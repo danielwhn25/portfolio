@@ -7,13 +7,71 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="intro-container">
-    <h1>Daniel Ng</h1>
-    <p class="role">Electrical Engineering | UBC</p>
-    <div class="button-group">
-      <a href="https://github.com/danielwhn25" target="_blank" class="btn btn-outline">GitHub</a>
-      <a href="Daniel_Ng_Resume.pdf" target="_blank" class="btn btn-solid">View Resume</a>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">DN</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="Daniel_Ng_Resume.pdf" target="_blank" class="nav-resume">Resume</a></li>
+      </ul>
     </div>
-  </div>
+  </nav>
+
+  <section id="about" class="hero">
+    <div class="intro-container">
+      <h1>Daniel Ng</h1>
+      <p class="role">Electrical Engineering | UBC</p>
+      <div class="button-group">
+        <a href="https://github.com/danielwhn25" target="_blank" class="btn btn-outline">GitHub</a>
+        <a href="Daniel_Ng_Resume.pdf" target="_blank" class="btn btn-solid">View Resume</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="content-section">
+    <h2 class="section-title">Professional Experience</h2>
+    <div class="card">
+      <div class="card-header">
+        <h3>Hardware Intern | Norsat International Inc.</h3>
+        <span class="date">June 2025 – Aug 2025</span>
+      </div>
+      <ul>
+        <li>Characterized 20+ Ku-Band Block-Up Converters (40W-80W) using Keysight PNA-X VNAs and Signal Analyzers[cite: 13].</li>
+        <li>Performed RF power calibration by sweeping DAC codes to control PA bias and attenuation stability[cite: 14].</li>
+        <li>Reworked BUCs and LNBs at the PCBA level, including fine-pitch SMT soldering on MMIC chips[cite: 15].</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="projects" class="content-section">
+    <h2 class="section-title">Technical Projects</h2>
+    
+    <div class="card">
+      <div class="card-header">
+        <h3>Project Lead: Laser Timing Gates | Formula UBC</h3>
+        <span class="date">Sept 2025 – Present</span>
+      </div>
+      <p>Leading the design of a 650 nm laser gate receiver using Altium Designer[cite: 18, 21].</p>
+      <ul>
+        <li>Developed a custom analog front end with photodiode, transimpedance amplifier (TIA), and Schmitt trigger[cite: 21].</li>
+        <li>Calibrated 20dB SNR and BER < 10^-7 for reliable 2.4GHz communication between ESP32-S3 MCUs[cite: 22, 23].</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3>RISC-V Single Cycle CPU</h3>
+        <span class="date">Dec 2025</span>
+      </div>
+      <ul>
+        <li>Architected a 10-instruction subset RISC-V processor in System Verilog for Altera DE10-Lite[cite: 25, 27].</li>
+        <li>Verified instruction-level correctness using a self-checking testbench in Questa[cite: 28].</li>
+      </ul>
+    </div>
+  </section>
+
 </body>
 </html>
