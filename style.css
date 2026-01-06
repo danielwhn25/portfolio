@@ -1,97 +1,94 @@
-/* --- Global Reset & Setup --- */
+/* --- Global Reset & Deep Blue Theme --- */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  /* The Font Requirement: Helvetica with safe fallbacks */
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color: #f8f9fa; /* A clean, very light gray background */
-  color: #333; /* Dark gray text instead of pure black for better readability */
-  /* Flexbox used to center content vertically and horizontally on the screen */
+  /* Dark Deep Blue Gradient Background */
+  background: radial-gradient(circle at center, #0a192f 0%, #020c1b 100%);
+  color: #e6f1ff; /* Off-white for better eye comfort on dark background */
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
-/* --- The Container & Animation --- */
+/* --- Container & Animation --- */
 .intro-container {
   text-align: center;
-  padding: 20px;
-
-  /* Initial State before animation starts */
-  opacity: 0; /* Start invisible */
-  transform: translateY(40px); /* Start 40 pixels down */
-
-  /* Apply the animation defined below */
-  /* name | duration | timing-function | fill-mode */
-  animation: slideFadeIn 1.2s ease-out forwards;
-  /* Slight delay before it starts so it doesn't feel abrupt */
-  animation-delay: 0.3s;
+  padding: 40px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideFadeIn 1s ease-out forwards;
 }
 
-/* --- Typography Styling --- */
+/* --- Typography --- */
 h1 {
-  font-size: 3.5rem; /* Large, prominent name */
-  font-weight: 700; /* Bold Helvetica */
-  margin: 0 0 10px 0;
-  letter-spacing: -0.5px;
-  color: #111; /* Slightly darker for the main heading */
+  font-size: clamp(2.5rem, 8vw, 4rem); /* Responsive sizing */
+  font-weight: 700;
+  margin: 0;
+  color: #fff;
+  letter-spacing: -1px;
 }
 
 .role {
-  font-size: 1.5rem;
-  font-weight: 300; /* Lighter weight for subtitle */
-  color: #666; /* Medium gray */
-  margin: 0 0 30px 0; /* Space below the subtitle */
+  font-size: 1.2rem;
+  color: #64ffda; /* Engineering "Teal" accent color */
+  font-weight: 400;
+  margin: 10px 0 40px 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-/* --- Link Styling --- */
-.links {
-  font-size: 1.1rem;
-  margin: 0;
+/* --- Button Grouping --- */
+.button-group {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.links a {
+/* --- Premium Buttons --- */
+.btn {
   text-decoration: none;
-  color: #0056b3; /* A professional engineering blue */
-  font-weight: 500;
-  padding: 5px 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 16px 32px;
   border-radius: 4px;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-/* Hover effect for links */
-.links a:hover {
-  background-color: #e9ecef;
-  color: #003d80;
+/* Solid Button (Resume) */
+.btn-solid {
+  background-color: #64ffda; /* Teal accent */
+  color: #020c1b; /* Dark text for contrast */
+  border: 1px solid #64ffda;
 }
 
-.separator {
-  margin: 0 5px;
-  color: #ccc;
+.btn-solid:hover {
+  background-color: rgba(100, 255, 218, 0.1);
+  color: #64ffda;
+  box-shadow: 0 10px 30px -10px rgba(100, 255, 218, 0.3);
 }
 
-/* --- The Animation Keyframes --- */
-/* This defines exactly how the slide and fade happens */
+/* Outline Button (GitHub) */
+.btn-outline {
+  border: 1px solid #64ffda;
+  color: #64ffda;
+}
+
+.btn-outline:hover {
+  background-color: rgba(100, 255, 218, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px -15px rgba(100, 255, 218, 0.3);
+}
+
+/* --- Entrance Animation --- */
 @keyframes slideFadeIn {
-  0% {
-    /* Where it starts */
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  100% {
-    /* Where it ends */
+  to {
     opacity: 1;
-    transform: translateY(0); /* Ends in its final correct position */
-  }
-}
-
-/* --- Simple Mobile Responsiveness --- */
-@media (max-width: 600px) {
-  h1 {
-    font-size: 2.5rem;
-  }
-  .role {
-    font-size: 1.2rem;
+    transform: translateY(0);
   }
 }
