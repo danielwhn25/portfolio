@@ -12,9 +12,9 @@
     <div class="nav-container">
       <a href="#" class="nav-logo">DANIEL NG</a>
       <div class="nav-links">
+        <a href="#about">About</a>
         <a href="#norsat">Experience</a>
         <a href="#formula">Formula UBC</a>
-        <a href="#riscv">RISC-V CPU</a>
         <a href="Daniel_Ng_Resume.pdf" target="_blank" class="nav-resume">Resume</a>
       </div>
     </div>
@@ -22,77 +22,52 @@
 
   <div class="scroll-container">
     <section class="page hero">
-      <div class="content fade-in">
-        <h1>Daniel Ng</h1>
-        <p class="subtitle">Electrical Engineering @ UBC</p>
-        <div class="button-group">
-          <a href="#norsat" class="btn btn-primary">View Portfolio</a>
-          <a href="Daniel_Ng_Resume.pdf" target="_blank" class="btn btn-secondary">Resume</a>
+      <div class="content">
+        <div class="typewriter-container">
+          <h1 class="typed-text">Daniel Ng</h1>
+          <p class="typed-text subtitle">Electrical Engineering @ UBC</p>
+        </div>
+        
+        <a href="#about" class="scroll-arrow">
+          <span>About Me</span>
+          <div class="arrow"></div>
+        </a>
+      </div>
+    </section>
+
+    <section id="about" class="page about-section">
+      <div class="content">
+        <h2 class="section-label">Profile</h2>
+        <div class="about-text-container">
+          <p class="typing-paragraph">
+            Third-year Electrical Engineering student at UBC with a focus on RF hardware and embedded systems[cite: 4, 5]. 
+            Experienced in high-power Ku-Band characterization and PCB design for automotive telemetry[cite: 13, 21]. 
+            Currently seeking Co-op opportunities starting May 2026 to apply rigorous testing and digital design skills to industry-leading hardware[cite: 5].
+          </p>
         </div>
       </div>
     </section>
 
     <section id="norsat" class="page project-page">
       <div class="grid-container">
-        <div class="text-side fade-up">
+        <div class="text-side">
           <h2 class="section-label">Professional Experience</h2>
           <h3>Hardware Intern | Norsat International Inc.</h3>
-          <p class="date">June 2025 – August 2025</p>
+          <p class="date">June 2025 – August 2025 [cite: 11, 12]</p>
           <ul class="bullet-list">
-            <li>Characterized 20+ Ku-Band Block-Up Converters (40W–80W) using Keysight PNA-X VNAs and Signal Analyzers to verify hardware parameters.</li>
-            <li>Performed RF power calibration by sweeping DAC codes controlling voltage-variable attenuation and PA bias.</li>
-            <li>Executed fine-pitch SMT and THT soldering on MMIC chips and PCBA-level rework.</li>
-            <li>Troubleshot SSPA boards by rectifying DC bias instability and RF path discontinuities.</li>
+            <li>Characterized 20+ 40W, 50W, and 80W Ku-Band Block-Up Converters using Keysight PNA-X VNAs[cite: 13].</li>
+            <li>Performed RF power calibration by sweeping DAC codes for PA bias stability[cite: 14].</li>
+            <li>Executed fine-pitch SMT soldering on MMIC chips and PCBA-level rework[cite: 15].</li>
+            <li>Troubleshot SSPA boards to rectify DC bias instability and RF path discontinuities[cite: 16].</li>
           </ul>
         </div>
-        <div class="image-side pop-in">
-          <div class="image-box">
-             <div class="img-label">RF Characterization Setup</div>
-          </div>
+        <div class="image-side">
+          <div class="image-box"><div class="img-label">RF Characterization Setup</div></div>
         </div>
       </div>
     </section>
 
-    <section id="formula" class="page project-page">
-      <div class="grid-container reversed">
-        <div class="text-side fade-up">
-          <h2 class="section-label">Formula UBC Racing</h2>
-          <h3>Project Lead: Laser Timing Gates</h3>
-          <p class="date">September 2025 – Present</p>
-          <ul class="bullet-list">
-            <li>Leading the full design cycle of a 650 nm laser gate receiver in Altium Designer.</li>
-            <li>Developing a custom analog front end with a photodiode, transimpedance amplifier (TIA), and Schmitt trigger.</li>
-            <li>Calibrated adjustable hysteresis to target 20dB SNR and BER < 10⁻⁷ for ESP32-S3 data integrity.</li>
-          </ul>
-        </div>
-        <div class="image-side pop-in">
-          <div class="image-box">
-            <div class="img-label">Altium PCB Layout</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="riscv" class="page project-page">
-      <div class="grid-container">
-        <div class="text-side fade-up">
-          <h2 class="section-label">Digital Design</h2>
-          <h3>RISC-V Single Cycle CPU</h3>
-          <p class="date">December 2025</p>
-          <ul class="bullet-list">
-            <li>Architected a 10-instruction RISC-V processor in System Verilog with memory-mapped I/O for Altera's DE10-Lite.</li>
-            <li>Implemented a functional register file, ALU, and control unit.</li>
-            <li>Verified timing datapath and instruction-level correctness using assertion-based verification in Questa.</li>
-          </ul>
-        </div>
-        <div class="image-side pop-in">
-          <div class="image-box">
-            <div class="img-label">RISC-V Datapath Traces</div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+    </div>
 
 </body>
 </html>
