@@ -1,94 +1,154 @@
-/* --- Global Reset & Deep Blue Theme --- */
-html, body {
-  height: 100%;
+/* --- Global Theme --- */
+:root {
+  --bg-dark: #020c1b;
+  --bg-navy: #0a192f;
+  --teal: #64ffda;
+  --text-white: #e6f1ff;
+  --text-gray: #8892b0;
+  --nav-height: 70px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
   margin: 0;
   padding: 0;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  /* Dark Deep Blue Gradient Background */
-  background: radial-gradient(circle at center, #0a192f 0%, #020c1b 100%);
-  color: #e6f1ff; /* Off-white for better eye comfort on dark background */
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  line-height: 1.6;
+}
+
+/* --- Solid Top Navigation Bar --- */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: var(--nav-height);
+  background-color: rgba(2, 12, 27, 0.95); /* Solid deep blue */
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+.nav-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 40px;
+}
+
+.nav-logo {
+  color: var(--teal);
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-white);
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--teal);
+}
+
+.nav-resume {
+  border: 1px solid var(--teal);
+  padding: 8px 16px;
+  border-radius: 4px;
+  color: var(--teal) !important;
+}
+
+/* --- Hero Section & Buttons --- */
+.hero {
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  background: radial-gradient(circle at center, var(--bg-navy) 0%, var(--bg-dark) 100%);
 }
 
-/* --- Container & Animation --- */
 .intro-container {
   text-align: center;
-  padding: 40px;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: slideFadeIn 1s ease-out forwards;
+  animation: slideUp 1s ease-out forwards;
 }
 
-/* --- Typography --- */
-h1 {
-  font-size: clamp(2.5rem, 8vw, 4rem); /* Responsive sizing */
-  font-weight: 700;
-  margin: 0;
-  color: #fff;
-  letter-spacing: -1px;
-}
+h1 { font-size: 4rem; margin: 0; color: #fff; }
+.role { color: var(--teal); text-transform: uppercase; letter-spacing: 3px; margin: 10px 0 40px; }
 
-.role {
-  font-size: 1.2rem;
-  color: #64ffda; /* Engineering "Teal" accent color */
-  font-weight: 400;
-  margin: 10px 0 40px 0;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
+.button-group { display: flex; gap: 20px; justify-content: center; }
 
-/* --- Button Grouping --- */
-.button-group {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-/* --- Premium Buttons --- */
 .btn {
   text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 16px 32px;
+  padding: 18px 34px;
   border-radius: 4px;
-  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-  letter-spacing: 1px;
+  font-weight: 600;
   text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 0.3s;
+  font-size: 0.8rem;
 }
 
-/* Solid Button (Resume) */
-.btn-solid {
-  background-color: #64ffda; /* Teal accent */
-  color: #020c1b; /* Dark text for contrast */
-  border: 1px solid #64ffda;
+.btn-solid { background: var(--teal); color: var(--bg-dark); }
+.btn-outline { border: 1px solid var(--teal); color: var(--teal); }
+
+.btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(100, 255, 218, 0.2); }
+
+/* --- Content Sections --- */
+.content-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 100px 40px;
 }
 
-.btn-solid:hover {
-  background-color: rgba(100, 255, 218, 0.1);
-  color: #64ffda;
-  box-shadow: 0 10px 30px -10px rgba(100, 255, 218, 0.3);
+.section-title {
+  color: #ccd6f6;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
 }
 
-/* Outline Button (GitHub) */
-.btn-outline {
-  border: 1px solid #64ffda;
-  color: #64ffda;
+.section-title::after {
+  content: "";
+  height: 1px;
+  width: 200px;
+  background-color: #233554;
+  margin-left: 20px;
 }
 
-.btn-outline:hover {
-  background-color: rgba(100, 255, 218, 0.1);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px -15px rgba(100, 255, 218, 0.3);
+.card {
+  background: #112240;
+  padding: 30px;
+  border-radius: 4px;
+  margin-bottom: 30px;
+  transition: 0.3s;
 }
 
-/* --- Entrance Animation --- */
-@keyframes slideFadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.card:hover { transform: translateY(-5px); }
+.card-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px; }
+.card h3 { color: var(--text-white); margin: 0; }
+.date { color: var(--text-gray); font-size: 0.85rem; }
+ul { color: var(--text-gray); padding-left: 20px; }
+li { margin-bottom: 10px; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
