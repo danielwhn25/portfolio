@@ -3,75 +3,89 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daniel Ng | Engineering Portfolio</title>
+  <title>Daniel Ng | Electrical Engineering</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <nav class="navbar">
     <div class="nav-container">
-      <a href="#" class="nav-logo">DN</a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="Daniel_Ng_Resume.pdf" target="_blank" class="nav-resume">Resume</a></li>
-      </ul>
+      <a href="#" class="nav-logo">DANIEL NG</a>
+      <div class="nav-links">
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="Daniel_Ng_Resume.pdf" target="_blank" class="nav-resume">Resume</a>
+      </div>
     </div>
   </nav>
 
-  <section id="about" class="hero">
-    <div class="intro-container">
-      <h1>Daniel Ng</h1>
-      <p class="role">Electrical Engineering | UBC</p>
-      <div class="button-group">
-        <a href="https://github.com/danielwhn25" target="_blank" class="btn btn-outline">GitHub</a>
-        <a href="Daniel_Ng_Resume.pdf" target="_blank" class="btn btn-solid">View Resume</a>
+  <main class="parallax-wrapper">
+    <section class="hero section">
+      <div class="hero-content">
+        <h1 class="fade-in">Daniel Ng</h1>
+        <p class="subtitle fade-in">Electrical Engineering @ UBC</p>
+        <div class="button-group fade-in">
+          <a href="https://github.com/danielwhn25" target="_blank" class="btn btn-secondary">GitHub</a>
+          <a href="Daniel_Ng_Resume.pdf" target="_blank" class="btn btn-primary">View Resume</a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="experience" class="content-section">
-    <h2 class="section-title">Professional Experience</h2>
-    <div class="card">
-      <div class="card-header">
-        <h3>Hardware Intern | Norsat International Inc.</h3>
-        <span class="date">June 2025 – Aug 2025</span>
+    <section id="experience" class="section">
+      <div class="container">
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="glass-card">
+          <div class="card-header">
+            <div>
+              <h3>Hardware Intern</h3>
+              <p class="company">Norsat International Inc.</p>
+            </div>
+            <span class="date">June – Aug 2025</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Characterized 20+ Ku-Band Block-Up Converters (40W-80W) using PNA-X VNAs and Signal Analyzers.</li>
+            <li>Performed RF power calibration via DAC code sweeping for PA bias and attenuation stability.</li>
+            <li>Executed fine-pitch SMT soldering and microscopic inspection on MMIC chips.</li>
+            <li>Troubleshot SSPA boards by rectifying DC bias instability and RF path discontinuities.</li>
+          </ul>
+        </div>
       </div>
-      <ul>
-        <li>Characterized 20+ Ku-Band Block-Up Converters (40W-80W) using Keysight PNA-X VNAs and Signal Analyzers[cite: 13].</li>
-        <li>Performed RF power calibration by sweeping DAC codes to control PA bias and attenuation stability[cite: 14].</li>
-        <li>Reworked BUCs and LNBs at the PCBA level, including fine-pitch SMT soldering on MMIC chips[cite: 15].</li>
-      </ul>
-    </div>
-  </section>
+    </section>
 
-  <section id="projects" class="content-section">
-    <h2 class="section-title">Technical Projects</h2>
-    
-    <div class="card">
-      <div class="card-header">
-        <h3>Project Lead: Laser Timing Gates | Formula UBC</h3>
-        <span class="date">Sept 2025 – Present</span>
-      </div>
-      <p>Leading the design of a 650 nm laser gate receiver using Altium Designer[cite: 18, 21].</p>
-      <ul>
-        <li>Developed a custom analog front end with photodiode, transimpedance amplifier (TIA), and Schmitt trigger[cite: 21].</li>
-        <li>Calibrated 20dB SNR and BER < 10^-7 for reliable 2.4GHz communication between ESP32-S3 MCUs[cite: 22, 23].</li>
-      </ul>
-    </div>
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title">Technical Projects</h2>
+        
+        <div class="glass-card">
+          <div class="card-header">
+            <div>
+              <h3>Project Lead: Laser Timing Gates</h3>
+              <p class="company">Formula UBC Racing</p>
+            </div>
+            <span class="date">Sept 2025 – Present</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Designing a 650 nm laser gate receiver with a custom TIA and Schmitt trigger in Altium.</li>
+            <li>Calibrated adjustable hysteresis to target 20dB SNR and BER < 10⁻⁷ for ESP32-S3 communication.</li>
+          </ul>
+        </div>
 
-    <div class="card">
-      <div class="card-header">
-        <h3>RISC-V Single Cycle CPU</h3>
-        <span class="date">Dec 2025</span>
+        <div class="glass-card">
+          <div class="card-header">
+            <div>
+              <h3>RISC-V Single Cycle CPU</h3>
+              <p class="company">System Verilog & FPGA</p>
+            </div>
+            <span class="date">Dec 2025</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Implemented a 10-instruction RISC-V processor on Altera DE10-Lite with MMIO.</li>
+            <li>Verified timing datapath correctness using assertion-based verification in Questa.</li>
+          </ul>
+        </div>
       </div>
-      <ul>
-        <li>Architected a 10-instruction subset RISC-V processor in System Verilog for Altera DE10-Lite[cite: 25, 27].</li>
-        <li>Verified instruction-level correctness using a self-checking testbench in Questa[cite: 28].</li>
-      </ul>
-    </div>
-  </section>
+    </section>
+  </main>
 
 </body>
 </html>
