@@ -22,13 +22,29 @@
         <div class="carousel-box">
             <h1 class="main-title">Daniel Ng</h1>
             <div class="word-wrapper">
-                <span class="static-text">Expertise in</span>
-                <div class="word-carousel">
-                    <span class="word">RF Hardware</span>
-                    <span class="word">Digital Design</span>
-                    <span class="word">System Verilog</span>
-                    <span class="word">PCB Engineering</span>
-                    <span class="word">RF Hardware</span> </div>
+                <span class="static-text">Skills in</span>
+                <div class="skills-carousel">
+                    <div class="skills-track">
+                        <span class="skill-pill">RF Hardware</span>
+                        <span class="skill-pill">Digital Design</span>
+                        <span class="skill-pill">SystemVerilog</span>
+                        <span class="skill-pill">PCB Design</span>
+                        <span class="skill-pill">Ku-Band Characterization</span>
+                        <span class="skill-pill">Mixed-Signal Circuits</span>
+                        <span class="skill-pill">Test &amp; Measurement</span>
+                        <span class="skill-pill">Embedded Systems</span>
+
+                        <!-- duplicate for seamless carousel -->
+                        <span class="skill-pill">RF Hardware</span>
+                        <span class="skill-pill">Digital Design</span>
+                        <span class="skill-pill">SystemVerilog</span>
+                        <span class="skill-pill">PCB Design</span>
+                        <span class="skill-pill">Ku-Band Characterization</span>
+                        <span class="skill-pill">Mixed-Signal Circuits</span>
+                        <span class="skill-pill">Test &amp; Measurement</span>
+                        <span class="skill-pill">Embedded Systems</span>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -41,20 +57,64 @@
     </section>
 
     <section id="projects" class="container tight">
-        <h2 class="section-label">02 // Projects</h2>
-        <div class="project-item">
-            <div class="project-header">
-                <h3>Project Lead: Laser Timing Gates</h3>
-                <span class="project-date">Formula UBC</span>
-            </div>
-            <p>Designed 650 nm laser gate receiver with custom TIA in Altium. Calibrated for 20dB SNR and BER &lt; 10⁻⁷.</p>
-        </div>
-        <div class="project-item">
-            <div class="project-header">
-                <h3>RISC-V Single Cycle CPU</h3>
-                <span class="project-date">Dec 2025</span>
-            </div>
-            <p>Architected 10-instruction subset RISC-V processor in System Verilog. Verified via assertion-based testbenches.</p>
+        <h2 class="section-label">02 // Experience &amp; Projects</h2>
+        <div class="cards-grid">
+            <details class="experience-card">
+                <summary>
+                    <div class="card-header">
+                        <h3>RF Hardware Engineering</h3>
+                        <span class="card-badge">Norsat International</span>
+                    </div>
+                    <p class="card-summary">Ku-Band RF characterization and hardware development for satellite communication systems.</p>
+                    <span class="card-link">Click to view details</span>
+                </summary>
+                <div class="card-details">
+                    <ul>
+                        <li>Characterized Ku-band RF front-end modules, optimizing gain, noise figure, and linearity.</li>
+                        <li>Developed and executed test plans using network analyzers, spectrum analyzers, and signal generators.</li>
+                        <li>Collaborated with senior engineers to debug and validate hardware prior to release.</li>
+                        <li>Documented measurement procedures and results for internal design reviews.</li>
+                    </ul>
+                </div>
+            </details>
+            
+            <details class="experience-card">
+                <summary>
+                    <div class="card-header">
+                        <h3>Laser Timing Gates</h3>
+                        <span class="card-badge">Formula UBC Racing</span>
+                    </div>
+                    <p class="card-summary">Project lead for 650 nm laser timing gate system with custom TIA and precision calibration.</p>
+                    <span class="card-link">Click to view details</span>
+                </summary>
+                <div class="card-details">
+                    <ul>
+                        <li>Designed a custom transimpedance amplifier (TIA) receiver for 650 nm laser diodes in Altium.</li>
+                        <li>Calibrated the system to achieve 20 dB SNR and bit error rate below 10⁻⁷.</li>
+                        <li>Integrated electrical design with mechanical packaging for on-track deployment.</li>
+                        <li>Validated timing accuracy through bench testing and track-side measurements.</li>
+                    </ul>
+                </div>
+            </details>
+            
+            <details class="experience-card">
+                <summary>
+                    <div class="card-header">
+                        <h3>RISC-V Single Cycle CPU</h3>
+                        <span class="card-badge">Academic Project</span>
+                    </div>
+                    <p class="card-summary">Single-cycle RISC-V core in SystemVerilog with assertion-based verification.</p>
+                    <span class="card-link">Click to view details</span>
+                </summary>
+                <div class="card-details">
+                    <ul>
+                        <li>Implemented a 10-instruction subset RISC-V processor with separate datapath and control.</li>
+                        <li>Developed register file, ALU, and memory interfaces in synthesizable SystemVerilog.</li>
+                        <li>Created assertion-based testbenches to exercise arithmetic, logical, and control-flow paths.</li>
+                        <li>Analyzed simulation waveforms to debug corner cases and ensure correct instruction execution.</li>
+                    </ul>
+                </div>
+            </details>
         </div>
     </section>
 
