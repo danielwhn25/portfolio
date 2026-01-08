@@ -23,73 +23,78 @@
         <div class="hero-content">
             <h1 class="typing-text">Daniel Ng</h1>
             <p class="subtitle">Electrical Engineering @ UBC</p>
-            <div class="hero-tags">
-                <span>RF Hardware</span> • <span>Digital Design</span> • <span>PCB Engineering</span>
-            </div>
         </div>
     </header>
 
     <section id="about" class="container">
-        <h2 class="section-title">Introduction</h2>
+        <h2 class="section-label">01 // Profile</h2>
         <div class="glass-card">
-            [cite_start]<p>I am a BASc Electrical Engineering student at UBC with a focus on hardware characterization and digital system architecture. [cite: 5] [cite_start]My experience includes high-power Ku-Band testing at <strong>Norsat International</strong> and leading telemetry circuit design for <strong>Formula UBC Racing</strong>. [cite: 9, 17]"</p>
+            <p>Electrical Engineering student at UBC specializing in RF hardware and digital systems. Experienced in Ku-Band characterization at <strong>Norsat International</strong> and leading timing gate design for <strong>Formula UBC Racing</strong>.</p>
         </div>
     </section>
 
     <section id="skills" class="container">
-        <h2 class="section-title">Technical Skills</h2>
-        <div class="carousel-wrapper">
-            <div class="skills-carousel">
+        <h2 class="section-label">02 // Technical Skills</h2>
+        <div class="carousel-window">
+            <div class="skills-track" id="skill-track">
                 <div class="skill-card-mini">
                     <h4>Hardware & Lab</h4>
-                    <div class="mini-tags">
-                        <span>Keysight PNA-X VNA</span><span>Signal Analyzers</span><span>PCB Rework</span>
-                    </div>
+                    <div class="mini-tags"><span>Keysight VNA</span><span>Signal Analyzers</span><span>PCB Rework</span></div>
                 </div>
                 <div class="skill-card-mini highlight-card">
                     <h4>Digital & HDL</h4>
-                    <div class="mini-tags">
-                        <span>System Verilog</span><span>RISC-V Assembly</span><span>Quartus Prime</span>
-                    </div>
+                    <div class="mini-tags"><span>System Verilog</span><span>RISC-V Assembly</span><span>Quartus Prime</span></div>
                 </div>
                 <div class="skill-card-mini">
                     <h4>Tools & Design</h4>
-                    <div class="mini-tags">
-                        <span>Altium Designer</span><span>Questa/ModelSim</span><span>Python</span>
-                    </div>
+                    <div class="mini-tags"><span>Altium Designer</span><span>QuestaSim</span><span>Python</span></div>
                 </div>
                 <div class="skill-card-mini">
                     <h4>Embedded</h4>
-                    <div class="mini-tags">
-                        <span>ESP32-S3</span><span>Embedded C</span><span>RTOS</span>
-                    </div>
+                    <div class="mini-tags"><span>ESP32-S3</span><span>Embedded C</span><span>Bare Metal</span></div>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="projects" class="container">
-        <h2 class="section-title">Selected Projects</h2>
-        <div class="project-list">
-            <div class="project-item">
-                <div class="project-header">
-                    <h3>Project Lead: Laser Timing Gates</h3>
-                    <span class="project-date">Formula UBC</span>
-                </div>
-                [cite_start]<p>Designed a 650 nm laser gate receiver with custom TIA and Schmitt trigger. [cite: 21] Targeted a 20dB SNR and BER &lt; [cite_start]10⁻⁷ for high-speed data integrity. [cite: 23]</p>
+        <h2 class="section-label">03 // Projects</h2>
+        <div class="project-item">
+            <div class="project-header">
+                <h3>Project Lead: Laser Timing Gates</h3>
+                <span class="project-date">Formula UBC</span>
             </div>
-            <div class="project-item">
-                <div class="project-header">
-                    <h3>RISC-V Single Cycle CPU</h3>
-                    <span class="project-date">Dec 2025</span>
-                </div>
-                [cite_start]<p>Architected a 10-instruction subset RISC-V processor in System Verilog for Altera's DE10-Lite. [cite: 27] [cite_start]Verified via assertion-based testbenches. [cite: 28]</p>
+            <p>Designed 650 nm laser gate receiver with custom TIA in Altium. Calibrated for 20dB SNR and BER &lt; 10⁻⁷.</p>
+        </div>
+        <div class="project-item">
+            <div class="project-header">
+                <h3>RISC-V Single Cycle CPU</h3>
+                <span class="project-date">Dec 2025</span>
             </div>
+            <p>Architected 10-instruction subset RISC-V processor in System Verilog. Verified via assertion-based testbenches.</p>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Daniel Ng | UBC Electrical Engineering</p>
+        <p>&copy; 2026 Daniel Ng | Vancouver, BC</p>
     </footer>
+
+    <script>
+        const track = document.getElementById('skill-track');
+        let scrollAmount = 0;
+        
+        function autoScroll() {
+            scrollAmount += 1; // Adjust speed here
+            if (scrollAmount >= track.scrollWidth / 2) {
+                scrollAmount = 0;
+            }
+            track.style.transform = `translateX(-${scrollAmount}px)`;
+            requestAnimationFrame(autoScroll);
+        }
+
+        // Duplicate the content for infinite loop effect
+        track.innerHTML += track.innerHTML;
+        autoScroll();
+    </script>
 </body>
 </html>
