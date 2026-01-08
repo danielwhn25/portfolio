@@ -1,103 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniel Ng | Electrical Engineering</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">DANIEL NG</a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="Daniel_Ng_Resume.pdf" class="resume-btn" target="_blank">Resume</a></li>
-            </ul>
-        </div>
-    </nav>
+<li><a href="Daniel_Ng_Resume.pdf" class="resume-btn" target="_blank">📄 Resume</a></li>
 
-    <header class="hero">
-        <div class="hero-content">
-            <h1 class="typing-text">Daniel Ng</h1>
-            <p class="subtitle">Electrical Engineering student @ UBC</p>
-            <div class="hero-tags">
-                <span>RF Hardware</span> • <span>Digital Design</span> • <span>PCB Engineering</span>
-            </div>
-        </div>
-    </header>
+<header class="hero condensed">
+    <div class="hero-content">
+        <h1 class="typing-text">Daniel Ng</h1>
+        <p class="subtitle">Electrical Engineering @ UBC</p>
+    </div>
+</header>
 
-    <section id="about" class="container">
-        <h2 class="section-title">Introduction</h2>
-        <div class="glass-card">
-            <p>I am a BASc Electrical Engineering student at the University of British Columbia with a focus on hardware characterization and digital system architecture. My experience ranges from high-power Ku-Band testing at <strong>Norsat International</strong> to leading telemetry circuit design for the <strong>Formula UBC Racing</strong> team.</p>
-        </div>
-    </section>
-
-    <section id="skills" class="container">
-        <h2 class="section-title">Technical Proficiency</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <h3>Hardware & Lab</h3>
-                <div class="skill-tags">
-                    <span class="tag">Keysight PNA-X VNA</span>
-                    <span class="tag">Signal Analyzers</span>
-                    <span class="tag">Oscilloscopes</span>
-                    <span class="tag">SMT/THT Soldering</span>
-                    <span class="tag">PCB Rework</span>
+<section id="skills" class="container tight">
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="carousel-wrapper">
+        <div class="skills-carousel">
+            <div class="skill-card-mini">
+                <h4>Hardware & Lab</h4>
+                <div class="mini-tags">
+                    <span>Keysight PNA-X VNA</span><span>Signal Analyzers</span><span>PCB Rework</span>
                 </div>
             </div>
-            <div class="skill-card highlight">
-                <h3>Digital & Embedded</h3>
-                <div class="skill-tags">
-                    <span class="tag">System Verilog</span>
-                    <span class="tag">RISC-V Assembly</span>
-                    <span class="tag">Altium Designer</span>
-                    <span class="tag">Quartus Prime</span>
-                    <span class="tag">Embedded C</span>
+            <div class="skill-card-mini">
+                <h4>Digital/HDL</h4>
+                <div class="mini-tags">
+                    <span>System Verilog</span><span>RISC-V Assembly</span><span>Quartus Prime</span>
                 </div>
             </div>
-            <div class="skill-card">
-                <h3>Design & Verification</h3>
-                <div class="skill-tags">
-                    <span class="tag">Questa/ModelSim</span>
-                    <span class="tag">FSM Design</span>
-                    <span class="tag">Assertion Verification</span>
-                    <span class="tag">Python Automation</span>
+            <div class="skill-card-mini">
+                <h4>Tools & Design</h4>
+                <div class="mini-tags">
+                    <span>Altium Designer</span><span>Questa/ModelSim</span><span>Python</span>
+                </div>
+            </div>
+            <div class="skill-card-mini">
+                <h4>Embedded</h4>
+                <div class="mini-tags">
+                    <span>ESP32-S3</span><span>Embedded C</span><span>RTOS</span>
                 </div>
             </div>
         </div>
-    </section>
-
-    <section id="projects" class="container">
-        <h2 class="section-title">Selected Projects</h2>
-        <div class="project-list">
-            <div class="project-item">
-                <div class="project-header">
-                    <h3>Project Lead: Laser Timing Gates</h3>
-                    <span class="project-date">Formula UBC</span>
-                </div>
-                <p>Designed a 650 nm laser gate receiver with custom TIA and Schmitt trigger. Targeted a 20dB SNR and BER < 10⁻⁷ for reliable high-speed data integrity between ESP32-S3 MCUs.</p>
-            </div>
-            <div class="project-item">
-                <div class="project-header">
-                    <h3>RISC-V Single Cycle CPU</h3>
-                    <span class="project-date">Dec 2025</span>
-                </div>
-                <p>Architected a 10-instruction subset RISC-V processor in System Verilog. Verified instruction-level correctness using self-checking testbenches in Questa.</p>
-            </div>
-        </div>
-    </section>
-<section class="container" style="text-align: center;">
-    <a href="Daniel_Ng_Resume.pdf" class="resume-btn" style="padding: 15px 30px; font-size: 1.1rem;" target="_blank">
-        Download Full Resume (PDF)
-    </a>
+    </div>
 </section>
-    <footer>
-        <p>&copy; 2026 Daniel Ng | <a href="mailto:daniel.whn@outlook.com">Contact</a></p>
-    </footer>
-</body>
-</html>
-
