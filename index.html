@@ -1,73 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daniel Ng | Electrical Engineering</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Ng | Electrical Engineering</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="#" class="nav-logo">DANIEL NG</a>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#norsat">Experience</a>
-        <a href="#formula">Formula UBC</a>
-        <a href="Daniel_Ng_Resume.pdf" target="_blank" class="nav-resume">Resume</a>
-      </div>
-    </div>
-  </nav>
-
-  <div class="scroll-container">
-    <section class="page hero">
-      <div class="content">
-        <div class="typewriter-container">
-          <h1 class="typed-text">Daniel Ng</h1>
-          <p class="typed-text subtitle">Electrical Engineering @ UBC</p>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">DANIEL NG</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="Daniel_Ng_Resume.pdf" class="resume-btn" target="_blank">Resume</a></li>
+            </ul>
         </div>
-        
-        <a href="#about" class="scroll-arrow">
-          <span>About Me</span>
-          <div class="arrow"></div>
-        </a>
-      </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="typing-text">Daniel Ng</h1>
+            <p class="subtitle">Electrical Engineering student @ UBC</p>
+            <div class="hero-tags">
+                <span>RF Hardware</span> • <span>Digital Design</span> • <span>PCB Engineering</span>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="container">
+        <h2 class="section-title">Introduction</h2>
+        <div class="glass-card">
+            <p>I am a BASc Electrical Engineering student at the University of British Columbia with a focus on hardware characterization and digital system architecture. My experience ranges from high-power Ku-Band testing at <strong>Norsat International</strong> to leading telemetry circuit design for the <strong>Formula UBC Racing</strong> team.</p>
+        </div>
     </section>
 
-    <section id="about" class="page about-section">
-      <div class="content">
-        <h2 class="section-label">Profile</h2>
-        <div class="about-text-container">
-          <p class="typing-paragraph">
-            Third-year Electrical Engineering student at UBC with a focus on RF hardware and embedded systems[cite: 4, 5]. 
-            Experienced in high-power Ku-Band characterization and PCB design for automotive telemetry[cite: 13, 21]. 
-            Currently seeking Co-op opportunities starting May 2026 to apply rigorous testing and digital design skills to industry-leading hardware[cite: 5].
-          </p>
+    <section id="skills" class="container">
+        <h2 class="section-title">Technical Proficiency</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>Hardware & Lab</h3>
+                <div class="skill-tags">
+                    <span class="tag">Keysight PNA-X VNA</span>
+                    <span class="tag">Signal Analyzers</span>
+                    <span class="tag">Oscilloscopes</span>
+                    <span class="tag">SMT/THT Soldering</span>
+                    <span class="tag">PCB Rework</span>
+                </div>
+            </div>
+            <div class="skill-card highlight">
+                <h3>Digital & Embedded</h3>
+                <div class="skill-tags">
+                    <span class="tag">System Verilog</span>
+                    <span class="tag">RISC-V Assembly</span>
+                    <span class="tag">Altium Designer</span>
+                    <span class="tag">Quartus Prime</span>
+                    <span class="tag">Embedded C</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>Design & Verification</h3>
+                <div class="skill-tags">
+                    <span class="tag">Questa/ModelSim</span>
+                    <span class="tag">FSM Design</span>
+                    <span class="tag">Assertion Verification</span>
+                    <span class="tag">Python Automation</span>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <section id="norsat" class="page project-page">
-      <div class="grid-container">
-        <div class="text-side">
-          <h2 class="section-label">Professional Experience</h2>
-          <h3>Hardware Intern | Norsat International Inc.</h3>
-          <p class="date">June 2025 – August 2025 [cite: 11, 12]</p>
-          <ul class="bullet-list">
-            <li>Characterized 20+ 40W, 50W, and 80W Ku-Band Block-Up Converters using Keysight PNA-X VNAs[cite: 13].</li>
-            <li>Performed RF power calibration by sweeping DAC codes for PA bias stability[cite: 14].</li>
-            <li>Executed fine-pitch SMT soldering on MMIC chips and PCBA-level rework[cite: 15].</li>
-            <li>Troubleshot SSPA boards to rectify DC bias instability and RF path discontinuities[cite: 16].</li>
-          </ul>
+    <section id="projects" class="container">
+        <h2 class="section-title">Selected Projects</h2>
+        <div class="project-list">
+            <div class="project-item">
+                <div class="project-header">
+                    <h3>Project Lead: Laser Timing Gates</h3>
+                    <span class="project-date">Formula UBC</span>
+                </div>
+                <p>Designed a 650 nm laser gate receiver with custom TIA and Schmitt trigger. Targeted a 20dB SNR and BER < 10⁻⁷ for reliable high-speed data integrity between ESP32-S3 MCUs.</p>
+            </div>
+            <div class="project-item">
+                <div class="project-header">
+                    <h3>RISC-V Single Cycle CPU</h3>
+                    <span class="project-date">Dec 2025</span>
+                </div>
+                <p>Architected a 10-instruction subset RISC-V processor in System Verilog. Verified instruction-level correctness using self-checking testbenches in Questa.</p>
+            </div>
         </div>
-        <div class="image-side">
-          <div class="image-box"><div class="img-label">RF Characterization Setup</div></div>
-        </div>
-      </div>
     </section>
 
-    </div>
-
+    <footer>
+        <p>&copy; 2026 Daniel Ng | <a href="mailto:daniel.whn@outlook.com">Contact</a></p>
+    </footer>
 </body>
 </html>
