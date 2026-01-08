@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="scroll-progress"></div>
     <nav class="navbar">
         <div class="nav-container">
             <a href="#" class="logo">DANIEL NG</a>
             <ul class="nav-links">
-                <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
                 <li><a href="Daniel_Ng_Resume.pdf" class="resume-btn" target="_blank">Resume</a></li>
             </ul>
         </div>
@@ -22,6 +24,7 @@
         <div class="carousel-box">
             <h1 class="main-title"><span id="name-text"></span><span class="cursor">|</span></h1>
             <p class="hook-text"><span id="hook-text"></span><span class="cursor">|</span></p>
+            <a href="Daniel_Ng_Resume.pdf" download="Daniel_Ng_Resume.pdf" class="resume-download-btn">View Resume</a>
             <div class="word-wrapper">
                 <div class="skills-carousel">
                     <div class="skills-track">
@@ -49,17 +52,8 @@
         </div>
     </header>
 
-    <section id="about" class="container tight">
-        <h2 class="section-label">01 // Profile</h2>
-        <div class="glass-card">
-            <p><strong>University of British Columbia</strong> | Expected Graduation: May 2029<br>
-            BASc in Electrical Engineering (Co-op, available May 2026) | Vancouver, BC</p>
-            <p style="margin-top: 12px;">2<sup>nd</sup> Year Electrical Engineering student specializing in RF hardware, digital design, and embedded systems. Experienced in Ku-Band RF characterization at <strong>Norsat International</strong> and leading timing gate design for <strong>Formula UBC Racing</strong>.</p>
-        </div>
-    </section>
-
     <section id="projects" class="container tight">
-        <h2 class="section-label">02 // Experience &amp; Projects</h2>
+        <h2 class="section-title">Experience &amp; Projects</h2>
         <div class="cards-grid">
             <details class="experience-card">
                 <summary>
@@ -68,6 +62,12 @@
                         <span class="card-badge">Norsat International</span>
                     </div>
                     <p class="card-summary">Hardware Intern | June 2025 – August 2025 | RF characterization and hardware development for satellite communication systems.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">VNA</span>
+                        <span class="tech-tag">RF Characterization</span>
+                        <span class="tech-tag">SMT/THT</span>
+                        <span class="tech-tag">PCB Rework</span>
+                    </div>
                     <span class="card-link">Click to view details</span>
                 </summary>
                 <div class="card-details">
@@ -100,6 +100,12 @@
                         <span class="card-badge">Formula UBC Racing</span>
                     </div>
                     <p class="card-summary">Project Lead - Timing Gates | September 2025 – Present | Leading full design cycle of 650 nm laser gate receiver with ESP32-S3 MCUs.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Altium Designer</span>
+                        <span class="tech-tag">Embedded C</span>
+                        <span class="tech-tag">ESP32-S3</span>
+                        <span class="tech-tag">Schematic Capture</span>
+                    </div>
                     <span class="card-link">Click to view details</span>
                 </summary>
                 <div class="card-details">
@@ -131,6 +137,12 @@
                         <span class="card-badge">Academic Project</span>
                     </div>
                     <p class="card-summary">December 2025 | Single-cycle RISC-V processor implemented on Altera DE10-Lite FPGA with assertion-based verification.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">SystemVerilog</span>
+                        <span class="tech-tag">Altera FPGA</span>
+                        <span class="tech-tag">Quartus Prime</span>
+                        <span class="tech-tag">Questa</span>
+                    </div>
                     <span class="card-link">Click to view details</span>
                 </summary>
                 <div class="card-details">
@@ -154,6 +166,63 @@
                     </ul>
                 </div>
             </details>
+        </div>
+    </section>
+
+    <section id="skills" class="container tight">
+        <h2 class="section-title">Technical Expertise</h2>
+        <div class="skills-breakdown">
+            <div class="skill-category">
+                <h3>Digital Design & HDL</h3>
+                <div class="skill-items">
+                    <span class="skill-item">SystemVerilog</span>
+                    <span class="skill-item">RISC-V Assembly</span>
+                    <span class="skill-item">FSM Implementation</span>
+                    <span class="skill-item">CPU Architecture</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Embedded Systems</h3>
+                <div class="skill-items">
+                    <span class="skill-item">ESP32-S3</span>
+                    <span class="skill-item">8051 MCUs</span>
+                    <span class="skill-item">Embedded C</span>
+                    <span class="skill-item">Bare Metal Programming</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Design Tools</h3>
+                <div class="skill-items">
+                    <span class="skill-item">Quartus Prime</span>
+                    <span class="skill-item">Questa/ModelSim</span>
+                    <span class="skill-item">Altium Designer</span>
+                    <span class="skill-item">CPUlator</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Hardware & Lab</h3>
+                <div class="skill-items">
+                    <span class="skill-item">VNA</span>
+                    <span class="skill-item">Signal Analyzer</span>
+                    <span class="skill-item">PCB Design & Rework</span>
+                    <span class="skill-item">SMT/THT Soldering</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container tight">
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="contact-card">
+            <p>Open to co-op opportunities starting May 2026. Always interested in discussing digital design, embedded systems, and hardware engineering projects.</p>
+            <div class="contact-links">
+                <a href="Daniel_Ng_Resume.pdf" download="Daniel_Ng_Resume.pdf" class="contact-btn">
+                    <span>Download Resume</span>
+                </a>
+                <a href="mailto:your.email@ubc.ca" class="contact-btn secondary">
+                    <span>Email Me</span>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -262,6 +331,46 @@
                         formulaCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 });
+            });
+
+            // Scroll progress indicator
+            const scrollProgress = document.querySelector('.scroll-progress');
+            window.addEventListener('scroll', function() {
+                const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (window.scrollY / windowHeight) * 100;
+                scrollProgress.style.width = scrolled + '%';
+            });
+
+            // Animate cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.experience-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+
+            document.querySelectorAll('.skill-category').forEach(category => {
+                category.style.opacity = '0';
+                category.style.transform = 'translateY(20px)';
+                category.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(category);
             });
         });
     </script>
