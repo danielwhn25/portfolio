@@ -111,17 +111,22 @@
                 <div class="card-details">
                     <div class="project-images">
                         <h4>Project Images</h4>
-                        <div class="image-gallery">
-                            <div class="image-placeholder">
-                                <p>Add your project images here</p>
-                                <small>Recommended: 800x600px or similar aspect ratio</small>
-                            </div>
-                            <!-- Add your images like this:
-                            <img src="images/formula-ubc-1.jpg" alt="Laser Timing Gate System">
-                            <img src="images/formula-ubc-2.jpg" alt="PCB Design">
-                            <img src="images/formula-ubc-3.jpg" alt="Track Deployment">
-                            -->
-                        </div>
+                        <div class="image-gallery visible-carousel">
+
+    <a href="#formula-img1" class="carousel-img">
+        <img src="images/formula-ubc-1.jpg" alt="Laser Timing Gate System">
+    </a>
+
+    <a href="#formula-img2" class="carousel-img">
+        <img src="images/formula-ubc-2.jpg" alt="PCB Design">
+    </a>
+
+    <a href="#formula-img3" class="carousel-img">
+        <img src="images/formula-ubc-3.jpg" alt="Track Deployment">
+    </a>
+
+</div>
+
                     </div>
                     <ul>
                         <li>Leading the full design cycle of a 650 nm laser gate receiver in Altium, mentoring two MechE students to develop optomechanical shrouding coupled with a custom analog front end (photodiode+transimpedance amplifier (TIA)+Schmitt trigger) to maintain 3.3V CMOS logic and 2.4GHz communication between master-slave ESP32-S3 MCUs.</li>
@@ -214,7 +219,7 @@
     <section id="contact" class="container tight">
         <h2 class="section-title">Let's Connect</h2>
         <div class="contact-card">
-            <p>Open to co-op opportunities starting May 2026. Always interested in discussing digital design, embedded systems, and hardware engineering projects.</p>
+            <p>Open to co-op opportunities starting May 2026. Let's have a coffee chat and discuss what I can problems I can solve for you.</p>
 <div class="contact-links">
     <a href="https://www.linkedin.com/in/YOUR-LINKEDIN-USERNAME"
        target="_blank"
@@ -237,6 +242,23 @@
     <footer>
         <p>&copy; 2026 Daniel Ng | Vancouver, BC</p>
     </footer>
+
+<!-- Formula UBC Image Lightbox -->
+<div id="formula-img1" class="lightbox">
+    <a href="#" class="lightbox-close">&times;</a>
+    <img src="images/formula-ubc-1.jpg" alt="">
+</div>
+
+<div id="formula-img2" class="lightbox">
+    <a href="#" class="lightbox-close">&times;</a>
+    <img src="images/formula-ubc-2.jpg" alt="">
+</div>
+
+<div id="formula-img3" class="lightbox">
+    <a href="#" class="lightbox-close">&times;</a>
+    <img src="images/formula-ubc-3.jpg" alt="">
+</div>
+
 
     <script>
         // Typing animation function
