@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laser Timing Gates | Daniel Ng</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .detail-page {
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+        .detail-header {
+            margin-bottom: 30px;
+        }
+        .detail-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .detail-subtitle {
+            color: var(--accent-blue);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        .detail-content {
+            background: var(--glass);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+        .detail-content h3 {
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+        .detail-content h3:first-child {
+            margin-top: 0;
+        }
+        .detail-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .detail-content li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+        .detail-content li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+        .back-link {
+            display: inline-block;
+            color: var(--accent-blue);
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            transition: opacity 0.3s;
+        }
+        .back-link:hover {
+            opacity: 0.7;
+        }
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .spec-item {
+            background: rgba(0, 113, 227, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 113, 227, 0.2);
+        }
+        .spec-label {
+            color: var(--accent-blue);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .spec-value {
+            color: var(--text-main);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">DANIEL NG</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#projects">Projects</a></li>
+                <li><a href="../Daniel_Ng_Resume.pdf" class="resume-btn" target="_blank">Resume</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="detail-page container tight">
+        <a href="../index.html" class="back-link">← Back to Portfolio</a>
+        
+        <div class="detail-header">
+            <h1 class="detail-title">Laser Timing Gates</h1>
+            <div class="detail-subtitle">Project Lead | Formula UBC Racing</div>
+        </div>
+
+        <div class="detail-content">
+            <h3>Project Overview</h3>
+            <p>Led the design and development of a precision laser timing gate system for Formula UBC Racing. The system uses 650 nm laser diodes and custom transimpedance amplifier (TIA) circuits to detect vehicle passage with high accuracy and reliability.</p>
+
+            <h3>Technical Specifications</h3>
+            <div class="specs-grid">
+                <div class="spec-item">
+                    <div class="spec-label">Wavelength</div>
+                    <div class="spec-value">650 nm</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Signal-to-Noise Ratio</div>
+                    <div class="spec-value">20 dB</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Bit Error Rate</div>
+                    <div class="spec-value">&lt; 10⁻⁷</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Design Tool</div>
+                    <div class="spec-value">Altium Designer</div>
+                </div>
+            </div>
+
+            <h3>Key Achievements</h3>
+            <ul>
+                <li>Designed custom transimpedance amplifier (TIA) circuit optimized for 650 nm laser detection</li>
+                <li>Developed complete PCB layout in Altium Designer with proper RF considerations</li>
+                <li>Calibrated system to achieve 20 dB SNR for reliable signal detection</li>
+                <li>Achieved bit error rate below 10⁻⁷ for high-precision timing measurements</li>
+                <li>Led cross-functional team coordination between electrical and mechanical subsystems</li>
+                <li>Validated system performance through extensive testing and characterization</li>
+            </ul>
+
+            <h3>Technical Challenges</h3>
+            <ul>
+                <li>Optimized TIA design for low-noise amplification of photodiode signals</li>
+                <li>Ensured robust operation in outdoor racing environment with varying lighting conditions</li>
+                <li>Maintained timing accuracy requirements for competitive racing applications</li>
+                <li>Integrated laser transmitter and receiver subsystems for reliable detection</li>
+            </ul>
+
+            <h3>Technologies Used</h3>
+            <ul>
+                <li>Altium Designer (PCB Design)</li>
+                <li>650 nm Laser Diodes</li>
+                <li>Custom TIA Circuit Design</li>
+                <li>RF/High-Speed PCB Layout</li>
+                <li>Signal Processing & Calibration</li>
+            </ul>
+
+            <h3>Impact</h3>
+            <p>Delivered a reliable timing gate system that enables precise lap time measurements for Formula UBC Racing, supporting data-driven performance analysis and race strategy optimization.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Daniel Ng | Vancouver, BC</p>
+    </footer>
+</body>
+</html>
