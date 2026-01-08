@@ -1,55 +1,133 @@
-/* Reduce global spacing */
-.container.tight {
-    margin: 40px auto; /* Reduced from 80px */
+:root {
+    --bg-dark: #010816;
+    --accent-blue: #0071e3;
+    --text-main: #ffffff;
+    --text-dim: #a1a1a6;
+    --glass: rgba(255, 255, 255, 0.05);
 }
 
-.hero.condensed {
-    height: 40vh; /* Reduced from 60vh */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* TIGHTER MARGINS */
+.container {
+    max-width: 900px;
+    margin: 40px auto; /* Reduced from 80px to save space */
+    padding: 0 20px;
+}
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0; width: 100%;
+    background: rgba(1, 8, 22, 0.8);
+    backdrop-filter: blur(15px);
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px; /* Slimmer nav */
+}
+
+.logo { font-weight: 700; text-decoration: none; color: #fff; letter-spacing: 1px; }
+.nav-links { display: flex; list-style: none; gap: 20px; align-items: center; }
+.nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.85rem; transition: 0.3s; }
+.nav-links a:hover { color: var(--accent-blue); }
+
+.resume-btn {
+    border: 1px solid var(--accent-blue);
+    padding: 6px 14px;
+    border-radius: 20px;
+    color: var(--accent-blue) !important;
+}
+
+/* CONDENSED HERO */
+.hero {
+    height: 45vh; /* Reduced from 60vh to minimize scrolling */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     padding-top: 60px;
 }
 
-/* Carousel Styles */
+.typing-text {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 800;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 4px solid var(--accent-blue);
+    width: 0;
+    margin: 0 auto;
+    animation: typing 2s steps(20, end) forwards;
+}
+
+@keyframes typing { from { width: 0; } to { width: 100%; } }
+
+.subtitle { color: var(--text-dim); font-size: 1.1rem; margin-top: 5px; }
+.hero-tags { margin-top: 10px; font-size: 0.8rem; color: var(--accent-blue); opacity: 0.8; }
+
+/* SKILLS CAROUSEL */
 .carousel-wrapper {
     overflow-x: auto;
-    padding-bottom: 15px;
-    -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px;
 }
 
 .skills-carousel {
     display: flex;
     gap: 15px;
-    width: max-content; /* Allows items to sit side-by-side */
+    width: max-content;
 }
 
 .skill-card-mini {
     background: var(--glass);
-    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 12px;
-    width: 280px;
-    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 260px;
 }
 
-.skill-card-mini h4 {
-    color: var(--accent-blue);
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-}
+.highlight-card { border-color: var(--accent-blue); }
 
-.mini-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-}
+.skill-card-mini h4 { font-size: 0.9rem; color: var(--accent-blue); margin-bottom: 10px; }
+
+.mini-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 
 .mini-tags span {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     background: rgba(255, 255, 255, 0.05);
-    padding: 3px 8px;
+    padding: 2px 8px;
     border-radius: 4px;
     color: var(--text-dim);
 }
 
-/* Custom Scrollbar for Carousel */
+/* SECTION BASICS */
+.section-title { color: var(--accent-blue); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 15px; }
+
+.glass-card {
+    background: var(--glass);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-item { margin-bottom: 25px; }
+.project-header { display: flex; justify-content: space-between; margin-bottom: 5px; }
+.project-date { color: var(--accent-blue); font-weight: 700; font-size: 0.9rem; }
+
+footer { text-align: center; padding: 40px; color: var(--text-dim); font-size: 0.75rem; }
+
+/* Custom Scrollbar */
 .carousel-wrapper::-webkit-scrollbar { height: 4px; }
 .carousel-wrapper::-webkit-scrollbar-thumb { background: var(--accent-blue); border-radius: 10px; }
