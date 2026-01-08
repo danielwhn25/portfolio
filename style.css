@@ -1,117 +1,55 @@
-:root {
-    --bg-dark: #010816;
-    --accent-blue: #0071e3;
-    --text-main: #ffffff;
-    --text-dim: #a1a1a6;
-    --glass: rgba(255, 255, 255, 0.05);
+/* Reduce global spacing */
+.container.tight {
+    margin: 40px auto; /* Reduced from 80px */
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-    background-color: var(--bg-dark);
-    color: var(--text-main);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    line-height: 1.6;
+.hero.condensed {
+    height: 40vh; /* Reduced from 60vh */
+    padding-top: 60px;
 }
 
-.container {
-    max-width: 900px;
-    margin: 80px auto;
-    padding: 0 20px;
+/* Carousel Styles */
+.carousel-wrapper {
+    overflow-x: auto;
+    padding-bottom: 15px;
+    -webkit-overflow-scrolling: touch;
 }
 
-/* Navbar */
-.navbar {
-    position: fixed;
-    top: 0; width: 100%;
-    background: rgba(1, 8, 22, 0.8);
-    backdrop-filter: blur(15px);
-    z-index: 1000;
-}
-
-.nav-container {
-    max-width: 900px;
-    margin: 0 auto;
+.skills-carousel {
     display: flex;
-    justify-content: space-between;
-    padding: 20px;
+    gap: 15px;
+    width: max-content; /* Allows items to sit side-by-side */
 }
 
-.logo { font-weight: 700; text-decoration: none; color: #fff; letter-spacing: 1px; }
-
-.nav-links { display: flex; list-style: none; gap: 30px; align-items: center; }
-
-.nav-links a { 
-    text-decoration: none; 
-    color: var(--text-dim); 
-    font-size: 0.9rem; 
-    transition: 0.3s;
-}
-
-.nav-links a:hover { color: var(--accent-blue); }
-
-.resume-btn {
-    border: 1px solid var(--accent-blue);
-    padding: 8px 16px;
-    border-radius: 20px;
-    color: var(--accent-blue) !important;
-}
-
-/* Hero & Typing Animation */
-.hero {
-    height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding-top: 100px;
-}
-
-.typing-text {
-    font-size: 4rem;
-    font-weight: 800;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 4px solid var(--accent-blue);
-    width: 0;
-    margin: 0 auto;
-    animation: typing 2.5s steps(20, end) forwards, blink 0.8s infinite;
-}
-
-@keyframes typing { from { width: 0; } to { width: 100%; } }
-@keyframes blink { from { border-color: transparent; } to { border-color: var(--accent-blue); } }
-
-.subtitle { color: var(--text-dim); font-size: 1.2rem; margin-top: 10px; }
-
-/* Skills Grid */
-.section-title { color: var(--accent-blue); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 25px; }
-
-.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-
-.skill-card {
+.skill-card-mini {
     background: var(--glass);
-    padding: 30px;
-    border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+    width: 280px;
+    flex-shrink: 0;
 }
 
-.skill-card.highlight { border-color: var(--accent-blue); }
-
-.skill-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
-
-.tag {
-    background: rgba(0, 113, 227, 0.1);
+.skill-card-mini h4 {
     color: var(--accent-blue);
-    padding: 4px 12px;
-    border-radius: 5px;
-    font-size: 0.8rem;
-    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
 }
 
-/* Projects */
-.project-item { margin-bottom: 40px; }
-.project-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
-.project-date { color: var(--accent-blue); font-weight: 700; }
+.mini-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
 
-footer { text-align: center; padding: 60px; color: var(--text-dim); font-size: 0.8rem; }
+.mini-tags span {
+    font-size: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 3px 8px;
+    border-radius: 4px;
+    color: var(--text-dim);
+}
+
+/* Custom Scrollbar for Carousel */
+.carousel-wrapper::-webkit-scrollbar { height: 4px; }
+.carousel-wrapper::-webkit-scrollbar-thumb { background: var(--accent-blue); border-radius: 10px; }
