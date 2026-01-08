@@ -12,53 +12,36 @@
             <a href="#" class="logo">DANIEL NG</a>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="Daniel_Ng_Resume.pdf" class="resume-btn" target="_blank">Resume</a></li>
             </ul>
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="hero-content">
-            <h1 class="typing-text">Daniel Ng</h1>
-            <p class="subtitle">Electrical Engineering @ UBC</p>
+    <header class="hero-center">
+        <div class="carousel-box">
+            <h1 class="main-title">Daniel Ng</h1>
+            <div class="word-wrapper">
+                <span class="static-text">Expertise in</span>
+                <div class="word-carousel">
+                    <span class="word">RF Hardware</span>
+                    <span class="word">Digital Design</span>
+                    <span class="word">System Verilog</span>
+                    <span class="word">PCB Engineering</span>
+                    <span class="word">RF Hardware</span> </div>
+            </div>
         </div>
     </header>
 
-    <section id="about" class="container">
+    <section id="about" class="container tight">
         <h2 class="section-label">01 // Profile</h2>
         <div class="glass-card">
             <p>Electrical Engineering student at UBC specializing in RF hardware and digital systems. Experienced in Ku-Band characterization at <strong>Norsat International</strong> and leading timing gate design for <strong>Formula UBC Racing</strong>.</p>
         </div>
     </section>
 
-    <section id="skills" class="container">
-        <h2 class="section-label">02 // Technical Skills</h2>
-        <div class="carousel-window">
-            <div class="skills-track" id="skill-track">
-                <div class="skill-card-mini">
-                    <h4>Hardware & Lab</h4>
-                    <div class="mini-tags"><span>Keysight VNA</span><span>Signal Analyzers</span><span>PCB Rework</span></div>
-                </div>
-                <div class="skill-card-mini highlight-card">
-                    <h4>Digital & HDL</h4>
-                    <div class="mini-tags"><span>System Verilog</span><span>RISC-V Assembly</span><span>Quartus Prime</span></div>
-                </div>
-                <div class="skill-card-mini">
-                    <h4>Tools & Design</h4>
-                    <div class="mini-tags"><span>Altium Designer</span><span>QuestaSim</span><span>Python</span></div>
-                </div>
-                <div class="skill-card-mini">
-                    <h4>Embedded</h4>
-                    <div class="mini-tags"><span>ESP32-S3</span><span>Embedded C</span><span>Bare Metal</span></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="container">
-        <h2 class="section-label">03 // Projects</h2>
+    <section id="projects" class="container tight">
+        <h2 class="section-label">02 // Projects</h2>
         <div class="project-item">
             <div class="project-header">
                 <h3>Project Lead: Laser Timing Gates</h3>
@@ -78,23 +61,5 @@
     <footer>
         <p>&copy; 2026 Daniel Ng | Vancouver, BC</p>
     </footer>
-
-    <script>
-        const track = document.getElementById('skill-track');
-        let scrollAmount = 0;
-        
-        function autoScroll() {
-            scrollAmount += 1; // Adjust speed here
-            if (scrollAmount >= track.scrollWidth / 2) {
-                scrollAmount = 0;
-            }
-            track.style.transform = `translateX(-${scrollAmount}px)`;
-            requestAnimationFrame(autoScroll);
-        }
-
-        // Duplicate the content for infinite loop effect
-        track.innerHTML += track.innerHTML;
-        autoScroll();
-    </script>
 </body>
 </html>
