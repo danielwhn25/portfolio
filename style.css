@@ -491,3 +491,61 @@ footer { text-align: center; padding: 25px; color: var(--text-dim); font-size: 0
     fill: white;
     margin-right: 8px;
 }
+/* Visible image carousel */
+.visible-carousel {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+}
+
+.visible-carousel::-webkit-scrollbar {
+    height: 6px;
+}
+
+.visible-carousel::-webkit-scrollbar-thumb {
+    background: rgba(0, 113, 227, 0.4);
+    border-radius: 4px;
+}
+
+.carousel-img img {
+    height: 160px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.carousel-img img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(0,113,227,0.35);
+}
+
+/* Lightbox */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(1,8,22,0.92);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+}
+
+.lightbox:target {
+    display: flex;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 2.5rem;
+    color: white;
+    text-decoration: none;
+}
