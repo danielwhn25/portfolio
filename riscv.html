@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RISC-V Single Cycle CPU | Daniel Ng</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .detail-page {
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+        .detail-header {
+            margin-bottom: 30px;
+        }
+        .detail-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .detail-subtitle {
+            color: var(--accent-blue);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        .detail-content {
+            background: var(--glass);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+        .detail-content h3 {
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+        .detail-content h3:first-child {
+            margin-top: 0;
+        }
+        .detail-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .detail-content li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+        .detail-content li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+        .back-link {
+            display: inline-block;
+            color: var(--accent-blue);
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            transition: opacity 0.3s;
+        }
+        .back-link:hover {
+            opacity: 0.7;
+        }
+        .instructions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .instruction-item {
+            background: rgba(0, 113, 227, 0.1);
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 113, 227, 0.2);
+            text-align: center;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">DANIEL NG</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#projects">Projects</a></li>
+                <li><a href="../Daniel_Ng_Resume.pdf" class="resume-btn" target="_blank">Resume</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="detail-page container tight">
+        <a href="../index.html" class="back-link">← Back to Portfolio</a>
+        
+        <div class="detail-header">
+            <h1 class="detail-title">RISC-V Single Cycle CPU</h1>
+            <div class="detail-subtitle">Academic Project | December 2025</div>
+        </div>
+
+        <div class="detail-content">
+            <h3>Project Overview</h3>
+            <p>Designed and implemented a complete RISC-V single-cycle processor in System Verilog, supporting a 10-instruction subset of the RISC-V ISA. The processor executes one instruction per clock cycle and includes comprehensive verification through assertion-based testbenches.</p>
+
+            <h3>Architecture</h3>
+            <ul>
+                <li>Single-cycle execution model - one instruction per clock cycle</li>
+                <li>RISC-V 32-bit instruction set architecture</li>
+                <li>10-instruction subset implementation</li>
+                <li>Modular design with separate datapath and control unit</li>
+                <li>Register file with 32 general-purpose registers</li>
+                <li>ALU supporting arithmetic and logical operations</li>
+            </ul>
+
+            <h3>Instruction Set</h3>
+            <p>The processor implements a 10-instruction subset including:</p>
+            <div class="instructions-grid">
+                <div class="instruction-item">ADD</div>
+                <div class="instruction-item">SUB</div>
+                <div class="instruction-item">AND</div>
+                <div class="instruction-item">OR</div>
+                <div class="instruction-item">XOR</div>
+                <div class="instruction-item">SLT</div>
+                <div class="instruction-item">ADDI</div>
+                <div class="instruction-item">LW</div>
+                <div class="instruction-item">SW</div>
+                <div class="instruction-item">BEQ</div>
+            </div>
+
+            <h3>Key Components</h3>
+            <ul>
+                <li><strong>Control Unit:</strong> Generates control signals based on instruction opcode</li>
+                <li><strong>Datapath:</strong> Implements instruction execution pipeline</li>
+                <li><strong>Register File:</strong> 32x32-bit registers with dual-port read, single-port write</li>
+                <li><strong>ALU:</strong> Performs arithmetic, logical, and comparison operations</li>
+                <li><strong>Instruction Memory:</strong> Stores program instructions</li>
+                <li><strong>Data Memory:</strong> Handles load/store operations</li>
+                <li><strong>Program Counter:</strong> Tracks instruction execution flow</li>
+            </ul>
+
+            <h3>Verification & Testing</h3>
+            <ul>
+                <li>Developed comprehensive System Verilog testbenches</li>
+                <li>Implemented assertion-based verification (ABV) for formal validation</li>
+                <li>Created test programs covering all instruction types</li>
+                <li>Verified correct execution of arithmetic, logical, and control flow instructions</li>
+                <li>Validated memory access operations (load/store)</li>
+                <li>Tested edge cases and error conditions</li>
+            </ul>
+
+            <h3>Technical Skills</h3>
+            <ul>
+                <li>System Verilog Hardware Description Language</li>
+                <li>RISC-V Instruction Set Architecture</li>
+                <li>CPU Architecture & Microarchitecture Design</li>
+                <li>Digital Logic Design</li>
+                <li>Assertion-Based Verification</li>
+                <li>Hardware Simulation & Testing</li>
+            </ul>
+
+            <h3>Learning Outcomes</h3>
+            <p>This project provided deep understanding of processor architecture, instruction execution, and hardware verification methodologies. The single-cycle design demonstrates fundamental concepts that extend to pipelined and superscalar processor architectures.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Daniel Ng | Vancouver, BC</p>
+    </footer>
+</body>
+</html>
