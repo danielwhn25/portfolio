@@ -474,4 +474,20 @@ body {
 }
 
 footer { text-align: center; padding: 25px; color: var(--text-dim); font-size: 0.7rem; }
+/* LinkedIn button */
+.linkedin-btn {
+    background: #0a66c2;
+    box-shadow: 0 4px 12px rgba(10, 102, 194, 0.35);
+}
 
+.linkedin-btn:hover {
+    background: #004182;
+    box-shadow: 0 6px 20px rgba(10, 102, 194, 0.45);
+}
+
+.linkedin-icon {
+    width: 18px;
+    height: 18px;
+    fill: white;
+    margin-right: 8px;
+}
