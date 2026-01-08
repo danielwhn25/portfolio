@@ -20,7 +20,8 @@
 
     <header class="hero-center">
         <div class="carousel-box">
-            <h1 class="main-title">Daniel Ng</h1>
+            <h1 class="main-title"><span id="name-text"></span><span class="cursor">|</span></h1>
+            <p class="hook-text"><span id="hook-text"></span><span class="cursor">|</span></p>
             <div class="word-wrapper">
                 <div class="skills-carousel">
                     <div class="skills-track">
@@ -51,7 +52,9 @@
     <section id="about" class="container tight">
         <h2 class="section-label">01 // Profile</h2>
         <div class="glass-card">
-            <p>Electrical Engineering student at UBC specializing in RF hardware and digital systems. Experienced in Ku-Band characterization at <strong>Norsat International</strong> and leading timing gate design for <strong>Formula UBC Racing</strong>.</p>
+            <p><strong>University of British Columbia</strong> | Expected Graduation: May 2029<br>
+            BASc in Electrical Engineering (Co-op, available May 2026) | Vancouver, BC</p>
+            <p style="margin-top: 12px;">2<sup>nd</sup> Year Electrical Engineering student specializing in RF hardware, digital design, and embedded systems. Experienced in Ku-Band RF characterization at <strong>Norsat International</strong> and leading timing gate design for <strong>Formula UBC Racing</strong>.</p>
         </div>
     </section>
 
@@ -61,37 +64,62 @@
             <details class="experience-card">
                 <summary>
                     <div class="card-header">
-                        <h3>RF Hardware Engineering</h3>
+                        <h3>Hardware Intern</h3>
                         <span class="card-badge">Norsat International</span>
                     </div>
-                    <p class="card-summary">Ku-Band RF characterization and hardware development for satellite communication systems.</p>
+                    <p class="card-summary">Hardware Intern | June 2025 – August 2025 | RF characterization and hardware development for satellite communication systems.</p>
                     <span class="card-link">Click to view details</span>
                 </summary>
                 <div class="card-details">
+                    <div class="project-images">
+                        <h4>Project Images</h4>
+                        <div class="image-gallery">
+                            <div class="image-placeholder">
+                                <p>Add your project images here</p>
+                                <small>Recommended: 800x600px or similar aspect ratio</small>
+                            </div>
+                            <!-- Add your images like this:
+                            <img src="images/norsat-1.jpg" alt="RF Hardware Project">
+                            <img src="images/norsat-2.jpg" alt="RF Testing Setup">
+                            -->
+                        </div>
+                    </div>
                     <ul>
-                        <li>Characterized Ku-band RF front-end modules, optimizing gain, noise figure, and linearity.</li>
-                        <li>Developed and executed test plans using network analyzers, spectrum analyzers, and signal generators.</li>
-                        <li>Collaborated with senior engineers to debug and validate hardware prior to release.</li>
-                        <li>Documented measurement procedures and results for internal design reviews.</li>
+                        <li>Performed gain, power saturation, 1-dB compression point, spurious emissions, third-order intermodulation distortion, and noise figure characterization on 20+ 40W, 50W, and 80W Ku-Band Block-Up Converters using Keysight PNA-X Vector Network Analyzers, Signal Analyzers, RF jigs, and multimeters to verify hardware parameters.</li>
+                        <li>Performed RF power calibration by sweeping DAC codes controlling voltage-variable attenuation and PA bias while monitoring output power and stability.</li>
+                        <li>Assembled and reworked BUCs and LNBs at the PCB and PCBA levels, performing fine-pitch SMT and THT soldering and microscopic inspection on MMIC chips to meet production quality standards.</li>
+                        <li>Verified and troubleshooted SSPA boards by conducting continuity tests and cross-referencing schematics to identify and rectify DC bias instability and RF path discontinuities, ensuring 100% yield for high-power MMIC stages.</li>
                     </ul>
                 </div>
             </details>
             
-            <details class="experience-card">
+            <details class="experience-card" id="formula-ubc-project">
                 <summary>
                     <div class="card-header">
                         <h3>Laser Timing Gates</h3>
                         <span class="card-badge">Formula UBC Racing</span>
                     </div>
-                    <p class="card-summary">Project lead for 650 nm laser timing gate system with custom TIA and precision calibration.</p>
+                    <p class="card-summary">Project Lead - Timing Gates | September 2025 – Present | Leading full design cycle of 650 nm laser gate receiver with ESP32-S3 MCUs.</p>
                     <span class="card-link">Click to view details</span>
                 </summary>
                 <div class="card-details">
+                    <div class="project-images">
+                        <h4>Project Images</h4>
+                        <div class="image-gallery">
+                            <div class="image-placeholder">
+                                <p>Add your project images here</p>
+                                <small>Recommended: 800x600px or similar aspect ratio</small>
+                            </div>
+                            <!-- Add your images like this:
+                            <img src="images/formula-ubc-1.jpg" alt="Laser Timing Gate System">
+                            <img src="images/formula-ubc-2.jpg" alt="PCB Design">
+                            <img src="images/formula-ubc-3.jpg" alt="Track Deployment">
+                            -->
+                        </div>
+                    </div>
                     <ul>
-                        <li>Designed a custom transimpedance amplifier (TIA) receiver for 650 nm laser diodes in Altium.</li>
-                        <li>Calibrated the system to achieve 20 dB SNR and bit error rate below 10⁻⁷.</li>
-                        <li>Integrated electrical design with mechanical packaging for on-track deployment.</li>
-                        <li>Validated timing accuracy through bench testing and track-side measurements.</li>
+                        <li>Leading the full design cycle of a 650 nm laser gate receiver in Altium, mentoring two MechE students to develop optomechanical shrouding coupled with a custom analog front end (photodiode+transimpedance amplifier (TIA)+Schmitt trigger) to maintain 3.3V CMOS logic and 2.4GHz communication between master-slave ESP32-S3 MCUs.</li>
+                        <li>Characterizing baseline photodiode thermal dark current and TIA voltage noise to calibrate an adjustable hysteresis threshold via potentiometer, targeting a 20dB Signal-to-Noise Ratio (SNR) and a Bit Error Rate (BER) of &lt; 10⁻⁷ to ensure reliable high-speed data integrity between MCUs.</li>
                     </ul>
                 </div>
             </details>
@@ -102,15 +130,27 @@
                         <h3>RISC-V Single Cycle CPU</h3>
                         <span class="card-badge">Academic Project</span>
                     </div>
-                    <p class="card-summary">Single-cycle RISC-V core in SystemVerilog with assertion-based verification.</p>
+                    <p class="card-summary">December 2025 | Single-cycle RISC-V processor implemented on Altera DE10-Lite FPGA with assertion-based verification.</p>
                     <span class="card-link">Click to view details</span>
                 </summary>
                 <div class="card-details">
+                    <div class="project-images">
+                        <h4>Project Images</h4>
+                        <div class="image-gallery">
+                            <div class="image-placeholder">
+                                <p>Add your project images here</p>
+                                <small>Recommended: 800x600px or similar aspect ratio</small>
+                            </div>
+                            <!-- Add your images like this:
+                            <img src="images/risc-v-1.jpg" alt="RISC-V CPU Architecture">
+                            <img src="images/risc-v-2.jpg" alt="SystemVerilog Code">
+                            <img src="images/risc-v-3.jpg" alt="Simulation Results">
+                            -->
+                        </div>
+                    </div>
                     <ul>
-                        <li>Implemented a 10-instruction subset RISC-V processor with separate datapath and control.</li>
-                        <li>Developed register file, ALU, and memory interfaces in synthesizable SystemVerilog.</li>
-                        <li>Created assertion-based testbenches to exercise arithmetic, logical, and control-flow paths.</li>
-                        <li>Analyzed simulation waveforms to debug corner cases and ensure correct instruction execution.</li>
+                        <li>Architected and implemented a Single-cycle RISC-V processor in SystemVerilog with memory-mapped I/O onto Altera's DE10-Lite with functioning register file, ALU, and control unit, supporting a 10-instruction subset of the RISC-V ISA.</li>
+                        <li>Wrote a self-checking non-synthesizable testbench with assertion-based verification to verify instruction-level correctness and used Questa to trace signals through the synchronous timing datapath.</li>
                     </ul>
                 </div>
             </details>
@@ -120,5 +160,110 @@
     <footer>
         <p>&copy; 2026 Daniel Ng | Vancouver, BC</p>
     </footer>
+
+    <script>
+        // Typing animation function
+        function typeText(element, text, speed, callback) {
+            let i = 0;
+            element.textContent = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    if (callback) callback();
+                }
+            }
+            
+            type();
+        }
+
+        // Typing function that supports HTML
+        function typeTextHTML(element, text, speed, callback) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    const char = text.charAt(i);
+                    const nextChars = text.substring(i, i+3);
+                    
+                    // Handle "2nd" with superscript
+                    if (nextChars === '2nd') {
+                        element.innerHTML += '2<sup>nd</sup>';
+                        i += 3;
+                    } else {
+                        element.innerHTML += char;
+                        i++;
+                    }
+                    setTimeout(type, speed);
+                } else {
+                    if (callback) callback();
+                }
+            }
+            
+            type();
+        }
+
+        // Wait for page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const nameElement = document.getElementById('name-text');
+            const hookElement = document.getElementById('hook-text');
+            const nameCursor = document.querySelector('.main-title .cursor');
+            const hookCursor = document.querySelector('.hook-text .cursor');
+            
+            const name = 'Daniel Ng';
+            const hookBeforeLink = '2nd Year EE @UBC specializing in digital and embedded systems. ';
+            const hookLinkText = 'See my latest work →';
+            
+            // Hide cursors initially
+            nameCursor.style.opacity = '0';
+            hookCursor.style.opacity = '0';
+            
+            // Small delay before starting
+            setTimeout(() => {
+                // Show cursor and type name
+                nameCursor.style.opacity = '1';
+                typeText(nameElement, name, 100, function() {
+                    // Hide name cursor, wait a bit, then start hook
+                    setTimeout(() => {
+                        nameCursor.style.opacity = '0';
+                        setTimeout(() => {
+                            hookCursor.style.opacity = '1';
+                            // Type hook text with superscript support
+                            typeTextHTML(hookElement, hookBeforeLink, 50, function() {
+                                // Add the clickable link after typing
+                                hookElement.innerHTML += '<a href="#formula-ubc-project" class="hook-link">' + hookLinkText + '</a>';
+                                // Hide hook cursor after completion
+                                setTimeout(() => {
+                                    hookCursor.style.opacity = '0';
+                                }, 1000);
+                            });
+                        }, 400);
+                    }, 600);
+                });
+            }, 500);
+        });
+
+        // Handle smooth scroll to Formula UBC project and open it
+        document.addEventListener('DOMContentLoaded', function() {
+            const hookLinks = document.querySelectorAll('.hook-link');
+            const formulaCard = document.getElementById('formula-ubc-project');
+            
+            hookLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (formulaCard) {
+                        // Open the details element
+                        formulaCard.setAttribute('open', '');
+                        // Smooth scroll to it
+                        formulaCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
