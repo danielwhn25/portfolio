@@ -492,12 +492,22 @@ footer { text-align: center; padding: 25px; color: var(--text-dim); font-size: 0
     margin-right: 8px;
 }
 /* Visible image carousel */
+/* Project images: one per row, no compression */
 .visible-carousel {
     display: flex;
-    gap: 14px;
-    overflow-x: auto;
-    padding-bottom: 6px;
+    flex-direction: column;   /* 👈 THIS is the key */
+    gap: 16px;
 }
+
+.carousel-img img {
+    width: 100%;              /* 👈 fill container */
+    height: auto;             /* 👈 preserve aspect ratio */
+    max-height: 420px;        /* optional, prevents giant images */
+    object-fit: contain;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
 
 .visible-carousel::-webkit-scrollbar {
     height: 6px;
