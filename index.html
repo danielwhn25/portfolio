@@ -23,8 +23,9 @@
     <header class="hero-center">
         <div class="carousel-box">
             <h1 class="main-title"><span id="name-text"></span><span class="cursor">|</span></h1>
-            <p class="hook-text"><span id="hook-text"></span><span class="cursor">|</span></p>
-            <a href="Daniel_Ng_Resume.pdf" download="Daniel_Ng_Resume.pdf" class="resume-download-btn">View Resume</a>
+            <p class="hook-text"><span id="hook-text"></span><span class="cursor">|</span></p> 
+
+            <a href="Daniel_Ng_Resume.pdf" download="Daniel_Ng_Resume.pdf" class="resume-download-btn">View Daniel's Resume</a>
             <div class="word-wrapper">
                 <div class="skills-carousel">
                     <div class="skills-track">
@@ -61,7 +62,7 @@
                         <h3>Hardware Intern</h3>
                         <span class="card-badge">Norsat International</span>
                     </div>
-                    <p class="card-summary">Hardware Intern | June 2025 – August 2025 | RF characterization and hardware development for satellite communication systems.</p>
+                    <p class="card-summary"> RF characterization and hardware testing for Norsat satellite communication systems.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">VNA</span>
                         <span class="tech-tag">RF Characterization</span>
@@ -96,10 +97,10 @@
             <details class="experience-card" id="formula-ubc-project">
                 <summary>
                     <div class="card-header">
-                        <h3>Laser Timing Gates</h3>
+                        <h3>Laser Timing Gates (Ongoing)</h3>
                         <span class="card-badge">Formula UBC Racing</span>
                     </div>
-                    <p class="card-summary">Project Lead - Timing Gates | September 2025 – Present | Leading full design cycle of 650 nm laser gate receiver with ESP32-S3 MCUs.</p>
+                    <p class="card-summary">Full design cycle of 650 nm laser gate receiver with ESP32-S3 MCUs.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">Altium Designer</span>
                         <span class="tech-tag">Embedded C</span>
@@ -129,7 +130,7 @@
 
                     </div>
                     <ul>
-                        <li>Leading the full design cycle of a 650 nm laser gate receiver in Altium, mentoring two MechE students to develop optomechanical shrouding coupled with a custom analog front end (photodiode+transimpedance amplifier (TIA)+Schmitt trigger) to maintain 3.3V CMOS logic and 2.4GHz communication between master-slave ESP32-S3 MCUs.</li>
+                        <li>Leading the full design cycle of a 650 nm laser gate receiver in Altium with two MechE students to develop optomechanical shrouding coupled with a custom analog front end (photodiode+transimpedance amplifier (TIA)+Schmitt trigger) to maintain 3.3V CMOS logic and 2.4GHz communication between master-slave ESP32-S3 MCUs.</li>
                         <li>Characterizing baseline photodiode thermal dark current and TIA voltage noise to calibrate an adjustable hysteresis threshold via potentiometer, targeting a 20dB Signal-to-Noise Ratio (SNR) and a Bit Error Rate (BER) of &lt; 10⁻⁷ to ensure reliable high-speed data integrity between MCUs.</li>
                     </ul>
                 </div>
@@ -171,6 +172,44 @@
                     </ul>
                 </div>
             </details>
+
+            <details class="experience-card">
+    <summary>
+        <div class="card-header">
+            <h3>Tron Light Cycle Game</h3>
+            <span class="card-badge">Academic Project</span>
+        </div>
+        <p class="card-summary">Embedded C & FPGA | November 2025 | Real-time competitive game featuring custom VGA drivers and interrupt-driven controls.</p>
+        <div class="tech-tags">
+            <span class="tech-tag">Embedded C</span>
+            <span class="tech-tag">MMIO</span>
+            <span class="tech-tag">VGA Driver</span>
+            <span class="tech-tag">ISR</span>
+            <span class="tech-tag">Altera FPGA</span>
+        </div>
+        <span class="card-link">Click to view details</span>
+    </summary>
+    <div class="card-details">
+        <div class="project-images">
+            <h4>System Architecture</h4>
+            <div class="image-gallery">
+                <div class="image-placeholder">
+                    <p>Add screenshots of your VGA output or Logic Analyzer traces here</p>
+                </div>
+            </div>
+        </div>
+        <ul>
+            <li>Developed a custom VGA graphics driver using <strong>Memory-Mapped I/O (MMIO)</strong> to manage frame buffers, rendering dynamic light traces and a gameplay perimeter while maintaining high-speed pixel updates via bit-shifted coordinate mapping.</li>
+            <li>Implemented an <strong>interrupt-driven control scheme</strong> for human input, utilizing an <strong>Interrupt Service Routine (ISR)</strong> to handle asynchronous pushbutton events, significantly reducing input latency compared to traditional polling.</li>
+            <li>Engineered an autonomous robot opponent with <strong>predictive collision logic</strong>; the algorithm performs real-time memory reads of the VGA buffer to scan for obstacles and dynamically updates movement vectors to avoid crashes .</li>
+            <li>Integrated hardware-level peripherals including an active-high <strong>Seven-Segment LUT</strong> for real-time score tracking and JTAG UART for system status monitoring.</li>
+        </ul>
+    </div>
+</details>
+
+
+
+
         </div>
     </section>
 
@@ -219,9 +258,9 @@
     <section id="contact" class="container tight">
         <h2 class="section-title">Let's Connect</h2>
         <div class="contact-card">
-            <p>Open to co-op opportunities starting May 2026. Let's have a coffee chat and discuss what I can problems I can solve for you.</p>
+            <p>Open to co-op opportunities starting May 2026.<br> Let's have a coffee chat and discuss what I can problems I can solve for you.</p>
 <div class="contact-links">
-    <a href="https://www.linkedin.com/in/YOUR-LINKEDIN-USERNAME"
+    <a href="https://www.linkedin.com/in/danielngEE"
        target="_blank"
        class="contact-btn linkedin-btn">
         <svg class="linkedin-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -230,7 +269,7 @@
         <span>LinkedIn</span>
     </a>
 
-    <a href="mailto:daniel.whn25@gmail.com" class="contact-btn secondary">
+    <a href="mailto:daniel.whn@outlook.com" class="contact-btn secondary">
         <span>Email Me</span>
     </a>
 </div>
@@ -314,8 +353,8 @@
             const hookCursor = document.querySelector('.hook-text .cursor');
             
             const name = 'Daniel Ng';
-            const hookBeforeLink = '2nd Year EE @UBC specializing in digital and embedded systems. ';
-            const hookLinkText = 'See my latest work →';
+            const hookBeforeLink = '2nd Year EE @ UBC working at the hardware–software boundary: FPGA CPUs, embedded firmware, and system-level verification';
+            const hookLinkText = 'See my latest work → ';
             
             // Hide cursors initially
             nameCursor.style.opacity = '0';
@@ -333,13 +372,9 @@
                             hookCursor.style.opacity = '1';
                             // Type hook text with superscript support
                             typeTextHTML(hookElement, hookBeforeLink, 50, function() {
-                                // Add the clickable link after typing
-                                hookElement.innerHTML += '<a href="#formula-ubc-project" class="hook-link">' + hookLinkText + '</a>';
-                                // Hide hook cursor after completion
-                                setTimeout(() => {
-                                    hookCursor.style.opacity = '0';
-                                }, 1000);
-                            });
+    hookElement.innerHTML += '<br><a href="#formula-ubc-project" class="hook-link">' + hookLinkText + '</a>';
+});
+
                         }, 400);
                     }, 600);
                 });
