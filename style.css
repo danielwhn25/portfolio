@@ -70,7 +70,7 @@ body {
 
 /* CENTERED WORD CAROUSEL */
 .hero-center {
-    height: 15vh; /* Reduced height */
+    height: 100vh; /* Reduced height */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -660,4 +660,5 @@ footer { text-align: center; padding: 25px; color: var(--text-dim); font-size: 0
     border: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
 }
+
 
