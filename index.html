@@ -567,14 +567,14 @@
             setTimeout(() => {
                 // Show cursor and type name
                 nameCursor.style.opacity = '1';
-                typeText(nameElement, name, 100, function() {
+                typeText(nameElement, name, 30, function() {
                     // Hide name cursor, wait a bit, then start hook
                     setTimeout(() => {
                         nameCursor.style.opacity = '0';
                         setTimeout(() => {
                             hookCursor.style.opacity = '1';
                             // Type hook text with superscript support
-                            typeTextHTML(hookElement, hookBeforeLink, 50, function() {
+                            typeTextHTML(hookElement, hookBeforeLink, 30, function() {
     hookElement.innerHTML += '<br><a href="#formula-ubc-project" class="hook-link">' + hookLinkText + '</a>';
 });
 
@@ -644,6 +644,7 @@
     </script>
 </body>
 </html>
+
 
 
 
