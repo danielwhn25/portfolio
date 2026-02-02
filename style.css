@@ -21,7 +21,7 @@ body {
 }
 
 .container.tight {
-    max-width: 800px;
+    max-width: 900px;
     margin: 15px auto;
     padding: 0 20px;
 }
@@ -50,7 +50,7 @@ body {
 }
 
 .nav-container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -155,56 +155,68 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* CARDS GRID */
-.cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 15px;
+/* HORIZONTAL PROJECT CARDS */
+.projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     margin-top: 10px;
 }
 
 .experience-card {
     background: var(--glass);
-    padding: 20px;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     text-decoration: none;
     color: var(--text-main);
-    display: flex;
-    flex-direction: column;
     transition: all 0.3s ease;
     cursor: pointer;
+    width: 100%;
 }
 
 .experience-card[open],
 .experience-card:hover {
     border-color: var(--accent-blue);
-    transform: translateY(-2px);
     box-shadow: 0 4px 20px rgba(0, 113, 227, 0.2);
 }
 
 .experience-card summary {
     list-style: none;
     cursor: pointer;
+    padding: 20px 24px;
 }
 
 .experience-card summary::-webkit-details-marker {
     display: none;
 }
 
-.card-header {
+/* Card Main Layout - Horizontal */
+.card-main {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 10px;
-    gap: 12px;
+    align-items: center;
+    gap: 20px;
 }
 
-.card-header h3 {
-    font-size: 1.05rem;
+.card-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Header Inline - Title and Badge on Same Line */
+.card-header-inline {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.card-header-inline h3 {
+    font-size: 1.1rem;
     font-weight: 600;
     margin: 0;
-    flex: 1;
 }
 
 .card-badge {
@@ -217,39 +229,57 @@ body {
     white-space: nowrap;
 }
 
-.experience-card p {
+.card-summary {
     color: var(--text-dim);
     font-size: 0.9rem;
     line-height: 1.5;
-    margin-bottom: 10px;
-    flex: 1;
+    margin: 0;
 }
 
-.card-link {
+/* Expand Arrow */
+.expand-arrow {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0, 113, 227, 0.1);
+    transition: all 0.3s ease;
+}
+
+.expand-arrow svg {
     color: var(--accent-blue);
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-top: auto;
+    transition: transform 0.3s ease;
 }
 
-.card-summary {
-    margin-bottom: 8px;
+.experience-card[open] .expand-arrow svg {
+    transform: rotate(180deg);
 }
 
+.experience-card:hover .expand-arrow {
+    background: rgba(0, 113, 227, 0.2);
+}
+
+/* Card Details */
 .card-details {
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0 24px 20px 24px;
     color: var(--text-dim);
     font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 12px;
+    padding-top: 16px;
 }
 
 .card-details ul {
     padding-left: 18px;
+    margin-top: 10px;
 }
 
 .card-details li {
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    line-height: 1.6;
 }
 
 /* GitHub Link Styling */
@@ -259,15 +289,15 @@ body {
     gap: 6px;
     color: var(--accent-blue);
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 500;
-    margin: 8px 0 4px 0;
-    padding: 6px 12px;
+    padding: 5px 10px;
     border: 1px solid rgba(0, 113, 227, 0.3);
     border-radius: 6px;
     background: rgba(0, 113, 227, 0.05);
     transition: all 0.3s ease;
     width: fit-content;
+    margin-top: 4px;
 }
 
 .github-link:hover {
@@ -277,8 +307,8 @@ body {
 }
 
 .github-icon {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
 }
 
 .project-images {
@@ -318,7 +348,6 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin: 10px 0;
 }
 
 .tech-tag {
@@ -618,8 +647,19 @@ section#contact {
         font-size: 1.1rem;
     }
     
-    .cards-grid {
-        grid-template-columns: 1fr;
+    .card-main {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .expand-arrow {
+        align-self: center;
+    }
+    
+    .card-header-inline {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
     }
     
     .learning-grid {
