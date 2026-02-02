@@ -22,7 +22,7 @@ body {
 
 .container.tight {
     max-width: 800px;
-    margin: 20px auto; /* Minimal white space */
+    margin: 15px auto;
     padding: 0 20px;
 }
 
@@ -70,7 +70,7 @@ body {
 
 /* CENTERED WORD CAROUSEL */
 .hero-center {
-    height: 100vh; /* Reduced height */
+    height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -89,7 +89,7 @@ body {
     font-size: 1.4rem;
     font-weight: 400;
     color: var(--text-dim);
-    margin-bottom: 10px; /* Reduced from 30px */
+    margin-bottom: 10px;
     min-height: 2rem;
 }
 
@@ -113,7 +113,7 @@ body {
 
 .resume-download-btn {
     display: inline-block;
-    margin: 5px auto 30px auto; /* Reduced top margin to 5px */
+    margin: 5px auto 20px auto;
     padding: 10px 20px;
     background: transparent;
     color: var(--accent-blue);
@@ -145,76 +145,27 @@ body {
     51%, 100% { opacity: 0; }
 }
 
-.word-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    height: 48px;
-    font-size: 1.1rem;
-    color: var(--text-dim);
-}
-
-.static-text { white-space: nowrap; }
-
-.skills-carousel {
-    position: relative;
-    overflow: hidden;
-    max-width: 520px;
-}
-
-.skills-track {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    animation: scroll-skills 22s linear infinite;
-    will-change: transform;
-}
-
-.skill-pill {
-    border-radius: 999px;
-    padding: 6px 14px;
-    border: 1px solid rgba(0, 113, 227, 0.5);
-    background: rgba(0, 113, 227, 0.12);
-    color: var(--accent-blue);
-    font-size: 0.85rem;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-@keyframes scroll-skills {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
 /* CONTENT BLOCKS */
-.section-label { color: var(--accent-blue); font-family: monospace; font-size: 0.65rem; margin-bottom: 15px; opacity: 0.6; }
-
 .section-title {
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--text-main);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     padding-bottom: 8px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-.glass-card { background: var(--glass); padding: 20px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); }
-.project-item { margin-bottom: 20px; }
-.project-header { display: flex; justify-content: space-between; margin-bottom: 2px; }
-.project-header h3 { font-size: 1.1rem; }
-.project-date { color: var(--accent-blue); font-size: 0.8rem; font-weight: 600; }
 
 /* CARDS GRID */
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    gap: 15px;
     margin-top: 10px;
 }
 
 .experience-card {
     background: var(--glass);
-    padding: 24px;
+    padding: 20px;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     text-decoration: none;
@@ -245,12 +196,12 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     gap: 12px;
 }
 
 .card-header h3 {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     margin: 0;
     flex: 1;
@@ -270,7 +221,7 @@ body {
     color: var(--text-dim);
     font-size: 0.9rem;
     line-height: 1.5;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     flex: 1;
 }
 
@@ -286,7 +237,7 @@ body {
 }
 
 .card-details {
-    margin-top: 14px;
+    margin-top: 12px;
     padding-top: 12px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     color: var(--text-dim);
@@ -301,9 +252,38 @@ body {
     margin-bottom: 6px;
 }
 
+/* GitHub Link Styling */
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin: 8px 0 4px 0;
+    padding: 6px 12px;
+    border: 1px solid rgba(0, 113, 227, 0.3);
+    border-radius: 6px;
+    background: rgba(0, 113, 227, 0.05);
+    transition: all 0.3s ease;
+    width: fit-content;
+}
+
+.github-link:hover {
+    background: rgba(0, 113, 227, 0.15);
+    border-color: var(--accent-blue);
+    transform: translateX(2px);
+}
+
+.github-icon {
+    width: 16px;
+    height: 16px;
+}
+
 .project-images {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -311,14 +291,14 @@ body {
     color: var(--accent-blue);
     font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .image-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-    margin-top: 12px;
+    gap: 12px;
+    margin-top: 10px;
 }
 
 .image-gallery img {
@@ -334,30 +314,11 @@ body {
     box-shadow: 0 4px 20px rgba(0, 113, 227, 0.3);
 }
 
-.image-placeholder {
-    background: rgba(0, 113, 227, 0.08);
-    border: 2px dashed rgba(0, 113, 227, 0.3);
-    border-radius: 8px;
-    padding: 40px 20px;
-    text-align: center;
-    color: var(--text-dim);
-}
-
-.image-placeholder p {
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-}
-
-.image-placeholder small {
-    font-size: 0.75rem;
-    opacity: 0.7;
-}
-
 .tech-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin: 12px 0;
+    gap: 6px;
+    margin: 10px 0;
 }
 
 .tech-tag {
@@ -379,13 +340,13 @@ body {
 .skills-breakdown {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
+    gap: 15px;
+    margin-top: 15px;
 }
 
 .skill-category {
     background: var(--glass);
-    padding: 20px;
+    padding: 18px;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -394,7 +355,7 @@ body {
     color: var(--accent-blue);
     font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .skill-items {
@@ -421,7 +382,7 @@ body {
 
 .contact-card {
     background: var(--glass);
-    padding: 30px;
+    padding: 25px;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
@@ -429,7 +390,7 @@ body {
 
 .contact-card p {
     color: var(--text-dim);
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     line-height: 1.6;
 }
 
@@ -472,7 +433,8 @@ body {
     box-shadow: 0 4px 12px rgba(0, 113, 227, 0.2);
 }
 
-footer { text-align: center; padding: 25px; color: var(--text-dim); font-size: 0.7rem; }
+footer { text-align: center; padding: 20px; color: var(--text-dim); font-size: 0.7rem; }
+
 /* LinkedIn button */
 .linkedin-btn {
     background: #0a66c2;
@@ -490,23 +452,22 @@ footer { text-align: center; padding: 25px; color: var(--text-dim); font-size: 0
     fill: white;
     margin-right: 8px;
 }
+
 /* Visible image carousel */
-/* Project images: one per row, no compression */
 .visible-carousel {
     display: flex;
-    flex-direction: column;   /* 👈 THIS is the key */
-    gap: 16px;
+    flex-direction: column;
+    gap: 14px;
 }
 
 .carousel-img img {
-    width: 100%;              /* 👈 fill container */
-    height: auto;             /* 👈 preserve aspect ratio */
-    max-height: 420px;        /* optional, prevents giant images */
+    width: 100%;
+    height: auto;
+    max-height: 420px;
     object-fit: contain;
     border-radius: 10px;
     border: 1px solid rgba(255,255,255,0.12);
 }
-
 
 .visible-carousel::-webkit-scrollbar {
     height: 6px;
@@ -515,13 +476,6 @@ footer { text-align: center; padding: 25px; color: var(--text-dim); font-size: 0
 .visible-carousel::-webkit-scrollbar-thumb {
     background: rgba(0, 113, 227, 0.4);
     border-radius: 4px;
-}
-
-.carousel-img img {
-    height: 160px;
-    border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.1);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .carousel-img img:hover {
@@ -567,20 +521,20 @@ footer { text-align: center; padding: 25px; color: var(--text-dim); font-size: 0
 .learning-intro {
     color: var(--text-dim);
     font-size: 1rem;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     text-align: center;
 }
 
 .learning-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
+    gap: 15px;
+    margin-top: 15px;
 }
 
 .learning-card {
     background: var(--glass);
-    padding: 24px;
+    padding: 20px;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
@@ -613,9 +567,10 @@ footer { text-align: center; padding: 25px; color: var(--text-dim); font-size: 0
 
 .learning-icon {
     font-size: 2rem;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     display: inline-block;
     transition: transform 0.3s ease;
+    color: var(--accent-blue);
 }
 
 .learning-card:hover .learning-icon {
@@ -626,44 +581,48 @@ footer { text-align: center; padding: 25px; color: var(--text-dim); font-size: 0
     font-size: 1.05rem;
     font-weight: 600;
     color: var(--text-main);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .learning-card p {
     color: var(--text-dim);
     font-size: 0.85rem;
     line-height: 1.5;
-    margin-bottom: 16px;
-}
-
-.learning-progress {
-    width: 100%;
-    height: 6px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 3px;
-    overflow: hidden;
-    margin-top: 12px;
-}
-
-.progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent-blue), #00a8ff);
-    border-radius: 3px;
-    transition: width 0.6s ease;
-    box-shadow: 0 0 10px rgba(0, 113, 227, 0.5);
-}
-
-.contact-card {
-    background: var(--glass);
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    text-align: center;
+    margin-bottom: 0;
 }
 
 .experience-card, 
 section {
-    scroll-margin-top: 100px; /* This accounts for the fixed navbar height */
+    scroll-margin-top: 100px;
 }
 
+/* Compact section spacing */
+section#projects,
+section#skills,
+section#learning,
+section#contact {
+    margin-bottom: 30px;
+}
 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-center {
+        height: 60vh;
+    }
+    
+    .main-title {
+        font-size: 2.5rem;
+    }
+    
+    .hook-text {
+        font-size: 1.1rem;
+    }
+    
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .learning-grid {
+        grid-template-columns: 1fr;
+    }
+}
