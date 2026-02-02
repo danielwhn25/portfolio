@@ -55,30 +55,6 @@
             <p class="hook-text"><span id="hook-text"></span><span class="cursor">|</span></p> 
 
             <a href="Daniel_Ng_Resume.pdf" download="Daniel_Ng_Resume.pdf" class="resume-download-btn">View Daniel's Resume</a>
-           <!-- <div class="word-wrapper">
-                <div class="skills-carousel">
-                    <div class="skills-track">
-                        <span class="skill-pill">SystemVerilog</span>
-                        <span class="skill-pill">Altera FPGA</span>
-                        <span class="skill-pill">Embedded C</span>
-                        <span class="skill-pill">Schematic Capture</span>
-                        <span class="skill-pill">RF Characterization</span>
-                        <span class="skill-pill">Quartus Prime</span>
-                        <span class="skill-pill">VNA</span>
-                        <span class="skill-pill">Altium Designer</span>
-
-                        <span class="skill-pill">SystemVerilog</span>
-                        <span class="skill-pill">Altera FPGA</span>
-                        <span class="skill-pill">Embedded C</span>
-                        <span class="skill-pill">Schematic Capture</span>
-                        <span class="skill-pill">RF Characterization</span>
-                        <span class="skill-pill">Quartus Prime</span>
-                        <span class="skill-pill">VNA</span>
-                        <span class="skill-pill">Altium Designer</span>
-                    </div>
-                </div>
-            </div>
-            -->
         </div>
     </header>
 
@@ -91,7 +67,7 @@
                         <h3>Hardware Intern</h3>
                         <span class="card-badge">Norsat International</span>
                     </div>
-                    <p class="card-summary"> <i>RF characterization and hardware testing for Norsat satellite communication systems.</i></p>
+                    <p class="card-summary"><i>RF characterization and hardware testing for satellite communication systems</i></p>
                     <div class="tech-tags">
                         <span class="tech-tag">VNA</span>
                         <span class="tech-tag">RF Characterization</span>
@@ -105,15 +81,13 @@
                         <h4>Project Images</h4>
                         <div class="image-gallery">
                             <img src="images/norsat-1.jpg" alt="ATOM-BUC">
-                          <!--  <img src="images/norsat-2.jpg" alt="RF Testing Setup">-->
-                            
                         </div>
                     </div>
                     <ul>
-                        <li>Performed gain, power saturation, 1-dB compression point, spurious emissions, third-order intermodulation distortion, and noise figure characterization on 20+ 40W, 50W, and 80W Ku-Band Block-Up Converters using Keysight PNA-X Vector Network Analyzers, Signal Analyzers, RF jigs, and multimeters to verify hardware parameters.</li>
-                        <li>Performed RF power calibration by sweeping DAC codes controlling voltage-variable attenuation and PA bias while monitoring output power and stability.</li>
-                        <li>Assembled and reworked BUCs and LNBs at the PCB and PCBA levels, performing fine-pitch SMT and THT soldering and microscopic inspection on MMIC chips to meet production quality standards.</li>
-                        <li>Verified and troubleshooted SSPA boards by conducting continuity tests and cross-referencing schematics to identify and rectify DC bias instability and RF path discontinuities, ensuring 100% yield for high-power MMIC stages.</li>
+                        <li>Characterized Ku-Band Block-Up Converters (gain, P<sub>sat</sub>, P1dB, spurious, IMD3, noise figure) using VNAs, signal analyzers, oscilloscopes, and multimeters to ensure 100% compliance with hardware specifications.</li>
+                        <li>Optimized RF power module stability by precisely sweeping DAC control codes, significantly reducing variance in output power prior to final acceptance testing.</li>
+                        <li>Assembled and troubleshot BUCs and LNBs at the PCBA level, performing microscopic SMT and THT soldering and inspection to maintain quality standards for high-sensitivity MMIC chips.</li>
+                        <li>Verified and troubleshot SSPA boards by conducting continuity tests and cross-referencing schematics to identify and rectify DC bias instability, ensuring 100% yield for high-power MMIC stages.</li>
                     </ul>
                 </div>
             </details>
@@ -121,41 +95,102 @@
             <details class="experience-card" id="formula-ubc-project">
                 <summary>
                     <div class="card-header">
-                        <h3>Laser Timing Gates (Ongoing)</h3>
+                        <h3>Laser Timing Gates</h3>
                         <span class="card-badge">Formula UBC Racing</span>
                     </div>
-                    <p class="card-summary"><i>End-to-end development of 650 nm laser gate receivers with ESP32-S3 MCUs.</i></p>
+                    <p class="card-summary"><i>End-to-end development of 650 nm laser gate receivers with ESP32-S3 MCUs</i></p>
                     <div class="tech-tags">
                         <span class="tech-tag">Altium Designer</span>
                         <span class="tech-tag">Embedded C</span>
                         <span class="tech-tag">ESP32-S3</span>
-                        <span class="tech-tag">Schematic Capture</span>
+                        <span class="tech-tag">Analog Design</span>
                     </div>
+                    <a href="https://github.com/danielwhn25/FUBC-timing-gates" target="_blank" class="github-link">
+                        <svg class="github-icon" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                        View on GitHub
+                    </a>
                     <span class="card-link">Click to view details</span>
                 </summary>
                 <div class="card-details">
                     <div class="project-images">
                         <h4>Project Images</h4>
                         <div class="image-gallery visible-carousel">
-
-    <a href="#formula-img1" class="carousel-img">
-        <img src="images/formula-ubc-1.jpg" alt="Laser Timing Gate System">
-    </a>
-
-    <a href="#formula-img2" class="carousel-img">
-        <img src="images/formula-ubc-2.jpg" alt="PCB Design">
-    </a>
-
-    <a href="#formula-img3" class="carousel-img">
-        <img src="images/formula-ubc-3.jpg" alt="Track Deployment">
-    </a>
-
-</div>
-
+                            <a href="#formula-img1" class="carousel-img">
+                                <img src="images/formula-ubc-1.jpg" alt="Laser Timing Gate System">
+                            </a>
+                            <a href="#formula-img2" class="carousel-img">
+                                <img src="images/formula-ubc-2.jpg" alt="PCB Design">
+                            </a>
+                            <a href="#formula-img3" class="carousel-img">
+                                <img src="images/formula-ubc-3.jpg" alt="Track Deployment">
+                            </a>
+                        </div>
                     </div>
                     <ul>
-                        <li>Leading the full design cycle of a 650 nm laser gate receiver in Altium with two MechE students to develop optomechanical shrouding coupled with a custom analog front end (photodiode+transimpedance amplifier (TIA)+Schmitt trigger) to maintain 3.3V CMOS logic and 2.4GHz communication between master-slave ESP32-S3 MCUs.</li>
-                        <li>Characterizing baseline photodiode thermal dark current and TIA voltage noise to calibrate an adjustable hysteresis threshold via potentiometer, targeting a 20dB Signal-to-Noise Ratio (SNR) and a Bit Error Rate (BER) of &lt; 10⁻⁷ to ensure reliable high-speed data integrity between MCUs.</li>
+                        <li>Led end-to-end development of a laser receiver, including optomechanical shrouding coupled with a custom 3.3V CMOS analog front end and 2.4GHz communication between master-slave ESP32-S3 MCUs to calculate speed and lap times.</li>
+                        <li>Characterized baseline photodiode thermal dark current and TIA voltage noise to calibrate an adjustable hysteresis threshold via potentiometer, targeting a 20dB SNR and BER &lt; 10<sup>-7</sup> to ensure high-speed data integrity.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="experience-card">
+                <summary>
+                    <div class="card-header">
+                        <h3>Interrupt-Driven Alarm Clock</h3>
+                        <span class="card-badge">Academic Project</span>
+                    </div>
+                    <p class="card-summary"><i>Real-time settable clock using 16.6 MHz oscillator with timer-driven interrupts</i></p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">A51 Assembly</span>
+                        <span class="tech-tag">N76E003</span>
+                        <span class="tech-tag">Interrupts</span>
+                        <span class="tech-tag">LCD</span>
+                    </div>
+                    <a href="https://github.com/danielwhn25/alarm-clock.git" target="_blank" class="github-link">
+                        <svg class="github-icon" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                        View on GitHub
+                    </a>
+                    <span class="card-link">Click to view details</span>
+                </summary>
+                <div class="card-details">
+                    <ul>
+                        <li>Engineered a real-time settable clock using a 16.6 MHz oscillator to drive timers and interrupts.</li>
+                        <li>Utilized Timer 0 to generate a stable 2 kHz square wave for audio signaling and Timer 2 to manage high-precision half-second BCD clock increments.</li>
+                        <li>Interfaced a 4-bit LCD for time/alarm display and implemented a sampling-based debouncing algorithm coupled with decoupling capacitors for pushbutton inputs to eliminate noise.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="experience-card">
+                <summary>
+                    <div class="card-header">
+                        <h3>Temperature Telemetry System</h3>
+                        <span class="card-badge">Academic Project</span>
+                    </div>
+                    <p class="card-summary"><i>High-precision temperature sensing with RS-232 telemetry and real-time visualization</i></p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">C</span>
+                        <span class="tech-tag">A51 Assembly</span>
+                        <span class="tech-tag">ADC</span>
+                        <span class="tech-tag">RS-232</span>
+                    </div>
+                    <a href="https://github.com/danielwhn25/telemetry-system.git" target="_blank" class="github-link">
+                        <svg class="github-icon" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                        View on GitHub
+                    </a>
+                    <span class="card-link">Click to view details</span>
+                </summary>
+                <div class="card-details">
+                    <ul>
+                        <li>Designed a high-precision analog front-end by interfacing an LM335 sensor with a 12-bit SAR ADC, utilizing an LM4040 external voltage reference (V<sub>REF</sub>=4.096V) to eliminate measurement instability inherent in internal band-gap references.</li>
+                        <li>Engineered a 32-bit assembly math library to execute voltage-to-temperature transfer functions via integer-scaling, enabling 115.2 kbps telemetry transmission via RS-232 to a custom Python suite for real-time data visualization.</li>
                     </ul>
                 </div>
             </details>
@@ -166,13 +201,19 @@
                         <h3>RISC-V Single Cycle CPU</h3>
                         <span class="card-badge">Academic Project</span>
                     </div>
-                    <p class="card-summary">Single-cycle RISC-V subset ISA processor implemented on Altera DE10-Lite FPGA with assertion-based verification.</p>
+                    <p class="card-summary"><i>Single-cycle RISC-V processor with assertion-based verification on Altera FPGA</i></p>
                     <div class="tech-tags">
                         <span class="tech-tag">SystemVerilog</span>
                         <span class="tech-tag">Altera FPGA</span>
                         <span class="tech-tag">Quartus Prime</span>
                         <span class="tech-tag">Questa</span>
                     </div>
+                    <a href="https://github.com/danielwhn25/RISC-V-CPU.git" target="_blank" class="github-link">
+                        <svg class="github-icon" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                        View on GitHub
+                    </a>
                     <span class="card-link">Click to view details</span>
                 </summary>
                 <div class="card-details">
@@ -184,67 +225,68 @@
                         </div>
                     </div>
                     <ul>
-                        <li>Architected and implemented a Single-cycle RISC-V processor in SystemVerilog with memory-mapped I/O onto Altera's DE10-Lite with functioning register file, ALU, and control unit, supporting a 10-instruction subset of the RISC-V ISA.</li>
-                        <li>Wrote a self-checking non-synthesizable testbench with assertion-based verification to verify instruction-level correctness and used EPWave & Questa to trace signals through the synchronous timing datapath.</li>
+                        <li>Architected and implemented a single-cycle RISC-V processor in SystemVerilog with MMIO on Altera's DE10-Lite with functioning register file, ALU, and control unit, supporting a 10-instruction subset of the RISC-V ISA.</li>
+                        <li>Wrote a self-checking non-synthesizable testbench with assertion-based verification to verify instruction-level correctness and used Questa to trace signals through the synchronous timing datapath.</li>
                     </ul>
                 </div>
             </details>
 
             <details class="experience-card">
-    <summary>
-        <div class="card-header">
-            <h3>Tron Light Cycle Game</h3>
-            <span class="card-badge">Academic Project</span>
-        </div>
-        <p class="card-summary">Embedded C & FPGA MMIO. Tron Light Cycle Game featuring custom VGA drivers and interrupt-driven controls.</p>
-        <div class="tech-tags">
-            <span class="tech-tag">Embedded C</span>
-            <span class="tech-tag">MMIO</span>
-            <span class="tech-tag">VGA Driver</span>
-            <span class="tech-tag">ISR</span>
-            <span class="tech-tag">Altera FPGA</span>
-        </div>
-        <span class="card-link">Click to view details</span>
-    </summary>
-    <div class="card-details">
-        <div class="project-images">
-            <h4>System Architecture</h4>
-            <div class="image-gallery">
+                <summary>
+                    <div class="card-header">
+                        <h3>Tron Light Cycle Game</h3>
+                        <span class="card-badge">Academic Project</span>
+                    </div>
+                    <p class="card-summary"><i>Custom VGA driver with interrupt-driven controls and autonomous opponent AI</i></p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Embedded C</span>
+                        <span class="tech-tag">MMIO</span>
+                        <span class="tech-tag">VGA Driver</span>
+                        <span class="tech-tag">ISR</span>
+                    </div>
+                    <a href="https://github.com/danielwhn25/vga_driver.git" target="_blank" class="github-link">
+                        <svg class="github-icon" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                        View on GitHub
+                    </a>
+                    <span class="card-link">Click to view details</span>
+                </summary>
+                <div class="card-details">
+                    <div class="project-images">
+                        <h4>System Architecture</h4>
+                        <div class="image-gallery">
                             <img src="images/vga-1.jpg" alt="VGA1">
                             <img src="images/vga-2.jpg" alt="VGA2">
                             <img src="images/vga-3.jpg" alt="VGA3">
-                            
-                            
-                                        </div>
-        </div>
-        <ul>
-            <li>Developed a custom VGA graphics driver using <strong>Memory-Mapped I/O (MMIO)</strong> to manage frame buffers, rendering dynamic light traces and a gameplay perimeter while maintaining high-speed pixel updates via bit-shifted coordinate mapping.</li>
-            <li>Implemented an <strong>interrupt-driven control scheme</strong> for human input, utilizing an <strong>Interrupt Service Routine (ISR)</strong> to handle asynchronous pushbutton events, significantly reducing input latency compared to traditional polling.</li>
-            <li>Engineered an autonomous robot opponent with <strong>predictive collision logic</strong>; the algorithm performs real-time memory reads of the VGA buffer to scan for obstacles and dynamically updates movement vectors to avoid crashes .</li>
-            <li>Integrated hardware-level peripherals including an active-high <strong>Seven-Segment LUT</strong> for real-time score tracking and JTAG UART for system status monitoring.</li>
-        </ul>
-    </div>
-</details>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>Developed a custom VGA graphics driver using Memory-Mapped I/O (MMIO) to manage frame buffers, rendering dynamic light traces for a fully functional, one-player "Tron Light Cycle" game, while maintaining real-time pixel updates at VGA timing constraints.</li>
+                        <li>Implemented interrupt-driven input handling to handle asynchronous pushbutton events, reducing input latency compared to traditional polling.</li>
+                        <li>Engineered an autonomous robot opponent with predictive collision logic, performing real-time memory reads of the VGA buffer to scan for obstacles and update movement vectors.</li>
+                    </ul>
+                </div>
+            </details>
 
-<details class="experience-card">
+            <details class="experience-card">
                 <summary>
                     <div class="card-header">
-                        <h3>Reflow Oven Controller (Ongoing)</h3>
+                        <h3>Reflow Oven Controller</h3>
                         <span class="card-badge">Academic Project</span>
                     </div>
-                    <p class="card-summary"><i>Closed-loop thermal control system using thermocouple feedback and PWM power regulation.</i></p>
+                    <p class="card-summary"><i>Closed-loop thermal control system using thermocouple feedback and PWM power regulation</i></p>
                     <div class="tech-tags">
                         <span class="tech-tag">Embedded C</span>
                         <span class="tech-tag">PWM</span>
                         <span class="tech-tag">PID Control</span>
                         <span class="tech-tag">SPI</span>
-                        <span class="tech-tag">N76E003</span>
                     </div>
                     <span class="card-link">Click to view details</span>
                 </summary>
                 <div class="card-details">
                     <ul>
-                        <li>⏳Work in progress...check in mid February!</li>
+                        <li>⏳ Work in progress...check in mid February!</li>
                     </ul>
                 </div>
             </details>
@@ -252,10 +294,10 @@
             <details class="experience-card">
                 <summary>
                     <div class="card-header">
-                        <h3>Autonomous Field-Following Robot (Ongoing)</h3>
+                        <h3>Autonomous Field-Following Robot</h3>
                         <span class="card-badge">Academic Project</span>
                     </div>
-                    <p class="card-summary"><i>Mobile robot engineered to detect and follow magnetic field lines with integrated collision avoidance.</i></p>
+                    <p class="card-summary"><i>Mobile robot with magnetic field detection and collision avoidance</i></p>
                     <div class="tech-tags">
                         <span class="tech-tag">State Machines</span>
                         <span class="tech-tag">Magnetic Sensors</span>
@@ -266,36 +308,10 @@
                 </summary>
                 <div class="card-details">
                     <ul>
-                        <li>⏳Work in progress...check in early April!</li>
+                        <li>⏳ Work in progress...check in early April!</li>
                     </ul>
                 </div>
             </details>
-
-            <details class="experience-card">
-                <summary>
-                    <div class="card-header">
-                        <h3>Alarm Clock (Ongoing)</h3>
-                        <span class="card-badge">Academic Project</span>
-                    </div>
-                    <p class="card-summary"><i>High-order active filter system designed for specific frequency response and noise rejection.</i></p>
-                    <div class="tech-tags">
-                      <!--  <span class="tech-tag">Sallen-Key</span>
-                        <span class="tech-tag">Op-Amps</span>-->
-                        <span class="tech-tag">Embedded C</span>
-                        <span class="tech-tag">Interrupts</span>
-                    </div>
-                    <span class="card-link">Click to view details</span>
-                </summary>
-                <div class="card-details">
-                    <ul>
-                        <li>⏳Work in progress: check in a few weeks!</li>
-                    </ul>
-                </div>
-            </details>
-
-
-
-
         </div>
     </section>
 
@@ -307,8 +323,8 @@
                 <div class="skill-items">
                     <span class="skill-item">SystemVerilog</span>
                     <span class="skill-item">RISC-V Assembly</span>
-                    <span class="skill-item">FSM Implementation</span>
-                    <span class="skill-item">CPU Architecture</span>
+                    <span class="skill-item">A51 Assembly</span>
+                    <span class="skill-item">FSM Design</span>
                 </div>
             </div>
             <div class="skill-category">
@@ -317,7 +333,7 @@
                     <span class="skill-item">ESP32-S3</span>
                     <span class="skill-item">8051 MCUs</span>
                     <span class="skill-item">Embedded C</span>
-                    <span class="skill-item">Bare Metal Programming</span>
+                    <span class="skill-item">UART/SPI/I2C</span>
                 </div>
             </div>
             <div class="skill-category">
@@ -334,14 +350,12 @@
                 <div class="skill-items">
                     <span class="skill-item">VNA</span>
                     <span class="skill-item">Signal Analyzer</span>
-                    <span class="skill-item">PCB Design & Rework</span>
+                    <span class="skill-item">PCB Design</span>
                     <span class="skill-item">SMT/THT Soldering</span>
                 </div>
             </div>
         </div>
     </section>
-
-
 
     <section id="learning" class="container tight">
         <h2 class="section-title"><i>Always</i> learning.</h2>
@@ -350,138 +364,76 @@
             <div class="learning-grid">
                 <div class="learning-card">
                     <div class="learning-icon">
-                        <div class="icon-container">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="learning-icon">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-        <polyline points="9 11 11 13 15 9"></polyline>
-        </svg>
-</div>    
-
-
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <polyline points="9 11 11 13 15 9"></polyline>
+                        </svg>
                     </div>
-                    <h3>SystemVerilog & UVM Concepts</h3>
-                    <p>Studying how large-scale chips are tested. I’m currently refining my SystemVerilog for testbench development and researching the UVM to understand professional verification workflows.</p>
-                   
+                    <h3>SystemVerilog & UVM</h3>
+                    <p>Studying how large-scale chips are tested. Refining SystemVerilog for testbench development and researching UVM for professional verification workflows.</p>
                 </div>
-
                 
                 <div class="learning-card">
-                    <div class="learning-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="learning-icon">
-  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-</svg></div>
+                    <div class="learning-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                    </div>
                     <h3>Timing & Clocking</h3>
-                    <p>Learning to handle the complexities of high-speed hardware. I am studying Clock Domain Crossing (CDC), the role of PLLs in frequency synthesis, and how to write TCL/Python scripts to automate repetitive design tasks.</p>
-
+                    <p>Learning to handle high-speed hardware complexities. Studying CDC, PLLs in frequency synthesis, and TCL/Python scripting for design automation.</p>
                 </div>
+
                 <div class="learning-card">
-                    <div class="learning-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="learning-icon">
-  <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path>
-  <circle cx="7" cy="17" r="2"></circle>
-  <circle cx="17" cy="17" r="2"></circle>
-  <path d="M12 10V5"></path>
-  <path d="M9 5c0-1.7 1.3-3 3-3s3 1.3 3 3"></path>
-</svg></div>
-                    <h3>Automotive & Comms Protocols</h3>
-                    <h6>Focus: CAN Bus & Vehicle Integration</h6>
-                    <p>Interested in learning the CAN protocol to understand how our UBC Formula car communicates telemetry, sensor data, and ECU data over a single robust bus.</p>
-                    
+                    <div class="learning-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path>
+                            <circle cx="7" cy="17" r="2"></circle>
+                            <circle cx="17" cy="17" r="2"></circle>
+                            <path d="M12 10V5"></path>
+                            <path d="M9 5c0-1.7 1.3-3 3-3s3 1.3 3 3"></path>
+                        </svg>
+                    </div>
+                    <h3>Automotive Protocols</h3>
+                    <p>Learning CAN protocol to understand how our UBC Formula car communicates telemetry, sensor data, and ECU data over a robust bus.</p>
                 </div>
+
                 <div class="learning-card">
-                    <div class="learning-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="learning-icon">
-  <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
-  <polyline points="10 9 13 12 10 15"></polyline>
-  <line x1="14" y1="15" x2="16" y2="15"></line>
-</svg></div>
-                    <h3>Design Automation & AI Arch</h3>
-                    <p>Learning to build faster by automating workflows with Python and TCL. I'm also researching the architectural trade-offs between GPUs and TPUs (like Groq) to understand how hardware is being specialized for AI.</p>
-                    
-                </div>
-
-                                <div class="learning-card">
-                    <div class="learning-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="learning-icon">
-                    <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-                    <rect x="9" y="9" width="6" height="6"></rect>
-                    <line x1="9" y1="1" x2="9" y2="4"></line>
-                    <line x1="15" y1="1" x2="15" y2="4"></line>
-                    <line x1="9" y1="20" x2="9" y2="23"></line>
-                    <line x1="15" y1="20" x2="15" y2="23"></line>
-                    <line x1="20" y1="9" x2="23" y2="9"></line>
-                    <line x1="20" y1="15" x2="23" y2="15"></line>
-                    <line x1="1" y1="9" x2="4" y2="9"></line>
-                    <line x1="1" y1="15" x2="4" y2="15"></line>
-                    </svg>
-
-</div>
+                    <div class="learning-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                            <rect x="9" y="9" width="6" height="6"></rect>
+                            <line x1="9" y1="1" x2="9" y2="4"></line>
+                            <line x1="15" y1="1" x2="15" y2="4"></line>
+                            <line x1="9" y1="20" x2="9" y2="23"></line>
+                            <line x1="15" y1="20" x2="15" y2="23"></line>
+                            <line x1="20" y1="9" x2="23" y2="9"></line>
+                            <line x1="20" y1="15" x2="23" y2="15"></line>
+                            <line x1="1" y1="9" x2="4" y2="9"></line>
+                            <line x1="1" y1="15" x2="4" y2="15"></line>
+                        </svg>
+                    </div>
                     <h3>GPU Architecture</h3>
-                    <p>Building my first PC in grade eight gave rise to my passion for GPU architecture, microcomputers, and the EE field. As an everyday user of NVIDIA and AMD processors, .I am driven to understand the future of specialized silicon. I’m currently comparing traditional GPU architectures with emerging Domain Specific Architectures (DSAs) like TPUs to see how hardware is evolving to meet the demands of modern AI inference.</p>
-                    
+                    <p>Comparing traditional GPU architectures with emerging DSAs like TPUs to understand how hardware is evolving for modern AI inference.</p>
                 </div>
-
-                
             </div>
-
-
-<!--
-            <div class="learning-card">
-    <div class="learning-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-        </svg>
-    </div>
-    <h3>Current Relevant Courses</h3>
-    <ul style="margin-top: 10px; padding-left: 20px; text-align: left; font-size: 0.9rem; line-height: 1.6;">
-                <li><strong>EE Design Studio (ELEC291):</strong> A hands-on, project-intensive course focused on the full design cycle of microcontroller-based systems, bridging low-level hardware design with embedded software development.</li> <br>
-
-        <li><strong>Signals & Systems (ELEC221):</strong> A foundational course in the mathematical modeling of continuous-time and discrete-time signals, essential for understanding how data is processed, filtered, and transmitted in modern silicon.</li><br>
-        <li><strong>Circuit Analysis II (AC Circuits) (ELEC202):</strong> Advanced study of linear circuit engineering in the frequency domain, focused on characterizing system dynamics, stability, and precision signal conditioning.</li><br>
-        <li><strong>Engineering Electromagnetics (ELEC211 / MATH264):</strong> A fully integrated course combining high-level vector calculus with fundamental electromagnetics to model and analyze the physical phenomena that govern all electrical engineering systems.</li><br>
-
-
-    </ul>
-<br>
-        <h3>Past Relevant Courses</h3>
-            <ul style="margin-top: 10px; padding-left: 20px; text-align: left; font-size: 0.9rem; line-height: 1.6;">
-<li><strong>Intro to Microcomputer Architecture and Digital Design (CPEN211):</strong> SystemVerilog, FSMs, FPGA, RTL, Testbenches, single-cycle, multi-cycle, and pipelined processors.</li><br>
-        <li><strong>DC Circuit Analysis (ELEC201):</strong> Diodes, Op Amps, MOSFET, BJTs, & small-signal analysis.</li><br>
-        <li><strong>Data Structures & Algorithms in C (CPSC259):</strong> Structures, Asymptotic Analysis, Linked Lists, Stacks and Queues, Recursion, Trees, Priority queues, heaps, sorting, recursive analysis, and hash tables.</li>         
-
-    </ul>
-        
-
-</div>
         </div>
-
-
-        
     </section>
-
-    -->
-
-
-
-
 
     <section id="contact" class="container tight">
         <h2 class="section-title">Let's Connect</h2>
         <div class="contact-card">
             <p>Open to co-op opportunities starting May 2026.<br> Let's have a coffee chat and discuss what problems I can solve for you.</p>
-<div class="contact-links">
-    <a href="https://www.linkedin.com/in/danielngEE"
-       target="_blank"
-       class="contact-btn linkedin-btn">
-        <svg class="linkedin-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.11 1 2.48 1c1.37 0 2.5 1.12 2.5 2.5zM.2 8h4.6v16H.2V8zM8.2 8h4.4v2.2h.1c.6-1.1 2.1-2.2 4.3-2.2 4.6 0 5.5 3 5.5 6.9V24h-4.6v-7.8c0-1.9 0-4.3-2.6-4.3-2.6 0-3 2-3 4.1V24H8.2V8z"/>
-        </svg>
-        <span>LinkedIn</span>
-    </a>
-
-    <a href="mailto:daniel.whn@outlook.com" class="contact-btn secondary">
-        <span>Email Me</span>
-    </a>
-</div>
-
-
+            <div class="contact-links">
+                <a href="https://www.linkedin.com/in/danielngEE" target="_blank" class="contact-btn linkedin-btn">
+                    <svg class="linkedin-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.11 1 2.48 1c1.37 0 2.5 1.12 2.5 2.5zM.2 8h4.6v16H.2V8zM8.2 8h4.4v2.2h.1c.6-1.1 2.1-2.2 4.3-2.2 4.6 0 5.5 3 5.5 6.9V24h-4.6v-7.8c0-1.9 0-4.3-2.6-4.3-2.6 0-3 2-3 4.1V24H8.2V8z"/>
+                    </svg>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="mailto:daniel.whn@outlook.com" class="contact-btn secondary">
+                    <span>Email Me</span>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -489,22 +441,21 @@
         <p>&copy; 2026 Daniel Ng | Vancouver, BC</p>
     </footer>
 
-<!-- Formula UBC Image Lightbox -->
-<div id="formula-img1" class="lightbox">
-    <a href="#" class="lightbox-close">&times;</a>
-    <img src="images/formula-ubc-1.jpg" alt="">
-</div>
+    <!-- Formula UBC Image Lightbox -->
+    <div id="formula-img1" class="lightbox">
+        <a href="#" class="lightbox-close">&times;</a>
+        <img src="images/formula-ubc-1.jpg" alt="">
+    </div>
 
-<div id="formula-img2" class="lightbox">
-    <a href="#" class="lightbox-close">&times;</a>
-    <img src="images/formula-ubc-2.jpg" alt="">
-</div>
+    <div id="formula-img2" class="lightbox">
+        <a href="#" class="lightbox-close">&times;</a>
+        <img src="images/formula-ubc-2.jpg" alt="">
+    </div>
 
-<div id="formula-img3" class="lightbox">
-    <a href="#" class="lightbox-close">&times;</a>
-    <img src="images/formula-ubc-3.jpg" alt="">
-</div>
-
+    <div id="formula-img3" class="lightbox">
+        <a href="#" class="lightbox-close">&times;</a>
+        <img src="images/formula-ubc-3.jpg" alt="">
+    </div>
 
     <script>
         // Typing animation function
@@ -535,7 +486,6 @@
                     const char = text.charAt(i);
                     const nextChars = text.substring(i, i+3);
                     
-                    // Handle "2nd" with superscript
                     if (nextChars === '2nd') {
                         element.innerHTML += '2<sup>nd</sup>';
                         i += 3;
@@ -563,25 +513,19 @@
             const hookBeforeLink = '2nd Year EE @ UBC working at the hardware–software boundary: FPGA CPUs, embedded firmware, and system-level verification';
             const hookLinkText = 'See my latest work → ';
             
-            // Hide cursors initially
             nameCursor.style.opacity = '0';
             hookCursor.style.opacity = '0';
             
-            // Small delay before starting
             setTimeout(() => {
-                // Show cursor and type name
                 nameCursor.style.opacity = '1';
                 typeText(nameElement, name, 55, function() {
-                    // Hide name cursor, wait a bit, then start hook
                     setTimeout(() => {
                         nameCursor.style.opacity = '0';
                         setTimeout(() => {
                             hookCursor.style.opacity = '1';
-                            // Type hook text with superscript support
                             typeTextHTML(hookElement, hookBeforeLink, 30, function() {
-    hookElement.innerHTML += '<br><a href="#formula-ubc-project" class="hook-link">' + hookLinkText + '</a>';
-});
-
+                                hookElement.innerHTML += '<br><a href="#formula-ubc-project" class="hook-link">' + hookLinkText + '</a>';
+                            });
                         }, 400);
                     }, 600);
                 });
@@ -597,9 +541,7 @@
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     if (formulaCard) {
-                        // Open the details element
                         formulaCard.setAttribute('open', '');
-                        // Smooth scroll to it
                         formulaCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 });
@@ -648,4 +590,3 @@
     </script>
 </body>
 </html>
-
