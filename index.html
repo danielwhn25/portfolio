@@ -164,6 +164,36 @@
 
     <div class="project">
       <div class="project-header">
+        <h3>MPPT Control System: Photovoltaic Analyzer (PVA)</h3>
+        <span class="project-date">Hackathon Project</span>
+      </div>
+      <div class="tech-stack">STM32G4 // CAN-Bus // 4-Layer PCB // Altium Designer // INA240</div>
+      <div class="project-desc">
+        Architected the "brain" of a decoupled MPPT system, designed to sample solar panel V/I at kHz rates to calculate the Maximum Power Point (MPP) and actuate a high-power Buck-Boost stage.
+      </div>
+      
+      <ul class="project-bullets">
+        <li><strong>Signal Integrity:</strong> Designed a professional 4-layer PCB with a dedicated internal solid ground plane to shield sensitive ADC paths from high-current EMI[cite: 228].</li>
+        <li><strong>Communication:</strong> Encoded optimal power targets into noise-immune CAN-Bus frames to ensure reliable data transmission in switching-noise environments[cite: 59, 296].</li>
+        <li><strong>Power Management:</strong> Integrated an STM32G4 MCU with an INA240 current sensor and a TPS62177 buck regulator for efficient system-level logic power.</li>
+        <li><strong>Performance:</strong> Precision tracking logic recaptures 5-15% of energy typically lost to sensor noise in traditional single-board systems[cite: 299].</li>
+      </ul>
+      
+      <div class="cad-container">
+        <div class="cad-label">PVA_BOARD_ASSEMBLY // 4-LAYER_ARCHITECTURE</div>
+        <model-viewer 
+          src="models/pva_board.glb" 
+          camera-controls 
+          auto-rotate 
+          shadow-intensity="1" 
+          environment-image="neutral"
+          camera-orbit="0deg 75deg auto">
+        </model-viewer>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
         <h3>Norsat International: Hardware Intern</h3>
         <span class="project-date">June 2025 – Aug 2025</span>
       </div>
