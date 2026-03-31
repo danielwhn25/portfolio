@@ -3,23 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daniel Ng | Electrical Engineering</title>
+<title>Daniel Ng | Electrical Engineering Portfolio</title>
 
-<!-- Google's 3D Web Component -->
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+<!-- Google's 3D Web Component (v3.4.0 for better scaling) -->
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 
 <style>
-  /* 
-   * THE WHITEPAPER AESTHETIC 
-   * Minimalist, high-readability, zero clutter.
-   */
   :root {
     --bg: #ffffff;
     --text-main: #111111;
     --text-muted: #555555;
-    --accent: #0055aa; /* Subtle engineering blue */
+    --accent: #0055aa;
     --border: #e0e0e0;
-    
     --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
     --font-mono: "SFMono-Regular", Consolas, "Courier New", monospace;
   }
@@ -32,7 +27,7 @@
     font-family: var(--font-sans);
     line-height: 1.6;
     font-size: 15px;
-    max-width: 760px;
+    max-width: 800px;
     margin: 40px auto;
     padding: 0 20px;
   }
@@ -41,97 +36,84 @@
   a:hover { text-decoration: underline; }
 
   /* --- HEADER --- */
-  header { margin-bottom: 3rem; }
-  h1 { font-size: 2rem; font-weight: 600; margin-bottom: 0.2rem; letter-spacing: -0.5px; }
+  header { margin-bottom: 3rem; border-left: 4px solid var(--text-main); padding-left: 20px; }
+  h1 { font-size: 2.2rem; font-weight: 600; margin-bottom: 0.2rem; letter-spacing: -0.5px; }
   
   .contact-bar {
     font-family: var(--font-mono);
     font-size: 0.85rem;
     color: var(--text-muted);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
   }
-  .contact-bar a { color: var(--text-muted); text-decoration: underline; text-decoration-color: var(--border); }
-  .contact-bar a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
-  .abstract {
-    font-size: 1.05rem;
-    color: var(--text-main);
-    max-width: 650px;
-  }
+  .abstract { font-size: 1.05rem; color: var(--text-main); max-width: 700px; }
 
   /* --- SECTIONS --- */
-  section { margin-bottom: 3rem; }
+  section { margin-bottom: 3.5rem; }
   
   h2.section-title {
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     border-bottom: 2px solid var(--text-main);
     padding-bottom: 0.4rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
   }
 
-  /* --- PROJECTS --- */
-  .project { margin-bottom: 2.5rem; }
+  /* --- PROJECTS & EXPERIENCE --- */
+  .project { margin-bottom: 2.8rem; }
   
   .project-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.3rem;
   }
   
-  .project-header h3 { font-size: 1.1rem; font-weight: 600; }
+  .project-header h3 { font-size: 1.15rem; font-weight: 600; }
   .project-date { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); }
   
-  /* Removed the pill boxes. Just clean, comma-separated monospace text. */
   .tech-stack {
     font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--text-muted);
+    font-size: 0.82rem;
+    color: var(--accent);
     margin-bottom: 0.8rem;
+    text-transform: uppercase;
   }
 
-  .project-desc { margin-bottom: 1rem; }
-  
-  ul.project-bullets {
-    margin-left: 20px;
-    color: var(--text-muted);
-  }
-  ul.project-bullets li { margin-bottom: 0.5rem; }
-  ul.project-bullets strong { color: var(--text-main); }
+  ul.project-bullets { margin-left: 20px; color: var(--text-muted); font-size: 0.92rem; }
+  ul.project-bullets li { margin-bottom: 0.6rem; }
+  ul.project-bullets strong { color: var(--text-main); font-weight: 600; }
 
-  /* --- 3D CAD VIEWER --- */
+  /* --- 3D VIEWPORT --- */
   .cad-container {
     width: 100%;
-    height: 400px;
-    background-color: #f8f9fa; /* Very soft gray */
+    height: 450px;
+    background-color: #fcfcfc;
     border: 1px solid var(--border);
-    margin-top: 1rem;
+    margin-top: 1.2rem;
     position: relative;
+    overflow: hidden;
   }
 
   .cad-label {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 12px;
+    left: 12px;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
     z-index: 10;
-    pointer-events: none;
+    letter-spacing: 1px;
+    background: rgba(255,255,255,0.8);
+    padding: 2px 6px;
   }
 
-  model-viewer {
-    width: 100%;
-    height: 100%;
-    --poster-color: transparent;
-  }
+  model-viewer { width: 100%; height: 100%; outline: none; }
 
-  /* --- RESPONSIVE --- */
   @media (max-width: 600px) {
     .project-header { flex-direction: column; }
-    .cad-container { height: 300px; }
+    .cad-container { height: 320px; }
   }
 </style>
 </head>
@@ -146,52 +128,65 @@
       <a href="https://linkedin.com/in/danielngEE" target="_blank">LinkedIn</a>
     </div>
     <p class="abstract">
-      Working at the hardware-software boundary. Specializing in bare-metal firmware, digital logic design, and system-level verification for embedded applications.
+      Hardware and firmware engineer specializing in the physical-to-digital boundary. Proven experience in RF characterization, bare-metal C, and digital logic design.
     </p>
   </header>
 
   <section>
-    <h2 class="section-title">Hardware & PCB Architecture</h2>
+    <h2 class="section-title">01. Hardware & PCB Architecture</h2>
     
     <div class="project">
       <div class="project-header">
         <h3>Formula UBC: Laser Timing Gates Receiver</h3>
         <span class="project-date">Sept 2025 – Present</span>
       </div>
-      <div class="tech-stack">Altium Designer, Mixed-Signal Routing, ESP32-S3, Analog CMOS</div>
-      <div class="project-desc">
-        Designed and routed a custom mixed-signal PCB featuring controlled impedance for the ESP32-S3 module and strict analog/digital ground isolation for the 3.3V CMOS front-end.
-      </div>
+      <div class="tech-stack">Altium Designer // ESP32-S3 // Mixed-Signal Layout // Analog CMOS</div>
+      <ul class="project-bullets">
+        <li><strong>Mixed-Signal Design:</strong> Engineered a 4-layer custom PCB featuring controlled impedance routing for 2.4 GHz ESP-NOW communication and analog/digital ground isolation.</li>
+        <li><strong>Analog Front-End:</strong> Integrated a 3.3V CMOS front-end with adjustable hysteresis via potentiometer to calibrate against photodiode thermal noise.</li>
+        <li><strong>Verification:</strong> Targeted a 20dB SNR and $BER < 10^{-7}$ to ensure high-speed data integrity during vehicle track passes.</li>
+      </ul>
       
-      <!-- 3D Viewer Implementation -->
       <div class="cad-container">
-        <div class="cad-label">INTERACTIVE 3D MODEL - DRAG TO INSPECT</div>
-        
-        <!-- Replace the src URL with your actual .glb file hosted on GitHub -->
+        <div class="cad-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
         <model-viewer 
-          src="https://raw.githubusercontent.com/danielwhn25/FUBC-timing-gates/main/hardware/3d_model.glb" 
+          src="models/fubc_board.glb" 
           camera-controls 
           auto-rotate 
-          rotation-per-second="10deg"
           shadow-intensity="1" 
-          environment-image="neutral">
+          environment-image="neutral"
+          exposure="1"
+          camera-orbit="45deg 75deg auto"
+          style="background-color: #ffffff;">
         </model-viewer>
       </div>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <h3>Norsat International: Hardware Intern</h3>
+        <span class="project-date">June 2025 – Aug 2025</span>
+      </div>
+      <div class="tech-stack">VNA // Signal Analyzers // RF Characterization // SMT Soldering</div>
+      <ul class="project-bullets">
+        <li><strong>RF Characterization:</strong> Tested Ku-Band Block-Up Converters for gain, P1dB, and noise figure compliance using VNAs and multimeters.</li>
+        <li><strong>PCBA Troubleshooting:</strong> Identified DC bias instabilities through microscopic SMT soldering and schematic cross-referencing, ensuring 100% yield across 50+ units.</li>
+      </ul>
     </div>
   </section>
 
   <section>
-    <h2 class="section-title">Firmware & Digital Design</h2>
+    <h2 class="section-title">02. Firmware & Digital Design</h2>
 
     <div class="project">
       <div class="project-header">
         <h3>Bare-Metal Digital Multimeter</h3>
         <span class="project-date">Mar 2026</span>
       </div>
-      <div class="tech-stack">STM32L051, Embedded C, Makefiles, Hardware Timers</div>
+      <div class="tech-stack">STM32L051 // ARM Cortex-M0 // Makefiles // Hardware Timers</div>
       <ul class="project-bullets">
-        <li><strong>Architecture:</strong> Wrote STM32 firmware for real-time RLC measurement, integrating ADC sampling, timer-based frequency capture via an astable 555 circuit, and CMOS inverter-based inductance measurement.</li>
-        <li><strong>Drivers:</strong> Developed modular LCD/ADC/serial drivers with a custom Makefile-based build system (no HAL), enabling interactive HMI and instant continuity detection.</li>
+        <li><strong>Real-Time Sampling:</strong> Developed STM32 firmware for RLC measurement using ADC sampling and timer-based frequency capture via an astable 555 circuit.</li>
+        <li><strong>Low-Level Drivers:</strong> Built modular LCD and serial drivers from scratch (No HAL) with a Makefile-based build system for deterministic execution.</li>
       </ul>
     </div>
 
@@ -200,14 +195,13 @@
         <h3>Oven Reflow Controller</h3>
         <span class="project-date">Jan 2026</span>
       </div>
-      <div class="tech-stack">8052 MCU, A51 Assembly, NEC Protocol, I2C</div>
+      <div class="tech-stack">8052 // A51 Assembly // NEC Protocol // PID Control</div>
       <ul class="project-bullets">
-        <li><strong>Control Loop:</strong> Designed a bare-metal controller with ADC sensor feedback, PWM heating, and FSM thermal profiles.</li>
-        <li><strong>Signal Processing:</strong> Implemented bit-level IR remote decoding to enable event-driven user setup via LCD/7-segment displays.</li>
-        <li><strong>Validation:</strong> Wrote a Python framework to plot live ADC data against multimeter measurements, achieving &plusmn;3&deg;C accuracy across standard reflow temperatures.</li>
+        <li><strong>Control Logic:</strong> Designed a bare-metal thermal controller with PWM heating and FSM-driven profiles for standard reflow curves.</li>
+        <li><strong>Protocol Decoding:</strong> Implemented bit-level NEC IR decoding for event-driven setup and interactive HMI.</li>
+        <li><strong>Precision:</strong> Achieved $\pm3^{\circ}C$ closed-loop accuracy validated through a custom Python data-plotting framework.</li>
       </ul>
     </div>
-    
   </section>
 
 </body>
