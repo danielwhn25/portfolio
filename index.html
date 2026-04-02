@@ -84,15 +84,23 @@
   ul.project-bullets li { margin-bottom: 0.6rem; }
   ul.project-bullets strong { color: var(--text-main); font-weight: 600; }
 
-  /* --- 3D VIEWPORT --- */
+  /* --- CAD CONTAINER (UPDATED FOR ZOOM & BOTTOM BAR) --- */
   .cad-container {
     width: 100%;
-    height: 450px;
+    height: 500px; 
     background-color: #fcfcfc;
     border: 1px solid var(--border);
     margin-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Keeps everything contained cleanly */
+  }
+
+  .viewer-area {
+    flex-grow: 1;
     position: relative;
-    overflow: hidden;
+    width: 100%;
+    overflow: hidden; /* Prevents zoomed images from breaking out of the box */
   }
 
   .cad-label {
@@ -104,54 +112,12 @@
     color: var(--text-muted);
     z-index: 10;
     letter-spacing: 1px;
-    background: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.85);
     padding: 2px 6px;
-  }
-
-  model-viewer { width: 100%; height: 100%; outline: none; }
-
-  @media (max-width: 600px) {
-    .project-header { flex-direction: column; }
-    .cad-container { height: 320px; }
-  }
-
-  /* --- VIEW CONTROLS & 2D IMAGES --- */
-  .view-controls {
-    position: absolute;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-    z-index: 20;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 6px 12px;
-    border-radius: 20px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     border: 1px solid var(--border);
   }
 
-  .view-btn {
-    background: none;
-    border: none;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 12px;
-    transition: all 0.2s;
-  }
-
-  .view-btn.active {
-    background: var(--text-main);
-    color: #fff;
-  }
-
-  .view-btn:hover:not(.active) {
-    background: #e0e0e0;
-    color: var(--text-main);
-  }
+  model-viewer { width: 100%; height: 100%; outline: none; }
 
   .schematic-img {
     position: absolute;
@@ -163,10 +129,57 @@
     background: #fcfcfc;
     z-index: 5;
     display: none;
+    cursor: grab;
+    transform-origin: center;
+    transition: transform 0.1s ease;
   }
 
   .schematic-img.active {
     display: block;
+  }
+  
+  .schematic-img:active {
+    cursor: grabbing;
+  }
+
+  /* --- CONTROL BAR --- */
+  .view-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    background: #f4f4f4;
+    padding: 10px 12px;
+    border-top: 1px solid var(--border);
+    z-index: 20;
+  }
+
+  .view-btn {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .view-btn.active {
+    background: var(--text-main);
+    color: #fff;
+    border-color: var(--text-main);
+  }
+
+  .view-btn:hover:not(.active) {
+    background: #e0e0e0;
+    color: var(--text-main);
+  }
+
+  @media (max-width: 600px) {
+    .project-header { flex-direction: column; }
+    .cad-container { height: 400px; }
   }
 </style>
 </head>
@@ -174,8 +187,61 @@
 <body>
 
   <script>
+    // --- ZOOM AND PAN LOGIC ---
+    let zState = { scale: 1, x: 0, y: 0, isDragging: false, startX: 0, startY: 0 };
+
+    function updateTransform(img) {
+      img.style.transform = `translate(${zState.x}px, ${zState.y}px) scale(${zState.scale})`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const images = document.querySelectorAll('.schematic-img');
+      
+      images.forEach(img => {
+        // Zoom on Mouse Wheel
+        img.addEventListener('wheel', (e) => {
+          if (!img.classList.contains('active')) return;
+          e.preventDefault();
+          
+          const delta = Math.sign(e.deltaY) * -0.15;
+          const newScale = Math.min(Math.max(1, zState.scale + delta), 5); // Max 5x zoom
+          
+          // Recenter if zoomed all the way out
+          if (newScale === 1) {
+            zState.x = 0;
+            zState.y = 0;
+          }
+          zState.scale = newScale;
+          updateTransform(img);
+        });
+
+        // Start Panning
+        img.addEventListener('mousedown', (e) => {
+          if (!img.classList.contains('active') || zState.scale === 1) return;
+          zState.isDragging = true;
+          zState.startX = e.clientX - zState.x;
+          zState.startY = e.clientY - zState.y;
+          img.style.transition = 'none'; // Disable transition for instant drag response
+        });
+
+        // Pan Movement
+        window.addEventListener('mousemove', (e) => {
+          if (!zState.isDragging) return;
+          zState.x = e.clientX - zState.startX;
+          zState.y = e.clientY - zState.startY;
+          updateTransform(img);
+        });
+
+        // End Panning
+        window.addEventListener('mouseup', () => {
+          zState.isDragging = false;
+          images.forEach(i => i.style.transition = 'transform 0.1s ease'); // Restore transition
+        });
+      });
+    });
+
+    // --- TAB SWITCHING LOGIC ---
     function switchView(projectId, viewType, btnElement) {
-      // 1. Get elements based on the prefix (e.g., 'tg')
       const model3d = document.getElementById(projectId + '-3d');
       const schematic = document.getElementById(projectId + '-schematic');
       const sch1 = document.getElementById(projectId + '-sch1');
@@ -183,18 +249,25 @@
       const label = document.getElementById(projectId + '-label');
       const container = document.getElementById(projectId);
   
-      // 2. Hide everything
+      // Reset zoom state on tab switch
+      zState = { scale: 1, x: 0, y: 0, isDragging: false, startX: 0, startY: 0 };
+      const allImages = container.querySelectorAll('.schematic-img');
+      allImages.forEach(img => {
+          img.style.transform = `translate(0px, 0px) scale(1)`;
+      });
+
+      // Hide all visuals
       model3d.style.display = 'none';
       if (schematic) schematic.classList.remove('active');
       if (sch1) sch1.classList.remove('active');
       if (sch2) sch2.classList.remove('active');
   
-      // 3. Update active button styles
+      // Update buttons
       const btns = container.querySelectorAll('.view-btn');
       btns.forEach(btn => btn.classList.remove('active'));
       btnElement.classList.add('active');
   
-      // 4. Show the selected view and update the top-left label
+      // Show selected visual & update label
       if (viewType === '3d') {
         model3d.style.display = 'block';
         label.innerText = "SYSTEM_VIEW // INTERACTIVE_3D_RENDER";
@@ -240,24 +313,26 @@
       </ul>
       
       <div class="cad-container" id="tg">
-        <div class="cad-label" id="tg-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
-        
-        <model-viewer 
-          id="tg-3d"
-          src="models/timing_gates.glb" 
-          camera-controls 
-          auto-rotate 
-          auto-rotate-delay="0"
-          rotation-per-second="30deg"
-          shadow-intensity="1" 
-          environment-image="neutral"
-          scale="0.001 0.001 0.001"
-          camera-orbit="45deg 75deg auto">
-        </model-viewer>
-        
-        <img src="models/IR_schematic.png" class="schematic-img" id="tg-schematic" alt="Circuit Schematic">
-        <img src="models/IR_layout1.png" class="schematic-img" id="tg-sch1" alt="Top Layer Routing">
-        <img src="models/IR_layout2.png" class="schematic-img" id="tg-sch2" alt="Bottom Layer Routing">
+        <div class="viewer-area">
+          <div class="cad-label" id="tg-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
+          
+          <model-viewer 
+            id="tg-3d"
+            src="models/timing_gates.glb" 
+            camera-controls 
+            auto-rotate 
+            auto-rotate-delay="0"
+            rotation-per-second="30deg"
+            shadow-intensity="1" 
+            environment-image="neutral"
+            scale="0.001 0.001 0.001"
+            camera-orbit="45deg 75deg auto">
+          </model-viewer>
+          
+          <img src="models/IR_schematic.png" class="schematic-img" id="tg-schematic" alt="Circuit Schematic">
+          <img src="models/IR_layout1.png" class="schematic-img" id="tg-sch1" alt="Top Layer Routing">
+          <img src="models/IR_layout2.png" class="schematic-img" id="tg-sch2" alt="Bottom Layer Routing">
+        </div>
 
         <div class="view-controls">
           <button class="view-btn active" onclick="switchView('tg', '3d', this)">3D View</button>
@@ -266,7 +341,9 @@
           <button class="view-btn" onclick="switchView('tg', 'sch2', this)">Layout 2</button>
         </div>
       </div>
-    </div> <div class="project">
+    </div> 
+
+    <div class="project">
       <div class="project-header">
         <h3>MPPT Control System: Photovoltaic Analyzer (PVA)</h3>
         <span class="project-date">Hackathon Project</span>
@@ -284,15 +361,17 @@
       </ul>
       
       <div class="cad-container">
-        <div class="cad-label">PVA_BOARD_ASSEMBLY // 4-LAYER_ARCHITECTURE</div>
-        <model-viewer 
-          src="models/PVA_board.glb"
-          camera-controls 
-          auto-rotate 
-          shadow-intensity="1" 
-          environment-image="neutral"
-          camera-orbit="0deg 75deg auto">
-        </model-viewer>
+        <div class="viewer-area">
+          <div class="cad-label">PVA_BOARD_ASSEMBLY // 4-LAYER_ARCHITECTURE</div>
+          <model-viewer 
+            src="models/PVA_board.glb"
+            camera-controls 
+            auto-rotate 
+            shadow-intensity="1" 
+            environment-image="neutral"
+            camera-orbit="0deg 75deg auto">
+          </model-viewer>
+        </div>
       </div>
     </div>
 
