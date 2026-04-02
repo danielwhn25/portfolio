@@ -115,8 +115,96 @@
     .project-header { flex-direction: column; }
     .cad-container { height: 320px; }
   }
+
+  /* --- VIEW CONTROLS & 2D IMAGES --- */
+  .view-controls {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 20;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 6px 12px;
+    border-radius: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border: 1px solid var(--border);
+  }
+
+  .view-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 12px;
+    transition: all 0.2s;
+  }
+
+  .view-btn.active {
+    background: var(--text-main);
+    color: #fff;
+  }
+
+  .view-btn:hover:not(.active) {
+    background: #e0e0e0;
+    color: var(--text-main);
+  }
+
+  .schematic-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Keeps the whole schematic visible without stretching */
+    background: #fcfcfc;
+    z-index: 5;
+    display: none; /* Hidden by default */
+  }
+
+  .schematic-img.active {
+    display: block;
+  }
 </style>
 </head>
+
+<script>
+  function switchView(projectId, viewType, btnElement) {
+    // 1. Get elements based on the prefix (e.g., 'tg')
+    const model3d = document.getElementById(projectId + '-3d');
+    const sch1 = document.getElementById(projectId + '-sch1');
+    const sch2 = document.getElementById(projectId + '-sch2');
+    const label = document.getElementById(projectId + '-label');
+    const container = document.getElementById(projectId);
+
+    // 2. Hide everything
+    model3d.style.display = 'none';
+    sch1.classList.remove('active');
+    sch2.classList.remove('active');
+
+    // 3. Update active button styles
+    const btns = container.querySelectorAll('.view-btn');
+    btns.forEach(btn => btn.classList.remove('active'));
+    btnElement.classList.add('active');
+
+    // 4. Show the selected view and update the top-left label
+    if (viewType === '3d') {
+      model3d.style.display = 'block';
+      label.innerText = "SYSTEM_VIEW // INTERACTIVE_3D_RENDER";
+    } else if (viewType === 'sch1') {
+      sch1.classList.add('active');
+      label.innerText = "SYSTEM_VIEW // SCHEMATIC_SHEET_1";
+    } else if (viewType === 'sch2') {
+      sch2.classList.add('active');
+      label.innerText = "SYSTEM_VIEW // SCHEMATIC_SHEET_2";
+    }
+  }
+</script>
+  
 <body>
 
   <header>
@@ -147,20 +235,31 @@
         <li><strong>Verification:</strong> Targeted a 20dB SNR and $BER < 10^{-7}$ to ensure high-speed data integrity during vehicle track passes.</li>
       </ul>
       
-      <div class="cad-container">
-        <div class="cad-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
-        <model-viewer 
-  src="models/timing_gates.glb" 
-  camera-controls 
-  auto-rotate 
-  shadow-intensity="1" 
-  environment-image="neutral"
-  scale="0.001 0.001 0.001"
-  camera-orbit="45deg 75deg auto">
-</model-viewer>
+      <div class="cad-container" id="timing-gates">
+        <div class="cad-label" id="tg-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
         
+        <model-viewer 
+          id="tg-3d"
+          src="models/timing_gates.glb" 
+          camera-controls 
+          auto-rotate 
+          auto-rotate-delay="0"
+          rotation-per-second="30deg"
+          shadow-intensity="1" 
+          environment-image="neutral"
+          scale="0.001 0.001 0.001"
+          camera-orbit="45deg 75deg auto">
+        </model-viewer>
+        
+        <img src="path/to/your/schematic1.png" class="schematic-img" id="tg-sch1" alt="Schematic View 1">
+        <img src="path/to/your/schematic2.png" class="schematic-img" id="tg-sch2" alt="Schematic View 2">
+
+        <div class="view-controls">
+          <button class="view-btn active" onclick="switchView('tg', '3d', this)">3D View</button>
+          <button class="view-btn" onclick="switchView('tg', 'sch1', this)">Schematic 1</button>
+          <button class="view-btn" onclick="switchView('tg', 'sch2', this)">Schematic 2</button>
+        </div>
       </div>
-    </div>
 
     <div class="project">
       <div class="project-header">
