@@ -34,7 +34,6 @@
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
-  /* --- HEADER --- */
   header { margin-bottom: 3rem; border-left: 4px solid var(--text-main); padding-left: 20px; }
   h1 { font-size: 2.2rem; font-weight: 600; margin-bottom: 0.2rem; letter-spacing: -0.5px; }
   
@@ -47,7 +46,6 @@
 
   .abstract { font-size: 1.05rem; color: var(--text-main); max-width: 700px; }
 
-  /* --- SECTIONS --- */
   section { margin-bottom: 3.5rem; }
   
   h2.section-title {
@@ -59,7 +57,6 @@
     margin-bottom: 1.8rem;
   }
 
-  /* --- PROJECTS & EXPERIENCE --- */
   .project { margin-bottom: 2.8rem; }
   
   .project-header {
@@ -84,7 +81,22 @@
   ul.project-bullets li { margin-bottom: 0.6rem; }
   ul.project-bullets strong { color: var(--text-main); font-weight: 600; }
 
-  /* --- CAD CONTAINER --- */
+  .project-links { margin-top: 0.8rem; margin-bottom: 1.2rem; }
+
+  .btn-link {
+    display: inline-block;
+    background: var(--text-main);
+    color: #ffffff !important;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .btn-link:hover { background: var(--text-muted); }
+
   .cad-container {
     width: 100%;
     height: 500px; 
@@ -96,12 +108,7 @@
     overflow: hidden;
   }
 
-  .viewer-area {
-    flex-grow: 1;
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-  }
+  .viewer-area { flex-grow: 1; position: relative; width: 100%; overflow: hidden; }
 
   .cad-label {
     position: absolute;
@@ -134,15 +141,9 @@
     transition: transform 0.1s ease;
   }
 
-  .schematic-img.active {
-    display: block;
-  }
-  
-  .schematic-img:active {
-    cursor: grabbing;
-  }
+  .schematic-img.active { display: block; }
+  .schematic-img:active { cursor: grabbing; }
 
-  /* --- CONTROL BAR --- */
   .view-controls {
     display: flex;
     justify-content: center;
@@ -172,11 +173,6 @@
     border-color: var(--text-main);
   }
 
-  .view-btn:hover:not(.active) {
-    background: #e0e0e0;
-    color: var(--text-main);
-  }
-
   @media (max-width: 600px) {
     .project-header { flex-direction: column; }
     .cad-container { height: 400px; }
@@ -187,7 +183,6 @@
 <body>
 
   <script>
-    // --- ZOOM AND PAN LOGIC ---
     let zState = { scale: 1, x: 0, y: 0, isDragging: false, startX: 0, startY: 0 };
 
     function updateTransform(img) {
@@ -196,19 +191,13 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       const images = document.querySelectorAll('.schematic-img');
-      
       images.forEach(img => {
         img.addEventListener('wheel', (e) => {
           if (!img.classList.contains('active')) return;
           e.preventDefault();
-          
           const delta = Math.sign(e.deltaY) * -0.15;
           const newScale = Math.min(Math.max(1, zState.scale + delta), 5);
-          
-          if (newScale === 1) {
-            zState.x = 0;
-            zState.y = 0;
-          }
+          if (newScale === 1) { zState.x = 0; zState.y = 0; }
           zState.scale = newScale;
           updateTransform(img);
         });
@@ -235,7 +224,6 @@
       });
     });
 
-    // --- TAB SWITCHING LOGIC ---
     function switchView(projectId, viewType, btnElement) {
       const model3d = document.getElementById(projectId + '-3d');
       const schematic = document.getElementById(projectId + '-schematic');
@@ -246,9 +234,7 @@
   
       zState = { scale: 1, x: 0, y: 0, isDragging: false, startX: 0, startY: 0 };
       const allImages = container.querySelectorAll('.schematic-img');
-      allImages.forEach(img => {
-          img.style.transform = `translate(0px, 0px) scale(1)`;
-      });
+      allImages.forEach(img => { img.style.transform = `translate(0px, 0px) scale(1)`; });
 
       if (model3d) model3d.style.display = 'none';
       if (schematic) schematic.classList.remove('active');
@@ -290,7 +276,6 @@
 
   <section>
     <h2 class="section-title">00. Work Experience</h2>
-
     <div class="project">
       <div class="project-header">
         <h3>Norsat International: Hardware Intern</h3>
@@ -301,7 +286,6 @@
         <li><strong>RF Characterization:</strong> Tested Ku-Band BUCs using VNAs and multimeters.</li>
         <li><strong>Quality Control:</strong> Verified gain, P1dB, and noise figure compliance.</li>
         <li><strong>Debug & Repair:</strong> Troubleshot DC bias issues via schematic cross-referencing.</li>
-        <li><strong>Prototyping:</strong> Performed microscopic SMT soldering on dense layouts.</li>
         <li><strong>Production Yield:</strong> Ensured 100% test yield across 50+ RF units.</li>
       </ul>
     </div>
@@ -315,13 +299,13 @@
         <h3>IR Remote Controller (ELEC 291)</h3>
         <span class="project-date">Feb 2026 – Mar 2026</span>
       </div>
-      <div class="tech-stack">Altium Designer // EFM8 MCU // C Firmware // 38kHz IR // UI Design</div>
+      <div class="tech-stack">Altium Designer // EFM8 MCU // 38kHz IR // Mixed-Signal PCB</div>
       <ul class="project-bullets">
-        <li><strong>Firmware:</strong> Developed bare-metal C firmware for EFM8LB1 MCU.</li>
-        <li><strong>IR Protocol:</strong> Engineered custom 38kHz IR encode/decode via hardware timers.</li>
-        <li><strong>User Interface:</strong> Built LCD menu for manual and auto-path navigation.</li>
-        <li><strong>Sensor Interfacing:</strong> Read joystick X/Y axes using ADC polling.</li>
-        <li><strong>Haptic Feedback:</strong> Programmed active-low PNP transistor drivers for motors and buzzers.</li>
+        <li><strong>Firmware:</strong> Developed bare-metal C firmware for EFM8LB1 MCU. [cite: 149]</li>
+        <li><strong>IR Protocol:</strong> Encoded 38kHz modulated signals via hardware timers. [cite: 47, 280]</li>
+        <li><strong>Safety Logic:</strong> Prioritized emergency stop button via direct GPIO polling. </li>
+        <li><strong>Feedback:</strong> Drove haptic motor and buzzer via active-low PNP transistors. [cite: 36, 390]</li>
+        <li><strong>UI Design:</strong> Built 16x2 LCD menu for autonomous path selection. [cite: 56, 161]</li>
       </ul>
       
       <div class="cad-container" id="ir">
@@ -331,7 +315,6 @@
           <img src="models/IR_layout1.png" class="schematic-img" id="ir-sch1" alt="Top Layer Routing">
           <img src="models/IR_layout2.png" class="schematic-img" id="ir-sch2" alt="Bottom Layer Routing">
         </div>
-
         <div class="view-controls">
           <button class="view-btn active" onclick="switchView('ir', 'schematic', this)">Schematic</button>
           <button class="view-btn" onclick="switchView('ir', 'sch1', this)">Layout 1</button>
@@ -345,61 +328,43 @@
         <h3>Formula UBC: Laser Timing Gates Receiver</h3>
         <span class="project-date">Sept 2025 – Present</span>
       </div>
-      <div class="tech-stack">Altium Designer // ESP32-S3 // Mixed-Signal Layout // Analog CMOS</div>
+      <div class="tech-stack">Altium Designer // ESP32-S3 // 2.4 GHz RF // Analog CMOS</div>
       <ul class="project-bullets">
         <li><strong>Hardware Design:</strong> Engineered a custom 4-layer PCB.</li>
-        <li><strong>Signal Integrity:</strong> Routed controlled impedance for 2.4 GHz ESP-NOW wireless.</li>
-        <li><strong>Noise Reduction:</strong> Implemented isolated analog and digital grounds.</li>
+        <li><strong>Signal Integrity:</strong> Routed controlled impedance for 2.4 GHz wireless.</li>
         <li><strong>Analog Front-End:</strong> Designed 3.3V CMOS circuit with adjustable hysteresis.</li>
-        <li><strong>Verification:</strong> Targeted 20dB SNR and BER < 10⁻⁷ for high-speed tracking.</li>
+        <li><strong>Verification:</strong> Targeted 20dB SNR for high-speed tracking.</li>
       </ul>
-      
-      <div class="cad-container">
+      <div class="project-links">
+        <a href="https://github.com/danielwhn25/FUBC-timing-gates" target="_blank" class="btn-link">GitHub ↗ (Full Documentation)</a>
+      </div>
+      <div class="cad-container" id="tg">
         <div class="viewer-area">
-          <div class="cad-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
-          <model-viewer 
-            src="models/timing_gates.glb" 
-            camera-controls 
-            auto-rotate 
-            auto-rotate-delay="0"
-            rotation-per-second="30deg"
-            shadow-intensity="1" 
-            environment-image="neutral"
-            camera-orbit="45deg 75deg auto">
-          </model-viewer>
+          <div class="cad-label" id="tg-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
+          <model-viewer id="tg-3d" src="models/timing_gates.glb" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="30deg" shadow-intensity="1" environment-image="neutral" scale="0.001 0.001 0.001" camera-orbit="45deg 75deg auto"></model-viewer>
         </div>
       </div>
     </div> 
 
     <div class="project">
       <div class="project-header">
-        <h3>MPPT Control System: Photovoltaic Analyzer (PVA)</h3>
+        <h3>MPPT Control System: PVA Analyzer</h3>
         <span class="project-date">Hackathon Project</span>
       </div>
-      <div class="tech-stack">STM32G4 // CAN-Bus // 4-Layer PCB // Altium Designer // INA240</div>
-      <div class="project-desc">
-        Architected a decoupled MPPT system. Sampled solar V/I at kHz rates. Calculated MPP to drive a high-power Buck-Boost stage.
-      </div>
-      
+      <div class="tech-stack">STM32G4 // CAN-Bus // 4-Layer PCB // Altium Designer</div>
       <ul class="project-bullets">
-        <li><strong>PCB Architecture:</strong> Designed 4-layer PCB with internal solid ground plane.</li>
-        <li><strong>EMI Mitigation:</strong> Shielded sensitive ADC paths from high-current switching noise.</li>
-        <li><strong>Robust Comm:</strong> Transmitted power targets via noise-immune CAN-Bus.</li>
-        <li><strong>Power Management:</strong> Integrated STM32G4 MCU and INA240 current sensor.</li>
-        <li><strong>Efficiency:</strong> Tracking logic recaptured 5-15% of energy lost to noise.</li>
+        <li><strong>PCB Architecture:</strong> Designed 4-layer PCB with internal ground plane.</li>
+        <li><strong>EMI Mitigation:</strong> Shielded ADC paths from high-current switching noise.</li>
+        <li><strong>Communication:</strong> Transmitted targets via noise-immune CAN-Bus.</li>
+        <li><strong>Efficiency:</strong> Recaptured 5-15% of energy lost to sensor noise.</li>
       </ul>
-      
-      <div class="cad-container">
+      <div class="project-links">
+        <a href="https://docs.google.com/presentation/d/16Gqmenjmz5KPoKvA52oVqfsM5uB7R8cbwH1qsTTRIMg/edit?usp=sharing" target="_blank" class="btn-link">View Presentation ↗</a>
+      </div>
+      <div class="cad-container" id="pva">
         <div class="viewer-area">
-          <div class="cad-label">PVA_BOARD_ASSEMBLY // 4-LAYER_ARCHITECTURE</div>
-          <model-viewer 
-            src="models/PVA_board.glb"
-            camera-controls 
-            auto-rotate 
-            shadow-intensity="1" 
-            environment-image="neutral"
-            camera-orbit="0deg 75deg auto">
-          </model-viewer>
+          <div class="cad-label" id="pva-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
+          <model-viewer id="pva-3d" src="models/PVA_board.glb" camera-controls auto-rotate shadow-intensity="1" environment-image="neutral" camera-orbit="0deg 75deg auto"></model-viewer>
         </div>
       </div>
     </div>
@@ -407,20 +372,20 @@
 
   <section>
     <h2 class="section-title">02. Firmware & Digital Design</h2>
-
     <div class="project">
       <div class="project-header">
         <h3>Bare-Metal Digital Multimeter</h3>
         <span class="project-date">Mar 2026</span>
       </div>
-      <div class="tech-stack">STM32L051 // ARM Cortex-M0 // Makefiles // Hardware Timers</div>
+      <div class="tech-stack">STM32L051 // Bare-Metal C // Hardware Timers // ADC</div>
       <ul class="project-bullets">
-        <li><strong>Embedded C:</strong> Developed bare-metal STM32 firmware for RLC measurement.</li>
-        <li><strong>Hardware Timers:</strong> Captured frequency via astable 555 timing circuits.</li>
+        <li><strong>Embedded C:</strong> Developed bare-metal firmware for RLC measurement.</li>
         <li><strong>Precision Sampling:</strong> Sampled voltage and resistance using calibrated ADC.</li>
         <li><strong>Custom Drivers:</strong> Wrote modular LCD and serial drivers without HAL.</li>
-        <li><strong>Build Automation:</strong> Created custom Makefile build system for deterministic execution.</li>
       </ul>
+      <div class="project-links">
+        <a href="https://github.com/danielwhn25/ELEC291_labs/tree/main/DMM_STM32LO51" target="_blank" class="btn-link">View Code ↗</a>
+      </div>
     </div>
 
     <div class="project">
@@ -430,14 +395,14 @@
       </div>
       <div class="tech-stack">8052 // A51 Assembly // NEC Protocol // PID Control</div>
       <ul class="project-bullets">
-        <li><strong>Low-Level Control:</strong> Programmed bare-metal thermal controller on 8052 MCU.</li>
-        <li><strong>Thermal Profiles:</strong> Used PWM and FSM for standard reflow curves.</li>
-        <li><strong>IR Protocols:</strong> Decoded bit-level NEC IR for interactive HMI.</li>
-        <li><strong>Control Systems:</strong> Achieved ±3°C closed-loop thermal accuracy.</li>
-        <li><strong>Data Validation:</strong> Validated telemetry using custom Python live-plotting framework.</li>
+        <li><strong>Low-Level Control:</strong> Programmed thermal controller in A51 Assembly.</li>
+        <li><strong>Profiles:</strong> Used PWM and FSM for standard reflow curves.</li>
+        <li><strong>Accuracy:</strong> Achieved ±3°C closed-loop thermal accuracy.</li>
       </ul>
+      <div class="project-links">
+        <a href="https://github.com/danielwhn25/4C11IV" target="_blank" class="btn-link">View Code ↗</a>
+      </div>
     </div>
   </section>
-
 </body>
 </html>
