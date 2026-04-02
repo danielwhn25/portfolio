@@ -234,12 +234,12 @@
   
       zState = { scale: 1, x: 0, y: 0, isDragging: false, startX: 0, startY: 0 };
       const allImages = container.querySelectorAll('.schematic-img');
-      allImages.forEach(img => { img.style.transform = `translate(0px, 0px) scale(1)`; });
+      allImages.forEach(img => { 
+        img.style.transform = `translate(0px, 0px) scale(1)`; 
+        img.classList.remove('active');
+      });
 
       if (model3d) model3d.style.display = 'none';
-      if (schematic) schematic.classList.remove('active');
-      if (sch1) sch1.classList.remove('active');
-      if (sch2) sch2.classList.remove('active');
   
       const btns = container.querySelectorAll('.view-btn');
       btns.forEach(btn => btn.classList.remove('active'));
@@ -310,13 +310,15 @@
       
       <div class="cad-container" id="ir">
         <div class="viewer-area">
-          <div class="cad-label" id="ir-label">SYSTEM_VIEW // SCHEMATIC</div>
-          <img src="models/IR_schematic.png" class="schematic-img active" id="ir-schematic" alt="Circuit Schematic" style="display: block;">
+          <div class="cad-label" id="ir-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
+          <model-viewer id="ir-3d" src="models/IR_remote.glb" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="30deg" shadow-intensity="1" environment-image="neutral" scale="0.001 0.001 0.001" camera-orbit="45deg 75deg auto"></model-viewer>
+          <img src="models/IR_schematic.png" class="schematic-img" id="ir-schematic" alt="Circuit Schematic">
           <img src="models/IR_layout1.png" class="schematic-img" id="ir-sch1" alt="Top Layer Routing">
           <img src="models/IR_layout2.png" class="schematic-img" id="ir-sch2" alt="Bottom Layer Routing">
         </div>
         <div class="view-controls">
-          <button class="view-btn active" onclick="switchView('ir', 'schematic', this)">Schematic</button>
+          <button class="view-btn active" onclick="switchView('ir', '3d', this)">3D View</button>
+          <button class="view-btn" onclick="switchView('ir', 'schematic', this)">Schematic</button>
           <button class="view-btn" onclick="switchView('ir', 'sch1', this)">Layout 1</button>
           <button class="view-btn" onclick="switchView('ir', 'sch2', this)">Layout 2</button>
         </div>
