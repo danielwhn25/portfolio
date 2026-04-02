@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daniel Ng | Electrical Engineering Portfolio</title>
 
-<!-- Google's 3D Web Component (v3.4.0 for better scaling) -->
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 
 <style>
@@ -160,10 +159,10 @@
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Keeps the whole schematic visible without stretching */
+    object-fit: contain;
     background: #fcfcfc;
     z-index: 5;
-    display: none; /* Hidden by default */
+    display: none;
   }
 
   .schematic-img.active {
@@ -172,40 +171,45 @@
 </style>
 </head>
 
-<script>
-  function switchView(projectId, viewType, btnElement) {
-    // 1. Get elements based on the prefix (e.g., 'tg')
-    const model3d = document.getElementById(projectId + '-3d');
-    const sch1 = document.getElementById(projectId + '-sch1');
-    const sch2 = document.getElementById(projectId + '-sch2');
-    const label = document.getElementById(projectId + '-label');
-    const container = document.getElementById(projectId);
-
-    // 2. Hide everything
-    model3d.style.display = 'none';
-    sch1.classList.remove('active');
-    sch2.classList.remove('active');
-
-    // 3. Update active button styles
-    const btns = container.querySelectorAll('.view-btn');
-    btns.forEach(btn => btn.classList.remove('active'));
-    btnElement.classList.add('active');
-
-    // 4. Show the selected view and update the top-left label
-    if (viewType === '3d') {
-      model3d.style.display = 'block';
-      label.innerText = "SYSTEM_VIEW // INTERACTIVE_3D_RENDER";
-    } else if (viewType === 'sch1') {
-      sch1.classList.add('active');
-      label.innerText = "SYSTEM_VIEW // SCHEMATIC_SHEET_1";
-    } else if (viewType === 'sch2') {
-      sch2.classList.add('active');
-      label.innerText = "SYSTEM_VIEW // SCHEMATIC_SHEET_2";
-    }
-  }
-</script>
-  
 <body>
+
+  <script>
+    function switchView(projectId, viewType, btnElement) {
+      // 1. Get elements based on the prefix (e.g., 'tg')
+      const model3d = document.getElementById(projectId + '-3d');
+      const schematic = document.getElementById(projectId + '-schematic');
+      const sch1 = document.getElementById(projectId + '-sch1');
+      const sch2 = document.getElementById(projectId + '-sch2');
+      const label = document.getElementById(projectId + '-label');
+      const container = document.getElementById(projectId);
+  
+      // 2. Hide everything
+      model3d.style.display = 'none';
+      if (schematic) schematic.classList.remove('active');
+      if (sch1) sch1.classList.remove('active');
+      if (sch2) sch2.classList.remove('active');
+  
+      // 3. Update active button styles
+      const btns = container.querySelectorAll('.view-btn');
+      btns.forEach(btn => btn.classList.remove('active'));
+      btnElement.classList.add('active');
+  
+      // 4. Show the selected view and update the top-left label
+      if (viewType === '3d') {
+        model3d.style.display = 'block';
+        label.innerText = "SYSTEM_VIEW // INTERACTIVE_3D_RENDER";
+      } else if (viewType === 'schematic') {
+        schematic.classList.add('active');
+        label.innerText = "SYSTEM_VIEW // SCHEMATIC";
+      } else if (viewType === 'sch1') {
+        sch1.classList.add('active');
+        label.innerText = "SYSTEM_VIEW // TOP_LAYER_ROUTING";
+      } else if (viewType === 'sch2') {
+        sch2.classList.add('active');
+        label.innerText = "SYSTEM_VIEW // BOTTOM_LAYER_ROUTING";
+      }
+    }
+  </script>
 
   <header>
     <h1>Daniel Ng</h1>
@@ -232,7 +236,7 @@
       <ul class="project-bullets">
         <li><strong>Mixed-Signal Design:</strong> Engineered a 4-layer custom PCB featuring controlled impedance routing for 2.4 GHz ESP-NOW communication and analog/digital ground isolation.</li>
         <li><strong>Analog Front-End:</strong> Integrated a 3.3V CMOS front-end with adjustable hysteresis via potentiometer to calibrate against photodiode thermal noise.</li>
-        <li><strong>Verification:</strong> Targeted a 20dB SNR and $BER < 10^{-7}$ to ensure high-speed data integrity during vehicle track passes.</li>
+        <li><strong>Verification:</strong> Targeted a 20dB SNR and BER < 10⁻⁷ to ensure high-speed data integrity during vehicle track passes.</li>
       </ul>
       
       <div class="cad-container" id="tg">
@@ -251,18 +255,18 @@
           camera-orbit="45deg 75deg auto">
         </model-viewer>
         
+        <img src="models/IR_schematic.png" class="schematic-img" id="tg-schematic" alt="Circuit Schematic">
         <img src="models/IR_layout1.png" class="schematic-img" id="tg-sch1" alt="Top Layer Routing">
         <img src="models/IR_layout2.png" class="schematic-img" id="tg-sch2" alt="Bottom Layer Routing">
 
         <div class="view-controls">
           <button class="view-btn active" onclick="switchView('tg', '3d', this)">3D View</button>
+          <button class="view-btn" onclick="switchView('tg', 'schematic', this)">Schematic</button>
           <button class="view-btn" onclick="switchView('tg', 'sch1', this)">Layout 1</button>
           <button class="view-btn" onclick="switchView('tg', 'sch2', this)">Layout 2</button>
-          
         </div>
       </div>
-
-    <div class="project">
+    </div> <div class="project">
       <div class="project-header">
         <h3>MPPT Control System: Photovoltaic Analyzer (PVA)</h3>
         <span class="project-date">Hackathon Project</span>
@@ -273,10 +277,10 @@
       </div>
       
       <ul class="project-bullets">
-        <li><strong>Signal Integrity:</strong> Designed a professional 4-layer PCB with a dedicated internal solid ground plane to shield sensitive ADC paths from high-current EMI[cite: 228].</li>
-        <li><strong>Communication:</strong> Encoded optimal power targets into noise-immune CAN-Bus frames to ensure reliable data transmission in switching-noise environments[cite: 59, 296].</li>
+        <li><strong>Signal Integrity:</strong> Designed a professional 4-layer PCB with a dedicated internal solid ground plane to shield sensitive ADC paths from high-current EMI.</li>
+        <li><strong>Communication:</strong> Encoded optimal power targets into noise-immune CAN-Bus frames to ensure reliable data transmission in switching-noise environments.</li>
         <li><strong>Power Management:</strong> Integrated an STM32G4 MCU with an INA240 current sensor and a TPS62177 buck regulator for efficient system-level logic power.</li>
-        <li><strong>Performance:</strong> Precision tracking logic recaptures 5-15% of energy typically lost to sensor noise in traditional single-board systems[cite: 299].</li>
+        <li><strong>Performance:</strong> Precision tracking logic recaptures 5-15% of energy typically lost to sensor noise in traditional single-board systems.</li>
       </ul>
       
       <div class="cad-container">
@@ -329,7 +333,7 @@
       <ul class="project-bullets">
         <li><strong>Control Logic:</strong> Designed a bare-metal thermal controller with PWM heating and FSM-driven profiles for standard reflow curves.</li>
         <li><strong>Protocol Decoding:</strong> Implemented bit-level NEC IR decoding for event-driven setup and interactive HMI.</li>
-        <li><strong>Precision:</strong> Achieved $\pm3^{\circ}C$ closed-loop accuracy validated through a custom Python data-plotting framework.</li>
+        <li><strong>Precision:</strong> Achieved ±3°C closed-loop accuracy validated through a custom Python data-plotting framework.</li>
       </ul>
     </div>
   </section>
