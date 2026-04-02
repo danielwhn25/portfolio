@@ -93,14 +93,14 @@
     margin-top: 1.2rem;
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Keeps everything contained cleanly */
+    overflow: hidden;
   }
 
   .viewer-area {
     flex-grow: 1;
     position: relative;
     width: 100%;
-    overflow: hidden; /* Prevents zoomed images from breaking out of the box */
+    overflow: hidden;
   }
 
   .cad-label {
@@ -198,15 +198,13 @@
       const images = document.querySelectorAll('.schematic-img');
       
       images.forEach(img => {
-        // Zoom on Mouse Wheel
         img.addEventListener('wheel', (e) => {
           if (!img.classList.contains('active')) return;
           e.preventDefault();
           
           const delta = Math.sign(e.deltaY) * -0.15;
-          const newScale = Math.min(Math.max(1, zState.scale + delta), 5); // Max 5x zoom
+          const newScale = Math.min(Math.max(1, zState.scale + delta), 5);
           
-          // Recenter if zoomed all the way out
           if (newScale === 1) {
             zState.x = 0;
             zState.y = 0;
@@ -215,16 +213,14 @@
           updateTransform(img);
         });
 
-        // Start Panning
         img.addEventListener('mousedown', (e) => {
           if (!img.classList.contains('active') || zState.scale === 1) return;
           zState.isDragging = true;
           zState.startX = e.clientX - zState.x;
           zState.startY = e.clientY - zState.y;
-          img.style.transition = 'none'; // Disable transition for instant drag response
+          img.style.transition = 'none';
         });
 
-        // Pan Movement
         window.addEventListener('mousemove', (e) => {
           if (!zState.isDragging) return;
           zState.x = e.clientX - zState.startX;
@@ -232,10 +228,9 @@
           updateTransform(img);
         });
 
-        // End Panning
         window.addEventListener('mouseup', () => {
           zState.isDragging = false;
-          images.forEach(i => i.style.transition = 'transform 0.1s ease'); // Restore transition
+          images.forEach(i => i.style.transition = 'transform 0.1s ease');
         });
       });
     });
@@ -249,25 +244,21 @@
       const label = document.getElementById(projectId + '-label');
       const container = document.getElementById(projectId);
   
-      // Reset zoom state on tab switch
       zState = { scale: 1, x: 0, y: 0, isDragging: false, startX: 0, startY: 0 };
       const allImages = container.querySelectorAll('.schematic-img');
       allImages.forEach(img => {
           img.style.transform = `translate(0px, 0px) scale(1)`;
       });
 
-      // Hide all visuals
       model3d.style.display = 'none';
       if (schematic) schematic.classList.remove('active');
       if (sch1) sch1.classList.remove('active');
       if (sch2) sch2.classList.remove('active');
   
-      // Update buttons
       const btns = container.querySelectorAll('.view-btn');
       btns.forEach(btn => btn.classList.remove('active'));
       btnElement.classList.add('active');
   
-      // Show selected visual & update label
       if (viewType === '3d') {
         model3d.style.display = 'block';
         label.innerText = "SYSTEM_VIEW // INTERACTIVE_3D_RENDER";
@@ -293,7 +284,7 @@
       <a href="https://linkedin.com/in/danielngEE" target="_blank">LinkedIn</a>
     </div>
     <p class="abstract">
-      Hardware and firmware engineer specializing in the physical-to-digital boundary. Proven experience in RF characterization, bare-metal C, and digital logic design.
+      Hardware and firmware engineer. Specializing in the physical-to-digital boundary. Expert in RF characterization, bare-metal C, and digital logic design.
     </p>
   </header>
 
@@ -307,9 +298,11 @@
       </div>
       <div class="tech-stack">Altium Designer // ESP32-S3 // Mixed-Signal Layout // Analog CMOS</div>
       <ul class="project-bullets">
-        <li><strong>Mixed-Signal Design:</strong> Engineered a 4-layer custom PCB featuring controlled impedance routing for 2.4 GHz ESP-NOW communication and analog/digital ground isolation.</li>
-        <li><strong>Analog Front-End:</strong> Integrated a 3.3V CMOS front-end with adjustable hysteresis via potentiometer to calibrate against photodiode thermal noise.</li>
-        <li><strong>Verification:</strong> Targeted a 20dB SNR and BER < 10⁻⁷ to ensure high-speed data integrity during vehicle track passes.</li>
+        <li><strong>Hardware Design:</strong> Engineered a custom 4-layer PCB.</li>
+        <li><strong>Signal Integrity:</strong> Routed controlled impedance for 2.4 GHz ESP-NOW wireless.</li>
+        <li><strong>Noise Reduction:</strong> Implemented isolated analog and digital grounds.</li>
+        <li><strong>Analog Front-End:</strong> Designed 3.3V CMOS circuit with adjustable hysteresis.</li>
+        <li><strong>Verification:</strong> Targeted 20dB SNR and BER < 10⁻⁷ for high-speed tracking.</li>
       </ul>
       
       <div class="cad-container" id="tg">
@@ -350,14 +343,15 @@
       </div>
       <div class="tech-stack">STM32G4 // CAN-Bus // 4-Layer PCB // Altium Designer // INA240</div>
       <div class="project-desc">
-        Architected the "brain" of a decoupled MPPT system, designed to sample solar panel V/I at kHz rates to calculate the Maximum Power Point (MPP) and actuate a high-power Buck-Boost stage.
+        Architected a decoupled MPPT system. Sampled solar V/I at kHz rates. Calculated MPP to drive a high-power Buck-Boost stage.
       </div>
       
       <ul class="project-bullets">
-        <li><strong>Signal Integrity:</strong> Designed a professional 4-layer PCB with a dedicated internal solid ground plane to shield sensitive ADC paths from high-current EMI.</li>
-        <li><strong>Communication:</strong> Encoded optimal power targets into noise-immune CAN-Bus frames to ensure reliable data transmission in switching-noise environments.</li>
-        <li><strong>Power Management:</strong> Integrated an STM32G4 MCU with an INA240 current sensor and a TPS62177 buck regulator for efficient system-level logic power.</li>
-        <li><strong>Performance:</strong> Precision tracking logic recaptures 5-15% of energy typically lost to sensor noise in traditional single-board systems.</li>
+        <li><strong>PCB Architecture:</strong> Designed 4-layer PCB with internal solid ground plane.</li>
+        <li><strong>EMI Mitigation:</strong> Shielded sensitive ADC paths from high-current switching noise.</li>
+        <li><strong>Robust Comm:</strong> Transmitted power targets via noise-immune CAN-Bus.</li>
+        <li><strong>Power Management:</strong> Integrated STM32G4 MCU and INA240 current sensor.</li>
+        <li><strong>Efficiency:</strong> Tracking logic recaptured 5-15% of energy lost to noise.</li>
       </ul>
       
       <div class="cad-container">
@@ -382,8 +376,11 @@
       </div>
       <div class="tech-stack">VNA // Signal Analyzers // RF Characterization // SMT Soldering</div>
       <ul class="project-bullets">
-        <li><strong>RF Characterization:</strong> Tested Ku-Band Block-Up Converters for gain, P1dB, and noise figure compliance using VNAs and multimeters.</li>
-        <li><strong>PCBA Troubleshooting:</strong> Identified DC bias instabilities through microscopic SMT soldering and schematic cross-referencing, ensuring 100% yield across 50+ units.</li>
+        <li><strong>RF Characterization:</strong> Tested Ku-Band BUCs using VNAs and multimeters.</li>
+        <li><strong>Quality Control:</strong> Verified gain, P1dB, and noise figure compliance.</li>
+        <li><strong>Debug & Repair:</strong> Troubleshot DC bias issues via schematic cross-referencing.</li>
+        <li><strong>Prototyping:</strong> Performed microscopic SMT soldering on dense layouts.</li>
+        <li><strong>Production Yield:</strong> Ensured 100% test yield across 50+ RF units.</li>
       </ul>
     </div>
   </section>
@@ -398,8 +395,11 @@
       </div>
       <div class="tech-stack">STM32L051 // ARM Cortex-M0 // Makefiles // Hardware Timers</div>
       <ul class="project-bullets">
-        <li><strong>Real-Time Sampling:</strong> Developed STM32 firmware for RLC measurement using ADC sampling and timer-based frequency capture via an astable 555 circuit.</li>
-        <li><strong>Low-Level Drivers:</strong> Built modular LCD and serial drivers from scratch (No HAL) with a Makefile-based build system for deterministic execution.</li>
+        <li><strong>Embedded C:</strong> Developed bare-metal STM32 firmware for RLC measurement.</li>
+        <li><strong>Hardware Timers:</strong> Captured frequency via astable 555 timing circuits.</li>
+        <li><strong>Precision Sampling:</strong> Sampled voltage and resistance using calibrated ADC.</li>
+        <li><strong>Custom Drivers:</strong> Wrote modular LCD and serial drivers without HAL.</li>
+        <li><strong>Build Automation:</strong> Created custom Makefile build system for deterministic execution.</li>
       </ul>
     </div>
 
@@ -410,9 +410,11 @@
       </div>
       <div class="tech-stack">8052 // A51 Assembly // NEC Protocol // PID Control</div>
       <ul class="project-bullets">
-        <li><strong>Control Logic:</strong> Designed a bare-metal thermal controller with PWM heating and FSM-driven profiles for standard reflow curves.</li>
-        <li><strong>Protocol Decoding:</strong> Implemented bit-level NEC IR decoding for event-driven setup and interactive HMI.</li>
-        <li><strong>Precision:</strong> Achieved ±3°C closed-loop accuracy validated through a custom Python data-plotting framework.</li>
+        <li><strong>Low-Level Control:</strong> Programmed bare-metal thermal controller on 8052 MCU.</li>
+        <li><strong>Thermal Profiles:</strong> Used PWM and FSM for standard reflow curves.</li>
+        <li><strong>IR Protocols:</strong> Decoded bit-level NEC IR for interactive HMI.</li>
+        <li><strong>Control Systems:</strong> Achieved ±3°C closed-loop thermal accuracy.</li>
+        <li><strong>Data Validation:</strong> Validated telemetry using custom Python live-plotting framework.</li>
       </ul>
     </div>
   </section>
