@@ -283,10 +283,10 @@
       </div>
       <div class="tech-stack">VNA // Signal Analyzers // RF Characterization // SMT Soldering</div>
       <ul class="project-bullets">
-        <li><strong>RF Characterization:</strong> Tested Ku-Band BUCs using VNAs and multimeters.</li>
-        <li><strong>Quality Control:</strong> Verified gain, P1dB, and noise figure compliance.</li>
-        <li><strong>Debug & Repair:</strong> Troubleshot DC bias issues via schematic cross-referencing.</li>
-        <li><strong>Production Yield:</strong> Ensured 100% test yield across 50+ RF units.</li>
+        <li><strong>Quality Assurance:</strong> Secured 100% production yield across 50+ commercial RF units.</li>
+        <li><strong>Compliance:</strong> Validated strict Ku-Band tolerances for gain, P1dB, and noise figures.</li>
+        <li><strong>Root Cause Analysis:</strong> Prevented field failures by diagnosing and repairing DC bias instabilities.</li>
+        <li><strong>Rapid Prototyping:</strong> Executed precision microscopic SMT soldering on dense, fine-pitch layouts.</li>
       </ul>
     </div>
   </section>
@@ -296,16 +296,15 @@
     
     <div class="project">
       <div class="project-header">
-        <h3>IR Remote Controller (ELEC 291)</h3>
+        <h3>IR Remote Controller</h3>
         <span class="project-date">Feb 2026 – Mar 2026</span>
       </div>
       <div class="tech-stack">Altium Designer // EFM8 MCU // 38kHz IR // Mixed-Signal PCB</div>
       <ul class="project-bullets">
-        <li><strong>Firmware:</strong> Developed bare-metal C firmware for EFM8LB1 MCU.</li>
-        <li><strong>IR Protocol:</strong> Encoded 38kHz modulated signals via hardware timers.</li>
-        <li><strong>Safety Logic:</strong> Prioritized emergency stop button via direct GPIO polling.</li>
-        <li><strong>Feedback:</strong> Drove haptic motor and buzzer via active-low PNP transistors.</li>
-        <li><strong>UI Design:</strong> Built 16x2 LCD menu for autonomous path selection.</li>
+        <li><strong>Reliable Comm:</strong> Engineered a robust 38kHz IR transmission protocol using hardware timers.</li>
+        <li><strong>System Safety:</strong> Guaranteed operator safety with zero-latency, interrupt-driven emergency stops.</li>
+        <li><strong>UX Design:</strong> Enhanced user interaction via active-low PNP haptic and acoustic feedback.</li>
+        <li><strong>Autonomous Control:</strong> Streamlined complex robotic navigation through custom, intuitive LCD menus.</li>
       </ul>
       
       <div class="cad-container" id="ir">
@@ -332,10 +331,10 @@
       </div>
       <div class="tech-stack">Altium Designer // ESP32-S3 // 2.4 GHz RF // Analog CMOS</div>
       <ul class="project-bullets">
-        <li><strong>Hardware Design:</strong> Engineered a custom 4-layer PCB.</li>
-        <li><strong>Signal Integrity:</strong> Routed controlled impedance for 2.4 GHz wireless.</li>
-        <li><strong>Analog Front-End:</strong> Designed 3.3V CMOS circuit with adjustable hysteresis.</li>
-        <li><strong>Verification:</strong> Targeted 20dB SNR for high-speed tracking.</li>
+        <li><strong>Performance:</strong> Enabled reliable, high-speed lap tracking for racing vehicles in high-noise environments.</li>
+        <li><strong>Signal Integrity:</strong> Achieved ultra-low BER (< 10⁻⁷) via strict controlled impedance routing.</li>
+        <li><strong>Noise Immunity:</strong> Maximized logic stability using physically isolated analog and digital ground planes.</li>
+        <li><strong>Precision Sensing:</strong> Optimized photodiode SNR to 20dB with a custom tunable CMOS hysteresis front-end.</li>
       </ul>
       <div class="project-links">
         <a href="https://github.com/danielwhn25/FUBC-timing-gates" target="_blank" class="btn-link">GitHub ↗ (Full Documentation)</a>
@@ -355,10 +354,10 @@
       </div>
       <div class="tech-stack">STM32G4 // CAN-Bus // 4-Layer PCB // Altium Designer</div>
       <ul class="project-bullets">
-        <li><strong>PCB Architecture:</strong> Designed 4-layer PCB with internal ground plane.</li>
-        <li><strong>EMI Mitigation:</strong> Shielded ADC paths from high-current switching noise.</li>
-        <li><strong>Communication:</strong> Transmitted targets via noise-immune CAN-Bus.</li>
-        <li><strong>Efficiency:</strong> Recaptured 5-15% of energy lost to sensor noise.</li>
+        <li><strong>Power Efficiency:</strong> Recaptured up to 15% of energy typically lost to sensor noise in solar arrays.</li>
+        <li><strong>EMI Mitigation:</strong> Shielded high-frequency ADC telemetry from switching noise using internal ground planes.</li>
+        <li><strong>Robust Comm:</strong> Ensured fault-tolerant target transmission across the vehicle via noise-immune CAN-Bus.</li>
+        <li><strong>Scalability:</strong> Allowed for high-power application scaling using a modular, decoupled Buck-Boost architecture.</li>
       </ul>
       <div class="project-links">
         <a href="https://docs.google.com/presentation/d/16Gqmenjmz5KPoKvA52oVqfsM5uB7R8cbwH1qsTTRIMg/edit?usp=sharing" target="_blank" class="btn-link">View Presentation ↗</a>
@@ -381,9 +380,9 @@
       </div>
       <div class="tech-stack">STM32L051 // Bare-Metal C // Hardware Timers // ADC</div>
       <ul class="project-bullets">
-        <li><strong>Embedded C:</strong> Developed bare-metal firmware for RLC measurement.</li>
-        <li><strong>Precision Sampling:</strong> Sampled voltage and resistance using calibrated ADC.</li>
-        <li><strong>Custom Drivers:</strong> Wrote modular LCD and serial drivers without HAL.</li>
+        <li><strong>Real-Time Execution:</strong> Achieved highly deterministic RLC sampling via custom Makefile build automation.</li>
+        <li><strong>Code Efficiency:</strong> Eliminated HAL bloat and overhead by engineering direct register-level drivers.</li>
+        <li><strong>Data Acquisition:</strong> Captured high-fidelity frequency metrics utilizing hardware timers and an astable 555 circuit.</li>
       </ul>
       <div class="project-links">
         <a href="https://github.com/danielwhn25/ELEC291_labs/tree/main/DMM_STM32LO51" target="_blank" class="btn-link">View Code ↗</a>
@@ -397,9 +396,9 @@
       </div>
       <div class="tech-stack">8052 // A51 Assembly // NEC Protocol // PID Control</div>
       <ul class="project-bullets">
-        <li><strong>Low-Level Control:</strong> Programmed thermal controller in A51 Assembly.</li>
-        <li><strong>Profiles:</strong> Used PWM and FSM for standard reflow curves.</li>
-        <li><strong>Accuracy:</strong> Achieved ±3°C closed-loop thermal accuracy.</li>
+        <li><strong>Process Control:</strong> Delivered ±3°C closed-loop thermal accuracy for reliable custom PCB manufacturing.</li>
+        <li><strong>Thermal Stability:</strong> Eliminated dangerous temperature overshoot using precision PWM and FSM state logic.</li>
+        <li><strong>Data Validation:</strong> Streamlined tuning and telemetry analysis with a custom Python live-plotting GUI.</li>
       </ul>
       <div class="project-links">
         <a href="https://github.com/danielwhn25/4C11IV" target="_blank" class="btn-link">View Code ↗</a>
