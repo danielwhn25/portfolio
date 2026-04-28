@@ -129,6 +129,7 @@
     background: rgba(255,255,255,0.85);
     padding: 2px 6px;
     border: 1px solid var(--border);
+    display: none;
   }
 
   model-viewer { width: 100%; height: 100%; outline: none; }
@@ -421,7 +422,7 @@
   <nav class="side-tabs" aria-label="Page sections">
     <div class="side-tabs-title">Jump</div>
     <a href="#intro" class="active">Intro</a>
-    <a href="#experience">Experience</a>
+    <a href="#experience">Norsat</a>
     <a href="#hardware">Hardware</a>
     <a href="#timing-gates">Timing Gates</a>
     <a href="#tg-requirements">Requirements</a>
@@ -505,8 +506,48 @@
 
       if (label) {
         label.innerText = btnElement.dataset.label || 'SYSTEM_VIEW';
+        label.style.display = viewType === '3d' ? 'none' : 'block';
       }
     }
+
+
+    function initModelViewerAutoRotatePause() {
+      const viewers = document.querySelectorAll('model-viewer');
+
+      viewers.forEach(viewer => {
+        viewer.setAttribute('auto-rotate-delay', '3500');
+
+        const pause = () => {
+          if (viewer.hasAttribute('auto-rotate')) {
+            viewer.dataset.wasAutoRotate = 'true';
+            viewer.removeAttribute('auto-rotate');
+          }
+
+          if (viewer._resumeAutoRotateTimer) {
+            clearTimeout(viewer._resumeAutoRotateTimer);
+          }
+        };
+
+        const resume = () => {
+          if (viewer.dataset.wasAutoRotate !== 'true') return;
+
+          if (viewer._resumeAutoRotateTimer) {
+            clearTimeout(viewer._resumeAutoRotateTimer);
+          }
+
+          viewer._resumeAutoRotateTimer = setTimeout(() => {
+            viewer.setAttribute('auto-rotate', '');
+          }, 2500);
+        };
+
+        viewer.addEventListener('pointerdown', pause);
+        viewer.addEventListener('pointerup', resume);
+        viewer.addEventListener('pointercancel', resume);
+        viewer.addEventListener('mouseleave', resume);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', initModelViewerAutoRotatePause);
 
 
     function copyCode(button) {
@@ -613,7 +654,7 @@
       <div class="cad-container" id="ir">
         <div class="viewer-area">
           <div class="cad-label" id="ir-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
-          <model-viewer id="ir-3d" src="models/IR_remote.glb" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="30deg" shadow-intensity="1" environment-image="neutral" scale="0.001 0.001 0.001" camera-orbit="45deg 75deg auto"></model-viewer>
+          <model-viewer id="ir-3d" src="models/IR_remote.glb" camera-controls auto-rotate auto-rotate-delay="3500" rotation-per-second="30deg" shadow-intensity="1" environment-image="neutral" scale="0.001 0.001 0.001" camera-orbit="45deg 75deg auto"></model-viewer>
           <img src="models/IR_schematic.png" class="schematic-img" id="ir-schematic" alt="Circuit Schematic">
           <img src="models/IR_layout1.png" class="schematic-img" id="ir-sch1" alt="Top Layer Routing">
           <img src="models/IR_layout2.png" class="schematic-img" id="ir-sch2" alt="Bottom Layer Routing">
@@ -757,7 +798,7 @@
       <div class="cad-container" id="tg">
         <div class="viewer-area">
           <div class="cad-label" id="tg-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
-          <model-viewer id="tg-3d" src="models/timing_gates.glb" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="30deg" shadow-intensity="1" environment-image="neutral" scale="0.001 0.001 0.001" camera-orbit="45deg 75deg auto"></model-viewer>
+          <model-viewer id="tg-3d" src="models/timing_gates.glb" camera-controls auto-rotate auto-rotate-delay="3500" rotation-per-second="30deg" shadow-intensity="1" environment-image="neutral" scale="0.001 0.001 0.001" camera-orbit="45deg 75deg auto"></model-viewer>
           <img src="models/tg_system.png" class="schematic-img" id="tg-system" alt="Timing Gates Top-Level Hierarchical Schematic">
           <img src="models/tg_afe.png" class="schematic-img" id="tg-afe" alt="Timing Gates Laser Receiver Analog Front End Schematic">
           <img src="models/tg_power.png" class="schematic-img" id="tg-power" alt="Timing Gates USB-C LiPo Power Management Schematic">
@@ -820,7 +861,7 @@ void setup_beam_break_input(void)
       <div class="cad-container" id="pva">
         <div class="viewer-area">
           <div class="cad-label" id="pva-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
-          <model-viewer id="pva-3d" src="models/PVA_board.glb" camera-controls auto-rotate shadow-intensity="1" environment-image="neutral" camera-orbit="0deg 75deg auto"></model-viewer>
+          <model-viewer id="pva-3d" src="models/PVA_board.glb" camera-controls auto-rotate auto-rotate-delay="3500" shadow-intensity="1" environment-image="neutral" camera-orbit="0deg 75deg auto"></model-viewer>
         </div>
       </div>
     </div>
