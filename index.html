@@ -230,38 +230,35 @@
     });
 
     function switchView(projectId, viewType, btnElement) {
-      const model3d = document.getElementById(projectId + '-3d');
-      const schematic = document.getElementById(projectId + '-schematic');
-      const sch1 = document.getElementById(projectId + '-sch1');
-      const sch2 = document.getElementById(projectId + '-sch2');
-      const label = document.getElementById(projectId + '-label');
       const container = document.getElementById(projectId);
-  
+      const label = document.getElementById(projectId + '-label');
+      const model3d = document.getElementById(projectId + '-3d');
+      const target = viewType === '3d' ? model3d : document.getElementById(projectId + '-' + viewType);
+
       zState = { scale: 1, x: 0, y: 0, isDragging: false, startX: 0, startY: 0 };
-      const allImages = container.querySelectorAll('.schematic-img');
-      allImages.forEach(img => { 
-        img.style.transform = `translate(0px, 0px) scale(1)`; 
+
+      container.querySelectorAll('.schematic-img').forEach(img => {
+        img.style.transform = `translate(0px, 0px) scale(1)`;
         img.classList.remove('active');
       });
 
-      if (model3d) model3d.style.display = 'none';
-  
-      const btns = container.querySelectorAll('.view-btn');
-      btns.forEach(btn => btn.classList.remove('active'));
+      container.querySelectorAll('model-viewer').forEach(model => {
+        model.style.display = 'none';
+      });
+
+      container.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
       btnElement.classList.add('active');
-  
-      if (viewType === '3d' && model3d) {
-        model3d.style.display = 'block';
-        label.innerText = "SYSTEM_VIEW // INTERACTIVE_3D_RENDER";
-      } else if (viewType === 'schematic' && schematic) {
-        schematic.classList.add('active');
-        label.innerText = "SYSTEM_VIEW // SCHEMATIC";
-      } else if (viewType === 'sch1' && sch1) {
-        sch1.classList.add('active');
-        label.innerText = "SYSTEM_VIEW // TOP_LAYER_ROUTING";
-      } else if (viewType === 'sch2' && sch2) {
-        sch2.classList.add('active');
-        label.innerText = "SYSTEM_VIEW // BOTTOM_LAYER_ROUTING";
+
+      if (target) {
+        if (target.tagName.toLowerCase() === 'model-viewer') {
+          target.style.display = 'block';
+        } else {
+          target.classList.add('active');
+        }
+      }
+
+      if (label) {
+        label.innerText = btnElement.dataset.label || 'SYSTEM_VIEW';
       }
     }
   </script>
@@ -324,37 +321,50 @@
           <img src="models/IR_layout2.png" class="schematic-img" id="ir-sch2" alt="Bottom Layer Routing">
         </div>
         <div class="view-controls">
-          <button class="view-btn active" onclick="switchView('ir', '3d', this)">3D View</button>
-          <button class="view-btn" onclick="switchView('ir', 'schematic', this)">Schematic</button>
-          <button class="view-btn" onclick="switchView('ir', 'sch1', this)">Layout 1</button>
-          <button class="view-btn" onclick="switchView('ir', 'sch2', this)">Layout 2</button>
+          <button class="view-btn active" data-label="SYSTEM_VIEW // INTERACTIVE_3D_RENDER" onclick="switchView('ir', '3d', this)">3D View</button>
+          <button class="view-btn" data-label="SYSTEM_VIEW // SCHEMATIC" onclick="switchView('ir', 'schematic', this)">Schematic</button>
+          <button class="view-btn" data-label="SYSTEM_VIEW // TOP_LAYER_ROUTING" onclick="switchView('ir', 'sch1', this)">Layout 1</button>
+          <button class="view-btn" data-label="SYSTEM_VIEW // BOTTOM_LAYER_ROUTING" onclick="switchView('ir', 'sch2', this)">Layout 2</button>
         </div>
       </div>
     </div>
 
 <div class="project">
-  <div class="project-header">
-    <h3>Formula UBC: Laser Timing Gates Receiver</h3>
-    <span class="project-date">Sept 2025 – Present</span>
-  </div>
-  <div class="tech-stack">Altium Designer // ESP32-C3 // LiPo PowerPath // Photodiode TIA // 2.4 GHz Wireless</div>
-  <ul class="project-bullets">
-    <li><strong>System Architecture:</strong> Designed a modular receiver PCB for laser-based lap timing, separating USB-C power, ESP32 control, and optical analog front-end circuitry across hierarchical schematic sheets.</li>
-    <li><strong>Power Management:</strong> Implemented a 1S LiPo power subsystem using a BQ24074 charger/PowerPath IC, USB-C input, battery temperature-sense option, and TPS63001 buck-boost regulation for a stable 3.3 V system rail.</li>
-    <li><strong>Optical Front End:</strong> Built a BPW34 photodiode array feeding an OPA380 transimpedance amplifier, using a 1.65 V virtual ground and feedback compensation to improve single-supply stability.</li>
-    <li><strong>Digital Edge Detection:</strong> Added an adjustable LM393 Schmitt comparator with hysteresis to convert noisy photodiode signals into clean ESP32 interrupt edges for beam-break timing.</li>
-    <li><strong>PCB Layout:</strong> Floorplanned a 4-layer board with isolated noisy power-switching and quiet analog zones, short TIA input routing, USB-C ESD protection near the connector, and u.FL antenna clearance for 2.4 GHz communication.</li>
-  </ul>
-  <div class="project-links">
-    <a href="https://github.com/danielwhn25/FUBC-timing-gates" target="_blank" class="btn-link">GitHub ↗ (Full Documentation)</a>
-  </div>
-  <div class="cad-container" id="tg">
-    <div class="viewer-area">
-      <div class="cad-label" id="tg-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
-      <model-viewer id="tg-3d" src="models/timing_gates.glb" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="30deg" shadow-intensity="1" environment-image="neutral" scale="0.001 0.001 0.001" camera-orbit="45deg 75deg auto"></model-viewer>
+      <div class="project-header">
+        <h3>Formula UBC: Laser Timing Gates Receiver</h3>
+        <span class="project-date">Sept 2025 – Present</span>
+      </div>
+      <div class="tech-stack">Altium Designer // ESP32-C3 // LiPo PowerPath // Photodiode TIA // 2.4 GHz Wireless</div>
+      <ul class="project-bullets">
+        <li><strong>System Architecture:</strong> Designed a modular receiver PCB for laser-based lap timing, separating USB-C power, ESP32 control, and optical analog front-end circuitry across hierarchical schematic sheets.</li>
+        <li><strong>Power Management:</strong> Implemented a 1S LiPo power subsystem using a BQ24074 charger/PowerPath IC, USB-C input, battery temperature-sense option, and TPS63001 buck-boost regulation for a stable 3.3 V system rail.</li>
+        <li><strong>Optical Front End:</strong> Built a BPW34 photodiode array feeding an OPA380 transimpedance amplifier, using a 1.65 V virtual ground and feedback compensation to improve single-supply stability.</li>
+        <li><strong>Digital Edge Detection:</strong> Added an adjustable LM393 Schmitt comparator with hysteresis to convert noisy photodiode signals into clean ESP32 interrupt edges for beam-break timing.</li>
+        <li><strong>PCB Layout:</strong> Floorplanned a 4-layer board with noisy power-switching kept away from the quiet optical receiver, short TIA input routing, USB-C ESD protection near the connector, and u.FL antenna clearance for 2.4 GHz communication.</li>
+      </ul>
+      <div class="project-links">
+        <a href="https://github.com/danielwhn25/FUBC-timing-gates" target="_blank" class="btn-link">GitHub ↗ (Full Documentation)</a>
+      </div>
+      <div class="cad-container" id="tg">
+        <div class="viewer-area">
+          <div class="cad-label" id="tg-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
+          <model-viewer id="tg-3d" src="models/timing_gates.glb" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="30deg" shadow-intensity="1" environment-image="neutral" scale="0.001 0.001 0.001" camera-orbit="45deg 75deg auto"></model-viewer>
+          <img src="models/tg_system.png" class="schematic-img" id="tg-system" alt="Timing Gates Top-Level Hierarchical Schematic">
+          <img src="models/tg_afe.png" class="schematic-img" id="tg-afe" alt="Timing Gates Laser Receiver Analog Front End Schematic">
+          <img src="models/tg_power.png" class="schematic-img" id="tg-power" alt="Timing Gates USB-C LiPo Power Management Schematic">
+          <img src="models/tg_mcu.png" class="schematic-img" id="tg-mcu" alt="Timing Gates ESP32-C3 MCU Schematic">
+          <img src="models/tg_pcb_layout.png" class="schematic-img" id="tg-layout" alt="Timing Gates PCB Placement and Layout">
+        </div>
+        <div class="view-controls">
+          <button class="view-btn active" data-label="SYSTEM_VIEW // INTERACTIVE_3D_RENDER" onclick="switchView('tg', '3d', this)">3D View</button>
+          <button class="view-btn" data-label="SYSTEM_VIEW // HIERARCHICAL_SCHEMATIC" onclick="switchView('tg', 'system', this)">System</button>
+          <button class="view-btn" data-label="SYSTEM_VIEW // LASER_RECEIVER_AFE" onclick="switchView('tg', 'afe', this)">AFE</button>
+          <button class="view-btn" data-label="SYSTEM_VIEW // USB_C_LIPO_POWER" onclick="switchView('tg', 'power', this)">Power</button>
+          <button class="view-btn" data-label="SYSTEM_VIEW // ESP32_C3_CONTROLLER" onclick="switchView('tg', 'mcu', this)">MCU</button>
+          <button class="view-btn" data-label="SYSTEM_VIEW // PCB_PLACEMENT_LAYOUT" onclick="switchView('tg', 'layout', this)">PCB Layout</button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
     <div class="project">
       <div class="project-header">
