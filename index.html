@@ -332,28 +332,29 @@
       </div>
     </div>
 
-    <div class="project">
-      <div class="project-header">
-        <h3>Formula UBC: Laser Timing Gates Receiver</h3>
-        <span class="project-date">Sept 2025 – Present</span>
-      </div>
-      <div class="tech-stack">Altium Designer // ESP32-S3 // 2.4 GHz RF // Analog CMOS</div>
-      <ul class="project-bullets">
-        <li><strong>Performance:</strong> Enabled reliable, high-speed lap tracking for racing vehicles in high-noise environments.</li>
-        <li><strong>Signal Integrity:</strong> Achieved ultra-low BER (< 10⁻⁷) via strict controlled impedance routing.</li>
-        <li><strong>Noise Immunity:</strong> Maximized logic stability using physically isolated analog and digital ground planes.</li>
-        <li><strong>Precision Sensing:</strong> Optimized photodiode SNR to 20dB with a custom tunable CMOS hysteresis front-end.</li>
-      </ul>
-      <div class="project-links">
-        <a href="https://github.com/danielwhn25/FUBC-timing-gates" target="_blank" class="btn-link">GitHub ↗ (Full Documentation)</a>
-      </div>
-      <div class="cad-container" id="tg">
-        <div class="viewer-area">
-          <div class="cad-label" id="tg-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
-          <model-viewer id="tg-3d" src="models/timing_gates.glb" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="30deg" shadow-intensity="1" environment-image="neutral" scale="0.001 0.001 0.001" camera-orbit="45deg 75deg auto"></model-viewer>
-        </div>
-      </div>
-    </div> 
+<div class="project">
+  <div class="project-header">
+    <h3>Formula UBC: Laser Timing Gates Receiver</h3>
+    <span class="project-date">Sept 2025 – Present</span>
+  </div>
+  <div class="tech-stack">Altium Designer // ESP32-C3 // LiPo PowerPath // Photodiode TIA // 2.4 GHz Wireless</div>
+  <ul class="project-bullets">
+    <li><strong>System Architecture:</strong> Designed a modular receiver PCB for laser-based lap timing, separating USB-C power, ESP32 control, and optical analog front-end circuitry across hierarchical schematic sheets.</li>
+    <li><strong>Power Management:</strong> Implemented a 1S LiPo power subsystem using a BQ24074 charger/PowerPath IC, USB-C input, battery temperature-sense option, and TPS63001 buck-boost regulation for a stable 3.3 V system rail.</li>
+    <li><strong>Optical Front End:</strong> Built a BPW34 photodiode array feeding an OPA380 transimpedance amplifier, using a 1.65 V virtual ground and feedback compensation to improve single-supply stability.</li>
+    <li><strong>Digital Edge Detection:</strong> Added an adjustable LM393 Schmitt comparator with hysteresis to convert noisy photodiode signals into clean ESP32 interrupt edges for beam-break timing.</li>
+    <li><strong>PCB Layout:</strong> Floorplanned a 4-layer board with isolated noisy power-switching and quiet analog zones, short TIA input routing, USB-C ESD protection near the connector, and u.FL antenna clearance for 2.4 GHz communication.</li>
+  </ul>
+  <div class="project-links">
+    <a href="https://github.com/danielwhn25/FUBC-timing-gates" target="_blank" class="btn-link">GitHub ↗ (Full Documentation)</a>
+  </div>
+  <div class="cad-container" id="tg">
+    <div class="viewer-area">
+      <div class="cad-label" id="tg-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
+      <model-viewer id="tg-3d" src="models/timing_gates.glb" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="30deg" shadow-intensity="1" environment-image="neutral" scale="0.001 0.001 0.001" camera-orbit="45deg 75deg auto"></model-viewer>
+    </div>
+  </div>
+</div>
 
     <div class="project">
       <div class="project-header">
