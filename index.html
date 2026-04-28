@@ -427,6 +427,7 @@
     <a href="#timing-gates">Timing Gates</a>
     <a href="#tg-requirements">Requirements</a>
     <a href="#tg-decisions">Decisions</a>
+    <a href="#tg-clock-sync">Clock Sync</a>
     <a href="#tg-layout-risk">Layout Risk</a>
     <a href="#tg-verification">Verification</a>
     <a href="#firmware">Firmware</a>
@@ -692,12 +693,13 @@
         <h3>Formula UBC: Laser Timing Gates Receiver</h3>
         <span class="project-date">Sept 2025 – Present</span>
       </div>
-      <div class="tech-stack">Altium Designer // ESP32-C3 // LiPo PowerPath // Photodiode TIA // 2.4 GHz Wireless</div>
+      <div class="tech-stack">Altium Designer // ESP32-C3 // ESP-NOW Clock Sync // LiPo PowerPath // Photodiode TIA</div>
       <ul class="project-bullets">
         <li><strong>System Architecture:</strong> Designed a modular receiver PCB for laser-based lap timing, separating USB-C power, ESP32 control, and optical analog front-end circuitry across hierarchical schematic sheets.</li>
         <li><strong>Power Management:</strong> Implemented a 1S LiPo power subsystem using a BQ24074 charger/PowerPath IC, USB-C input, battery temperature-sense option, and TPS63001 buck-boost regulation for a stable 3.3 V system rail.</li>
         <li><strong>Optical Front End:</strong> Built a BPW34 photodiode array feeding an OPA380 transimpedance amplifier, using a 1.65 V virtual ground and feedback compensation to improve single-supply stability.</li>
         <li><strong>Digital Edge Detection:</strong> Added an adjustable LM393 Schmitt comparator with hysteresis to convert noisy photodiode signals into clean ESP32 interrupt edges for beam-break timing.</li>
+        <li><strong>Clock Synchronization:</strong> Architected a master/client ESP-NOW timebase that converts local beam-break timestamps into a shared master-time domain using periodic offset calibration and RTT latency compensation.</li>
         <li><strong>PCB Layout:</strong> Floorplanned a 4-layer board with noisy power-switching kept away from the quiet optical receiver, short TIA input routing, USB-C ESD protection near the connector, and u.FL antenna clearance for 2.4 GHz communication.</li>
       </ul>
 
@@ -720,6 +722,14 @@
               <li>Operate from USB-C during setup/debug or from a 1S LiPo in the field.</li>
               <li>Provide battery charging, charger-status outputs, and optional thermistor sensing.</li>
               <li>Regulate a stable 3.3 V rail for the MCU, analog front end, and indicators.</li>
+            </ul>
+          </div>
+          <div class="review-card">
+            <h4>Distributed Timing</h4>
+            <ul>
+              <li>Synchronize separate start/finish gates before calculating lap time.</li>
+              <li>Record beam-break events with microsecond-resolution firmware timestamps.</li>
+              <li>Correct for oscillator drift using periodic timestamp exchanges between nodes.</li>
             </ul>
           </div>
         </div>
@@ -754,11 +764,35 @@
               <td>TPS63001 buck-boost keeps the ESP32 and analog circuitry powered across the LiPo discharge range.</td>
             </tr>
             <tr>
+              <td>Clock synchronization</td>
+              <td>Master/client ESP-NOW timestamp exchange estimates clock offset before lap-time calculation; local beam-break events are converted into the master time domain with RTT compensation.</td>
+            </tr>
+            <tr>
               <td>Wireless controller</td>
               <td>ESP32-C3-MINI-1U provides USB programming, GPIO interrupt capture, and an external u.FL antenna path for 2.4 GHz communication.</td>
             </tr>
           </tbody>
         </table>
+
+        <div class="review-section-title anchor-target" id="tg-clock-sync">Firmware Clock Synchronization</div>
+        <div class="review-grid">
+          <div class="review-card">
+            <h4>Master-Time Alignment</h4>
+            <ul>
+              <li>Designates one gate as the timing master and calibrates the other node against it before a run.</li>
+              <li>Computes a clock offset from exchanged ESP-NOW timestamps so both gates report events in one timebase.</li>
+              <li>Uses microsecond-resolution timestamps so lap time is calculated from synchronized beam-break events, not packet arrival time.</li>
+            </ul>
+          </div>
+          <div class="review-card">
+            <h4>Drift &amp; Latency Control</h4>
+            <ul>
+              <li>Re-syncs periodically to reduce crystal drift from temperature and supply variation.</li>
+              <li>Applies round-trip-time compensation to estimate one-way wireless latency.</li>
+              <li>Plans median filtering across sync packets to reject Wi-Fi/ESP-NOW timing outliers.</li>
+            </ul>
+          </div>
+        </div>
 
         <div class="review-section-title anchor-target" id="tg-layout-risk">Layout Risk Controls</div>
         <div class="review-grid">
@@ -788,6 +822,7 @@
             <li>Measure TIA output swing for laser-on and beam-blocked conditions.</li>
             <li>Tune comparator threshold and hysteresis for stable beam-break output without chatter.</li>
             <li>Validate ESP32 interrupt timestamp jitter by toggling a debug GPIO and checking timing on an oscilloscope.</li>
+            <li>Measure start/finish clock offset over repeated ESP-NOW sync bursts and verify that RTT compensation reduces lap-time error.</li>
           </ul>
         </div>
       </div>
@@ -807,26 +842,39 @@
           <div class="code-panel" id="tg-code">
             <div class="code-snippet">
               <div class="code-snippet-header">
-                <span>Firmware Snippet // Beam-Break Interrupt Capture</span>
+                <span>Firmware Snippet // Clock Sync + Beam-Break Capture</span>
                 <button class="copy-btn" onclick="copyCode(this)">COPY</button>
               </div>
-              <pre><code>static volatile uint32_t last_beam_break_us = 0;
+              <pre><code>static volatile int64_t clock_offset_us = 0;
+static volatile int64_t last_beam_break_us = 0;
 static volatile bool beam_break_event = false;
+
+int64_t master_time_now_us(void)
+{
+    return esp_timer_get_time() + clock_offset_us;
+}
+
+void on_sync_packet(const SyncPacket *pkt)
+{
+    int64_t t_client_rx_us = esp_timer_get_time();
+    int64_t one_way_us = pkt->round_trip_us / 2;
+
+    clock_offset_us =
+        (pkt->master_tx_us + one_way_us) - t_client_rx_us;
+}
 
 void IRAM_ATTR beam_break_isr(void)
 {
-    last_beam_break_us = micros();   // Timestamp comparator edge
-    beam_break_event = true;         // Defer processing to main loop
+    last_beam_break_us = master_time_now_us();
+    beam_break_event = true;
 }
 
-void setup_beam_break_input(void)
+void process_lap_event(void)
 {
-    pinMode(BEAM_BREAK_INT, INPUT);
-    attachInterrupt(
-        digitalPinToInterrupt(BEAM_BREAK_INT),
-        beam_break_isr,
-        FALLING
-    );
+    if (!beam_break_event) return;
+    beam_break_event = false;
+
+    send_timestamp_to_master(last_beam_break_us);
 }</code></pre>
             </div>
           </div>
@@ -838,7 +886,7 @@ void setup_beam_break_input(void)
           <button class="view-btn" data-label="SYSTEM_VIEW // USB_C_LIPO_POWER" onclick="switchView('tg', 'power', this)">Power</button>
           <button class="view-btn" data-label="SYSTEM_VIEW // ESP32_C3_CONTROLLER" onclick="switchView('tg', 'mcu', this)">MCU</button>
           <button class="view-btn" data-label="SYSTEM_VIEW // PCB_PLACEMENT_LAYOUT" onclick="switchView('tg', 'layout', this)">PCB Layout</button>
-          <button class="view-btn" data-label="SYSTEM_VIEW // FIRMWARE_SNIPPET" onclick="switchView('tg', 'code', this)">Code</button>
+          <button class="view-btn" data-label="SYSTEM_VIEW // FIRMWARE_CLOCK_SYNC" onclick="switchView('tg', 'code', this)">Code</button>
         </div>
       </div>
     </div>
