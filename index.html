@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:title" content="Daniel Ng | Electrical Engineering Portfolio">
-<meta property="og:description" content="Electronics and firmware engineering student at UBC. Specializing in microcontroller drivers, IoT, and communication protocols. Available for Co-op starting May 2026.">
+<meta property="og:description" content="Electronics and firmware engineering student at UBC. Specializing in microcontroller drivers, IoT, and communication protocols. Available for Co-op September 2026.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://danielng.pages.dev/">
 <meta property="og:image" content="https://danielng.pages.dev/models/preview-image.png">
@@ -24,6 +24,8 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
 
   body {
     background: var(--bg);
@@ -178,14 +180,256 @@
     border-color: var(--text-main);
   }
 
+
+
+  .code-snippet {
+    margin-top: 1.2rem;
+    border: 1px solid var(--border);
+    background: #0f172a;
+    color: #e5e7eb;
+    border-radius: 6px;
+    overflow: hidden;
+    font-family: var(--font-mono);
+  }
+
+  .code-snippet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111827;
+    color: #cbd5e1;
+    padding: 8px 12px;
+    font-size: 0.72rem;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #1f2937;
+  }
+
+  .code-snippet pre {
+    margin: 0;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    white-space: pre;
+  }
+
+  .code-snippet code {
+    font-family: var(--font-mono);
+  }
+
+  .copy-btn {
+    background: transparent;
+    color: #cbd5e1;
+    border: 1px solid #334155;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    cursor: pointer;
+  }
+
+  .copy-btn:hover {
+    background: #1e293b;
+  }
+
+
+
+  .code-panel {
+    position: absolute;
+    inset: 0;
+    display: none;
+    z-index: 6;
+    background: #0f172a;
+    color: #e5e7eb;
+    overflow: hidden;
+  }
+
+  .code-panel.active {
+    display: block;
+  }
+
+  .code-panel .code-snippet {
+    height: 100%;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+  }
+
+  .code-panel .code-snippet pre {
+    max-height: calc(100% - 42px);
+    overflow: auto;
+  }
+
+
+
+  .engineering-review {
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .review-section-title {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-main);
+    margin: 1.2rem 0 0.6rem;
+  }
+
+  .review-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .review-card {
+    border: 1px solid var(--border);
+    background: #fbfbfb;
+    padding: 12px 14px;
+    border-radius: 6px;
+  }
+
+  .review-card h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.45rem;
+  }
+
+  .review-card ul {
+    margin-left: 16px;
+    color: var(--text-muted);
+    font-size: 0.86rem;
+  }
+
+  .review-card li {
+    margin-bottom: 0.35rem;
+  }
+
+  .decision-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--border);
+    font-size: 0.86rem;
+    margin-top: 0.6rem;
+  }
+
+  .decision-table th,
+  .decision-table td {
+    border-bottom: 1px solid var(--border);
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .decision-table th {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    background: #f4f4f4;
+    color: var(--text-main);
+  }
+
+  .decision-table td:first-child {
+    font-weight: 600;
+    color: var(--text-main);
+    white-space: nowrap;
+  }
+
+  .verification-plan {
+    border-left: 3px solid var(--text-main);
+    background: #fbfbfb;
+    padding: 12px 14px;
+    margin-top: 0.6rem;
+    color: var(--text-muted);
+    font-size: 0.86rem;
+  }
+
+  .verification-plan ul {
+    margin-left: 16px;
+  }
+
+  .verification-plan li {
+    margin-bottom: 0.35rem;
+  }
+
+
+  .anchor-target {
+    scroll-margin-top: 28px;
+  }
+
+  .side-tabs {
+    position: fixed;
+    top: 118px;
+    left: max(14px, calc((100vw - 800px) / 2 - 138px));
+    width: 112px;
+    z-index: 50;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+  }
+
+  .side-tabs-title {
+    color: #999;
+    font-size: 0.62rem;
+    margin-bottom: 8px;
+    padding-left: 12px;
+  }
+
+  .side-tabs a {
+    display: block;
+    color: #777;
+    border-left: 2px solid var(--border);
+    padding: 5px 0 5px 10px;
+    text-decoration: none;
+    transition: color 0.15s ease, border-color 0.15s ease, padding-left 0.15s ease;
+  }
+
+  .side-tabs a:hover {
+    color: var(--text-main);
+    border-left-color: #aaa;
+    padding-left: 13px;
+    text-decoration: none;
+  }
+
+  .side-tabs a.active {
+    color: var(--text-main);
+    border-left-color: var(--text-main);
+    padding-left: 13px;
+  }
+
+
   @media (max-width: 600px) {
     .project-header { flex-direction: column; }
     .cad-container { height: 400px; }
+    .side-tabs { display: none; }
+    .review-grid { grid-template-columns: 1fr; }
+    .decision-table td:first-child { white-space: normal; }
+  }
+
+  @media (max-width: 1100px) {
+    .side-tabs { display: none; }
   }
 </style>
 </head>
 
 <body>
+
+
+  <nav class="side-tabs" aria-label="Page sections">
+    <div class="side-tabs-title">Jump</div>
+    <a href="#intro" class="active">Intro</a>
+    <a href="#experience">Experience</a>
+    <a href="#hardware">Hardware</a>
+    <a href="#timing-gates">Timing Gates</a>
+    <a href="#tg-requirements">Requirements</a>
+    <a href="#tg-decisions">Decisions</a>
+    <a href="#tg-layout-risk">Layout Risk</a>
+    <a href="#tg-verification">Verification</a>
+    <a href="#firmware">Firmware</a>
+  </nav>
 
   <script>
     let zState = { scale: 1, x: 0, y: 0, isDragging: false, startX: 0, startY: 0 };
@@ -237,9 +481,11 @@
 
       zState = { scale: 1, x: 0, y: 0, isDragging: false, startX: 0, startY: 0 };
 
-      container.querySelectorAll('.schematic-img').forEach(img => {
-        img.style.transform = `translate(0px, 0px) scale(1)`;
-        img.classList.remove('active');
+      container.querySelectorAll('.schematic-img, .code-panel').forEach(panel => {
+        if (panel.classList.contains('schematic-img')) {
+          panel.style.transform = `translate(0px, 0px) scale(1)`;
+        }
+        panel.classList.remove('active');
       });
 
       container.querySelectorAll('model-viewer').forEach(model => {
@@ -261,9 +507,60 @@
         label.innerText = btnElement.dataset.label || 'SYSTEM_VIEW';
       }
     }
+
+
+    function copyCode(button) {
+      const snippet = button.closest('.code-snippet');
+      const code = snippet.querySelector('code').innerText;
+
+      navigator.clipboard.writeText(code).then(() => {
+        const oldText = button.innerText;
+        button.innerText = "COPIED";
+        setTimeout(() => {
+          button.innerText = oldText;
+        }, 1200);
+      }).catch(() => {
+        const oldText = button.innerText;
+        button.innerText = "COPY FAILED";
+        setTimeout(() => {
+          button.innerText = oldText;
+        }, 1200);
+      });
+    }
+
+
+    function initSideTabs() {
+      const links = Array.from(document.querySelectorAll('.side-tabs a'));
+      if (!links.length) return;
+
+      const targets = links
+        .map(link => document.querySelector(link.getAttribute('href')))
+        .filter(Boolean);
+
+      function setActiveTab() {
+        let activeId = targets[0]?.id;
+        const triggerY = window.innerHeight * 0.32;
+
+        targets.forEach(target => {
+          const rect = target.getBoundingClientRect();
+          if (rect.top <= triggerY) activeId = target.id;
+        });
+
+        links.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + activeId);
+        });
+      }
+
+      window.addEventListener('scroll', setActiveTab, { passive: true });
+      window.addEventListener('resize', setActiveTab);
+      setActiveTab();
+    }
+
+    document.addEventListener('DOMContentLoaded', initSideTabs);
+
   </script>
 
-  <header>
+  <header id="intro" class="anchor-target">
     <h1>Daniel Ng</h1>
     <div class="contact-bar">
       Electrical Engineering (BASc) @ UBC // Available May 2026<br>
@@ -279,7 +576,7 @@
     </div>
   </header>
 
-  <section>
+  <section id="experience" class="anchor-target">
     <h2 class="section-title">00. Work Experience</h2>
     <div class="project">
       <div class="project-header">
@@ -296,7 +593,7 @@
     </div>
   </section>
 
-  <section>
+  <section id="hardware" class="anchor-target">
     <h2 class="section-title">01. Hardware & PCB Architecture</h2>
     
     <div class="project">
@@ -311,7 +608,8 @@
         <li><strong>UX Design:</strong> Enhanced user interaction via active-low PNP haptic and acoustic feedback.</li>
         <li><strong>Autonomous Control:</strong> Streamlined complex robotic navigation through custom, intuitive LCD menus.</li>
       </ul>
-      
+
+
       <div class="cad-container" id="ir">
         <div class="viewer-area">
           <div class="cad-label" id="ir-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
@@ -319,17 +617,36 @@
           <img src="models/IR_schematic.png" class="schematic-img" id="ir-schematic" alt="Circuit Schematic">
           <img src="models/IR_layout1.png" class="schematic-img" id="ir-sch1" alt="Top Layer Routing">
           <img src="models/IR_layout2.png" class="schematic-img" id="ir-sch2" alt="Bottom Layer Routing">
+          <div class="code-panel" id="ir-code">
+            <div class="code-snippet">
+              <div class="code-snippet-header">
+                <span>Firmware Snippet // 38 kHz IR Carrier Timing</span>
+                <button class="copy-btn" onclick="copyCode(this)">COPY</button>
+              </div>
+              <pre><code>void Timer2_ISR(void) interrupt 5
+{
+    TF2H = 0;
+
+    if (ir_tx_enable) {
+        IR_LED = !IR_LED;      // Toggle output to generate 38 kHz carrier
+    } else {
+        IR_LED = 0;            // Force LED off between NEC protocol bursts
+    }
+}</code></pre>
+            </div>
+          </div>
         </div>
         <div class="view-controls">
           <button class="view-btn active" data-label="SYSTEM_VIEW // INTERACTIVE_3D_RENDER" onclick="switchView('ir', '3d', this)">3D View</button>
           <button class="view-btn" data-label="SYSTEM_VIEW // SCHEMATIC" onclick="switchView('ir', 'schematic', this)">Schematic</button>
           <button class="view-btn" data-label="SYSTEM_VIEW // TOP_LAYER_ROUTING" onclick="switchView('ir', 'sch1', this)">Layout 1</button>
           <button class="view-btn" data-label="SYSTEM_VIEW // BOTTOM_LAYER_ROUTING" onclick="switchView('ir', 'sch2', this)">Layout 2</button>
+          <button class="view-btn" data-label="SYSTEM_VIEW // FIRMWARE_SNIPPET" onclick="switchView('ir', 'code', this)">Code</button>
         </div>
       </div>
     </div>
 
-<div class="project">
+<div class="project anchor-target" id="timing-gates">
       <div class="project-header">
         <h3>Formula UBC: Laser Timing Gates Receiver</h3>
         <span class="project-date">Sept 2025 – Present</span>
@@ -342,6 +659,98 @@
         <li><strong>Digital Edge Detection:</strong> Added an adjustable LM393 Schmitt comparator with hysteresis to convert noisy photodiode signals into clean ESP32 interrupt edges for beam-break timing.</li>
         <li><strong>PCB Layout:</strong> Floorplanned a 4-layer board with noisy power-switching kept away from the quiet optical receiver, short TIA input routing, USB-C ESD protection near the connector, and u.FL antenna clearance for 2.4 GHz communication.</li>
       </ul>
+
+
+
+      <div class="engineering-review">
+        <div class="review-section-title anchor-target" id="tg-requirements">Design Requirements</div>
+        <div class="review-grid">
+          <div class="review-card">
+            <h4>Optical Timing</h4>
+            <ul>
+              <li>Detect laser beam interruptions during vehicle test sessions.</li>
+              <li>Generate clean 3.3 V digital edges for ESP32 interrupt timestamping.</li>
+              <li>Support threshold tuning for changing ambient-light conditions.</li>
+            </ul>
+          </div>
+          <div class="review-card">
+            <h4>Portable Power</h4>
+            <ul>
+              <li>Operate from USB-C during setup/debug or from a 1S LiPo in the field.</li>
+              <li>Provide battery charging, charger-status outputs, and optional thermistor sensing.</li>
+              <li>Regulate a stable 3.3 V rail for the MCU, analog front end, and indicators.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="review-section-title anchor-target" id="tg-decisions">Key Design Decisions</div>
+        <table class="decision-table">
+          <thead>
+            <tr>
+              <th>Subsystem</th>
+              <th>Implementation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Optical receiver</td>
+              <td>Three BPW34 photodiodes increase the effective laser capture area while feeding one transimpedance stage.</td>
+            </tr>
+            <tr>
+              <td>Current-to-voltage stage</td>
+              <td>OPA380 TIA with 10 kΩ feedback and compensation capacitor converts photodiode current into a measurable voltage.</td>
+            </tr>
+            <tr>
+              <td>Digital edge output</td>
+              <td>LM393 comparator with adjustable threshold and hysteresis suppresses chatter before the signal reaches the ESP32.</td>
+            </tr>
+            <tr>
+              <td>Power path</td>
+              <td>BQ24074 manages USB-C input, 1S LiPo charging, PowerPath system output, and status pins for the MCU.</td>
+            </tr>
+            <tr>
+              <td>3.3 V rail</td>
+              <td>TPS63001 buck-boost keeps the ESP32 and analog circuitry powered across the LiPo discharge range.</td>
+            </tr>
+            <tr>
+              <td>Wireless controller</td>
+              <td>ESP32-C3-MINI-1U provides USB programming, GPIO interrupt capture, and an external u.FL antenna path for 2.4 GHz communication.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="review-section-title anchor-target" id="tg-layout-risk">Layout Risk Controls</div>
+        <div class="review-grid">
+          <div class="review-card">
+            <h4>Noise Isolation</h4>
+            <ul>
+              <li>Kept TPS63001 inductor and switch-node routing away from the OPA380 TIA input.</li>
+              <li>Placed the photodiode array directly beside the TIA to minimize the sensitive input path.</li>
+              <li>Used a 4-layer stackup plan with a continuous internal ground reference.</li>
+            </ul>
+          </div>
+          <div class="review-card">
+            <h4>Interface Protection</h4>
+            <ul>
+              <li>Placed USB ESD protection directly behind the USB-C connector.</li>
+              <li>Kept the buck-boost cluster compact with local input/output capacitors.</li>
+              <li>Reserved clearance around the ESP32-C3 u.FL connector and external antenna cable path.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="review-section-title anchor-target" id="tg-verification">Bring-Up / Verification Plan</div>
+        <div class="verification-plan">
+          <ul>
+            <li>Measure 3.3 V rail ripple under ESP32 wireless transmit load.</li>
+            <li>Confirm BQ24074 PGOOD, CHG, and thermistor/TS behavior during USB and battery operation.</li>
+            <li>Measure TIA output swing for laser-on and beam-blocked conditions.</li>
+            <li>Tune comparator threshold and hysteresis for stable beam-break output without chatter.</li>
+            <li>Validate ESP32 interrupt timestamp jitter by toggling a debug GPIO and checking timing on an oscilloscope.</li>
+          </ul>
+        </div>
+      </div>
+
       <div class="project-links">
         <a href="https://github.com/danielwhn25/FUBC-timing-gates" target="_blank" class="btn-link">GitHub ↗ (Full Documentation)</a>
       </div>
@@ -354,6 +763,32 @@
           <img src="models/tg_power.png" class="schematic-img" id="tg-power" alt="Timing Gates USB-C LiPo Power Management Schematic">
           <img src="models/tg_mcu.png" class="schematic-img" id="tg-mcu" alt="Timing Gates ESP32-C3 MCU Schematic">
           <img src="models/tg_pcb_layout.png" class="schematic-img" id="tg-layout" alt="Timing Gates PCB Placement and Layout">
+          <div class="code-panel" id="tg-code">
+            <div class="code-snippet">
+              <div class="code-snippet-header">
+                <span>Firmware Snippet // Beam-Break Interrupt Capture</span>
+                <button class="copy-btn" onclick="copyCode(this)">COPY</button>
+              </div>
+              <pre><code>static volatile uint32_t last_beam_break_us = 0;
+static volatile bool beam_break_event = false;
+
+void IRAM_ATTR beam_break_isr(void)
+{
+    last_beam_break_us = micros();   // Timestamp comparator edge
+    beam_break_event = true;         // Defer processing to main loop
+}
+
+void setup_beam_break_input(void)
+{
+    pinMode(BEAM_BREAK_INT, INPUT);
+    attachInterrupt(
+        digitalPinToInterrupt(BEAM_BREAK_INT),
+        beam_break_isr,
+        FALLING
+    );
+}</code></pre>
+            </div>
+          </div>
         </div>
         <div class="view-controls">
           <button class="view-btn active" data-label="SYSTEM_VIEW // INTERACTIVE_3D_RENDER" onclick="switchView('tg', '3d', this)">3D View</button>
@@ -362,6 +797,7 @@
           <button class="view-btn" data-label="SYSTEM_VIEW // USB_C_LIPO_POWER" onclick="switchView('tg', 'power', this)">Power</button>
           <button class="view-btn" data-label="SYSTEM_VIEW // ESP32_C3_CONTROLLER" onclick="switchView('tg', 'mcu', this)">MCU</button>
           <button class="view-btn" data-label="SYSTEM_VIEW // PCB_PLACEMENT_LAYOUT" onclick="switchView('tg', 'layout', this)">PCB Layout</button>
+          <button class="view-btn" data-label="SYSTEM_VIEW // FIRMWARE_SNIPPET" onclick="switchView('tg', 'code', this)">Code</button>
         </div>
       </div>
     </div>
@@ -390,7 +826,7 @@
     </div>
   </section>
 
-  <section>
+  <section id="firmware" class="anchor-target">
     <h2 class="section-title">02. Firmware & Digital Design</h2>
     <div class="project">
       <div class="project-header">
