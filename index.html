@@ -363,8 +363,8 @@
   .side-tabs {
     position: fixed;
     top: 118px;
-    left: max(14px, calc((100vw - 800px) / 2 - 138px));
-    width: 112px;
+    left: max(14px, calc((100vw - 800px) / 2 - 195px));
+    width: 170px;
     z-index: 50;
     font-family: var(--font-mono);
     font-size: 0.68rem;
@@ -384,6 +384,7 @@
     color: #777;
     border-left: 2px solid var(--border);
     padding: 5px 0 5px 10px;
+    line-height: 1.25;
     text-decoration: none;
     transition: color 0.15s ease, border-color 0.15s ease, padding-left 0.15s ease;
   }
@@ -410,7 +411,7 @@
     .decision-table td:first-child { white-space: normal; }
   }
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1200px) {
     .side-tabs { display: none; }
   }
 </style>
@@ -420,17 +421,19 @@
 
 
   <nav class="side-tabs" aria-label="Page sections">
-    <div class="side-tabs-title">Jump</div>
-    <a href="#intro" class="active">Intro</a>
-    <a href="#experience">Norsat</a>
-    <a href="#hardware">Hardware</a>
-    <a href="#timing-gates">Timing Gates</a>
-    <a href="#tg-requirements">Requirements</a>
-    <a href="#tg-decisions">Decisions</a>
-    <a href="#tg-clock-sync">Clock Sync</a>
-    <a href="#tg-layout-risk">Layout Risk</a>
-    <a href="#tg-verification">Verification</a>
-    <a href="#firmware">Firmware</a>
+    <div class="side-tabs-title">Project Map</div>
+    <a href="#intro" class="active">Intro / Contact</a>
+    <a href="#experience">Norsat RF Internship</a>
+    <a href="#hardware">Hardware Portfolio</a>
+    <a href="#timing-gates">Formula Timing Gates</a>
+    <a href="#tg-requirements">Timing Requirements</a>
+    <a href="#tg-decisions">Architecture Choices</a>
+    <a href="#tg-clock-sync">Clock Sync Firmware</a>
+    <a href="#tg-layout-risk">PCB Layout Controls</a>
+    <a href="#tg-verification">Bring-Up Verification</a>
+    <a href="#ir-remote">IR Remote PCB</a>
+    <a href="#pva-analyzer">MPPT / PVA Analyzer</a>
+    <a href="#firmware">Firmware Projects</a>
   </nav>
 
   <script>
@@ -638,56 +641,6 @@
   <section id="hardware" class="anchor-target">
     <h2 class="section-title">01. Hardware & PCB Architecture</h2>
     
-    <div class="project">
-      <div class="project-header">
-        <h3>IR Remote Controller</h3>
-        <span class="project-date">Feb 2026 – Mar 2026</span>
-      </div>
-      <div class="tech-stack">Altium Designer // EFM8 MCU // 38kHz IR // Mixed-Signal PCB</div>
-      <ul class="project-bullets">
-        <li><strong>Reliable Comm:</strong> Engineered a robust 38kHz IR transmission protocol using hardware timers.</li>
-        <li><strong>System Safety:</strong> Guaranteed operator safety with zero-latency, interrupt-driven emergency stops.</li>
-        <li><strong>UX Design:</strong> Enhanced user interaction via active-low PNP haptic and acoustic feedback.</li>
-        <li><strong>Autonomous Control:</strong> Streamlined complex robotic navigation through custom, intuitive LCD menus.</li>
-      </ul>
-
-
-      <div class="cad-container" id="ir">
-        <div class="viewer-area">
-          <div class="cad-label" id="ir-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
-          <model-viewer id="ir-3d" src="models/IR_remote.glb" camera-controls auto-rotate auto-rotate-delay="3500" rotation-per-second="30deg" shadow-intensity="1" environment-image="neutral" scale="0.001 0.001 0.001" camera-orbit="45deg 75deg auto"></model-viewer>
-          <img src="models/IR_schematic.png" class="schematic-img" id="ir-schematic" alt="Circuit Schematic">
-          <img src="models/IR_layout1.png" class="schematic-img" id="ir-sch1" alt="Top Layer Routing">
-          <img src="models/IR_layout2.png" class="schematic-img" id="ir-sch2" alt="Bottom Layer Routing">
-          <div class="code-panel" id="ir-code">
-            <div class="code-snippet">
-              <div class="code-snippet-header">
-                <span>Firmware Snippet // 38 kHz IR Carrier Timing</span>
-                <button class="copy-btn" onclick="copyCode(this)">COPY</button>
-              </div>
-              <pre><code>void Timer2_ISR(void) interrupt 5
-{
-    TF2H = 0;
-
-    if (ir_tx_enable) {
-        IR_LED = !IR_LED;      // Toggle output to generate 38 kHz carrier
-    } else {
-        IR_LED = 0;            // Force LED off between NEC protocol bursts
-    }
-}</code></pre>
-            </div>
-          </div>
-        </div>
-        <div class="view-controls">
-          <button class="view-btn active" data-label="SYSTEM_VIEW // INTERACTIVE_3D_RENDER" onclick="switchView('ir', '3d', this)">3D View</button>
-          <button class="view-btn" data-label="SYSTEM_VIEW // SCHEMATIC" onclick="switchView('ir', 'schematic', this)">Schematic</button>
-          <button class="view-btn" data-label="SYSTEM_VIEW // TOP_LAYER_ROUTING" onclick="switchView('ir', 'sch1', this)">Layout 1</button>
-          <button class="view-btn" data-label="SYSTEM_VIEW // BOTTOM_LAYER_ROUTING" onclick="switchView('ir', 'sch2', this)">Layout 2</button>
-          <button class="view-btn" data-label="SYSTEM_VIEW // FIRMWARE_SNIPPET" onclick="switchView('ir', 'code', this)">Code</button>
-        </div>
-      </div>
-    </div>
-
 <div class="project anchor-target" id="timing-gates">
       <div class="project-header">
         <h3>Formula UBC: Laser Timing Gates Receiver</h3>
@@ -891,7 +844,58 @@ void process_lap_event(void)
       </div>
     </div>
 
-    <div class="project">
+
+    <div class="project anchor-target" id="ir-remote">
+      <div class="project-header">
+        <h3>IR Remote Controller</h3>
+        <span class="project-date">Feb 2026 – Mar 2026</span>
+      </div>
+      <div class="tech-stack">Altium Designer // EFM8 MCU // 38kHz IR // Mixed-Signal PCB</div>
+      <ul class="project-bullets">
+        <li><strong>Reliable Comm:</strong> Engineered a robust 38kHz IR transmission protocol using hardware timers.</li>
+        <li><strong>System Safety:</strong> Guaranteed operator safety with zero-latency, interrupt-driven emergency stops.</li>
+        <li><strong>UX Design:</strong> Enhanced user interaction via active-low PNP haptic and acoustic feedback.</li>
+        <li><strong>Autonomous Control:</strong> Streamlined complex robotic navigation through custom, intuitive LCD menus.</li>
+      </ul>
+
+
+      <div class="cad-container" id="ir">
+        <div class="viewer-area">
+          <div class="cad-label" id="ir-label">SYSTEM_VIEW // INTERACTIVE_3D_RENDER</div>
+          <model-viewer id="ir-3d" src="models/IR_remote.glb" camera-controls auto-rotate auto-rotate-delay="3500" rotation-per-second="30deg" shadow-intensity="1" environment-image="neutral" scale="0.001 0.001 0.001" camera-orbit="45deg 75deg auto"></model-viewer>
+          <img src="models/IR_schematic.png" class="schematic-img" id="ir-schematic" alt="Circuit Schematic">
+          <img src="models/IR_layout1.png" class="schematic-img" id="ir-sch1" alt="Top Layer Routing">
+          <img src="models/IR_layout2.png" class="schematic-img" id="ir-sch2" alt="Bottom Layer Routing">
+          <div class="code-panel" id="ir-code">
+            <div class="code-snippet">
+              <div class="code-snippet-header">
+                <span>Firmware Snippet // 38 kHz IR Carrier Timing</span>
+                <button class="copy-btn" onclick="copyCode(this)">COPY</button>
+              </div>
+              <pre><code>void Timer2_ISR(void) interrupt 5
+{
+    TF2H = 0;
+
+    if (ir_tx_enable) {
+        IR_LED = !IR_LED;      // Toggle output to generate 38 kHz carrier
+    } else {
+        IR_LED = 0;            // Force LED off between NEC protocol bursts
+    }
+}</code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="view-controls">
+          <button class="view-btn active" data-label="SYSTEM_VIEW // INTERACTIVE_3D_RENDER" onclick="switchView('ir', '3d', this)">3D View</button>
+          <button class="view-btn" data-label="SYSTEM_VIEW // SCHEMATIC" onclick="switchView('ir', 'schematic', this)">Schematic</button>
+          <button class="view-btn" data-label="SYSTEM_VIEW // TOP_LAYER_ROUTING" onclick="switchView('ir', 'sch1', this)">Layout 1</button>
+          <button class="view-btn" data-label="SYSTEM_VIEW // BOTTOM_LAYER_ROUTING" onclick="switchView('ir', 'sch2', this)">Layout 2</button>
+          <button class="view-btn" data-label="SYSTEM_VIEW // FIRMWARE_SNIPPET" onclick="switchView('ir', 'code', this)">Code</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="project anchor-target" id="pva-analyzer">
       <div class="project-header">
         <h3>MPPT Control System: PVA Analyzer</h3>
         <span class="project-date">Hackathon Project</span>
