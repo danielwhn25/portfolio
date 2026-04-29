@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MPPT PVA Analyzer | Daniel Ng</title>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="back-nav"><a href="index.html">← Back to Portfolio</a></div>
+
+<div class="project-page-header">
+  <h1>MPPT Control System: PVA Analyzer</h1>
+  <div class="project-date" style="margin-top:0.3rem;">Hackathon Project</div>
+  <div class="tech-stack" style="margin-top:0.6rem;">
+    STM32G4 // CAN-Bus // 4-Layer PCB // Altium Designer
+  </div>
+</div>
+
+<section>
+  <ul class="project-bullets">
+    <li><strong>Power Efficiency:</strong> Recaptured up to 15% of energy typically lost to sensor noise in solar arrays by implementing precise MPPT tracking on the STM32G4.</li>
+    <li><strong>EMI Mitigation:</strong> Shielded high-frequency ADC telemetry from switching noise using internal ground planes on a 4-layer stackup.</li>
+    <li><strong>Robust Comm:</strong> Ensured fault-tolerant data transmission across the vehicle via noise-immune CAN-Bus, enabling reliable real-time power telemetry.</li>
+    <li><strong>Scalability:</strong> Allowed for high-power application scaling using a modular, decoupled Buck-Boost architecture separable from the control logic.</li>
+  </ul>
+
+  <div class="project-links">
+    <a href="https://docs.google.com/presentation/d/16Gqmenjmz5KPoKvA52oVqfsM5uB7R8cbwH1qsTTRIMg/edit?usp=sharing" target="_blank" class="btn-link">View Presentation ↗</a>
+  </div>
+
+  <!-- 3D Viewer -->
+  <div class="cad-container" id="pva" style="margin-top:0.4rem;">
+    <div class="viewer-area">
+      <model-viewer id="pva-3d"
+        src="models/PVA_board.glb"
+        camera-controls auto-rotate auto-rotate-delay="3500"
+        rotation-per-second="30deg"
+        shadow-intensity="1" environment-image="neutral"
+        camera-orbit="0deg 75deg auto">
+      </model-viewer>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('model-viewer').forEach(viewer => {
+      const pause=()=>{ if(viewer.hasAttribute('auto-rotate')){viewer.dataset.wasAutoRotate='true';viewer.removeAttribute('auto-rotate');} clearTimeout(viewer._rt); };
+      const resume=()=>{ if(viewer.dataset.wasAutoRotate!=='true') return; clearTimeout(viewer._rt); viewer._rt=setTimeout(()=>viewer.setAttribute('auto-rotate',''),2500); };
+      viewer.addEventListener('pointerdown',pause); viewer.addEventListener('pointerup',resume);
+      viewer.addEventListener('pointercancel',resume); viewer.addEventListener('mouseleave',resume);
+    });
+  });
+</script>
+</body>
+</html>

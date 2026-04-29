@@ -1,0 +1,391 @@
+:root {
+  --bg: #ffffff;
+  --text-main: #111111;
+  --text-muted: #555555;
+  --accent: #0055aa;
+  --border: #e0e0e0;
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Courier New", monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  font-size: 15px;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Header ── */
+header {
+  margin-bottom: 3rem;
+  border-left: 4px solid var(--text-main);
+  padding-left: 20px;
+}
+h1 { font-size: 2.2rem; font-weight: 600; margin-bottom: 0.2rem; letter-spacing: -0.5px; }
+
+.contact-bar {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.2rem;
+}
+.abstract { font-size: 1.05rem; color: var(--text-main); max-width: 700px; }
+
+/* ── Sections ── */
+section { margin-bottom: 3.5rem; }
+
+h2.section-title {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-bottom: 2px solid var(--text-main);
+  padding-bottom: 0.4rem;
+  margin-bottom: 1.8rem;
+}
+
+/* ── Shared project bits ── */
+.tech-stack {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+}
+
+ul.project-bullets { margin-left: 20px; color: var(--text-muted); font-size: 0.92rem; }
+ul.project-bullets li { margin-bottom: 0.6rem; }
+ul.project-bullets strong { color: var(--text-main); font-weight: 600; }
+
+.project-links { margin-top: 0.8rem; margin-bottom: 1.2rem; }
+
+.btn-link {
+  display: inline-block;
+  background: var(--text-main);
+  color: #ffffff !important;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-link:hover { background: var(--text-muted); text-decoration: none; }
+
+/* ── INDEX: Project Cards — 2-column square grid ── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.project-card {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fafafa;
+  transition: box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+.project-card:hover { box-shadow: 0 3px 14px rgba(0,0,0,0.08); }
+
+/* Square viewer — aspect-ratio forces height = width */
+.card-viewer {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f0f0f0;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.card-viewer model-viewer {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  display: block;
+}
+
+/* Firmware placeholder — exactly same square size */
+.card-viewer-placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #0f172a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.card-viewer-placeholder .fw-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 1.4px;
+  color: #475569;
+  text-transform: uppercase;
+}
+.card-viewer-placeholder .fw-langs {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: #7dd3fc;
+  text-align: center;
+  line-height: 2;
+}
+
+/* Compact card footer */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 13px;
+  border-top: 1px solid var(--border);
+  gap: 8px;
+}
+.card-footer h3 {
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.project-date { font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-muted); }
+
+/* ── PROJECT PAGES: back nav ── */
+.back-nav {
+  margin-bottom: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+.back-nav a { color: var(--text-muted); }
+.back-nav a:hover { color: var(--text-main); }
+
+.project-page-header {
+  margin-bottom: 2.2rem;
+  border-left: 4px solid var(--text-main);
+  padding-left: 20px;
+}
+.project-page-header h1 { font-size: 1.7rem; font-weight: 600; margin-bottom: 0.2rem; }
+
+/* ── CAD Viewer (project pages) ── */
+.cad-container {
+  width: 100%;
+  height: 500px;
+  background-color: #fcfcfc;
+  border: 1px solid var(--border);
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.viewer-area { flex-grow: 1; position: relative; width: 100%; overflow: hidden; }
+
+.cad-label {
+  position: absolute;
+  top: 12px; left: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  z-index: 10;
+  letter-spacing: 1px;
+  background: rgba(255,255,255,0.85);
+  padding: 2px 6px;
+  border: 1px solid var(--border);
+  display: none;
+}
+
+model-viewer { width: 100%; height: 100%; outline: none; }
+
+.schematic-img {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  background: #fcfcfc;
+  z-index: 5;
+  display: none;
+  cursor: grab;
+  transform-origin: center;
+  transition: transform 0.1s ease;
+}
+.schematic-img.active { display: block; }
+.schematic-img:active { cursor: grabbing; }
+
+.view-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: #f4f4f4;
+  padding: 10px 12px;
+  border-top: 1px solid var(--border);
+  z-index: 20;
+}
+
+.view-btn {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.view-btn.active { background: var(--text-main); color: #fff; border-color: var(--text-main); }
+
+/* ── Code Snippet ── */
+.code-snippet {
+  margin-top: 1.2rem;
+  border: 1px solid var(--border);
+  background: #0f172a;
+  color: #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+  font-family: var(--font-mono);
+}
+.code-snippet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111827;
+  color: #cbd5e1;
+  padding: 8px 12px;
+  font-size: 0.72rem;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #1f2937;
+}
+.code-snippet pre {
+  margin: 0; padding: 14px 16px;
+  overflow-x: auto;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  white-space: pre;
+}
+.code-snippet code { font-family: var(--font-mono); }
+.copy-btn {
+  background: transparent;
+  color: #cbd5e1;
+  border: 1px solid #334155;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #1e293b; }
+
+.code-panel {
+  position: absolute; inset: 0;
+  display: none; z-index: 6;
+  background: #0f172a;
+  color: #e5e7eb;
+  overflow: hidden;
+}
+.code-panel.active { display: block; }
+.code-panel .code-snippet { height: 100%; margin: 0; border: none; border-radius: 0; }
+.code-panel .code-snippet pre { max-height: calc(100% - 42px); overflow: auto; }
+
+/* ── Engineering Review ── */
+.engineering-review { margin-top: 1.2rem; margin-bottom: 1.2rem; }
+
+.review-section-title {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-main);
+  margin: 1.2rem 0 0.6rem;
+}
+
+.review-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+
+.review-card {
+  border: 1px solid var(--border);
+  background: #fbfbfb;
+  padding: 12px 14px;
+  border-radius: 6px;
+}
+.review-card h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.45rem; }
+.review-card ul { margin-left: 16px; color: var(--text-muted); font-size: 0.86rem; }
+.review-card li { margin-bottom: 0.35rem; }
+
+.decision-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--border);
+  font-size: 0.86rem;
+  margin-top: 0.6rem;
+}
+.decision-table th, .decision-table td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+.decision-table th {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  background: #f4f4f4;
+  color: var(--text-main);
+}
+.decision-table td:first-child { font-weight: 600; color: var(--text-main); white-space: nowrap; }
+
+.verification-plan {
+  border-left: 3px solid var(--text-main);
+  background: #fbfbfb;
+  padding: 12px 14px;
+  margin-top: 0.6rem;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+}
+.verification-plan ul { margin-left: 16px; }
+.verification-plan li { margin-bottom: 0.35rem; }
+
+/* ── Side Tabs (project pages) ── */
+.anchor-target { scroll-margin-top: 28px; }
+
+.side-tabs {
+  position: fixed;
+  top: 118px;
+  left: max(14px, calc((100vw - 800px) / 2 - 195px));
+  width: 170px;
+  z-index: 50;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+.side-tabs-title { color: #999; font-size: 0.62rem; margin-bottom: 8px; padding-left: 12px; }
+.side-tabs a {
+  display: block;
+  color: #777;
+  border-left: 2px solid var(--border);
+  padding: 5px 0 5px 10px;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease, padding-left 0.15s ease;
+}
+.side-tabs a:hover { color: var(--text-main); border-left-color: #aaa; padding-left: 13px; text-decoration: none; }
+.side-tabs a.active { color: var(--text-main); border-left-color: var(--text-main); padding-left: 13px; }
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .cards-grid { grid-template-columns: 1fr; }
+  .cad-container { height: 400px; }
+  .side-tabs { display: none; }
+  .review-grid { grid-template-columns: 1fr; }
+  .decision-table td:first-child { white-space: normal; }
+}
+@media (max-width: 1200px) { .side-tabs { display: none; } }

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bare-Metal Digital Multimeter | Daniel Ng</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="back-nav"><a href="index.html">← Back to Portfolio</a></div>
+
+<div class="project-page-header">
+  <h1>Bare-Metal Digital Multimeter</h1>
+  <div class="project-date" style="margin-top:0.3rem;">Mar 2026</div>
+  <div class="tech-stack" style="margin-top:0.6rem;">
+    STM32L051 // Bare-Metal C // Hardware Timers // ADC
+  </div>
+</div>
+
+<section>
+  <ul class="project-bullets">
+    <li><strong>Real-Time Execution:</strong> Achieved highly deterministic RLC sampling via custom Makefile build automation, eliminating IDE overhead and ensuring reproducible builds.</li>
+    <li><strong>Code Efficiency:</strong> Eliminated HAL bloat and overhead by engineering direct register-level drivers for all peripherals — timers, ADC, USART, and GPIO — from scratch.</li>
+    <li><strong>Data Acquisition:</strong> Captured high-fidelity frequency metrics utilizing hardware timers and an astable 555 timer circuit as a precision reference oscillator for component measurement.</li>
+  </ul>
+
+  <div class="project-links">
+    <a href="https://github.com/danielwhn25/ELEC291_labs/tree/main/DMM_STM32LO51" target="_blank" class="btn-link">View Code on GitHub ↗</a>
+  </div>
+</section>
+
+</body>
+</html>

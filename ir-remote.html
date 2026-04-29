@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IR Remote Controller | Daniel Ng</title>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="back-nav"><a href="index.html">← Back to Portfolio</a></div>
+
+<div class="project-page-header">
+  <h1>IR Remote Controller PCB</h1>
+  <div class="project-date" style="margin-top:0.3rem;">Feb 2026 – Mar 2026</div>
+  <div class="tech-stack" style="margin-top:0.6rem;">
+    Altium Designer // EFM8 MCU // 38 kHz IR // Mixed-Signal PCB
+  </div>
+</div>
+
+<section>
+  <ul class="project-bullets">
+    <li><strong>Reliable Comm:</strong> Engineered a robust 38 kHz IR transmission protocol using hardware timers to generate a precise NEC-protocol carrier and ensure reliable decode at the receiver.</li>
+    <li><strong>System Safety:</strong> Guaranteed operator safety with zero-latency, interrupt-driven emergency stops that preempt all normal control flow.</li>
+    <li><strong>UX Design:</strong> Enhanced user interaction via active-low PNP haptic and acoustic feedback circuits driven from MCU GPIO.</li>
+    <li><strong>Autonomous Control:</strong> Streamlined complex robotic navigation through custom, intuitive LCD menus with state-machine driven UI logic.</li>
+  </ul>
+
+  <!-- CAD Viewer -->
+  <div class="cad-container" id="ir" style="margin-top:1.4rem;">
+    <div class="viewer-area">
+      <div class="cad-label" id="ir-label"></div>
+      <model-viewer id="ir-3d"
+        src="models/IR_remote.glb"
+        camera-controls auto-rotate auto-rotate-delay="3500"
+        rotation-per-second="30deg"
+        shadow-intensity="1" environment-image="neutral"
+        scale="0.001 0.001 0.001"
+        camera-orbit="45deg 75deg auto">
+      </model-viewer>
+      <img src="models/IR_schematic.png" class="schematic-img" id="ir-schematic" alt="Circuit Schematic">
+      <img src="models/IR_layout1.png"   class="schematic-img" id="ir-sch1"      alt="Top Layer Routing">
+      <img src="models/IR_layout2.png"   class="schematic-img" id="ir-sch2"      alt="Bottom Layer Routing">
+      <img src="models/IR_layout3.png"   class="schematic-img" id="ir-sch3"      alt="Layout View 3">
+      <div class="code-panel" id="ir-code">
+        <div class="code-snippet">
+          <div class="code-snippet-header">
+            <span>Firmware Snippet // 38 kHz IR Carrier Timing</span>
+            <button class="copy-btn" onclick="copyCode(this)">COPY</button>
+          </div>
+          <pre><code>void Timer2_ISR(void) interrupt 5
+{
+    TF2H = 0;
+
+    if (ir_tx_enable) {
+        IR_LED = !IR_LED;      // Toggle output to generate 38 kHz carrier
+    } else {
+        IR_LED = 0;            // Force LED off between NEC protocol bursts
+    }
+}</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="view-controls">
+      <button class="view-btn active" data-label="INTERACTIVE 3D RENDER"  onclick="switchView('ir','3d',this)">3D View</button>
+      <button class="view-btn"        data-label="CIRCUIT SCHEMATIC"       onclick="switchView('ir','schematic',this)">Schematic</button>
+      <button class="view-btn"        data-label="TOP LAYER ROUTING"       onclick="switchView('ir','sch1',this)">Layout 1</button>
+      <button class="view-btn"        data-label="BOTTOM LAYER ROUTING"    onclick="switchView('ir','sch2',this)">Layout 2</button>
+      <button class="view-btn"        data-label="LAYOUT VIEW 3"           onclick="switchView('ir','sch3',this)">Layout 3</button>
+      <button class="view-btn"        data-label="FIRMWARE // IR CARRIER"  onclick="switchView('ir','code',this)">Code</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  let zState = { scale:1, x:0, y:0, isDragging:false, startX:0, startY:0 };
+  function updateTransform(img) { img.style.transform=`translate(${zState.x}px,${zState.y}px) scale(${zState.scale})`; }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.schematic-img').forEach(img => {
+      img.addEventListener('wheel', e => {
+        if (!img.classList.contains('active')) return;
+        e.preventDefault();
+        zState.scale = Math.min(Math.max(1, zState.scale + Math.sign(e.deltaY)*-0.15), 5);
+        if (zState.scale===1) { zState.x=0; zState.y=0; }
+        updateTransform(img);
+      });
+      img.addEventListener('mousedown', e => {
+        if (!img.classList.contains('active')||zState.scale===1) return;
+        zState.isDragging=true; zState.startX=e.clientX-zState.x; zState.startY=e.clientY-zState.y;
+        img.style.transition='none';
+      });
+    });
+    window.addEventListener('mousemove', e => {
+      if (!zState.isDragging) return;
+      const img=document.querySelector('.schematic-img.active'); if(!img) return;
+      zState.x=e.clientX-zState.startX; zState.y=e.clientY-zState.startY; updateTransform(img);
+    });
+    window.addEventListener('mouseup', () => {
+      zState.isDragging=false;
+      document.querySelectorAll('.schematic-img').forEach(i=>i.style.transition='transform 0.1s ease');
+    });
+    document.querySelectorAll('model-viewer').forEach(viewer => {
+      const pause=()=>{ if(viewer.hasAttribute('auto-rotate')){viewer.dataset.wasAutoRotate='true';viewer.removeAttribute('auto-rotate');} clearTimeout(viewer._rt); };
+      const resume=()=>{ if(viewer.dataset.wasAutoRotate!=='true') return; clearTimeout(viewer._rt); viewer._rt=setTimeout(()=>viewer.setAttribute('auto-rotate',''),2500); };
+      viewer.addEventListener('pointerdown',pause); viewer.addEventListener('pointerup',resume);
+      viewer.addEventListener('pointercancel',resume); viewer.addEventListener('mouseleave',resume);
+    });
+  });
+
+  function switchView(projectId, viewType, btnElement) {
+    const container=document.getElementById(projectId);
+    const label=document.getElementById(projectId+'-label');
+    zState={scale:1,x:0,y:0,isDragging:false,startX:0,startY:0};
+    container.querySelectorAll('.schematic-img,.code-panel').forEach(p=>{
+      if(p.classList.contains('schematic-img')) p.style.transform='translate(0,0) scale(1)';
+      p.classList.remove('active');
+    });
+    container.querySelectorAll('model-viewer').forEach(m=>m.style.display='none');
+    container.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
+    btnElement.classList.add('active');
+    const target=viewType==='3d'?document.getElementById(projectId+'-3d'):document.getElementById(projectId+'-'+viewType);
+    if(target){ if(target.tagName.toLowerCase()==='model-viewer') target.style.display='block'; else target.classList.add('active'); }
+    if(label){ label.innerText=btnElement.dataset.label||''; label.style.display=viewType==='3d'?'none':'block'; }
+  }
+
+  function copyCode(button) {
+    navigator.clipboard.writeText(button.closest('.code-snippet').querySelector('code').innerText)
+      .then(()=>{ button.innerText='COPIED'; setTimeout(()=>button.innerText='COPY',1200); });
+  }
+</script>
+</body>
+</html>
