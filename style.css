@@ -4,12 +4,38 @@
   --text-muted: #555555;
   --accent: #0055aa;
   --border: #e0e0e0;
+  --surface: #fafafa;
+  --surface-alt: #f0f0f0;
+  --surface-control: #f4f4f4;
+  --surface-card: #fbfbfb;
+  --label-bg: rgba(255,255,255,0.85);
+  --button-bg: #111111;
+  --button-fg: #ffffff;
+  --shadow-card: rgba(0,0,0,0.08);
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-mono: "SFMono-Regular", Consolas, "Courier New", monospace;
 }
 
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0b1120;
+  --text-main: #e5e7eb;
+  --text-muted: #94a3b8;
+  --accent: #60a5fa;
+  --border: #263244;
+  --surface: #111827;
+  --surface-alt: #0f172a;
+  --surface-control: #111827;
+  --surface-card: #111827;
+  --label-bg: rgba(15,23,42,0.88);
+  --button-bg: #e5e7eb;
+  --button-fg: #0b1120;
+  --shadow-card: rgba(0,0,0,0.35);
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
+html[data-theme="light"] { color-scheme: light; }
 
 body {
   background: var(--bg);
@@ -24,6 +50,29 @@ body {
 
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
+
+
+.theme-toggle {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-main);
+  border-radius: 999px;
+  padding: 7px 11px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  cursor: pointer;
+  box-shadow: 0 3px 12px var(--shadow-card);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.theme-toggle:hover { border-color: var(--accent); }
+.theme-toggle-icon { font-size: 0.85rem; line-height: 1; }
 
 /* ── Header ── */
 header {
@@ -70,8 +119,8 @@ ul.project-bullets strong { color: var(--text-main); font-weight: 600; }
 
 .btn-link {
   display: inline-block;
-  background: var(--text-main);
-  color: #ffffff !important;
+  background: var(--button-bg);
+  color: var(--button-fg) !important;
   padding: 6px 14px;
   border-radius: 4px;
   font-family: var(--font-mono);
@@ -79,7 +128,7 @@ ul.project-bullets strong { color: var(--text-main); font-weight: 600; }
   text-decoration: none;
   transition: background 0.2s;
 }
-.btn-link:hover { background: var(--text-muted); text-decoration: none; }
+.btn-link:hover { background: var(--accent); text-decoration: none; }
 
 /* ── INDEX: Project Cards — 2-column square grid ── */
 .cards-grid {
@@ -92,18 +141,18 @@ ul.project-bullets strong { color: var(--text-main); font-weight: 600; }
   border: 1px solid var(--border);
   border-radius: 6px;
   overflow: hidden;
-  background: #fafafa;
+  background: var(--surface);
   transition: box-shadow 0.2s;
   display: flex;
   flex-direction: column;
 }
-.project-card:hover { box-shadow: 0 3px 14px rgba(0,0,0,0.08); }
+.project-card:hover { box-shadow: 0 3px 14px var(--shadow-card); }
 
 /* Square viewer — aspect-ratio forces height = width */
 .card-viewer {
   width: 100%;
   aspect-ratio: 1 / 1;
-  background: #f0f0f0;
+  background: var(--surface-alt);
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
@@ -178,7 +227,7 @@ ul.project-bullets strong { color: var(--text-main); font-weight: 600; }
 .cad-container {
   width: 100%;
   height: 500px;
-  background-color: #fcfcfc;
+  background-color: var(--surface);
   border: 1px solid var(--border);
   margin-top: 1.2rem;
   display: flex;
@@ -195,7 +244,7 @@ ul.project-bullets strong { color: var(--text-main); font-weight: 600; }
   color: var(--text-muted);
   z-index: 10;
   letter-spacing: 1px;
-  background: rgba(255,255,255,0.85);
+  background: var(--label-bg);
   padding: 2px 6px;
   border: 1px solid var(--border);
   display: none;
@@ -207,7 +256,7 @@ model-viewer { width: 100%; height: 100%; outline: none; }
   position: absolute; top: 0; left: 0;
   width: 100%; height: 100%;
   object-fit: contain;
-  background: #fcfcfc;
+  background: var(--surface);
   z-index: 5;
   display: none;
   cursor: grab;
@@ -223,14 +272,14 @@ model-viewer { width: 100%; height: 100%; outline: none; }
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
-  background: #f4f4f4;
+  background: var(--surface-control);
   padding: 10px 12px;
   border-top: 1px solid var(--border);
   z-index: 20;
 }
 
 .view-btn {
-  background: #ffffff;
+  background: var(--bg);
   border: 1px solid var(--border);
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -240,7 +289,7 @@ model-viewer { width: 100%; height: 100%; outline: none; }
   border-radius: 4px;
   transition: all 0.2s;
 }
-.view-btn.active { background: var(--text-main); color: #fff; border-color: var(--text-main); }
+.view-btn.active { background: var(--button-bg); color: var(--button-fg); border-color: var(--button-bg); }
 
 /* ── Code Snippet ── */
 .code-snippet {
@@ -311,7 +360,7 @@ model-viewer { width: 100%; height: 100%; outline: none; }
 
 .review-card {
   border: 1px solid var(--border);
-  background: #fbfbfb;
+  background: var(--surface-card);
   padding: 12px 14px;
   border-radius: 6px;
 }
@@ -337,14 +386,14 @@ model-viewer { width: 100%; height: 100%; outline: none; }
   font-size: 0.72rem;
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  background: #f4f4f4;
+  background: var(--surface-control);
   color: var(--text-main);
 }
 .decision-table td:first-child { font-weight: 600; color: var(--text-main); white-space: nowrap; }
 
 .verification-plan {
   border-left: 3px solid var(--text-main);
-  background: #fbfbfb;
+  background: var(--surface-card);
   padding: 12px 14px;
   margin-top: 0.6rem;
   color: var(--text-muted);
@@ -367,17 +416,17 @@ model-viewer { width: 100%; height: 100%; outline: none; }
   letter-spacing: 0.7px;
   text-transform: uppercase;
 }
-.side-tabs-title { color: #999; font-size: 0.62rem; margin-bottom: 8px; padding-left: 12px; }
+.side-tabs-title { color: var(--text-muted); font-size: 0.62rem; margin-bottom: 8px; padding-left: 12px; }
 .side-tabs a {
   display: block;
-  color: #777;
+  color: var(--text-muted);
   border-left: 2px solid var(--border);
   padding: 5px 0 5px 10px;
   line-height: 1.25;
   text-decoration: none;
   transition: color 0.15s ease, border-color 0.15s ease, padding-left 0.15s ease;
 }
-.side-tabs a:hover { color: var(--text-main); border-left-color: #aaa; padding-left: 13px; text-decoration: none; }
+.side-tabs a:hover { color: var(--text-main); border-left-color: var(--text-muted); padding-left: 13px; text-decoration: none; }
 .side-tabs a.active { color: var(--text-main); border-left-color: var(--text-main); padding-left: 13px; }
 
 /* ── Responsive ── */
@@ -389,3 +438,64 @@ model-viewer { width: 100%; height: 100%; outline: none; }
   .decision-table td:first-child { white-space: normal; }
 }
 @media (max-width: 1200px) { .side-tabs { display: none; } }
+
+
+/* ── Static schematic previews ── */
+.card-image-viewer {
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-image-viewer img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 12px;
+  display: block;
+}
+
+.page-lede {
+  font-size: 1rem;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+  max-width: 760px;
+}
+
+.schematic-display-card {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--surface);
+  margin-top: 0.6rem;
+}
+.schematic-display-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
+  background: var(--surface-control);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.static-schematic-img {
+  width: 100%;
+  display: block;
+  background: var(--bg);
+}
+
+/* Keep exported schematic images on a neutral sheet background. */
+.static-schematic-img, .card-image-viewer img { background: #ffffff; }
+
+@media (max-width: 600px) {
+  .theme-toggle {
+    top: 10px;
+    right: 10px;
+    padding: 6px 9px;
+  }
+  .theme-toggle-text { display: none; }
+}

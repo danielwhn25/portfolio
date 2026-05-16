@@ -10,9 +10,23 @@
 <meta property="og:image" content="https://danielng.pages.dev/models/preview-image.png">
 <title>Daniel Ng | Electrical Engineering Portfolio</title>
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {}
+  })();
+</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode" aria-pressed="false">
+  <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+  <span class="theme-toggle-text">Dark</span>
+</button>
 
 <header>
   <h1>Daniel Ng</h1>
@@ -68,6 +82,18 @@
       <div class="card-footer">
         <h3>Formula UBC: Laser Timing Gates</h3>
         <a href="https://danielwhn25.github.io/portfolio/timing-gates/" class="btn-link">View →</a>
+      </div>
+    </div>
+
+
+    <!-- PoE Ethernet Interface Board -->
+    <div class="project-card">
+      <div class="card-viewer card-image-viewer">
+        <img src="models/poe_schematic.png" alt="PoE Ethernet Interface Board schematic preview">
+      </div>
+      <div class="card-footer">
+        <h3>PoE Ethernet Interface Board</h3>
+        <a href="poe-ethernet/" class="btn-link">View →</a>
       </div>
     </div>
 
@@ -169,5 +195,6 @@
     });
   });
 </script>
+<script src="theme.js"></script>
 </body>
 </html>

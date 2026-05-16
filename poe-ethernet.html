@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PoE Ethernet Interface Board | Daniel Ng</title>
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode" aria-pressed="false">
+  <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+  <span class="theme-toggle-text">Dark</span>
+</button>
+
+<nav class="side-tabs" aria-label="Page sections">
+  <div class="side-tabs-title">On This Page</div>
+  <a href="#top" class="active">Overview</a>
+  <a href="#schematic">Schematic</a>
+  <a href="#architecture">Architecture</a>
+  <a href="#firmware">Firmware Plan</a>
+  <a href="#bringup">Bring-Up Plan</a>
+</nav>
+
+<div class="back-nav"><a href="index.html">← Back to Portfolio</a></div>
+
+<div class="project-page-header anchor-target" id="top">
+  <h1>PoE Ethernet Interface Board</h1>
+  <div class="project-date" style="margin-top:0.3rem;">May 2026 – Present</div>
+  <div class="tech-stack" style="margin-top:0.6rem;">
+    Altium Designer // ESP32 // W5500 // Ethernet // TCP/IP // SPI // PoE
+  </div>
+</div>
+
+<section>
+  <p class="page-lede">
+    A Power over Ethernet embedded networking board designed to receive power and data through a single Cat5e cable. The project focuses on wired Ethernet bring-up, PoE power architecture, W5500 register-level firmware, and practical board-level debug features for deployed embedded systems.
+  </p>
+
+  <ul class="project-bullets">
+    <li><strong>Single-Cable Architecture:</strong> Designing a PoE-powered Ethernet interface for systems where one cable should provide both regulated board power and reliable wired network connectivity.</li>
+    <li><strong>Embedded Networking:</strong> Planning C firmware to bring up the W5500 over SPI, validate register-level communication, monitor link state, and test UDP/HTTP diagnostics.</li>
+    <li><strong>Board Bring-Up:</strong> Adding test access for power rails, SPI, reset, interrupt, and Ethernet status indicators so faults can be isolated during first-power and network validation.</li>
+  </ul>
+
+  <div class="project-links">
+    <a href="https://github.com/danielwhn25/Power-over-Ethernet" target="_blank" class="btn-link">GitHub ↗</a>
+  </div>
+
+  <div class="engineering-review">
+    <div class="review-section-title anchor-target" id="schematic">Current Schematic</div>
+    <div class="schematic-display-card">
+      <div class="schematic-display-header">
+        <span>Altium Schematic Export</span>
+        <span>In Progress</span>
+      </div>
+      <img src="models/poe_schematic.png" alt="PoE Ethernet Interface Board schematic" class="static-schematic-img">
+    </div>
+
+    <div class="review-section-title anchor-target" id="architecture">System Architecture</div>
+    <table class="decision-table">
+      <thead>
+        <tr><th>Subsystem</th><th>Implementation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>PoE input</td><td>PoE-compatible RJ45 MagJack routes Ethernet data to the W5500 and PoE voltage nodes to bridge rectifiers.</td></tr>
+        <tr><td>Power conversion</td><td>Bridge-rectified PoE input feeds an isolated Silvertel PoE PD module to generate the board supply rail.</td></tr>
+        <tr><td>Ethernet controller</td><td>W5500 provides the hardwired TCP/IP Ethernet interface and communicates with the ESP32 over SPI.</td></tr>
+        <tr><td>Digital control</td><td>ESP32 controls chip select, reset, interrupt handling, and packet-level application firmware.</td></tr>
+        <tr><td>Debug access</td><td>Breakout/test access is planned for SPI, reset, interrupt, 3.3 V, ground, and PoE power rails.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="review-section-title anchor-target" id="firmware">Firmware Bring-Up Plan</div>
+    <div class="review-grid">
+      <div class="review-card">
+        <h4>SPI Driver Bring-Up</h4>
+        <ul>
+          <li>Initialize ESP32 SPI pins for SCLK, MOSI, MISO, and active-low chip select.</li>
+          <li>Read the W5500 version register to confirm basic bus communication.</li>
+          <li>Control W5500 reset timing from firmware while preserving a manual reset path.</li>
+        </ul>
+      </div>
+      <div class="review-card">
+        <h4>Network Validation</h4>
+        <ul>
+          <li>Monitor link, speed, and activity status during cable insertion and router connection.</li>
+          <li>Bring up static IP or DHCP network configuration.</li>
+          <li>Expose a simple UDP/HTTP diagnostics page for board status and link testing.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="review-section-title anchor-target" id="bringup">Hardware Bring-Up Plan</div>
+    <div class="verification-plan">
+      <ul>
+        <li>Verify PoE input polarity after bridge rectification before connecting downstream circuitry.</li>
+        <li>Measure the generated board rail under no-load and ESP32/W5500 load conditions.</li>
+        <li>Confirm W5500 VDD/AVDD rails, reset state, crystal startup, and SPI signal integrity.</li>
+        <li>Connect to a router or switch and validate link LEDs before running UDP/HTTP firmware tests.</li>
+        <li>Use test pads and debug headers to isolate power, reset, SPI, and Ethernet link faults during first revision bring-up.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = [...document.querySelectorAll('.anchor-target')];
+    const links = [...document.querySelectorAll('.side-tabs a')];
+    if (!sections.length || !links.length) return;
+
+    const setActive = () => {
+      let current = sections[0].id;
+      sections.forEach(section => {
+        if (section.getBoundingClientRect().top <= 120) current = section.id;
+      });
+      links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${current}`));
+    };
+    window.addEventListener('scroll', setActive, { passive: true });
+    setActive();
+  });
+</script>
+<script src="theme.js"></script>
+</body>
+</html>
