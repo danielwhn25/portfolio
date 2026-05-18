@@ -16,26 +16,8 @@
   --font-mono: "SFMono-Regular", Consolas, "Courier New", monospace;
 }
 
-html[data-theme="dark"] {
-  color-scheme: dark;
-  --bg: #0b1120;
-  --text-main: #e5e7eb;
-  --text-muted: #94a3b8;
-  --accent: #60a5fa;
-  --border: #263244;
-  --surface: #111827;
-  --surface-alt: #0f172a;
-  --surface-control: #111827;
-  --surface-card: #111827;
-  --label-bg: rgba(15,23,42,0.88);
-  --button-bg: #e5e7eb;
-  --button-fg: #0b1120;
-  --shadow-card: rgba(0,0,0,0.35);
-}
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-html[data-theme="light"] { color-scheme: light; }
+html { scroll-behavior: smooth; color-scheme: light; }
 
 body {
   background: var(--bg);
@@ -51,28 +33,6 @@ body {
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-
-.theme-toggle {
-  position: fixed;
-  top: 18px;
-  right: 18px;
-  z-index: 100;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text-main);
-  border-radius: 999px;
-  padding: 7px 11px;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  cursor: pointer;
-  box-shadow: 0 3px 12px var(--shadow-card);
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
-}
-.theme-toggle:hover { border-color: var(--accent); }
-.theme-toggle-icon { font-size: 0.85rem; line-height: 1; }
 
 /* ── Header ── */
 header {
@@ -491,11 +451,3 @@ model-viewer { width: 100%; height: 100%; outline: none; }
 /* Keep exported schematic images on a neutral sheet background. */
 .static-schematic-img, .card-image-viewer img { background: #ffffff; }
 
-@media (max-width: 600px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 6px 9px;
-  }
-  .theme-toggle-text { display: none; }
-}

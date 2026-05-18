@@ -14,13 +14,13 @@
   <h1>Oven Reflow Controller</h1>
   <div class="project-date" style="margin-top:0.3rem;">Jan 2026</div>
   <div class="tech-stack" style="margin-top:0.6rem;">
-    8052 // A51 Assembly // NEC Protocol // PID Control
+    8052 // A51 Assembly // NEC Protocol // Thermal Control
   </div>
 </div>
 
 <section>
   <ul class="project-bullets">
-    <li><strong>Process Control:</strong> Delivered ±3°C closed-loop thermal accuracy for reliable custom PCB manufacturing, implementing a full PID algorithm in hand-written A51 assembly.</li>
+    <li><strong>Process Control:</strong> Built an 8052-based reflow controller in hand-written A51 assembly to manage staged oven temperature profiles for custom PCB manufacturing.</li>
     <li><strong>Thermal Stability:</strong> Eliminated dangerous temperature overshoot using precision PWM output modulation combined with FSM state logic governing the reflow profile stages (preheat → soak → reflow → cooldown).</li>
     <li><strong>Data Validation:</strong> Streamlined tuning and telemetry analysis with a custom Python live-plotting GUI that receives serial thermocouple data and displays the thermal profile in real time.</li>
   </ul>

@@ -4,40 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:title" content="Daniel Ng | Electrical Engineering Portfolio">
-<meta property="og:description" content="Electronics and firmware engineering student at UBC. Specializing in microcontroller drivers, IoT, and communication protocols. Available for Co-op May 2026.">
+<meta property="og:description" content="Aspiring embedded software engineer at UBC focused on bare-metal firmware, embedded networking, and RF test automation. Available September 2026.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://danielng.pages.dev/">
 <meta property="og:image" content="https://danielng.pages.dev/models/preview-image.png">
 <title>Daniel Ng | Electrical Engineering Portfolio</title>
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-<script>
-  (function () {
-    try {
-      var stored = localStorage.getItem('theme');
-      var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
-    } catch (e) {}
-  })();
-</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode" aria-pressed="false">
-  <span class="theme-toggle-icon" aria-hidden="true">☾</span>
-  <span class="theme-toggle-text">Dark</span>
-</button>
-
 <header>
   <h1>Daniel Ng</h1>
   <div class="contact-bar">
-    Electrical Engineering (BASc) @ UBC // Available May 2026<br>
+    Electrical Engineering (BASc) @ UBC // Available September 2026<br>
     <a href="mailto:daniel.whn@outlook.com">daniel.whn@outlook.com</a> |
     <a href="https://github.com/danielwhn25" target="_blank">GitHub</a> |
     <a href="https://linkedin.com/in/danielngEE" target="_blank">LinkedIn</a>
   </div>
   <p class="abstract">
-    Electronics and firmware engineering student. Specializing in microcontroller drivers, IoT, and communication protocols. Experienced in bare-metal C, PCB design, and RF characterization.
+    Aspiring embedded software engineer focused on bare-metal firmware, embedded networking, board bring-up, and RF test automation. Experienced in C, PCB design, lab instrumentation, and low-level debugging.
   </p>
 </header>
 
@@ -46,15 +32,26 @@
   <h2 class="section-title">00. Work Experience</h2>
   <div style="margin-bottom: 2rem;">
     <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.3rem; flex-wrap:wrap; gap:4px;">
-      <h3 style="font-size:1.15rem; font-weight:600;">Norsat International: Hardware Intern</h3>
-      <span class="project-date">June 2025 – Aug 2025</span>
+      <h3 style="font-size:1.15rem; font-weight:600;">Norsat International: Electrical Engineering Intern, Automated Test Equipment</h3>
+      <span class="project-date">May 2026 &ndash; Present</span>
     </div>
-    <div class="tech-stack">VNA // Signal Analyzers // RF Characterization // SMT Soldering</div>
+    <div class="tech-stack">LabVIEW // Python // PyVISA // GPIB // SCPI // RF Test Automation</div>
     <ul class="project-bullets">
-      <li><strong>Quality Assurance:</strong> Secured 100% production yield across 50+ commercial RF units.</li>
-      <li><strong>Compliance:</strong> Validated strict Ku-Band tolerances for gain, P1dB, and noise figures.</li>
-      <li><strong>Root Cause Analysis:</strong> Prevented field failures by diagnosing and repairing DC bias instabilities.</li>
-      <li><strong>Rapid Prototyping:</strong> Executed precision microscopic SMT soldering on dense, fine-pitch layouts.</li>
+      <li><strong>RF Debug:</strong> Investigated unwanted PLL spurs by decoding SPI register writes against datasheet bit fields, calculating divider settings, PFD frequency, spur spacing, and integer-boundary risk.</li>
+      <li><strong>ATE Modernization:</strong> Reverse-engineered legacy LabVIEW workflows and prototyped a Python/PyVISA architecture separating instrument control, RF test sequencing, calibration loading, and report generation.</li>
+      <li><strong>Instrument Control:</strong> Integrated LabVIEW drivers over GPIB/SCPI (IEEE 488.1/488.2) for Rohde &amp; Schwarz and Keysight RF test equipment.</li>
+    </ul>
+  </div>
+
+  <div style="margin-bottom: 2rem;">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.3rem; flex-wrap:wrap; gap:4px;">
+      <h3 style="font-size:1.15rem; font-weight:600;">Norsat International: Hardware Test Intern</h3>
+      <span class="project-date">June 2025 &ndash; August 2025</span>
+    </div>
+    <div class="tech-stack">PNA-X VNA // Signal Analyzers // Oscilloscopes // Multimeters // SMT/THT Rework</div>
+    <ul class="project-bullets">
+      <li><strong>RF Characterization:</strong> Characterized block-up converters using PNA-X VNAs, signal analyzers, oscilloscopes, and multimeters to validate gain, output power, saturation, and spurious parameters against product specifications.</li>
+      <li><strong>Rework &amp; Assembly:</strong> Performed microscope-assisted SMT/THT soldering, rework, inspection, and assembly on BUC/LNB hardware.</li>
     </ul>
   </div>
 </section>
@@ -162,7 +159,7 @@
     <div class="project-card">
       <div class="card-viewer-placeholder">
         <span class="fw-label">Firmware</span>
-        <span class="fw-langs">8052 MCU<br>A51 Assembly<br>PID Control</span>
+        <span class="fw-langs">8052 MCU<br>A51 Assembly<br>Thermal Control</span>
       </div>
       <div class="card-footer">
         <h3>Oven Reflow Controller</h3>
@@ -195,6 +192,5 @@
     });
   });
 </script>
-<script src="theme.js"></script>
 </body>
 </html>
