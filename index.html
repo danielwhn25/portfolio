@@ -56,9 +56,9 @@
   </div>
 </section>
 
-<!-- ── 01. Hardware & PCB Architecture ── -->
+<!-- ── 01. Embedded Projects ── -->
 <section>
-  <h2 class="section-title">01. Hardware &amp; PCB Architecture</h2>
+  <h2 class="section-title">01. Embedded Projects</h2>
   <div class="cards-grid">
 
     <!-- Timing Gates -->
@@ -135,14 +135,6 @@
       </div>
     </div>
 
-  </div>
-</section>
-
-<!-- ── 02. Firmware & Digital Design ── -->
-<section>
-  <h2 class="section-title">02. Firmware &amp; Digital Design</h2>
-  <div class="cards-grid">
-
     <!-- DMM -->
     <div class="project-card">
       <div class="card-viewer-placeholder">
@@ -170,6 +162,11 @@
   </div>
 </section>
 
+<aside class="chess-status" aria-label="Chess.com rating">
+  <a href="https://www.chess.com/member/daniel_whn" target="_blank" rel="noopener" class="chess-status-label">Chess.com</a>
+  <span data-chess-summary>daniel_whn // Rapid 1112 // Blitz 937 // Bullet 1015 // Puzzles 1732 peak</span>
+</aside>
+
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('model-viewer').forEach(viewer => {
@@ -190,6 +187,35 @@
       viewer.addEventListener('pointercancel', resume);
       viewer.addEventListener('mouseleave', resume);
     });
+
+    const chessSummary = document.querySelector('[data-chess-summary]');
+    if (chessSummary) {
+      const statLine = (label, stat) => {
+        const rating = stat && stat.last && stat.last.rating;
+        return rating ? `${label} ${rating}` : '';
+      };
+
+      fetch('https://api.chess.com/pub/player/daniel_whn/stats')
+        .then(response => {
+          if (!response.ok) throw new Error('Chess.com stats unavailable');
+          return response.json();
+        })
+        .then(stats => {
+          const parts = [
+            statLine('Rapid', stats.chess_rapid),
+            statLine('Blitz', stats.chess_blitz),
+            statLine('Bullet', stats.chess_bullet),
+            stats.tactics && stats.tactics.highest && stats.tactics.highest.rating
+              ? `Puzzles ${stats.tactics.highest.rating} peak`
+              : ''
+          ].filter(Boolean);
+
+          if (parts.length) {
+            chessSummary.textContent = `daniel_whn // ${parts.join(' // ')}`;
+          }
+        })
+        .catch(() => {});
+    }
   });
 </script>
 </body>

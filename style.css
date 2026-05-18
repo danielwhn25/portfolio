@@ -167,6 +167,24 @@ ul.project-bullets strong { color: var(--text-main); font-weight: 600; }
 }
 .project-date { font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-muted); }
 
+.chess-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  margin: -1.4rem 0 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+}
+.chess-status-label {
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
 /* ── PROJECT PAGES: back nav ── */
 .back-nav {
   margin-bottom: 2rem;
