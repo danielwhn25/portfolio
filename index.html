@@ -27,17 +27,19 @@
   </p>
 </header>
 
-<!-- ── 00. Work Experience ── -->
+<!-- Work Experience -->
 <section>
-  <h2 class="section-title">00. Work Experience</h2>
+  <h2 class="section-title">Work Experience</h2>
   <div style="margin-bottom: 2rem;">
     <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.3rem; flex-wrap:wrap; gap:4px;">
       <h3 style="font-size:1.15rem; font-weight:600;">Norsat International: Electrical Engineering Intern, Automated Test Equipment</h3>
       <span class="project-date">May 2026 &ndash; Present</span>
     </div>
-    <div class="tech-stack">LabVIEW // Python // PyVISA // GPIB // SCPI // RF Test Automation</div>
+    <div class="tech-stack">LabVIEW // Python // PyVISA // GPIB // SCPI // LTspice // RF Test Automation</div>
     <ul class="project-bullets">
       <li><strong>RF Debug:</strong> Investigated unwanted PLL spurs by decoding SPI register writes against datasheet bit fields, calculating divider settings, PFD frequency, spur spacing, and integer-boundary risk.</li>
+      <li><strong>Bias-Tee Verification:</strong> Performed circuit-level review of 50 &ohm;/75 &ohm; bias-tee networks, calculating impedance, insertion loss, return loss, and SPICE-based risk estimates to define VNA validation points.</li>
+      <li><strong>PCB Rework Validation:</strong> Created test recommendations for bias-tee PCB rework variants, identifying shunt-loss paths, impedance-matching risks, GHz parasitic limitations, and required VNA measurements.</li>
       <li><strong>ATE Modernization:</strong> Reverse-engineered legacy LabVIEW workflows and prototyped a Python/PyVISA architecture separating instrument control, RF test sequencing, calibration loading, and report generation.</li>
       <li><strong>Instrument Control:</strong> Integrated LabVIEW drivers over GPIB/SCPI (IEEE 488.1/488.2) for Rohde &amp; Schwarz and Keysight RF test equipment.</li>
     </ul>
@@ -56,9 +58,9 @@
   </div>
 </section>
 
-<!-- ── 01. Embedded Projects ── -->
+<!-- Embedded Projects -->
 <section>
-  <h2 class="section-title">01. Embedded Projects</h2>
+  <h2 class="section-title">Embedded Projects</h2>
   <div class="cards-grid">
 
     <!-- Timing Gates -->
@@ -163,7 +165,7 @@
 </section>
 
 <section class="chess-section" aria-labelledby="chess-heading">
-  <h2 class="section-title" id="chess-heading">02. Chess</h2>
+  <h2 class="section-title" id="chess-heading">Chess</h2>
   <div class="chess-status" aria-label="Chess.com rating">
     <span data-chess-summary>daniel_whn // Rapid 1112 // Blitz 937 // Bullet 1015 // Puzzles 1732 peak</span>
     <a href="https://www.chess.com/member/daniel_whn" target="_blank" rel="noopener" class="btn-link chess-profile-link">Profile / Rating</a>
@@ -173,7 +175,7 @@
     <a href="https://www.chess.com/game/live/168905893390" target="_blank" rel="noopener" class="chess-card" data-recent-game-card>
       <div class="mini-chess-board" data-chess-board data-fen="8/8/8/8/8/6K1/8/1R4k1 b - - 8 62" data-flip="true"></div>
       <div class="chess-card-caption">
-        <span class="chess-card-title" data-game-title>Review vs ruzicarosi</span>
+        <span class="chess-card-title" data-game-title>daniel_whn vs ruzicarosi</span>
         <small class="chess-card-meta" data-game-meta>Loss // Bullet // May 18</small>
       </div>
     </a>
@@ -181,7 +183,7 @@
     <a href="https://www.chess.com/game/live/168905785202" target="_blank" rel="noopener" class="chess-card" data-recent-game-card>
       <div class="mini-chess-board" data-chess-board data-fen="8/8/8/8/8/5k1p/7K/5q2 w - - 0 58"></div>
       <div class="chess-card-caption">
-        <span class="chess-card-title" data-game-title>Review vs kuzeyalkanm</span>
+        <span class="chess-card-title" data-game-title>daniel_whn vs kuzeyalkanm</span>
         <small class="chess-card-meta" data-game-meta>Draw // Bullet // May 18</small>
       </div>
     </a>
@@ -189,7 +191,7 @@
     <a href="https://www.chess.com/game/live/168905715616" target="_blank" rel="noopener" class="chess-card" data-recent-game-card>
       <div class="mini-chess-board" data-chess-board data-fen="1r4k1/5pbp/3p2p1/8/PPrp4/3q4/1K6/8 w - - 0 32"></div>
       <div class="chess-card-caption">
-        <span class="chess-card-title" data-game-title>Review vs CORPSEJADED</span>
+        <span class="chess-card-title" data-game-title>daniel_whn vs CORPSEJADED</span>
         <small class="chess-card-meta" data-game-meta>Loss // Bullet // May 18</small>
       </div>
     </a>
@@ -320,12 +322,13 @@
             const player = isWhite ? game.white : game.black;
             const opponent = isWhite ? game.black : game.white;
             const opponentName = opponent && opponent.username ? opponent.username : 'opponent';
+            const gameLabel = `${CHESS_USERNAME} vs ${opponentName}`;
             const result = playerResult(player && player.result);
             const metaText = `${result} // ${formatLabel(game.time_class)} // ${formatDate(game.end_time)}`;
 
             card.href = game.url;
-            card.setAttribute('aria-label', `Review vs ${opponentName}, ${metaText}`);
-            if (title) title.textContent = `Review vs ${opponentName}`;
+            card.setAttribute('aria-label', `${gameLabel}, ${metaText}`);
+            if (title) title.textContent = gameLabel;
             if (meta) meta.textContent = metaText;
             if (board) {
               board.dataset.fen = game.fen;
