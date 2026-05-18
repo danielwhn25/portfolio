@@ -162,10 +162,39 @@
   </div>
 </section>
 
-<aside class="chess-status" aria-label="Chess.com rating">
-  <a href="https://www.chess.com/member/daniel_whn" target="_blank" rel="noopener" class="chess-status-label">Chess.com</a>
-  <span data-chess-summary>daniel_whn // Rapid 1112 // Blitz 937 // Bullet 1015 // Puzzles 1732 peak</span>
-</aside>
+<section class="chess-section" aria-labelledby="chess-heading">
+  <h2 class="section-title" id="chess-heading">02. Chess</h2>
+  <div class="chess-status" aria-label="Chess.com rating">
+    <span data-chess-summary>daniel_whn // Rapid 1112 // Blitz 937 // Bullet 1015 // Puzzles 1732 peak</span>
+    <a href="https://www.chess.com/member/daniel_whn" target="_blank" rel="noopener" class="btn-link chess-profile-link">Profile / Rating</a>
+  </div>
+
+  <div class="chess-board-grid" aria-live="polite">
+    <a href="https://www.chess.com/game/live/168905893390" target="_blank" rel="noopener" class="chess-card" data-recent-game-card>
+      <div class="mini-chess-board" data-chess-board data-fen="8/8/8/8/8/6K1/8/1R4k1 b - - 8 62" data-flip="true"></div>
+      <div class="chess-card-caption">
+        <span class="chess-card-title" data-game-title>Review vs ruzicarosi</span>
+        <small class="chess-card-meta" data-game-meta>Loss // Bullet // May 18</small>
+      </div>
+    </a>
+
+    <a href="https://www.chess.com/game/live/168905785202" target="_blank" rel="noopener" class="chess-card" data-recent-game-card>
+      <div class="mini-chess-board" data-chess-board data-fen="8/8/8/8/8/5k1p/7K/5q2 w - - 0 58"></div>
+      <div class="chess-card-caption">
+        <span class="chess-card-title" data-game-title>Review vs kuzeyalkanm</span>
+        <small class="chess-card-meta" data-game-meta>Draw // Bullet // May 18</small>
+      </div>
+    </a>
+
+    <a href="https://www.chess.com/game/live/168905715616" target="_blank" rel="noopener" class="chess-card" data-recent-game-card>
+      <div class="mini-chess-board" data-chess-board data-fen="1r4k1/5pbp/3p2p1/8/PPrp4/3q4/1K6/8 w - - 0 32"></div>
+      <div class="chess-card-caption">
+        <span class="chess-card-title" data-game-title>Review vs CORPSEJADED</span>
+        <small class="chess-card-meta" data-game-meta>Loss // Bullet // May 18</small>
+      </div>
+    </a>
+  </div>
+</section>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -188,18 +217,65 @@
       viewer.addEventListener('mouseleave', resume);
     });
 
+    const CHESS_USERNAME = 'daniel_whn';
+    const CHESS_API_BASE = `https://api.chess.com/pub/player/${CHESS_USERNAME}`;
     const chessSummary = document.querySelector('[data-chess-summary]');
+    const gameCards = Array.from(document.querySelectorAll('[data-recent-game-card]'));
+    const pieceMap = {
+      p: '\u265f', r: '\u265c', n: '\u265e', b: '\u265d', q: '\u265b', k: '\u265a',
+      P: '\u2659', R: '\u2656', N: '\u2658', B: '\u2657', Q: '\u2655', K: '\u2654'
+    };
+
+    const fetchJson = url => fetch(url).then(response => {
+      if (!response.ok) throw new Error(`Chess.com request failed: ${response.status}`);
+      return response.json();
+    });
+
+    const drawChessBoard = board => {
+      const fen = board.dataset.fen || '';
+      const ranks = fen.split(' ')[0].split('/');
+      const squares = [];
+
+      ranks.forEach(rank => {
+        rank.split('').forEach(token => {
+          const blanks = Number(token);
+          if (blanks) {
+            for (let i = 0; i < blanks; i += 1) squares.push('');
+          } else {
+            squares.push(token);
+          }
+        });
+      });
+
+      if (board.dataset.flip === 'true') squares.reverse();
+
+      const fragment = document.createDocumentFragment();
+      squares.slice(0, 64).forEach((piece, index) => {
+        const square = document.createElement('span');
+        const row = Math.floor(index / 8);
+        const col = index % 8;
+        square.className = `chess-square ${(row + col) % 2 === 0 ? 'light' : 'dark'}`;
+
+        if (piece) {
+          square.textContent = pieceMap[piece] || '';
+          square.classList.add(piece === piece.toUpperCase() ? 'white-piece' : 'black-piece');
+        }
+
+        fragment.appendChild(square);
+      });
+
+      board.replaceChildren(fragment);
+    };
+
+    document.querySelectorAll('[data-chess-board]').forEach(drawChessBoard);
+
     if (chessSummary) {
       const statLine = (label, stat) => {
         const rating = stat && stat.last && stat.last.rating;
         return rating ? `${label} ${rating}` : '';
       };
 
-      fetch('https://api.chess.com/pub/player/daniel_whn/stats')
-        .then(response => {
-          if (!response.ok) throw new Error('Chess.com stats unavailable');
-          return response.json();
-        })
+      fetchJson(`${CHESS_API_BASE}/stats`)
         .then(stats => {
           const parts = [
             statLine('Rapid', stats.chess_rapid),
@@ -211,8 +287,52 @@
           ].filter(Boolean);
 
           if (parts.length) {
-            chessSummary.textContent = `daniel_whn // ${parts.join(' // ')}`;
+            chessSummary.textContent = `${CHESS_USERNAME} // ${parts.join(' // ')}`;
           }
+        })
+        .catch(() => {});
+    }
+
+    if (gameCards.length) {
+      const drawResults = new Set(['agreed', 'repetition', 'stalemate', 'insufficient', '50move', 'timevsinsufficient']);
+      const formatLabel = value => value ? value.charAt(0).toUpperCase() + value.slice(1) : 'Chess';
+      const formatDate = timestamp => new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric' }).format(new Date(timestamp * 1000));
+      const playerResult = result => result === 'win' ? 'Win' : drawResults.has(result) ? 'Draw' : 'Loss';
+
+      fetchJson(`${CHESS_API_BASE}/games/archives`)
+        .then(data => {
+          const archives = data.archives || [];
+          const latestArchive = archives[archives.length - 1];
+          return latestArchive ? fetchJson(latestArchive) : { games: [] };
+        })
+        .then(data => {
+          const games = (data.games || [])
+            .filter(game => game.rules === 'chess' && game.fen && game.url)
+            .sort((a, b) => b.end_time - a.end_time)
+            .slice(0, gameCards.length);
+
+          games.forEach((game, index) => {
+            const card = gameCards[index];
+            const board = card.querySelector('[data-chess-board]');
+            const title = card.querySelector('[data-game-title]');
+            const meta = card.querySelector('[data-game-meta]');
+            const isWhite = game.white && game.white.username && game.white.username.toLowerCase() === CHESS_USERNAME;
+            const player = isWhite ? game.white : game.black;
+            const opponent = isWhite ? game.black : game.white;
+            const opponentName = opponent && opponent.username ? opponent.username : 'opponent';
+            const result = playerResult(player && player.result);
+            const metaText = `${result} // ${formatLabel(game.time_class)} // ${formatDate(game.end_time)}`;
+
+            card.href = game.url;
+            card.setAttribute('aria-label', `Review vs ${opponentName}, ${metaText}`);
+            if (title) title.textContent = `Review vs ${opponentName}`;
+            if (meta) meta.textContent = metaText;
+            if (board) {
+              board.dataset.fen = game.fen;
+              board.dataset.flip = isWhite ? 'false' : 'true';
+              drawChessBoard(board);
+            }
+          });
         })
         .catch(() => {});
     }
