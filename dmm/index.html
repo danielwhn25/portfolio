@@ -14,7 +14,7 @@
   <h1>Bare-Metal Digital Multimeter</h1>
   <div class="project-date" style="margin-top:0.3rem;">Mar 2026</div>
   <div class="tech-stack" style="margin-top:0.6rem;">
-    STM32L051 // Bare-Metal C // Hardware Timers // ADC
+    STM32L051 // Bare-Metal C // Register-Level GPIO/ADC // SysTick Timing // 4-Bit LCD
   </div>
 </div>
 
@@ -23,10 +23,15 @@
 </div>
 
 <section>
+  <p class="page-lede">
+    Register-level STM32L051 RLC meter firmware that combines ADC resistance measurement, oscillator-based capacitance/inductance timing, and a continuity probe that stays responsive during edge-timing waits.
+  </p>
   <ul class="project-bullets">
-    <li><strong>Real-Time Execution:</strong> Achieved highly deterministic RLC sampling via custom Makefile build automation, eliminating IDE overhead and ensuring reproducible builds.</li>
-    <li><strong>Code Efficiency:</strong> Eliminated HAL bloat and overhead by engineering direct register-level drivers for all peripherals — timers, ADC, USART, and GPIO — from scratch.</li>
-    <li><strong>Data Acquisition:</strong> Captured high-fidelity frequency metrics utilizing hardware timers and an astable 555 timer circuit as a precision reference oscillator for component measurement.</li>
+    <li><strong>Register-Level Bring-Up:</strong> Configured GPIO modes, output types, pull-ups, analog input, ADC clocking, calibration, auto-off mode, and long ADC sample time directly through STM32L051 peripheral registers.</li>
+    <li><strong>Continuity Detection:</strong> Used a weak internal pull-up on PB6 so a grounded probe pulls the input low, then drove PB5 for buzzer/LED feedback; the continuity check runs continuously, including inside measurement wait loops.</li>
+    <li><strong>Resistance Measurement:</strong> Sampled the PB1 analog divider with the 12-bit ADC, calculated unknown resistance against a 330 ohm reference, detected open-circuit readings near full scale, and supported ohm/kohm display modes.</li>
+    <li><strong>Frequency-Based C/L Measurement:</strong> Timed 10 oscillator cycles with SysTick edge polling, computed capacitance from a calibrated 555 timer equation, and computed inductance from LC resonance using measured stray-capacitance compensation.</li>
+    <li><strong>User-Facing Firmware:</strong> Built the 4-bit LCD driver, formatted R/C/L readings into fixed-width rows, and handled pull-up button inputs for resistance, capacitance, and inductance display modes.</li>
   </ul>
   <div class="project-links">
     <a href="https://github.com/danielwhn25/ELEC291_labs/tree/main/DMM_STM32LO51" target="_blank" class="btn-link">View Code on GitHub ↗</a>
