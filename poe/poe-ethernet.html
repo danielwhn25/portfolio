@@ -49,7 +49,9 @@
         <span>Altium Schematic Export</span>
         <span>In Progress</span>
       </div>
-      <img src="../models/poe_schematic.png" alt="PoE Dev Board schematic" class="static-schematic-img">
+      <div class="schematic-panzoom" data-panzoom>
+        <img src="../models/poe_schematic.png" alt="PoE Dev Board schematic" class="static-schematic-img" draggable="false">
+      </div>
     </div>
 
     <div class="review-section-title anchor-target" id="architecture">System Architecture</div>
@@ -101,6 +103,8 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    initSchematicPanZoom();
+
     const sections = [...document.querySelectorAll('.anchor-target')];
     const links = [...document.querySelectorAll('.side-tabs a')];
     if (!sections.length || !links.length) return;
@@ -115,6 +119,93 @@
     window.addEventListener('scroll', setActive, { passive: true });
     setActive();
   });
+
+  function initSchematicPanZoom() {
+    document.querySelectorAll('[data-panzoom]').forEach(frame => {
+      const img = frame.querySelector('img');
+      if (!img) return;
+
+      const state = { scale: 1, x: 0, y: 0, dragging: false, lastX: 0, lastY: 0 };
+      const minScale = 1;
+      const maxScale = 5;
+
+      const clamp = () => {
+        const frameRect = frame.getBoundingClientRect();
+        const width = img.offsetWidth * state.scale;
+        const height = img.offsetHeight * state.scale;
+        state.x = Math.min(0, Math.max(frameRect.width - width, state.x));
+        state.y = Math.min(0, Math.max(frameRect.height - height, state.y));
+        if (state.scale === 1) {
+          state.x = 0;
+          state.y = 0;
+        }
+      };
+
+      const render = () => {
+        img.style.transform = `translate(${state.x}px, ${state.y}px) scale(${state.scale})`;
+        frame.classList.toggle('is-zoomed', state.scale > 1);
+      };
+
+      const zoomAt = (clientX, clientY, nextScale) => {
+        const rect = frame.getBoundingClientRect();
+        const prevScale = state.scale;
+        nextScale = Math.min(maxScale, Math.max(minScale, nextScale));
+        if (nextScale === prevScale) return;
+
+        const localX = clientX - rect.left;
+        const localY = clientY - rect.top;
+        const ratio = nextScale / prevScale;
+        state.x = localX - (localX - state.x) * ratio;
+        state.y = localY - (localY - state.y) * ratio;
+        state.scale = nextScale;
+        clamp();
+        render();
+      };
+
+      frame.addEventListener('wheel', event => {
+        event.preventDefault();
+        zoomAt(event.clientX, event.clientY, state.scale * Math.exp(-event.deltaY * 0.001));
+      }, { passive: false });
+
+      frame.addEventListener('pointerdown', event => {
+        if (state.scale === 1) return;
+        state.dragging = true;
+        state.lastX = event.clientX;
+        state.lastY = event.clientY;
+        frame.classList.add('is-dragging');
+        frame.setPointerCapture(event.pointerId);
+      });
+
+      frame.addEventListener('pointermove', event => {
+        if (!state.dragging) return;
+        state.x += event.clientX - state.lastX;
+        state.y += event.clientY - state.lastY;
+        state.lastX = event.clientX;
+        state.lastY = event.clientY;
+        clamp();
+        render();
+      });
+
+      const endDrag = event => {
+        state.dragging = false;
+        frame.classList.remove('is-dragging');
+        if (frame.hasPointerCapture(event.pointerId)) frame.releasePointerCapture(event.pointerId);
+      };
+
+      frame.addEventListener('pointerup', endDrag);
+      frame.addEventListener('pointercancel', endDrag);
+      frame.addEventListener('dblclick', () => {
+        state.scale = 1;
+        state.x = 0;
+        state.y = 0;
+        render();
+      });
+      window.addEventListener('resize', () => {
+        clamp();
+        render();
+      });
+    });
+  }
 </script>
 </body>
 </html>

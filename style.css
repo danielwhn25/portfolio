@@ -572,6 +572,20 @@ model-viewer { width: 100%; height: 100%; outline: none; }
   display: block;
   background: var(--bg);
 }
+.schematic-panzoom {
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  cursor: zoom-in;
+  touch-action: none;
+}
+.schematic-panzoom.is-zoomed { cursor: grab; }
+.schematic-panzoom.is-dragging { cursor: grabbing; }
+.schematic-panzoom .static-schematic-img {
+  transform-origin: 0 0;
+  will-change: transform;
+  user-select: none;
+}
 
 /* Keep exported schematic images on a neutral sheet background. */
 .static-schematic-img, .card-image-viewer img { background: #ffffff; }
