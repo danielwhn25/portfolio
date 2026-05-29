@@ -51,6 +51,7 @@
       </div>
       <div class="schematic-panzoom" data-panzoom>
         <img src="../models/poe_schematic.png" alt="PoE Dev Board schematic" class="static-schematic-img" draggable="false">
+        <div class="panzoom-hint" aria-hidden="true">Scroll to zoom // Right-drag to pan</div>
       </div>
     </div>
 
@@ -164,11 +165,14 @@
 
       frame.addEventListener('wheel', event => {
         event.preventDefault();
+        frame.classList.add('has-interacted');
         zoomAt(event.clientX, event.clientY, state.scale * Math.exp(-event.deltaY * 0.001));
       }, { passive: false });
 
       frame.addEventListener('pointerdown', event => {
         if (state.scale === 1) return;
+        event.preventDefault();
+        frame.classList.add('has-interacted');
         state.dragging = true;
         state.lastX = event.clientX;
         state.lastY = event.clientY;
@@ -195,11 +199,13 @@
       frame.addEventListener('pointerup', endDrag);
       frame.addEventListener('pointercancel', endDrag);
       frame.addEventListener('dblclick', () => {
+        frame.classList.add('has-interacted');
         state.scale = 1;
         state.x = 0;
         state.y = 0;
         render();
       });
+      frame.addEventListener('contextmenu', event => event.preventDefault());
       window.addEventListener('resize', () => {
         clamp();
         render();
