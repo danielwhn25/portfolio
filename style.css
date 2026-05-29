@@ -520,6 +520,25 @@ model-viewer { width: 100%; height: 100%; outline: none; }
   padding: 12px;
   display: block;
 }
+.project-photo-viewer img {
+  object-fit: cover;
+  padding: 0;
+  background: var(--surface);
+}
+
+.project-hero-visual {
+  overflow: hidden;
+  margin: -0.8rem 0 1.8rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+}
+.project-hero-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
 
 .page-lede {
   font-size: 1rem;
