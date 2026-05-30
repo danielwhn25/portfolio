@@ -29,12 +29,12 @@
 
 <section>
   <p class="page-lede">
-    Power-over-Ethernet (PoE) is a common way to deliver DC power and network data over the same Ethernet cable, which keeps remote devices simpler to install and easier to service. A PoE link needs power sourcing equipment (PSE), such as a PoE switch or Ethernet power injector, and a powered device (PD), which receives that power and converts it into local board rails. This project is the PD side of the link: a dev board that accepts power from a PoE source, brings up Ethernet through the W5500, and gives me a practical way to learn wired networking, high-speed PCB layout, PoE front-end design, and register-level Ethernet firmware. This first revision is focused on receiving PoE power and validating the Ethernet controller; after this stage, I plan to design a switching-based version of the power stage.
+    Power-over-Ethernet (PoE) sends DC power and network data through the same Ethernet cable. A PoE link has two sides: power sourcing equipment (PSE), such as a PoE switch or Ethernet injector, and a powered device (PD), which receives that power. This board is my PD-side dev board for learning wired networking, high-speed PCB layout, PoE front-end design, and register-level Ethernet firmware. This revision focuses on receiving PoE power and bringing up the W5500; a future revision will use a switching power stage.
   </p>
 
   <figure class="poe-diagram-figure">
     <img src="../models/poe_injector_brainboxes.jpg" alt="Diagram showing a non-PoE switch connected to a PoE injector, which adds power before sending power and data to a powered device.">
-    <figcaption>In an injector setup, the injector acts as the PSE and the device at the far end is the PD. Same topology applies to this board. Source: <a href="https://docs.brainboxes.com/explanation/networking/what-is-power-over-ethernet-poe" target="_blank" rel="noopener">Brainboxes Documentation</a>.</figcaption>
+    <figcaption>Source: <a href="https://docs.brainboxes.com/explanation/networking/what-is-power-over-ethernet-poe" target="_blank" rel="noopener">Brainboxes Documentation</a>.</figcaption>
   </figure>
 
   <ul class="project-bullets">
@@ -50,10 +50,6 @@
   <div class="engineering-review">
     <div class="review-section-title anchor-target" id="schematic">Current Schematic</div>
     <div class="schematic-display-card">
-      <div class="schematic-display-header">
-        <span>Altium Schematic Export</span>
-        <span>In Progress</span>
-      </div>
       <div class="schematic-panzoom" data-panzoom>
         <img src="../models/poe_schematic.png" alt="PoE Dev Board schematic" class="static-schematic-img" draggable="false">
         <div class="panzoom-hint" aria-hidden="true">Scroll to zoom // Right-drag to pan</div>
