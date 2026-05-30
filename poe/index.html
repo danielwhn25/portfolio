@@ -11,11 +11,11 @@
 <nav class="side-tabs" aria-label="Page sections">
   <div class="side-tabs-title">On This Page</div>
   <a href="#top" class="active">Overview</a>
-  <a href="#references">References</a>
   <a href="#schematic">Schematic</a>
   <a href="#architecture">Architecture</a>
   <a href="#firmware">Firmware Plan</a>
   <a href="#bringup">Bring-Up Plan</a>
+  <a href="#references">References</a>
 </nav>
 
 <div class="back-nav"><a href="../">← Back to Portfolio</a></div>
@@ -38,32 +38,8 @@
     <figcaption>Source: <a href="https://docs.brainboxes.com/explanation/networking/what-is-power-over-ethernet-poe" target="_blank" rel="noopener">Brainboxes Documentation</a>.</figcaption>
   </figure>
 
-  <ul class="project-bullets">
-    <li><strong>Single-Cable Architecture:</strong> Designing a PoE-powered Ethernet interface for systems where one cable should provide both regulated board power and reliable wired network connectivity.</li>
-    <li><strong>Embedded Networking:</strong> Planning C firmware to bring up the W5500 over SPI, validate register-level communication, monitor link state, and test UDP/HTTP diagnostics.</li>
-    <li><strong>Board Bring-Up:</strong> Adding test access for power rails, SPI, reset, interrupt, and Ethernet status indicators so faults can be isolated during first-power and network validation.</li>
-  </ul>
-
   <div class="project-links">
     <a href="https://github.com/danielwhn25/Power-over-Ethernet" target="_blank" class="btn-link">GitHub ↗</a>
-  </div>
-
-  <div class="reference-block">
-    <div class="review-section-title anchor-target" id="references">Design References</div>
-    <div class="reference-list">
-      <a class="reference-item" href="https://docs.wiznet.io/Product/Chip/Ethernet/W5500/ref-schematic" target="_blank" rel="noopener">
-        <span>WIZnet W5500 Reference Schematic</span>
-        <small>Official W5500 Ethernet reference schematic and RJ45/MagJack guidance.</small>
-      </a>
-      <a class="reference-item" href="https://docs.wiznet.io/assets/images/w5500_sch_v110_use_mag_-19e2939c3f018e5d72f1b957f990f96d.png" target="_blank" rel="noopener">
-        <span>W5500 MagJack Schematic Image</span>
-        <small>WIZnet schematic export for a W5500 design using an RJ45 connector with magnetics.</small>
-      </a>
-      <a class="reference-item" href="https://silvertel.com/images/datasheets/Ag9900M-datasheet-ultra-miniature-isolated-Power-over-Ethernet-POE-module.pdf" target="_blank" rel="noopener">
-        <span>Silvertel Ag9900M PoE Module Datasheet</span>
-        <small>Isolated IEEE 802.3af PoE module datasheet used for the PD power stage.</small>
-      </a>
-    </div>
   </div>
 
   <div class="engineering-review">
@@ -118,6 +94,24 @@
         <li>Connect to a router or switch and validate link LEDs before running UDP/HTTP firmware tests.</li>
         <li>Use test pads and debug headers to isolate power, reset, SPI, and Ethernet link faults during first revision bring-up.</li>
       </ul>
+    </div>
+
+    <div class="reference-block">
+      <div class="review-section-title anchor-target" id="references">Design References</div>
+      <div class="reference-list">
+        <a class="reference-item" href="https://docs.wiznet.io/Product/Chip/Ethernet/W5500/ref-schematic" target="_blank" rel="noopener">
+          <span>WIZnet W5500 Reference Schematic</span>
+          <small>Official W5500 Ethernet reference schematic and RJ45/MagJack guidance.</small>
+        </a>
+        <a class="reference-item" href="https://docs.wiznet.io/assets/images/w5500_sch_v110_use_mag_-19e2939c3f018e5d72f1b957f990f96d.png" target="_blank" rel="noopener">
+          <span>W5500 MagJack Schematic Image</span>
+          <small>WIZnet schematic export for a W5500 design using an RJ45 connector with magnetics.</small>
+        </a>
+        <a class="reference-item" href="https://silvertel.com/images/datasheets/Ag9900M-datasheet-ultra-miniature-isolated-Power-over-Ethernet-POE-module.pdf" target="_blank" rel="noopener">
+          <span>Silvertel Ag9900M PoE Module Datasheet</span>
+          <small>Isolated IEEE 802.3af PoE module datasheet used for the PD power stage.</small>
+        </a>
+      </div>
     </div>
   </div>
 </section>
