@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" role="img" aria-labelledby="poe-title poe-desc">
+  <title id="poe-title">Power-over-Ethernet PSE to PD diagram</title>
+  <desc id="poe-desc">A PoE switch or injector acts as the power sourcing equipment and sends data and DC power over an Ethernet cable to the PoE dev board, which acts as the powered device.</desc>
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0055aa"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f97316"/>
+    </marker>
+    <style>
+      text {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        fill: #111111;
+      }
+      .kicker {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1.6px;
+        text-transform: uppercase;
+      }
+      .heading {
+        font-size: 21px;
+        font-weight: 700;
+      }
+      .body {
+        font-size: 14px;
+        fill: #555555;
+      }
+      .small {
+        font-size: 12px;
+        fill: #555555;
+      }
+      .label {
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .mono {
+        font-family: "SFMono-Regular", Consolas, "Courier New", monospace;
+        font-size: 11px;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        fill: #555555;
+      }
+      .blue {
+        fill: #0055aa;
+      }
+      .orange {
+        fill: #f97316;
+      }
+      .light {
+        fill: #ffffff;
+      }
+    </style>
+  </defs>
+
+  <rect width="960" height="360" fill="#ffffff"/>
+
+  <rect x="36" y="66" width="258" height="216" rx="8" fill="#fbfbfb" stroke="#e0e0e0"/>
+  <text x="60" y="98" class="kicker blue">PSE</text>
+  <text x="60" y="127" class="heading">Power sourcing equipment</text>
+  <text x="60" y="151" class="body">PoE switch or Ethernet injector</text>
+
+  <g transform="translate(58 176)">
+    <rect x="0" y="0" width="206" height="66" rx="7" fill="#f4f4f4" stroke="#d6d6d6"/>
+    <rect x="15" y="16" width="42" height="32" rx="4" fill="#ffffff" stroke="#bdbdbd"/>
+    <circle cx="28" cy="32" r="4" fill="#20a167"/>
+    <circle cx="43" cy="32" r="4" fill="#f6b73c"/>
+    <g fill="#111111">
+      <rect x="77" y="17" width="25" height="20" rx="2"/>
+      <rect x="111" y="17" width="25" height="20" rx="2"/>
+      <rect x="145" y="17" width="25" height="20" rx="2"/>
+    </g>
+    <g fill="#ffd84d">
+      <rect x="81" y="21" width="4" height="4"/>
+      <rect x="89" y="21" width="4" height="4"/>
+      <rect x="115" y="21" width="4" height="4"/>
+      <rect x="123" y="21" width="4" height="4"/>
+      <rect x="149" y="21" width="4" height="4"/>
+      <rect x="157" y="21" width="4" height="4"/>
+    </g>
+    <text x="15" y="58" class="mono">detects PD, classifies power, then enables DC</text>
+  </g>
+
+  <rect x="666" y="66" width="258" height="216" rx="8" fill="#fbfbfb" stroke="#e0e0e0"/>
+  <text x="690" y="98" class="kicker orange">PD</text>
+  <text x="690" y="127" class="heading">Powered device</text>
+  <text x="690" y="151" class="body">PoE Dev Board</text>
+
+  <g transform="translate(690 174)">
+    <rect x="0" y="0" width="204" height="74" rx="7" fill="#f7faf8" stroke="#d5ded7"/>
+    <rect x="14" y="21" width="35" height="32" rx="3" fill="#ffffff" stroke="#9ca3af"/>
+    <rect x="68" y="17" width="38" height="38" rx="5" fill="#ffffff" stroke="#c7c7c7"/>
+    <rect x="123" y="17" width="58" height="38" rx="5" fill="#111111"/>
+    <circle cx="194" cy="12" r="4" fill="#20a167"/>
+    <circle cx="194" cy="62" r="4" fill="#f6b73c"/>
+    <text x="18" y="68" class="mono">RJ45</text>
+    <text x="65" y="68" class="mono">PD front end</text>
+    <text x="129" y="68" class="mono light">W5500</text>
+  </g>
+
+  <path d="M 294 143 C 384 143 419 112 480 143 S 571 174 666 143" fill="none" stroke="#0055aa" stroke-width="5" stroke-linecap="round" marker-start="url(#arrow-blue)" marker-end="url(#arrow-blue)"/>
+  <path d="M 294 207 C 384 207 419 238 480 207 S 571 176 666 207" fill="none" stroke="#0055aa" stroke-width="5" stroke-linecap="round" opacity="0.65"/>
+  <path d="M 294 175 C 384 175 419 205 480 175 S 571 145 666 175" fill="none" stroke="#f97316" stroke-width="6" stroke-linecap="round" marker-end="url(#arrow-orange)"/>
+
+  <path d="M 294 104 C 395 74 565 74 666 104" fill="none" stroke="#555555" stroke-width="2" stroke-dasharray="7 7" stroke-linecap="round"/>
+  <rect x="382" y="48" width="196" height="40" rx="6" fill="#ffffff" stroke="#e0e0e0"/>
+  <text x="410" y="73" class="mono">Detection + classification</text>
+
+  <rect x="389" y="126" width="64" height="30" rx="15" fill="#ffffff" stroke="#cfe0f5"/>
+  <text x="406" y="147" class="label blue">Data</text>
+  <rect x="500" y="189" width="76" height="30" rx="15" fill="#ffffff" stroke="#fed7aa"/>
+  <text x="515" y="210" class="label orange">Power</text>
+
+  <text x="376" y="274" class="body">One Ethernet cable carries link data and PoE DC power.</text>
+  <text x="326" y="299" class="small">Power can arrive from Mode A or Mode B pairs; the PD front end handles mode and polarity.</text>
+</svg>
