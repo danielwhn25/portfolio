@@ -90,8 +90,19 @@
 
     <!-- PoE Dev Board -->
     <div class="project-card">
-      <div class="card-viewer card-image-viewer">
-        <img src="models/poe_schematic.png" alt="PoE Dev Board schematic preview">
+      <div class="card-viewer">
+        <model-viewer
+          src="models/POE_board.glb"
+          camera-controls
+          auto-rotate
+          auto-rotate-delay="2000"
+          rotation-per-second="28deg"
+          bounds="tight"
+          shadow-intensity="1"
+          environment-image="neutral"
+          camera-target="0m 0m 0m"
+          camera-orbit="0deg 35deg auto">
+        </model-viewer>
       </div>
       <div class="card-footer">
         <h3>PoE Dev Board</h3>

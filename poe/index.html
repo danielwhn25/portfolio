@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PoE Dev Board | Daniel Ng</title>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -11,6 +12,7 @@
 <nav class="side-tabs" aria-label="Page sections">
   <div class="side-tabs-title">On This Page</div>
   <a href="#top" class="active">Overview</a>
+  <a href="#model">3D Model</a>
   <a href="#schematic">Schematic</a>
   <a href="#architecture">Architecture</a>
   <a href="#firmware">Firmware Plan</a>
@@ -32,6 +34,21 @@
   <p class="page-lede">
     Power-over-Ethernet (PoE) sends DC power and network data through the same Ethernet cable. A PoE link has two sides: power sourcing equipment (PSE), such as a PoE switch or Ethernet injector, and a powered device (PD), which receives that power. This board is my PD-side dev board for learning wired networking, high-speed PCB layout, PoE front-end design, and register-level Ethernet firmware. This revision focuses on receiving PoE power and bringing up the W5500; a future revision will use a switching power stage.
   </p>
+
+  <div class="review-section-title anchor-target" id="model">3D Board Model</div>
+  <div class="cad-container">
+    <div class="viewer-area">
+      <model-viewer id="poe-3d"
+        src="../models/POE_board.glb"
+        camera-controls auto-rotate auto-rotate-delay="3500"
+        rotation-per-second="30deg"
+        bounds="tight"
+        shadow-intensity="1" environment-image="neutral"
+        camera-target="0m 0m 0m"
+        camera-orbit="0deg 35deg auto">
+      </model-viewer>
+    </div>
+  </div>
 
   <figure class="poe-diagram-figure">
     <img src="../models/poe_injector_brainboxes.jpg" alt="Diagram showing a non-PoE switch connected to a PoE injector, which adds power before sending power and data to a powered device.">
@@ -118,6 +135,25 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('model-viewer').forEach(viewer => {
+      const pause = () => {
+        if (viewer.hasAttribute('auto-rotate')) {
+          viewer.dataset.wasAutoRotate = 'true';
+          viewer.removeAttribute('auto-rotate');
+        }
+        clearTimeout(viewer._resumeTimer);
+      };
+      const resume = () => {
+        if (viewer.dataset.wasAutoRotate !== 'true') return;
+        clearTimeout(viewer._resumeTimer);
+        viewer._resumeTimer = setTimeout(() => viewer.setAttribute('auto-rotate', ''), 2500);
+      };
+      viewer.addEventListener('pointerdown', pause);
+      viewer.addEventListener('pointerup', resume);
+      viewer.addEventListener('pointercancel', resume);
+      viewer.addEventListener('mouseleave', resume);
+    });
+
     initSchematicPanZoom();
 
     const sections = [...document.querySelectorAll('.anchor-target')];
