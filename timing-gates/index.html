@@ -4,10 +4,68 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Formula UBC: Laser Timing Gates | Daniel Ng</title>
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+<meta name="description" content="ESP32-C3 laser timing gate receiver with ESP-NOW clock synchronisation, photodiode TIA front end, and LiPo PowerPath.">
+<meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="../logos/favicon.png">
+<link rel="apple-touch-icon" href="../logos/favicon.png">
+
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      document.documentElement.dataset.theme = stored ||
+        'light';
+    } catch (e) {
+      document.documentElement.dataset.theme = 'light';
+    }
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../style.css">
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+<script src="../app.js" defer></script>
 </head>
 <body>
+
+<nav class="site-nav" aria-label="Primary">
+  <div class="site-nav-inner">
+    <a class="nav-brand" href="../">Daniel Ng</a>
+    <ul class="nav-links">
+      <li><a href="../#work">Experience</a></li>
+      <li><a href="../#projects">Projects</a></li>
+      <li><a href="../#chess">Chess</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch appearance">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.4v2.2M12 19.4v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.4 12h2.2M19.4 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20.5 14.3A8.6 8.6 0 1 1 9.7 3.5a6.9 6.9 0 0 0 10.8 10.8Z"/>
+        </svg>
+      </button>
+      <div class="social-row">
+        <a class="social-link is-compact" href="https://github.com/danielwhn25" target="_blank" rel="noopener" aria-label="GitHub" data-bubble="github.com/danielwhn25">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a class="social-link is-compact" href="https://linkedin.com/in/danielngEE" target="_blank" rel="noopener" aria-label="LinkedIn" data-bubble="linkedin.com/in/danielngEE">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg>
+        </a>
+        <a class="social-link is-compact" href="https://www.chess.com/member/daniel_whn" target="_blank" rel="noopener" aria-label="Chess.com" data-bubble="chess.com/member/daniel_whn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0a3.85 3.85 0 0 0-3.875 3.846A3.84 3.84 0 0 0 9.73 6.969l-2.79 1.85c0 .622.144 1.114.434 1.649H9.83c-.014.245-.014.549-.014.925 0 .025.003.048.006.071-.064 1.353-.507 3.472-3.62 5.842-.816.625-1.423 1.495-1.806 2.533a.33.33 0 0 0-.045.084 8.124 8.124 0 0 0-.39 2.516c0 .1.216 1.561 8.038 1.561s8.038-1.46 8.038-1.561c0-2.227-.824-4.048-2.24-5.133-4.034-3.08-3.586-5.74-3.644-6.838h2.458c.29-.535.434-1.027.434-1.649l-2.79-1.836a3.86 3.86 0 0 0 1.604-3.123A3.873 3.873 0 0 0 13.445.275c-.004-.002-.01.004-.015.004A3.76 3.76 0 0 0 12 0Z"/></svg>
+        </a>
+        <a class="social-link is-compact" href="mailto:daniel.whn@outlook.com" aria-label="Email daniel.whn@outlook.com" data-bubble="daniel.whn@outlook.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 8.2 6a1.4 1.4 0 0 0 1.6 0L21 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
 
 <nav class="side-tabs" aria-label="Page sections">
   <div class="side-tabs-title">On This Page</div>
@@ -19,40 +77,37 @@
   <a href="#tg-verification">Bring-Up Verification</a>
 </nav>
 
-<div class="back-nav"><a href="../">← Back to Portfolio</a></div>
+<div class="back-nav"><a href="../">Back to portfolio</a></div>
 
-<div class="project-page-header anchor-target" id="top">
+<div class="project-page-header anchor-target" id="top" data-reveal>
   <h1>Formula UBC: Laser Timing Gates Receiver</h1>
-  <div class="project-date" style="margin-top:0.3rem;">Sept 2025 – Present</div>
-  <div class="tech-stack" style="margin-top:0.6rem;">
-    Altium Designer // ESP32-C3 // ESP-NOW Clock Sync // LiPo PowerPath // Photodiode TIA
+  <div class="project-date">Sept 2025 – Present</div>
+  <div class="tech-stack" style="margin-top:0.9rem;">
+    <span>Altium Designer</span><span><svg class="chip-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.926 19.324a7.6 7.6 0 00-2.983-6.754 7.44 7.44 0 00-3.828-1.554.697.697 0 01-.606-.731.674.674 0 01.743-.617 8.97 8.97 0 018 9.805 7.828 7.828 0 01-.298 1.542l1.989.56a11.039 11.039 0 001.714-.651 12.159 12.159 0 00.217-2.343A12.57 12.57 0 007.212 6.171a5.53 5.53 0 00-2 0 4.354 4.354 0 00-2.16 1.337 4.274 4.274 0 001.909 6.856 9.896 9.896 0 001.074.195 4.011 4.011 0 013.337 3.954 3.965 3.965 0 01-.64 2.16l1.371.88a10.182 10.182 0 002.057.342 7.52 7.52 0 00.754-2.628m.16 4.73A13.073 13.073 0 01.001 10.983 12.982 12.982 0 013.83 1.737l.743.697a12.067 12.067 0 000 17.141 12.067 12.067 0 0017.141 0l.697.697a12.97 12.97 0 01-9.336 3.726M24 10.993A10.993 10.993 0 0012.949 0c-.389 0-.766 0-1.143.057l-.252.732a18.912 18.912 0 0111.588 11.576l.731-.263c0-.366.069-.732.069-1.143m-1.269 5.165A17.53 17.53 0 007.818 1.27a11.119 11.119 0 00-2.457 1.77v1.635A13.919 13.919 0 0119.268 18.57h1.634a11.713 11.713 0 001.771-2.446M7.92 17.884a1.691 1.691 0 11-1.69-1.691 1.691 1.691 0 011.69 1.691"/></svg>ESP32-C3</span><span>ESP-NOW Clock Sync</span>
+    <span>LiPo PowerPath</span><span>Photodiode TIA</span>
   </div>
 </div>
 
 <section>
 
-  <!-- CAD Viewer — top of page -->
-  <div class="cad-container" id="tg">
+  <!-- CAD Viewer, top of page -->
+  <div class="cad-container" id="tg" data-reveal>
     <div class="viewer-area">
       <div class="cad-label" id="tg-label"></div>
       <model-viewer id="tg-3d"
         src="../models/timing_gates.glb"
+        alt="3D model of the laser timing gate receiver PCB"
         camera-controls auto-rotate auto-rotate-delay="3500"
         rotation-per-second="30deg"
         shadow-intensity="1" environment-image="neutral"
         scale="0.001 0.001 0.001"
         camera-orbit="45deg 75deg auto">
       </model-viewer>
-      <img src="../models/tg_system.png"     class="schematic-img" id="tg-system" alt="Top-Level Hierarchical Schematic">
-      <img src="../models/tg_afe.png"        class="schematic-img" id="tg-afe"    alt="Laser Receiver Analog Front End">
-      <img src="../models/tg_power.png"      class="schematic-img" id="tg-power"  alt="USB-C LiPo Power Management">
-      <img src="../models/tg_mcu.png"        class="schematic-img" id="tg-mcu"    alt="ESP32-C3 MCU Schematic">
-      <img src="../models/tg_pcb_layout.png" class="schematic-img" id="tg-layout" alt="PCB Placement and Layout">
       <div class="code-panel" id="tg-code">
         <div class="code-snippet">
           <div class="code-snippet-header">
-            <span>Firmware Snippet // Clock Sync + Beam-Break Capture</span>
-            <button class="copy-btn" onclick="copyCode(this)">COPY</button>
+            <span>Firmware // Clock sync + beam-break capture</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
           </div>
           <pre><code>static volatile int64_t clock_offset_us = 0;
 static volatile int64_t last_beam_break_us = 0;
@@ -89,34 +144,51 @@ void process_lap_event(void)
       </div>
     </div>
     <div class="view-controls">
-      <button class="view-btn active" data-label="INTERACTIVE 3D RENDER"      onclick="switchView('tg','3d',this)">3D View</button>
-      <button class="view-btn"        data-label="HIERARCHICAL SCHEMATIC"      onclick="switchView('tg','system',this)">System</button>
-      <button class="view-btn"        data-label="LASER RECEIVER AFE"          onclick="switchView('tg','afe',this)">AFE</button>
-      <button class="view-btn"        data-label="USB-C / LIPO POWER"          onclick="switchView('tg','power',this)">Power</button>
-      <button class="view-btn"        data-label="ESP32-C3 CONTROLLER"         onclick="switchView('tg','mcu',this)">MCU</button>
-      <button class="view-btn"        data-label="PCB PLACEMENT &amp; LAYOUT"  onclick="switchView('tg','layout',this)">PCB Layout</button>
-      <button class="view-btn"        data-label="FIRMWARE // CLOCK SYNC"      onclick="switchView('tg','code',this)">Code</button>
+      <button class="view-btn active" data-label="INTERACTIVE 3D RENDER" onclick="switchView('tg','3d',this)">3D View</button>
+      <button class="view-btn"        data-label="FIRMWARE // CLOCK SYNC" onclick="switchView('tg','code',this)">Code</button>
     </div>
   </div>
 
-  <!-- Project bullets -->
-  <ul class="project-bullets" style="margin-top:1.6rem;">
-    <li><strong>System Architecture:</strong> Designed a modular receiver PCB for laser-based lap timing, separating USB-C power, ESP32 control, and optical analog front-end circuitry across hierarchical schematic sheets.</li>
+  <div class="review-section-title" data-reveal>Schematic Sheets</div>
+  <div class="sheet-stack-block" data-sheet-stack data-reveal>
+    <div class="sheet-stack">
+      <button class="sheet" type="button" data-sheet-label="Top-level hierarchical schematic">
+        <img src="../models/tg_system.png" alt="Top-level hierarchical schematic" loading="lazy" decoding="async">
+      </button>
+      <button class="sheet" type="button" data-sheet-label="Laser receiver analog front end">
+        <img src="../models/tg_afe.png" alt="Laser receiver analog front end" loading="lazy" decoding="async">
+      </button>
+      <button class="sheet" type="button" data-sheet-label="USB-C / LiPo power management">
+        <img src="../models/tg_power.png" alt="USB-C LiPo power management" loading="lazy" decoding="async">
+      </button>
+      <button class="sheet" type="button" data-sheet-label="ESP32-C3 controller">
+        <img src="../models/tg_mcu.png" alt="ESP32-C3 MCU schematic" loading="lazy" decoding="async">
+      </button>
+    </div>
+    <div class="sheet-stack-bar">
+      <span class="sheet-stack-caption" data-sheet-caption></span>
+      <span class="sheet-stack-count" data-sheet-count></span>
+    </div>
+    <p class="sheet-stack-hint">Hover a sheet to preview it &middot; click to open it full size.</p>
+  </div>
+
+  <ul class="project-bullets" style="margin-top:2rem;" data-reveal-group data-reveal-step="70">
+    <li><strong>System Architecture:</strong> Split the receiver PCB across hierarchical schematic sheets, with USB-C power, ESP32 control and the optical front end each on their own sheet.</li>
     <li><strong>Power Management:</strong> Implemented a 1S LiPo power subsystem using a BQ24074 charger/PowerPath IC, USB-C input, battery temperature-sense option, and TPS63001 buck-boost regulation for a stable 3.3 V system rail.</li>
     <li><strong>Optical Front End:</strong> Built a BPW34 photodiode array feeding an OPA380 transimpedance amplifier, using a 1.65 V virtual ground and feedback compensation to improve single-supply stability.</li>
     <li><strong>Digital Edge Detection:</strong> Added an adjustable LM393 Schmitt comparator with hysteresis to convert noisy photodiode signals into clean ESP32 interrupt edges for beam-break timing.</li>
-    <li><strong>Clock Synchronization:</strong> Architected a master/client ESP-NOW timebase that converts local beam-break timestamps into a shared master-time domain using periodic offset calibration and RTT latency compensation.</li>
+    <li><strong>Clock Synchronization:</strong> Wrote a master/client ESP-NOW timebase. Each gate converts its local beam-break timestamps into the master's time domain, and re-calibrates the offset periodically with round-trip-time compensation.</li>
     <li><strong>PCB Layout:</strong> Floorplanned a 4-layer board with noisy power-switching kept away from the quiet optical receiver, short TIA input routing, USB-C ESD protection near the connector, and u.FL antenna clearance for 2.4 GHz communication.</li>
   </ul>
 
-  <div class="project-links">
-    <a href="https://github.com/danielwhn25/FUBC-timing-gates" target="_blank" class="btn-link">GitHub ↗ (Full Documentation)</a>
+  <div class="project-links" data-reveal>
+    <a href="https://github.com/danielwhn25/FUBC-timing-gates" target="_blank" rel="noopener" class="btn-link">GitHub ↗ (full documentation)</a>
   </div>
 
   <div class="engineering-review">
 
-    <div class="review-section-title anchor-target" id="tg-requirements">Design Requirements</div>
-    <div class="review-grid">
+    <div class="review-section-title anchor-target" id="tg-requirements" data-reveal>Design Requirements</div>
+    <div class="review-grid" data-reveal-group data-reveal-step="80">
       <div class="review-card">
         <h4>Optical Timing</h4>
         <ul>
@@ -143,8 +215,8 @@ void process_lap_event(void)
       </div>
     </div>
 
-    <div class="review-section-title anchor-target" id="tg-decisions">Key Design Decisions</div>
-    <table class="decision-table">
+    <div class="review-section-title anchor-target" id="tg-decisions" data-reveal>Key Design Decisions</div>
+    <table class="decision-table" data-reveal>
       <thead><tr><th>Subsystem</th><th>Implementation</th></tr></thead>
       <tbody>
         <tr><td>Optical receiver</td><td>Three BPW34 photodiodes increase the effective laser capture area while feeding one transimpedance stage.</td></tr>
@@ -157,8 +229,8 @@ void process_lap_event(void)
       </tbody>
     </table>
 
-    <div class="review-section-title anchor-target" id="tg-clock-sync">Firmware Clock Synchronization</div>
-    <div class="review-grid">
+    <div class="review-section-title anchor-target" id="tg-clock-sync" data-reveal>Firmware Clock Synchronization</div>
+    <div class="review-grid" data-reveal-group data-reveal-step="80">
       <div class="review-card">
         <h4>Master-Time Alignment</h4>
         <ul>
@@ -177,8 +249,8 @@ void process_lap_event(void)
       </div>
     </div>
 
-    <div class="review-section-title anchor-target" id="tg-layout-risk">Layout Risk Controls</div>
-    <div class="review-grid">
+    <div class="review-section-title anchor-target" id="tg-layout-risk" data-reveal>Layout Risk Controls</div>
+    <div class="review-grid" data-reveal-group data-reveal-step="80">
       <div class="review-card">
         <h4>Noise Isolation</h4>
         <ul>
@@ -197,8 +269,8 @@ void process_lap_event(void)
       </div>
     </div>
 
-    <div class="review-section-title anchor-target" id="tg-verification">Bring-Up / Verification Plan</div>
-    <div class="verification-plan">
+    <div class="review-section-title anchor-target" id="tg-verification" data-reveal>Bring-Up / Verification Plan</div>
+    <div class="verification-plan" data-reveal>
       <ul>
         <li>Measure 3.3 V rail ripple under ESP32 wireless transmit load.</li>
         <li>Confirm BQ24074 PGOOD, CHG, and thermistor/TS behavior during USB and battery operation.</li>
@@ -213,59 +285,10 @@ void process_lap_event(void)
 </section>
 
 <script>
-  let zState = { scale:1, x:0, y:0, isDragging:false, startX:0, startY:0 };
-  function updateTransform(img) { img.style.transform=`translate(${zState.x}px,${zState.y}px) scale(${zState.scale})`; }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.schematic-img').forEach(img => {
-      img.addEventListener('wheel', e => {
-        if (!img.classList.contains('active')) return;
-        e.preventDefault();
-        zState.scale = Math.min(Math.max(1, zState.scale + Math.sign(e.deltaY)*-0.15), 5);
-        if (zState.scale===1) { zState.x=0; zState.y=0; }
-        updateTransform(img);
-      });
-      img.addEventListener('mousedown', e => {
-        if (!img.classList.contains('active')||zState.scale===1) return;
-        zState.isDragging=true; zState.startX=e.clientX-zState.x; zState.startY=e.clientY-zState.y;
-        img.style.transition='none';
-      });
-    });
-    window.addEventListener('mousemove', e => {
-      if (!zState.isDragging) return;
-      const img=document.querySelector('.schematic-img.active'); if(!img) return;
-      zState.x=e.clientX-zState.startX; zState.y=e.clientY-zState.startY; updateTransform(img);
-    });
-    window.addEventListener('mouseup', () => {
-      zState.isDragging=false;
-      document.querySelectorAll('.schematic-img').forEach(i=>i.style.transition='transform 0.1s ease');
-    });
-    document.querySelectorAll('model-viewer').forEach(viewer => {
-      const pause=()=>{ if(viewer.hasAttribute('auto-rotate')){viewer.dataset.wasAutoRotate='true';viewer.removeAttribute('auto-rotate');} clearTimeout(viewer._rt); };
-      const resume=()=>{ if(viewer.dataset.wasAutoRotate!=='true') return; clearTimeout(viewer._rt); viewer._rt=setTimeout(()=>viewer.setAttribute('auto-rotate',''),2500); };
-      viewer.addEventListener('pointerdown',pause); viewer.addEventListener('pointerup',resume);
-      viewer.addEventListener('pointercancel',resume); viewer.addEventListener('mouseleave',resume);
-    });
-    const links=Array.from(document.querySelectorAll('.side-tabs a'));
-    const targets=links.map(l=>document.querySelector(l.getAttribute('href'))).filter(Boolean);
-    function setActive() {
-      let id=targets[0]?.id;
-      targets.forEach(t=>{ if(t.getBoundingClientRect().top<=window.innerHeight*0.32) id=t.id; });
-      links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id));
-    }
-    window.addEventListener('scroll',setActive,{passive:true});
-    window.addEventListener('resize',setActive);
-    setActive();
-  });
-
   function switchView(projectId, viewType, btnElement) {
     const container=document.getElementById(projectId);
     const label=document.getElementById(projectId+'-label');
-    zState={scale:1,x:0,y:0,isDragging:false,startX:0,startY:0};
-    container.querySelectorAll('.schematic-img,.code-panel').forEach(p=>{
-      if(p.classList.contains('schematic-img')) p.style.transform='translate(0,0) scale(1)';
-      p.classList.remove('active');
-    });
+    container.querySelectorAll('.code-panel').forEach(p=>p.classList.remove('active'));
     container.querySelectorAll('model-viewer').forEach(m=>m.style.display='none');
     container.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
     btnElement.classList.add('active');
@@ -276,7 +299,7 @@ void process_lap_event(void)
 
   function copyCode(button) {
     navigator.clipboard.writeText(button.closest('.code-snippet').querySelector('code').innerText)
-      .then(()=>{ button.innerText='COPIED'; setTimeout(()=>button.innerText='COPY',1200); });
+      .then(()=>{ button.innerText='Copied'; setTimeout(()=>button.innerText='Copy',1200); });
   }
 </script>
 </body>

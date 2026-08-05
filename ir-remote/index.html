@@ -4,44 +4,99 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Line Follower Robot Wireless Remote | Daniel Ng</title>
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+<meta name="description" content="EFM8 mixed-signal remote generating a 38 kHz NEC IR carrier with interrupt-driven emergency stop.">
+<meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="../logos/favicon.png">
+<link rel="apple-touch-icon" href="../logos/favicon.png">
+
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      document.documentElement.dataset.theme = stored ||
+        'light';
+    } catch (e) {
+      document.documentElement.dataset.theme = 'light';
+    }
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../style.css">
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+<script src="../app.js" defer></script>
 </head>
 <body>
 
-<div class="back-nav"><a href="../">← Back to Portfolio</a></div>
+<nav class="site-nav" aria-label="Primary">
+  <div class="site-nav-inner">
+    <a class="nav-brand" href="../">Daniel Ng</a>
+    <ul class="nav-links">
+      <li><a href="../#work">Experience</a></li>
+      <li><a href="../#projects">Projects</a></li>
+      <li><a href="../#chess">Chess</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch appearance">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.4v2.2M12 19.4v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.4 12h2.2M19.4 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20.5 14.3A8.6 8.6 0 1 1 9.7 3.5a6.9 6.9 0 0 0 10.8 10.8Z"/>
+        </svg>
+      </button>
+      <div class="social-row">
+        <a class="social-link is-compact" href="https://github.com/danielwhn25" target="_blank" rel="noopener" aria-label="GitHub" data-bubble="github.com/danielwhn25">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a class="social-link is-compact" href="https://linkedin.com/in/danielngEE" target="_blank" rel="noopener" aria-label="LinkedIn" data-bubble="linkedin.com/in/danielngEE">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg>
+        </a>
+        <a class="social-link is-compact" href="https://www.chess.com/member/daniel_whn" target="_blank" rel="noopener" aria-label="Chess.com" data-bubble="chess.com/member/daniel_whn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0a3.85 3.85 0 0 0-3.875 3.846A3.84 3.84 0 0 0 9.73 6.969l-2.79 1.85c0 .622.144 1.114.434 1.649H9.83c-.014.245-.014.549-.014.925 0 .025.003.048.006.071-.064 1.353-.507 3.472-3.62 5.842-.816.625-1.423 1.495-1.806 2.533a.33.33 0 0 0-.045.084 8.124 8.124 0 0 0-.39 2.516c0 .1.216 1.561 8.038 1.561s8.038-1.46 8.038-1.561c0-2.227-.824-4.048-2.24-5.133-4.034-3.08-3.586-5.74-3.644-6.838h2.458c.29-.535.434-1.027.434-1.649l-2.79-1.836a3.86 3.86 0 0 0 1.604-3.123A3.873 3.873 0 0 0 13.445.275c-.004-.002-.01.004-.015.004A3.76 3.76 0 0 0 12 0Z"/></svg>
+        </a>
+        <a class="social-link is-compact" href="mailto:daniel.whn@outlook.com" aria-label="Email daniel.whn@outlook.com" data-bubble="daniel.whn@outlook.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 8.2 6a1.4 1.4 0 0 0 1.6 0L21 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
 
-<div class="project-page-header">
+<div class="back-nav"><a href="../">Back to portfolio</a></div>
+
+<div class="project-page-header" data-reveal>
   <h1>Line Follower Robot Wireless Remote</h1>
-  <div class="project-date" style="margin-top:0.3rem;">Feb 2026 – Mar 2026</div>
-  <div class="tech-stack" style="margin-top:0.6rem;">
-    Altium Designer // EFM8 MCU // 38 kHz IR // Mixed-Signal PCB
+  <div class="project-date">Feb 2026 – Mar 2026</div>
+  <div class="tech-stack" style="margin-top:0.9rem;">
+    <span>Altium Designer</span><span>EFM8 MCU</span><span>38 kHz IR</span><span>Mixed-Signal PCB</span>
   </div>
 </div>
 
 <section>
 
-  <!-- CAD Viewer — top of page -->
-  <div class="cad-container" id="ir">
+  <!-- CAD Viewer, top of page -->
+  <div class="cad-container" id="ir" data-reveal>
     <div class="viewer-area">
       <div class="cad-label" id="ir-label"></div>
       <model-viewer id="ir-3d"
         src="../models/IR_remote.glb"
+        alt="3D model of the wireless IR remote PCB"
         camera-controls auto-rotate auto-rotate-delay="3500"
         rotation-per-second="30deg"
         shadow-intensity="1" environment-image="neutral"
         scale="0.001 0.001 0.001"
         camera-orbit="45deg 75deg auto">
       </model-viewer>
-      <img src="../models/IR_schematic.png" class="schematic-img" id="ir-schematic" alt="Circuit Schematic">
-      <img src="../models/IR_layout1.png"   class="schematic-img" id="ir-sch1"      alt="Top Layer Routing">
-      <img src="../models/IR_layout2.png"   class="schematic-img" id="ir-sch2"      alt="Bottom Layer Routing">
-      <img src="../models/IR_layout3.png"   class="schematic-img" id="ir-sch3"      alt="Layout View 3">
       <div class="code-panel" id="ir-code">
         <div class="code-snippet">
           <div class="code-snippet-header">
-            <span>Firmware Snippet // 38 kHz IR Carrier Timing</span>
-            <button class="copy-btn" onclick="copyCode(this)">COPY</button>
+            <span>Firmware // 38 kHz IR carrier timing</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
           </div>
           <pre><code>void Timer2_ISR(void) interrupt 5
 {
@@ -58,62 +113,47 @@
     </div>
     <div class="view-controls">
       <button class="view-btn active" data-label="INTERACTIVE 3D RENDER" onclick="switchView('ir','3d',this)">3D View</button>
-      <button class="view-btn"        data-label="CIRCUIT SCHEMATIC"      onclick="switchView('ir','schematic',this)">Schematic</button>
-      <button class="view-btn"        data-label="TOP LAYER ROUTING"      onclick="switchView('ir','sch1',this)">Layout 1</button>
-      <button class="view-btn"        data-label="BOTTOM LAYER ROUTING"   onclick="switchView('ir','sch2',this)">Layout 2</button>
-      <button class="view-btn"        data-label="LAYOUT VIEW 3"          onclick="switchView('ir','sch3',this)">Layout 3</button>
       <button class="view-btn"        data-label="FIRMWARE // IR CARRIER" onclick="switchView('ir','code',this)">Code</button>
     </div>
   </div>
 
-  <!-- Project bullets -->
-  <ul class="project-bullets" style="margin-top:1.6rem;">
-    <li><strong>Reliable Comm:</strong> Engineered a robust 38 kHz IR transmission protocol using hardware timers to generate a precise NEC-protocol carrier and ensure reliable decode at the receiver.</li>
-    <li><strong>System Safety:</strong> Guaranteed operator safety with zero-latency, interrupt-driven emergency stops that preempt all normal control flow.</li>
-    <li><strong>UX Design:</strong> Enhanced user interaction via active-low PNP haptic and acoustic feedback circuits driven from MCU GPIO.</li>
-    <li><strong>Autonomous Control:</strong> Streamlined complex robotic navigation through custom, intuitive LCD menus with state-machine driven UI logic.</li>
+  <div class="review-section-title" data-reveal>Schematic &amp; Layout</div>
+  <div class="sheet-stack-block" data-sheet-stack data-reveal>
+    <div class="sheet-stack">
+      <button class="sheet" type="button" data-sheet-label="Circuit schematic">
+        <img src="../models/IR_schematic.png" alt="Circuit schematic" loading="lazy" decoding="async">
+      </button>
+      <button class="sheet" type="button" data-sheet-label="Top layer routing">
+        <img src="../models/IR_layout1.png" alt="Top layer routing" loading="lazy" decoding="async">
+      </button>
+      <button class="sheet" type="button" data-sheet-label="Bottom layer routing">
+        <img src="../models/IR_layout2.png" alt="Bottom layer routing" loading="lazy" decoding="async">
+      </button>
+      <button class="sheet" type="button" data-sheet-label="Layout view 3">
+        <img src="../models/IR_layout3.png" alt="Layout view 3" loading="lazy" decoding="async">
+      </button>
+    </div>
+    <div class="sheet-stack-bar">
+      <span class="sheet-stack-caption" data-sheet-caption></span>
+      <span class="sheet-stack-count" data-sheet-count></span>
+    </div>
+    <p class="sheet-stack-hint">Hover a sheet to preview it &middot; click to open it full size.</p>
+  </div>
+
+  <ul class="project-bullets" style="margin-top:2rem;" data-reveal-group data-reveal-step="70">
+    <li><strong>IR link:</strong> Generated the 38 kHz NEC carrier from a hardware timer rather than a software delay loop, so the carrier period stays inside the receiver's decode window.</li>
+    <li><strong>Emergency stop:</strong> Put the stop on an interrupt so it runs ahead of the main control loop instead of waiting on it.</li>
+    <li><strong>Feedback:</strong> Drove a buzzer and a vibration motor from MCU GPIO through active-low PNP stages, so the operator gets a response without looking at the remote.</li>
+    <li><strong>Menus:</strong> Wrote the LCD menu as a state machine so each screen has one place that handles its inputs.</li>
   </ul>
 
 </section>
 
 <script>
-  let zState = { scale:1, x:0, y:0, isDragging:false, startX:0, startY:0 };
-  function updateTransform(img) { img.style.transform=`translate(${zState.x}px,${zState.y}px) scale(${zState.scale})`; }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.schematic-img').forEach(img => {
-      img.addEventListener('wheel', e => {
-        if (!img.classList.contains('active')) return;
-        e.preventDefault();
-        zState.scale=Math.min(Math.max(1,zState.scale+Math.sign(e.deltaY)*-0.15),5);
-        if(zState.scale===1){zState.x=0;zState.y=0;}
-        updateTransform(img);
-      });
-      img.addEventListener('mousedown', e => {
-        if(!img.classList.contains('active')||zState.scale===1) return;
-        zState.isDragging=true; zState.startX=e.clientX-zState.x; zState.startY=e.clientY-zState.y;
-        img.style.transition='none';
-      });
-    });
-    window.addEventListener('mousemove', e => {
-      if(!zState.isDragging) return;
-      const img=document.querySelector('.schematic-img.active'); if(!img) return;
-      zState.x=e.clientX-zState.startX; zState.y=e.clientY-zState.startY; updateTransform(img);
-    });
-    window.addEventListener('mouseup', ()=>{ zState.isDragging=false; document.querySelectorAll('.schematic-img').forEach(i=>i.style.transition='transform 0.1s ease'); });
-    document.querySelectorAll('model-viewer').forEach(viewer => {
-      const pause=()=>{ if(viewer.hasAttribute('auto-rotate')){viewer.dataset.wasAutoRotate='true';viewer.removeAttribute('auto-rotate');} clearTimeout(viewer._rt); };
-      const resume=()=>{ if(viewer.dataset.wasAutoRotate!=='true') return; clearTimeout(viewer._rt); viewer._rt=setTimeout(()=>viewer.setAttribute('auto-rotate',''),2500); };
-      viewer.addEventListener('pointerdown',pause); viewer.addEventListener('pointerup',resume);
-      viewer.addEventListener('pointercancel',resume); viewer.addEventListener('mouseleave',resume);
-    });
-  });
-
   function switchView(projectId, viewType, btnElement) {
     const container=document.getElementById(projectId);
     const label=document.getElementById(projectId+'-label');
-    zState={scale:1,x:0,y:0,isDragging:false,startX:0,startY:0};
-    container.querySelectorAll('.schematic-img,.code-panel').forEach(p=>{ if(p.classList.contains('schematic-img')) p.style.transform='translate(0,0) scale(1)'; p.classList.remove('active'); });
+    container.querySelectorAll('.code-panel').forEach(p=>p.classList.remove('active'));
     container.querySelectorAll('model-viewer').forEach(m=>m.style.display='none');
     container.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
     btnElement.classList.add('active');
@@ -124,7 +164,7 @@
 
   function copyCode(button) {
     navigator.clipboard.writeText(button.closest('.code-snippet').querySelector('code').innerText)
-      .then(()=>{ button.innerText='COPIED'; setTimeout(()=>button.innerText='COPY',1200); });
+      .then(()=>{ button.innerText='Copied'; setTimeout(()=>button.innerText='Copy',1200); });
   }
 </script>
 </body>

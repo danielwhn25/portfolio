@@ -4,10 +4,68 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PoE Dev Board | Daniel Ng</title>
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+<meta name="description" content="Powered-device Power-over-Ethernet development board with an ESP32, W5500 Ethernet controller, and isolated PoE front end.">
+<meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="../logos/favicon.png">
+<link rel="apple-touch-icon" href="../logos/favicon.png">
+
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      document.documentElement.dataset.theme = stored ||
+        'light';
+    } catch (e) {
+      document.documentElement.dataset.theme = 'light';
+    }
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../style.css">
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+<script src="../app.js" defer></script>
 </head>
 <body>
+
+<nav class="site-nav" aria-label="Primary">
+  <div class="site-nav-inner">
+    <a class="nav-brand" href="../">Daniel Ng</a>
+    <ul class="nav-links">
+      <li><a href="../#work">Experience</a></li>
+      <li><a href="../#projects">Projects</a></li>
+      <li><a href="../#chess">Chess</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch appearance">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.4v2.2M12 19.4v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.4 12h2.2M19.4 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20.5 14.3A8.6 8.6 0 1 1 9.7 3.5a6.9 6.9 0 0 0 10.8 10.8Z"/>
+        </svg>
+      </button>
+      <div class="social-row">
+        <a class="social-link is-compact" href="https://github.com/danielwhn25" target="_blank" rel="noopener" aria-label="GitHub" data-bubble="github.com/danielwhn25">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a class="social-link is-compact" href="https://linkedin.com/in/danielngEE" target="_blank" rel="noopener" aria-label="LinkedIn" data-bubble="linkedin.com/in/danielngEE">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg>
+        </a>
+        <a class="social-link is-compact" href="https://www.chess.com/member/daniel_whn" target="_blank" rel="noopener" aria-label="Chess.com" data-bubble="chess.com/member/daniel_whn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0a3.85 3.85 0 0 0-3.875 3.846A3.84 3.84 0 0 0 9.73 6.969l-2.79 1.85c0 .622.144 1.114.434 1.649H9.83c-.014.245-.014.549-.014.925 0 .025.003.048.006.071-.064 1.353-.507 3.472-3.62 5.842-.816.625-1.423 1.495-1.806 2.533a.33.33 0 0 0-.045.084 8.124 8.124 0 0 0-.39 2.516c0 .1.216 1.561 8.038 1.561s8.038-1.46 8.038-1.561c0-2.227-.824-4.048-2.24-5.133-4.034-3.08-3.586-5.74-3.644-6.838h2.458c.29-.535.434-1.027.434-1.649l-2.79-1.836a3.86 3.86 0 0 0 1.604-3.123A3.873 3.873 0 0 0 13.445.275c-.004-.002-.01.004-.015.004A3.76 3.76 0 0 0 12 0Z"/></svg>
+        </a>
+        <a class="social-link is-compact" href="mailto:daniel.whn@outlook.com" aria-label="Email daniel.whn@outlook.com" data-bubble="daniel.whn@outlook.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 8.2 6a1.4 1.4 0 0 0 1.6 0L21 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
 
 <nav class="side-tabs" aria-label="Page sections">
   <div class="side-tabs-title">On This Page</div>
@@ -20,26 +78,28 @@
   <a href="#references">References</a>
 </nav>
 
-<div class="back-nav"><a href="../">← Back to Portfolio</a></div>
+<div class="back-nav"><a href="../">Back to portfolio</a></div>
 
-<div class="project-page-header anchor-target" id="top">
+<div class="project-page-header anchor-target" id="top" data-reveal>
   <h1>PoE Dev Board</h1>
-  <div class="project-date" style="margin-top:0.3rem;">May 2026 – Present</div>
-  <div class="tech-stack" style="margin-top:0.6rem;">
-    Altium Designer // C // ESP32 // W5500 // Ethernet // TCP/IP // SPI
+  <div class="project-date">May 2026 – Present</div>
+  <div class="tech-stack" style="margin-top:0.9rem;">
+    <span>Altium Designer</span><span><svg class="chip-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5921 9.1962s-.354-3.298-3.627-3.39c-3.2741-.09-4.9552 2.474-4.9552 6.14 0 3.6651 1.858 6.5972 5.0451 6.5972 3.184 0 3.5381-3.665 3.5381-3.665l6.1041.365s.36 3.31-2.196 5.836c-2.552 2.5241-5.6901 2.9371-7.8762 2.9201-2.19-.017-5.2261.034-8.1602-2.97-2.938-3.0101-3.436-5.9302-3.436-8.8002 0-2.8701.556-6.6702 4.047-9.5502C7.444.72 9.849 0 12.254 0c10.0422 0 10.7172 9.2602 10.7172 9.2602z"/></svg>C</span><span><svg class="chip-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.926 19.324a7.6 7.6 0 00-2.983-6.754 7.44 7.44 0 00-3.828-1.554.697.697 0 01-.606-.731.674.674 0 01.743-.617 8.97 8.97 0 018 9.805 7.828 7.828 0 01-.298 1.542l1.989.56a11.039 11.039 0 001.714-.651 12.159 12.159 0 00.217-2.343A12.57 12.57 0 007.212 6.171a5.53 5.53 0 00-2 0 4.354 4.354 0 00-2.16 1.337 4.274 4.274 0 001.909 6.856 9.896 9.896 0 001.074.195 4.011 4.011 0 013.337 3.954 3.965 3.965 0 01-.64 2.16l1.371.88a10.182 10.182 0 002.057.342 7.52 7.52 0 00.754-2.628m.16 4.73A13.073 13.073 0 01.001 10.983 12.982 12.982 0 013.83 1.737l.743.697a12.067 12.067 0 000 17.141 12.067 12.067 0 0017.141 0l.697.697a12.97 12.97 0 01-9.336 3.726M24 10.993A10.993 10.993 0 0012.949 0c-.389 0-.766 0-1.143.057l-.252.732a18.912 18.912 0 0111.588 11.576l.731-.263c0-.366.069-.732.069-1.143m-1.269 5.165A17.53 17.53 0 007.818 1.27a11.119 11.119 0 00-2.457 1.77v1.635A13.919 13.919 0 0119.268 18.57h1.634a11.713 11.713 0 001.771-2.446M7.92 17.884a1.691 1.691 0 11-1.69-1.691 1.691 1.691 0 011.69 1.691"/></svg>ESP32</span><span>W5500</span>
+    <span>Ethernet</span><span>TCP/IP</span><span>SPI</span>
   </div>
 </div>
 
 <section>
-  <p class="page-lede">
+  <p class="page-lede" data-reveal>
     Power-over-Ethernet (PoE) sends DC power and network data through the same Ethernet cable. A PoE link has two sides: power sourcing equipment (PSE), such as a PoE switch or Ethernet injector, and a powered device (PD), which receives that power. This board is my PD-side dev board for learning wired networking, high-speed PCB layout, PoE front-end design, and register-level Ethernet firmware. This revision focuses on receiving PoE power and bringing up the W5500; a future revision will use a switching power stage.
   </p>
 
-  <div class="review-section-title anchor-target" id="model">3D Board Model</div>
-  <div class="cad-container">
+  <div class="review-section-title anchor-target" id="model" data-reveal>3D Board Model</div>
+  <div class="cad-container" data-reveal>
     <div class="viewer-area">
       <model-viewer id="poe-3d"
         src="../models/POE_board.glb"
+        alt="3D model of the Power-over-Ethernet development board"
         camera-controls auto-rotate auto-rotate-delay="3500"
         rotation-per-second="30deg"
         shadow-intensity="1" environment-image="neutral"
@@ -48,26 +108,32 @@
     </div>
   </div>
 
-  <figure class="poe-diagram-figure">
+  <figure class="poe-diagram-figure" data-reveal>
     <img src="../models/poe_injector_brainboxes.jpg" alt="Diagram showing a non-PoE switch connected to a PoE injector, which adds power before sending power and data to a powered device.">
     <figcaption>Source: <a href="https://docs.brainboxes.com/explanation/networking/what-is-power-over-ethernet-poe" target="_blank" rel="noopener">Brainboxes Documentation</a>.</figcaption>
   </figure>
 
-  <div class="project-links">
-    <a href="https://github.com/danielwhn25/Power-over-Ethernet" target="_blank" class="btn-link">GitHub ↗</a>
+  <div class="project-links" data-reveal>
+    <a href="https://github.com/danielwhn25/Power-over-Ethernet" target="_blank" rel="noopener" class="btn-link">GitHub ↗</a>
   </div>
 
   <div class="engineering-review">
-    <div class="review-section-title anchor-target" id="schematic">Current Schematic</div>
-    <div class="schematic-display-card">
-      <div class="schematic-panzoom" data-panzoom>
-        <img src="../models/poe_schematic.png" alt="PoE Dev Board schematic" class="static-schematic-img" draggable="false">
-        <div class="panzoom-hint" aria-hidden="true">Scroll to zoom // Right-drag to pan</div>
+    <div class="review-section-title anchor-target" id="schematic" data-reveal>Current Schematic</div>
+    <div class="sheet-stack-block" data-sheet-stack data-reveal>
+      <div class="sheet-stack">
+        <button class="sheet" type="button" data-sheet-label="PoE Dev Board schematic">
+          <img src="../models/poe_schematic.png" alt="PoE Dev Board schematic" loading="lazy" decoding="async">
+        </button>
       </div>
+      <div class="sheet-stack-bar">
+        <span class="sheet-stack-caption" data-sheet-caption></span>
+        <span class="sheet-stack-count" data-sheet-count></span>
+      </div>
+      <p class="sheet-stack-hint">Click the sheet to open it full size.</p>
     </div>
 
-    <div class="review-section-title anchor-target" id="architecture">System Architecture</div>
-    <table class="decision-table">
+    <div class="review-section-title anchor-target" id="architecture" data-reveal>System Architecture</div>
+    <table class="decision-table" data-reveal>
       <thead>
         <tr><th>Subsystem</th><th>Implementation</th></tr>
       </thead>
@@ -80,8 +146,8 @@
       </tbody>
     </table>
 
-    <div class="review-section-title anchor-target" id="firmware">Firmware Bring-Up Plan</div>
-    <div class="review-grid">
+    <div class="review-section-title anchor-target" id="firmware" data-reveal>Firmware Bring-Up Plan</div>
+    <div class="review-grid" data-reveal-group data-reveal-step="80">
       <div class="review-card">
         <h4>SPI Driver Bring-Up</h4>
         <ul>
@@ -100,8 +166,8 @@
       </div>
     </div>
 
-    <div class="review-section-title anchor-target" id="bringup">Hardware Bring-Up Plan</div>
-    <div class="verification-plan">
+    <div class="review-section-title anchor-target" id="bringup" data-reveal>Hardware Bring-Up Plan</div>
+    <div class="verification-plan" data-reveal>
       <ul>
         <li>Verify PoE input polarity after bridge rectification before connecting downstream circuitry.</li>
         <li>Measure the generated board rail under no-load and ESP32/W5500 load conditions.</li>
@@ -112,8 +178,8 @@
     </div>
 
     <div class="reference-block">
-      <div class="review-section-title anchor-target" id="references">Design References</div>
-      <div class="reference-list">
+      <div class="review-section-title anchor-target" id="references" data-reveal>Design References</div>
+      <div class="reference-list" data-reveal-group data-reveal-step="70">
         <a class="reference-item" href="https://docs.wiznet.io/Product/Chip/Ethernet/W5500/ref-schematic" target="_blank" rel="noopener">
           <span>WIZnet W5500 Reference Schematic</span>
           <small>Official W5500 Ethernet reference schematic and RJ45/MagJack guidance.</small>
@@ -131,135 +197,5 @@
   </div>
 </section>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('model-viewer').forEach(viewer => {
-      const pause = () => {
-        if (viewer.hasAttribute('auto-rotate')) {
-          viewer.dataset.wasAutoRotate = 'true';
-          viewer.removeAttribute('auto-rotate');
-        }
-        clearTimeout(viewer._resumeTimer);
-      };
-      const resume = () => {
-        if (viewer.dataset.wasAutoRotate !== 'true') return;
-        clearTimeout(viewer._resumeTimer);
-        viewer._resumeTimer = setTimeout(() => viewer.setAttribute('auto-rotate', ''), 2500);
-      };
-      viewer.addEventListener('pointerdown', pause);
-      viewer.addEventListener('pointerup', resume);
-      viewer.addEventListener('pointercancel', resume);
-      viewer.addEventListener('mouseleave', resume);
-    });
-
-    initSchematicPanZoom();
-
-    const sections = [...document.querySelectorAll('.anchor-target')];
-    const links = [...document.querySelectorAll('.side-tabs a')];
-    if (!sections.length || !links.length) return;
-
-    const setActive = () => {
-      let current = sections[0].id;
-      sections.forEach(section => {
-        if (section.getBoundingClientRect().top <= 120) current = section.id;
-      });
-      links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${current}`));
-    };
-    window.addEventListener('scroll', setActive, { passive: true });
-    setActive();
-  });
-
-  function initSchematicPanZoom() {
-    document.querySelectorAll('[data-panzoom]').forEach(frame => {
-      const img = frame.querySelector('img');
-      if (!img) return;
-
-      const state = { scale: 1, x: 0, y: 0, dragging: false, lastX: 0, lastY: 0 };
-      const minScale = 1;
-      const maxScale = 5;
-
-      const clamp = () => {
-        const frameRect = frame.getBoundingClientRect();
-        const width = img.offsetWidth * state.scale;
-        const height = img.offsetHeight * state.scale;
-        state.x = Math.min(0, Math.max(frameRect.width - width, state.x));
-        state.y = Math.min(0, Math.max(frameRect.height - height, state.y));
-        if (state.scale === 1) {
-          state.x = 0;
-          state.y = 0;
-        }
-      };
-
-      const render = () => {
-        img.style.transform = `translate(${state.x}px, ${state.y}px) scale(${state.scale})`;
-        frame.classList.toggle('is-zoomed', state.scale > 1);
-      };
-
-      const zoomAt = (clientX, clientY, nextScale) => {
-        const rect = frame.getBoundingClientRect();
-        const prevScale = state.scale;
-        nextScale = Math.min(maxScale, Math.max(minScale, nextScale));
-        if (nextScale === prevScale) return;
-
-        const localX = clientX - rect.left;
-        const localY = clientY - rect.top;
-        const ratio = nextScale / prevScale;
-        state.x = localX - (localX - state.x) * ratio;
-        state.y = localY - (localY - state.y) * ratio;
-        state.scale = nextScale;
-        clamp();
-        render();
-      };
-
-      frame.addEventListener('wheel', event => {
-        event.preventDefault();
-        frame.classList.add('has-interacted');
-        zoomAt(event.clientX, event.clientY, state.scale * Math.exp(-event.deltaY * 0.001));
-      }, { passive: false });
-
-      frame.addEventListener('pointerdown', event => {
-        if (state.scale === 1) return;
-        event.preventDefault();
-        frame.classList.add('has-interacted');
-        state.dragging = true;
-        state.lastX = event.clientX;
-        state.lastY = event.clientY;
-        frame.classList.add('is-dragging');
-        frame.setPointerCapture(event.pointerId);
-      });
-
-      frame.addEventListener('pointermove', event => {
-        if (!state.dragging) return;
-        state.x += event.clientX - state.lastX;
-        state.y += event.clientY - state.lastY;
-        state.lastX = event.clientX;
-        state.lastY = event.clientY;
-        clamp();
-        render();
-      });
-
-      const endDrag = event => {
-        state.dragging = false;
-        frame.classList.remove('is-dragging');
-        if (frame.hasPointerCapture(event.pointerId)) frame.releasePointerCapture(event.pointerId);
-      };
-
-      frame.addEventListener('pointerup', endDrag);
-      frame.addEventListener('pointercancel', endDrag);
-      frame.addEventListener('dblclick', () => {
-        frame.classList.add('has-interacted');
-        state.scale = 1;
-        state.x = 0;
-        state.y = 0;
-        render();
-      });
-      frame.addEventListener('contextmenu', event => event.preventDefault());
-      window.addEventListener('resize', () => {
-        clamp();
-        render();
-      });
-    });
-  }
-</script>
 </body>
 </html>

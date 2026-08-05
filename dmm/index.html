@@ -4,37 +4,96 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bare-Metal Digital Multimeter | Daniel Ng</title>
+<meta name="description" content="Register-level STM32L051 C firmware combining an ohmmeter, capacitance meter, and continuity probe.">
+<meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="../logos/favicon.png">
+<link rel="apple-touch-icon" href="../logos/favicon.png">
+
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      document.documentElement.dataset.theme = stored ||
+        'light';
+    } catch (e) {
+      document.documentElement.dataset.theme = 'light';
+    }
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../style.css">
+<script src="../app.js" defer></script>
 </head>
 <body>
 
-<div class="back-nav"><a href="../">← Back to Portfolio</a></div>
+<nav class="site-nav" aria-label="Primary">
+  <div class="site-nav-inner">
+    <a class="nav-brand" href="../">Daniel Ng</a>
+    <ul class="nav-links">
+      <li><a href="../#work">Experience</a></li>
+      <li><a href="../#projects">Projects</a></li>
+      <li><a href="../#chess">Chess</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch appearance">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.4v2.2M12 19.4v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.4 12h2.2M19.4 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20.5 14.3A8.6 8.6 0 1 1 9.7 3.5a6.9 6.9 0 0 0 10.8 10.8Z"/>
+        </svg>
+      </button>
+      <div class="social-row">
+        <a class="social-link is-compact" href="https://github.com/danielwhn25" target="_blank" rel="noopener" aria-label="GitHub" data-bubble="github.com/danielwhn25">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a class="social-link is-compact" href="https://linkedin.com/in/danielngEE" target="_blank" rel="noopener" aria-label="LinkedIn" data-bubble="linkedin.com/in/danielngEE">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg>
+        </a>
+        <a class="social-link is-compact" href="https://www.chess.com/member/daniel_whn" target="_blank" rel="noopener" aria-label="Chess.com" data-bubble="chess.com/member/daniel_whn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0a3.85 3.85 0 0 0-3.875 3.846A3.84 3.84 0 0 0 9.73 6.969l-2.79 1.85c0 .622.144 1.114.434 1.649H9.83c-.014.245-.014.549-.014.925 0 .025.003.048.006.071-.064 1.353-.507 3.472-3.62 5.842-.816.625-1.423 1.495-1.806 2.533a.33.33 0 0 0-.045.084 8.124 8.124 0 0 0-.39 2.516c0 .1.216 1.561 8.038 1.561s8.038-1.46 8.038-1.561c0-2.227-.824-4.048-2.24-5.133-4.034-3.08-3.586-5.74-3.644-6.838h2.458c.29-.535.434-1.027.434-1.649l-2.79-1.836a3.86 3.86 0 0 0 1.604-3.123A3.873 3.873 0 0 0 13.445.275c-.004-.002-.01.004-.015.004A3.76 3.76 0 0 0 12 0Z"/></svg>
+        </a>
+        <a class="social-link is-compact" href="mailto:daniel.whn@outlook.com" aria-label="Email daniel.whn@outlook.com" data-bubble="daniel.whn@outlook.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 8.2 6a1.4 1.4 0 0 0 1.6 0L21 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
 
-<div class="project-page-header">
+<div class="back-nav"><a href="../">Back to portfolio</a></div>
+
+<div class="project-page-header" data-reveal>
   <h1>Bare-Metal Digital Multimeter</h1>
-  <div class="project-date" style="margin-top:0.3rem;">Mar 2026</div>
-  <div class="tech-stack" style="margin-top:0.6rem;">
-    STM32L051 // Bare-Metal C // Register-Level GPIO/ADC // SysTick Timing // 4-Bit LCD
+  <div class="project-date">Mar 2026</div>
+  <div class="tech-stack" style="margin-top:0.9rem;">
+    <span><svg class="chip-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M 23.818 5.61 L 6.402 5.61 C 5.125 5.609 3.968 6.362 3.452 7.529 L 0.014 15.811 C -0.036 15.931 0.052 16.063 0.182 16.061 L 8.046 16.061 C 8.601 16.061 8.848 15.523 8.412 15.093 L 5.524 12.388 C 4.008 10.9 4.658 7.45 7.81 7.45 L 23.206 7.45 C 23.283 7.451 23.352 7.402 23.378 7.329 L 23.987 5.857 C 23.996 5.835 24.001 5.811 24 5.787 C 23.997 5.689 23.917 5.61 23.818 5.61 M 22.082 9.826 L 19.126 9.826 C 18.932 9.825 18.756 9.94 18.681 10.118 L 15.369 18.118 C 15.355 18.144 15.347 18.173 15.347 18.202 C 15.348 18.302 15.429 18.383 15.529 18.381 L 16.632 18.381 C 17.93 18.387 19.105 17.613 19.612 16.418 L 22.244 10.063 C 22.252 10.042 22.257 10.019 22.257 9.996 C 22.253 9.902 22.176 9.828 22.082 9.826 M 16.271 10.005 C 16.271 9.905 16.189 9.825 16.089 9.825 L 7.706 9.825 C 7.251 9.825 6.853 10.38 7.335 10.825 L 10.104 13.404 C 10.104 13.404 11.224 14.437 10.984 15.916 C 10.778 17.219 9.889 18.016 9.241 18.302 C 9.208 18.31 9.196 18.351 9.219 18.376 C 9.23 18.387 9.246 18.392 9.261 18.388 L 12.489 18.388 C 12.683 18.39 12.859 18.275 12.934 18.095 L 16.256 10.068 C 16.266 10.049 16.271 10.027 16.271 10.005"/></svg>STM32L051</span><span><svg class="chip-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5921 9.1962s-.354-3.298-3.627-3.39c-3.2741-.09-4.9552 2.474-4.9552 6.14 0 3.6651 1.858 6.5972 5.0451 6.5972 3.184 0 3.5381-3.665 3.5381-3.665l6.1041.365s.36 3.31-2.196 5.836c-2.552 2.5241-5.6901 2.9371-7.8762 2.9201-2.19-.017-5.2261.034-8.1602-2.97-2.938-3.0101-3.436-5.9302-3.436-8.8002 0-2.8701.556-6.6702 4.047-9.5502C7.444.72 9.849 0 12.254 0c10.0422 0 10.7172 9.2602 10.7172 9.2602z"/></svg>Bare-Metal C</span><span>Register-Level GPIO/ADC</span>
+    <span>SysTick Timing</span><span>4-Bit LCD</span>
   </div>
 </div>
 
-<div class="project-hero-visual">
-  <img src="../models/stm32-dmm-preview.png" alt="STM32 digital multimeter prototype preview" class="project-hero-img" decoding="async">
+<div class="project-hero-visual" data-reveal>
+  <img src="../models/stm32-dmm-preview.png" alt="STM32 digital multimeter prototype" class="project-hero-img" decoding="async">
 </div>
 
 <section>
-  <p class="page-lede">
-    Register-level STM32L051 C firmware that combines an Ohmmeter, a capacitance meter, and a continuity probe.
+  <p class="page-lede" data-reveal>
+    Register-level STM32L051 C firmware that combines an ohmmeter, a capacitance meter, and a continuity probe.
   </p>
-  <ul class="project-bullets">
+  <ul class="project-bullets" data-reveal-group data-reveal-step="70">
     <li><strong>Register-Level Bring-Up:</strong> Configured GPIO modes, output types, pull-ups, analog input, ADC clocking, calibration, auto-off mode, and long ADC sample time directly through STM32L051 peripheral registers.</li>
     <li><strong>Continuity Detection:</strong> Used a weak internal pull-up on PB6 so a grounded probe pulls the input low, then drove PB5 for buzzer/LED feedback; the continuity check runs continuously, including inside measurement wait loops.</li>
     <li><strong>Resistance Measurement:</strong> Sampled the PB1 analog divider with the 12-bit ADC, calculated unknown resistance against a 330 ohm reference, detected open-circuit readings near full scale, and supported ohm/kohm display modes.</li>
     <li><strong>Frequency-Based C/L Measurement:</strong> Timed 10 oscillator cycles with SysTick edge polling, computed capacitance from a calibrated 555 timer equation, and computed inductance from LC resonance using measured stray-capacitance compensation.</li>
     <li><strong>User-Facing Firmware:</strong> Built the 4-bit LCD driver, formatted R/C/L readings into fixed-width rows, and handled pull-up button inputs for resistance, capacitance, and inductance display modes.</li>
   </ul>
-  <div class="project-links">
-    <a href="https://github.com/danielwhn25/ELEC291_labs/tree/main/DMM_STM32LO51" target="_blank" class="btn-link">View Code on GitHub ↗</a>
+  <div class="project-links" data-reveal>
+    <a href="https://github.com/danielwhn25/ELEC291_labs/tree/main/DMM_STM32LO51" target="_blank" rel="noopener" class="btn-link">View code on GitHub ↗</a>
   </div>
 </section>
 

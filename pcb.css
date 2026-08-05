@@ -1,0 +1,696 @@
+/* ============================================================
+   Daniel Ng. Portfolio, layer-stack edition.
+
+   The landing view is a PCB stackup rendered in CSS 3D. Scroll
+   drives a camera down through the board; each copper layer
+   carries one project. Everything below the stack is ordinary
+   document flow.
+
+   Colour system is the original site's: Apple off-white page wash,
+   #0071e3 accent, soft elevation. The boards themselves stay dark. A PCB is a dark object sitting on a white page, and the layer
+   colours need that contrast to stay legible.
+   ============================================================ */
+
+:root {
+  /* Surfaces */
+  --bg:             #ffffff;
+  --bg-tint:        #fbfbfd;   /* Apple's off-white page wash */
+  --surface:        #f5f5f7;   /* card fill */
+  --surface-2:      #ebebef;   /* pressed / nested fill */
+  --surface-raised: #ffffff;
+
+  /* The board */
+  --mask:      #1d1d1f;   /* solder mask, opaque so antipads punch through */
+  --mask-edge: #3a3a3c;
+  --substrate: #d9c48a;   /* FR-4 edge */
+
+  /* Type */
+  --ink:       #1d1d1f;
+  --ink-soft:  #6e6e73;
+  --ink-faint: #86868b;
+
+  /* Accent */
+  --accent:      #0071e3;
+  --accent-hover:#0077ed;
+  --accent-soft: rgba(0, 113, 227, 0.10);
+  --accent-ring: rgba(0, 113, 227, 0.35);
+  --positive:    #30d158;
+
+  /* Lines & elevation */
+  --line:      rgba(0, 0, 0, 0.08);
+  --line-soft: rgba(0, 0, 0, 0.06);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.05), 0 12px 32px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.06), 0 24px 56px rgba(0, 0, 0, 0.10);
+
+  /* Radii: generous, squircle-ish */
+  --r-sm:   12px;
+  --r-md:   16px;
+  --r-lg:   22px;
+  --r-xl:   28px;
+  --r-pill: 980px;
+
+  /* Same stacks as the original site: system faces first, Inter and
+     JetBrains Mono as the webfont fallbacks. */
+  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+          "Inter", "Segoe UI Variable Display", "Segoe UI", system-ui,
+          "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Mono",
+          "Roboto Mono", Menlo, Consolas, monospace;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --wrap: 1180px;
+
+  /* Stack geometry: read and written by pcb.js */
+  --rx: 62deg;
+  --rz: -34deg;
+  --gap: 26px;
+  --camz: 0px;
+  --bscale: 1;
+  --px: 50%;
+  --py: 46%;
+
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.55;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  background: var(--bg-tint);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+  letter-spacing: -0.026em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+.wrap { width: min(100% - 3rem, var(--wrap)); margin-inline: auto; }
+
+.skip-link {
+  position: fixed; top: -100px; left: 1rem; z-index: 200;
+  padding: .6rem 1rem; border-radius: var(--r-sm);
+  background: var(--accent); color: #fff; font-weight: 600; font-size: .85rem;
+  text-decoration: none;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ── Nav ─────────────────────────────────────────────────── */
+.site-nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 90;
+  background: rgba(251, 251, 253, 0.72);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--line-soft);
+}
+.nav-inner {
+  width: min(100% - 2rem, 1420px); margin-inline: auto;
+  height: 60px; display: flex; align-items: center; gap: 1.5rem;
+}
+.nav-brand {
+  display: inline-flex; align-items: center; gap: .6rem;
+  font-weight: 600; font-size: .95rem; letter-spacing: -0.01em;
+  text-decoration: none; white-space: nowrap; margin-right: auto;
+}
+/* The asset is a 1.75:1 navy card whose inner wordmark turns to mush at nav
+   size, so it's cropped square to the D|N monogram and sits as a logo tile. */
+.nav-brand-mark {
+  width: 30px; height: 30px; border-radius: 7px;
+  object-fit: cover; object-position: center; flex: none;
+}
+.nav-links { display: flex; gap: 1.6rem; list-style: none; margin: 0; padding: 0; }
+.nav-links a {
+  font-size: .82rem; font-weight: 500; letter-spacing: -0.005em;
+  color: var(--ink-soft); text-decoration: none; transition: color .18s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+.nav-social { display: flex; gap: .35rem; }
+.nav-social a {
+  display: grid; place-items: center; width: 32px; height: 32px; border-radius: var(--r-sm);
+  color: var(--ink-soft); border: 1px solid transparent; transition: .18s;
+}
+.nav-social a:hover { color: var(--ink); background: var(--surface); border-color: var(--line); }
+.nav-social svg { width: 16px; height: 16px; }
+
+/* ── Scroll track + sticky stage ─────────────────────────── */
+.stack-track {
+  position: relative;
+  /* height is set by pcb.js from the layer count; this is the no-JS default */
+  height: auto;
+}
+html.js .stack-track { height: 700vh; }
+
+.stage {
+  position: sticky; top: 0;
+  height: 100svh; min-height: 620px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.stage-bg { position: absolute; inset: 0; z-index: 0; }
+.stage-bg::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(120% 90% at 74% 10%, rgba(0, 113, 227, .09) 0%, transparent 55%),
+    radial-gradient(100% 80% at 15% 92%, rgba(0, 113, 227, .05) 0%, transparent 60%),
+    linear-gradient(165deg, #ffffff 0%, var(--bg-tint) 55%, #f2f3f6 100%);
+}
+.bg-glow {
+  position: absolute; left: 58%; top: 42%;
+  width: 70vmax; height: 70vmax; transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(0, 113, 227, .08) 0%, transparent 62%);
+  filter: blur(20px);
+}
+.bg-grid {
+  position: absolute; inset: 0; opacity: .8;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, .045) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(70% 60% at 50% 45%, #000 20%, transparent 80%);
+}
+
+/* ── The 3D stack ────────────────────────────────────────── */
+.board-space {
+  position: absolute; inset: 0; z-index: 1;
+  perspective: 1500px;
+  perspective-origin: var(--px) var(--py);
+  pointer-events: none;
+}
+.board {
+  position: absolute; left: 66%; top: 48%;
+  width: 0; height: 0;
+  transform-style: preserve-3d;
+  transform:
+    scale(var(--bscale))
+    rotateX(var(--rx))
+    rotateZ(var(--rz))
+    translateZ(var(--camz));
+}
+
+.layer {
+  position: absolute;
+  width: 900px; height: 580px;
+  margin: -290px 0 0 -450px;   /* centre on the board origin */
+  transform-style: preserve-3d;
+  transform: translate3d(var(--ox, 0px), var(--oy, 0px), var(--z, 0px));
+  opacity: var(--o, 1);
+  will-change: transform, opacity;
+}
+.layer svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+/* Real Gerber layers. The exported geometry paints with currentColor,
+   so each group only needs a colour set on it. */
+.gb-cu   { color: var(--hue); opacity: .95; }
+.gb-silk { color: #e8ecea; opacity: .5; }
+.gb-edge { color: var(--substrate); opacity: .45; }
+
+/* Ink of each layer's artwork */
+.pcb-body      { fill: var(--mask); }
+.pcb-edge      { fill: none; stroke: var(--mask-edge); stroke-width: 2; }
+.pcb-rim       { fill: none; stroke: var(--substrate); stroke-width: 1.2; opacity: .35; }
+.pcb-hole      { fill: var(--substrate); opacity: .5; }
+.pcb-drill     { fill: #0a0a0b; }
+.pcb-trace     { fill: none; stroke: var(--hue); stroke-linecap: round; stroke-linejoin: round; }
+.pcb-pad       { fill: var(--hue); }
+.pcb-antipad   { fill: var(--mask); }
+.pcb-pour      { fill: var(--hue); opacity: .16; }
+.pcb-hatch     { stroke: var(--hue); stroke-width: 1; opacity: .5; }
+.pcb-silk      { fill: #e8ecea; opacity: .78; }
+.pcb-silk-line { fill: none; stroke: #e8ecea; stroke-width: 1.6; opacity: .5; }
+.pcb-label     { font-family: var(--mono); font-size: 13px; fill: var(--hue); opacity: .7; letter-spacing: .06em; }
+.pcb-desig     { font-family: var(--mono); font-size: 12px; fill: #d7dbd9; opacity: .55; letter-spacing: .04em; }
+
+/* Project name, printed on the board like silkscreen */
+.pcb-title, .pcb-title-fill, .pcb-title-halo {
+  font-family: var(--mono); font-weight: 500; letter-spacing: .1em;
+}
+/* Silkscreen clearance: knocks the copper back so the name always reads. */
+.pcb-title-halo { fill: var(--mask); stroke: var(--mask); stroke-width: 13; stroke-linejoin: round; opacity: .88; }
+.pcb-title-fill { fill: var(--hue); opacity: .16; }
+.pcb-title      { fill: none; stroke: var(--hue); stroke-width: 2.4; opacity: 1; }
+
+/* ── Stage overlay ───────────────────────────────────────── */
+.stage-ui {
+  position: absolute; inset: 0; z-index: 3;
+  pointer-events: none;
+}
+.stage-ui a, .stage-ui button { pointer-events: auto; }
+
+/* Keeps the text column readable wherever the board drifts underneath it. */
+.stage-ui::before {
+  content: ""; position: absolute; inset: 0; width: 62%;
+  background: linear-gradient(90deg, rgba(251,251,253,.97) 0%, rgba(251,251,253,.92) 30%, rgba(251,251,253,.6) 62%, transparent 100%);
+  pointer-events: none;
+}
+
+.hud {
+  position: absolute;
+  display: flex; align-items: center; gap: .5rem;
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--ink-faint);
+}
+.hud-doc { top: 78px; left: max(1.5rem, calc(50vw - var(--wrap) / 2)); }
+.hud-xy  { bottom: 74px; right: max(1.5rem, calc(50vw - var(--wrap) / 2)); }
+
+/* Design credit, sitting in the instrument chrome rather than bolted on. */
+.hud-credit {
+  bottom: 74px; left: max(1.5rem, calc(50vw - var(--wrap) / 2));
+  text-decoration: none; transition: color .18s;
+}
+.hud-credit img { width: 13px; height: 13px; opacity: .5; transition: opacity .18s; }
+.hud-credit:hover { color: var(--accent); }
+.hud-credit:hover img { opacity: .9; }
+.hud-sep { opacity: .4; }
+.hud-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+/* ── Panels ──────────────────────────────────────────────── */
+.panels {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  left: max(1.5rem, calc(50vw - var(--wrap) / 2));
+  width: min(540px, 44vw);
+}
+.panel {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .45s ease, transform .55s var(--ease);
+  pointer-events: none;
+}
+html.js .panels { display: grid; }
+html.js .panel.is-active { opacity: 1; transform: none; pointer-events: auto; }
+html.js .panel.is-active a { pointer-events: auto; }
+
+.layer-eyebrow {
+  display: inline-flex; align-items: center; gap: .55rem;
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-soft);
+  padding: .35rem .7rem .35rem .5rem;
+  border: 1px solid var(--line); border-radius: var(--r-pill);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-sm);
+}
+.layer-eyebrow i {
+  width: 9px; height: 9px; border-radius: 2px; background: var(--hue);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--hue) 24%, transparent);
+}
+
+.hero-title {
+  margin: 1.1rem 0 0;
+  font-size: clamp(2.3rem, 4.2vw, 3.5rem);
+  line-height: 1.06; letter-spacing: -0.035em; font-weight: 700;
+}
+.hero-title .dim { color: var(--ink-soft); }
+.hero-sub {
+  margin: 1.1rem 0 0; max-width: 60ch;
+  color: var(--ink-soft);
+  font-size: clamp(1.02rem, 1.7vw, 1.22rem); line-height: 1.5; letter-spacing: -0.014em;
+}
+/* Two deliberate rows: status on top, credentials underneath. */
+.hero-meta { display: flex; flex-direction: column; align-items: flex-start; gap: .5rem; margin-top: 1.4rem; }
+.hero-meta-row { display: flex; flex-wrap: wrap; gap: .5rem; }
+.pill {
+  display: inline-flex; align-items: center; gap: .45rem;
+  padding: 6px 14px; border-radius: var(--r-pill);
+  border: 1px solid var(--line); background: var(--surface);
+  font-size: .78rem; font-weight: 500; letter-spacing: -0.005em; color: var(--ink-soft);
+}
+.pill img { width: 18px; height: 18px; object-fit: contain; }
+.pill-icon { width: 15px; height: 15px; flex: none; }
+.pill-live { border-color: transparent; background: rgba(48, 209, 88, .12); color: #1a7f37; }
+.pill-live .dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--positive);
+  box-shadow: 0 0 0 0 rgba(48, 209, 88, .6); animation: ping 2.4s ease-out infinite;
+}
+@keyframes ping {
+  0%   { box-shadow: 0 0 0 0 rgba(48, 209, 88, .55); }
+  70%  { box-shadow: 0 0 0 7px rgba(48, 209, 88, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(48, 209, 88, 0); }
+}
+/* Ciena red, sampled from their own wordmark in logos/ciena.png. */
+.pill-ciena { border-color: transparent; background: rgba(216, 0, 0, .09); color: #d80000; }
+.pill-ciena .dot { width: 7px; height: 7px; border-radius: 50%; background: #d80000; flex: none; }
+.hero-cue {
+  display: flex; align-items: center; gap: .6rem;
+  margin-top: 2.2rem;
+  font-size: .72rem; font-weight: 500; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink-faint);
+}
+.cue-arrow {
+  width: 1px; height: 26px; background: linear-gradient(var(--accent), transparent);
+  animation: cue 1.9s ease-in-out infinite;
+}
+@keyframes cue { 0%,100% { transform: translateY(0); opacity: 1; } 50% { transform: translateY(6px); opacity: .45; } }
+
+.panel-title {
+  margin: 1rem 0 0;
+  font-size: clamp(1.9rem, 4vw, 2.75rem); line-height: 1.1;
+  letter-spacing: -0.032em; font-weight: 650;
+}
+.panel-lede {
+  margin: .8rem 0 0; max-width: 60ch; color: var(--ink-soft);
+  font-size: clamp(1.02rem, 1.7vw, 1.22rem); line-height: 1.5; letter-spacing: -0.014em;
+}
+.panel-points { margin: 1.1rem 0 0; padding: 0 0 0 1.05rem; color: var(--ink-soft); }
+.panel-points li { margin-bottom: .5rem; line-height: 1.55; font-size: .95rem; }
+.panel-points li::marker { color: var(--accent); }
+.panel-points strong { color: var(--ink); font-weight: 600; }
+
+.panel-chips, .tag-row { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.1rem; }
+.panel-chips span, .tag-row span {
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .02em;
+  padding: .3rem .6rem; border-radius: 6px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink-soft);
+}
+
+/* Carries the colour of the layer it belongs to, so the button, the eyebrow
+   swatch and the board in the stack all read as one thing. */
+.panel-link {
+  display: inline-flex; align-items: center; gap: .5rem; margin-top: 1.6rem;
+  padding: 9px 19px; border-radius: var(--r-pill);
+  background: var(--hue, var(--accent)); color: var(--ink);
+  font-size: .86rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+}
+.panel-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--hue, var(--accent)) 40%, transparent);
+}
+.panel-link span { transition: transform .2s; }
+.panel-link:hover span { transform: translateX(3px); }
+
+/* ── Layer tab bar (Altium-style) ────────────────────────── */
+.layer-rail {
+  position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%);
+  display: flex; gap: 2px; padding: 4px;
+  border: 1px solid var(--line); border-radius: 14px;
+  background: rgba(255, 255, 255, .72);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  box-shadow: var(--shadow-sm);
+  max-width: calc(100vw - 2rem); overflow: hidden;
+}
+.layer-tab {
+  display: inline-flex; align-items: center; gap: .45rem;
+  padding: .42rem .75rem; border: 0; border-radius: 10px;
+  background: transparent; cursor: pointer;
+  font-family: var(--mono); font-size: .71rem; letter-spacing: .02em;
+  color: var(--ink-faint); white-space: nowrap;
+  transition: background .18s, color .18s, box-shadow .18s;
+}
+.layer-tab i {
+  width: 8px; height: 8px; border-radius: 2px; background: var(--hue); opacity: .55;
+  transition: opacity .18s, box-shadow .18s;
+}
+.layer-tab:hover { color: var(--ink-soft); background: rgba(0, 0, 0, .04); }
+.layer-tab.is-current {
+  color: var(--ink); background: var(--surface-raised); box-shadow: var(--shadow-sm);
+}
+.layer-tab.is-current i { opacity: 1; box-shadow: 0 0 0 2px color-mix(in srgb, var(--hue) 24%, transparent); }
+
+/* ── Flow sections ───────────────────────────────────────── */
+/* One section's worth of air between sections, not two. */
+.flow {
+  position: relative; z-index: 4;
+  padding: clamp(2.5rem, 5vw, 3.5rem) 0;
+  background: var(--bg-tint);
+}
+.flow:last-of-type { padding-bottom: clamp(4.5rem, 9vw, 6.5rem); }
+
+/* Rides up over the tail of the sticky stage so the board hands off to the
+   next section instead of leaving a dead screen behind it. Keyed off a class,
+   not :first-of-type. The scroll track is a <section> too, so this element
+   is never the first of its type. */
+.flow--lead {
+  margin-top: -30vh;
+  padding-top: clamp(4rem, 8vw, 6.5rem);
+  border-top: 1px solid var(--line-soft);
+  box-shadow: 0 -40px 80px 30px rgba(251, 251, 253, .92);
+}
+html.is-flat .flow--lead, html:not(.js) .flow--lead { margin-top: 0; }
+
+.section-head { margin-bottom: 2.6rem; }
+.section-kicker {
+  display: block;
+  font-size: .72rem; font-weight: 600; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--accent);
+}
+.section-title {
+  margin: .7rem 0 0;
+  font-size: clamp(1.9rem, 4vw, 2.75rem);
+  font-weight: 650; letter-spacing: -0.032em; line-height: 1.1;
+}
+
+[data-reveal] { opacity: 0; transform: translateY(20px); }
+[data-reveal].is-visible {
+  opacity: 1; transform: none;
+  transition: opacity .6s ease var(--reveal-delay, 0ms), transform .7s var(--ease) var(--reveal-delay, 0ms);
+}
+
+/* Roles */
+.role-list { display: grid; gap: 1rem; }
+.role-card {
+  padding: clamp(22px, 3vw, 32px);
+  border: 1px solid var(--line); border-radius: var(--r-xl);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-sm);
+  transition: transform .5s var(--ease), box-shadow .5s var(--ease);
+}
+.role-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.role-head { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.role-head h3 { margin: 0; font-size: clamp(1.1rem, 1.9vw, 1.35rem); letter-spacing: -0.026em; }
+.role-org { font-size: .82rem; font-weight: 500; letter-spacing: -0.005em; color: var(--ink-faint); }
+.role-date {
+  margin-left: auto; font-family: var(--mono); font-size: .78rem; letter-spacing: .01em;
+  color: var(--ink-faint); white-space: nowrap;
+}
+.logo-chip {
+  display: grid; place-items: center; flex: none;
+  width: 44px; height: 44px; border-radius: var(--r-sm);
+  background: var(--surface-raised); border: 1px solid var(--line); padding: 6px;
+}
+.logo-chip img { width: 100%; height: 100%; object-fit: contain; }
+.role-points { margin: 1.1rem 0 0; padding-left: 1.05rem; color: var(--ink-soft); }
+.role-points li { margin-bottom: .5rem; line-height: 1.55; font-size: .95rem; }
+.role-points li::marker { color: var(--accent); }
+.role-points strong { color: var(--ink); font-weight: 600; }
+.role-note { margin: 1rem 0 0; color: var(--ink-soft); font-size: .95rem; line-height: 1.55; }
+
+/* Logo wall, carried over from the original site's toolchain tile. A fixed
+   column count rather than auto-fit, so the tiles divide the content width
+   exactly and never leave a ragged last row. */
+.skill-grid {
+  display: grid; grid-template-columns: repeat(11, 1fr);
+  gap: 14px; margin-bottom: 1rem;
+}
+.skill {
+  position: relative;
+  display: grid; place-items: center;
+  aspect-ratio: 1;
+  /* Grid items floor at min-content, and the logo PNGs are far larger than
+     they render. Without this the columns blow past the content width. */
+  min-width: 0;
+  border: 1px solid var(--line); border-radius: 22%;
+  background: var(--surface-raised);
+  transition: transform .55s var(--ease), box-shadow .55s var(--ease);
+}
+/* Same lift the cards use, with a touch of scale so it pops. */
+.skill:hover { transform: translateY(-4px) scale(1.06); box-shadow: var(--shadow-lg); }
+/* Sized in percentages so the marks grow with the tile. */
+.skill-mark { width: 54%; height: 54%; color: var(--mark, var(--ink)); }
+/* Pinned rather than laid out: altium.svg carries no resolvable intrinsic
+   height, and as a flow child it stretched its tile half again as tall.
+   Wider box than the glyph marks get: FreeRTOS is a 2.6:1 badge, so
+   object-fit would otherwise shrink it to nothing on the short axis. */
+.skill img {
+  position: absolute; top: 11%; left: 11%;
+  width: 78%; height: 78%; object-fit: contain;
+}
+/* Art that ships on its own dark ground (the Barr monogram is reversed
+   out of navy) bleeds to the tile edge instead of floating on white. */
+.skill--fill { background: var(--tile); border-color: transparent; }
+.skill--fill img { top: 0; left: 0; width: 100%; height: 100%; border-radius: inherit; object-fit: cover; }
+
+/* The name lives in data-bubble and expands out of the tile on hover. Same
+   same treatment the original site gives its social icons. Pointer-only: a
+   tooltip on touch just sticks around after the tap. */
+@media (hover: hover) and (pointer: fine) {
+  .skill[data-bubble]::after {
+    content: attr(data-bubble);
+    position: absolute; z-index: 30;
+    bottom: calc(100% + 9px); left: 50%;
+    padding: 6px 11px;
+    border: 1px solid var(--line); border-radius: var(--r-pill);
+    background: var(--surface-2); color: var(--ink);
+    font-size: .72rem; font-weight: 500; line-height: 1;
+    white-space: nowrap; pointer-events: none;
+    box-shadow: var(--shadow-sm);
+    opacity: 0;
+    transform: translate(-50%, 3px) scale(.86);
+    transform-origin: bottom center;
+    transition: opacity .22s ease, transform .22s var(--ease);
+  }
+  .skill[data-bubble]:hover::after,
+  .skill[data-bubble]:focus-visible::after {
+    opacity: 1; transform: translate(-50%, 0) scale(1);
+  }
+  /* The end tiles would push their bubble past the content edge, so those
+     anchor to the near edge instead of centring. */
+  .skill[data-bubble]:first-child::after { left: 0; transform: translate(0, 3px) scale(.86); transform-origin: bottom left; }
+  .skill[data-bubble]:first-child:hover::after { transform: translate(0, 0) scale(1); }
+  .skill[data-bubble]:last-child::after { left: auto; right: 0; transform: translate(0, 3px) scale(.86); transform-origin: bottom right; }
+  .skill[data-bubble]:last-child:hover::after { transform: translate(0, 0) scale(1); }
+}
+
+/* Chess */
+.chess-status {
+  display: inline-flex; align-items: center; gap: .8rem;
+  padding: .55rem 1rem .55rem 1.1rem; border-radius: var(--r-pill);
+  border: 1px solid var(--line); background: var(--surface);
+  font-family: var(--mono); font-size: .78rem; letter-spacing: .01em; color: var(--ink-soft);
+  margin-bottom: 1.6rem;
+}
+.chess-status a { display: grid; place-items: center; color: var(--ink-faint); }
+.chess-status svg { width: 16px; height: 16px; }
+.chess-status a:hover { color: var(--accent); }
+
+.chess-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.chess-card {
+  display: block; padding: 1rem; text-decoration: none;
+  border: 1px solid var(--line); border-radius: var(--r-xl);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-sm);
+  transition: transform .5s var(--ease), box-shadow .5s var(--ease);
+}
+.chess-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.mini-board {
+  display: grid; grid-template-columns: repeat(8, 1fr);
+  aspect-ratio: 1; border-radius: var(--r-sm); overflow: hidden;
+}
+.chess-square {
+  display: grid; place-items: center;
+  font-size: clamp(12px, 2.4vw, 19px); line-height: 1;
+}
+.chess-square.light { background: #eef1f6; }
+.chess-square.dark  { background: #b3bfd1; }
+.chess-square.white-piece { color: #ffffff; text-shadow: 0 1px 1.5px rgba(0, 0, 0, .55); }
+.chess-square.black-piece { color: #1d1d1f; text-shadow: 0 1px 1.5px rgba(255, 255, 255, .4); }
+.chess-caption { display: flex; flex-direction: column; gap: .2rem; margin-top: .8rem; }
+.chess-caption span { font-size: .88rem; font-weight: 500; letter-spacing: -0.005em; }
+.chess-caption small { font-family: var(--mono); font-size: .72rem; letter-spacing: .02em; color: var(--ink-faint); }
+
+/* Footer */
+.site-footer {
+  position: relative; z-index: 4;
+  padding: 4rem 0 2rem; background: var(--bg);
+  border-top: 1px solid var(--line-soft);
+}
+.footer-inner { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; }
+.footer-lead { margin: 0; font-size: clamp(1.25rem, 2.2vw, 1.7rem); font-weight: 600; letter-spacing: -0.028em; line-height: 1.15; }
+.footer-sub { margin: .5rem 0 0; color: var(--ink-soft); font-size: .95rem; }
+.footer-links { display: flex; flex-direction: column; gap: .45rem; }
+.footer-links a {
+  font-family: var(--mono); font-size: .78rem; letter-spacing: .01em; color: var(--ink-soft);
+  text-decoration: none; transition: color .18s;
+}
+.footer-links a:hover { color: var(--accent); }
+.footer-fine {
+  width: min(100% - 3rem, var(--wrap)); margin: 3rem auto 0; padding-top: 1.4rem;
+  border-top: 1px solid var(--line-soft);
+  display: flex; flex-wrap: wrap; gap: .5rem 1.6rem; justify-content: space-between;
+  font-size: .76rem; color: var(--ink-faint);
+}
+/* Plain inline, not inline-flex. Flex would turn each text run into its own
+   item and open a gap before the link and the full stop. */
+.footer-credit img { width: 15px; height: 15px; opacity: .6; display: inline; vertical-align: -3px; margin-right: .45rem; }
+.footer-credit a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--line); }
+.footer-credit a:hover { color: var(--accent); border-color: var(--accent-ring); }
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 1080px) {
+  .board { left: 50%; top: 29%; }
+  .panels {
+    top: auto; bottom: 72px; transform: none;
+    left: 1.25rem; right: 1.25rem; width: auto;
+  }
+  .panels::before {
+    content: ""; position: absolute; inset: -4.5rem -1.25rem -5rem;
+    background: linear-gradient(to top, var(--bg-tint) 40%, rgba(251,251,253,.94) 66%, transparent);
+    z-index: -1; pointer-events: none;
+  }
+  .hero-title { font-size: clamp(1.9rem, 7.4vw, 2.6rem); }
+  .panel-title { font-size: clamp(1.6rem, 6.4vw, 2.2rem); }
+  .hero-sub, .panel-lede { font-size: 1.02rem; }
+  .hero-cue { margin-top: 1.4rem; }
+  .hud-xy { display: none; }
+  .hud-doc { left: 1.25rem; }
+  /* The panel eyebrow already names the layer, so the doc HUD drops it and
+     the credit tucks in underneath, clear of the panel at the bottom. */
+  .hud-doc .hud-sep, .hud-doc [data-hud-layer] { display: none; }
+  .hud-credit { top: 104px; bottom: auto; left: 1.25rem; }
+  .stage-ui::before { display: none; }
+  .panel-points li:nth-child(n+3) { display: none; }
+  .hero-sub { max-width: none; }
+}
+
+@media (max-width: 1080px) {
+  .skill-grid { grid-template-columns: repeat(6, 1fr); gap: 12px; }
+}
+
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .skill-grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .layer-rail { gap: 0; padding: 3px; }
+  .layer-tab { padding: .38rem .5rem; font-size: .62rem; }
+  .layer-tab span { display: none; }
+  .hero-sub, .panel-lede { font-size: .98rem; }
+  .role-date { margin-left: 0; width: 100%; }
+}
+
+/* ── No-JS / reduced motion: the stack becomes a plain list ── */
+html:not(.js) .stage,
+html.is-flat .stage { position: static; height: auto; min-height: 0; overflow: visible; }
+html:not(.js) .board-space,
+html.is-flat .board-space { display: none; }
+/* The stage backdrop and the text scrim are both absolutely positioned, so
+   with the stage un-stuck they would paint straight over the flowed panels. */
+html:not(.js) .layer-rail,
+html.is-flat .layer-rail,
+html:not(.js) .hud,
+html.is-flat .hud,
+html:not(.js) .stage-bg,
+html.is-flat .stage-bg,
+html:not(.js) .stage-ui::before,
+html.is-flat .stage-ui::before,
+html:not(.js) .hero-cue,
+html.is-flat .hero-cue { display: none; }
+html:not(.js) .stage-ui,
+html.is-flat .stage-ui { position: static; padding: 8rem 0 4rem; }
+html:not(.js) .panels,
+html.is-flat .panels {
+  position: static; transform: none; width: min(100% - 3rem, var(--wrap));
+  margin-inline: auto; display: grid; gap: 4rem;
+}
+html:not(.js) .panel,
+html.is-flat .panel { opacity: 1; transform: none; pointer-events: auto; grid-area: auto; }
+html:not(.js) .panels::before,
+html.is-flat .panels::before { display: none; }
+html.is-flat .stack-track { height: auto !important; }
+html.is-flat [data-reveal] { opacity: 1; transform: none; }
+html.is-flat .cue-arrow, html.is-flat .pill-live .dot { animation: none; }

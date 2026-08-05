@@ -1,0 +1,12 @@
+{
+  "name": "portfolio-layer-build",
+  "private": true,
+  "type": "module",
+  "description": "Converts Altium Gerber output into the SVG board layers used on the landing page.",
+  "scripts": {
+    "build": "node build-layers.mjs"
+  },
+  "dependencies": {
+    "gerber-to-svg": "^4.2.7"
+  }
+}
