@@ -1,227 +1,244 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daniel Ng | Electrical Engineering Portfolio</title>
-<meta name="description" content="Electrical Engineering (BASc) at UBC. Mixed-signal PCB design and bare-metal C / FreeRTOS firmware. Available for Co-Op January 2027.">
-<meta name="theme-color" content="#fbfbfd">
+<meta name="description" content="Electrical Engineering (BASc) at UBC. RF and mixed-signal hardware design. Incoming RFIC design co-op at Skyworks.">
+<meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/png" href="logos/favicon.png">
 <link rel="apple-touch-icon" href="logos/favicon.png">
 <meta property="og:title" content="Daniel Ng | Electrical Engineering Portfolio">
-<meta property="og:description" content="A portfolio built as a PCB layer stack. Scroll down through the board to reach each project.">
+<meta property="og:description" content="Electrical Engineering student at UBC focused on RF and mixed-signal hardware. Incoming RFIC design co-op at Skyworks.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://danielng.pages.dev/">
 <meta property="og:image" content="https://danielng.pages.dev/models/preview-image.png">
 
+<script>
+  /* Applied before first paint so the page never flashes the wrong appearance. */
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      document.documentElement.dataset.theme = stored ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    } catch (e) {
+      document.documentElement.dataset.theme = 'light';
+    }
+  })();
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="pcb.css?v=1">
-<script>document.documentElement.classList.add('js');</script>
-<script src="pcb.js?v=1" defer></script>
+<link rel="stylesheet" href="style.css?v=7">
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+<script src="app.js?v=3" defer></script>
 </head>
 <body>
 
-<a class="skip-link" href="#work">Skip the board</a>
-
 <nav class="site-nav" aria-label="Primary">
-  <div class="nav-inner">
-    <a class="nav-brand" href="#top">
-      <img class="nav-brand-mark" src="logos/initials.png" alt="" width="1050" height="600">
-      Daniel Ng
-    </a>
+  <div class="site-nav-inner">
+    <a class="nav-brand" href="#top">Daniel Ng</a>
     <ul class="nav-links">
-      <li><a href="#projects">Projects</a></li>
       <li><a href="#work">Experience</a></li>
-      <li><a href="#toolchain">Toolchain</a></li>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#chess">Chess</a></li>
     </ul>
-    <div class="nav-social">
-      <a href="https://github.com/danielwhn25" target="_blank" rel="noopener" aria-label="GitHub">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-      </a>
-      <a href="https://linkedin.com/in/danielngEE" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg>
-      </a>
-      <a href="mailto:daniel.whn@outlook.com" aria-label="Email daniel.whn@outlook.com">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 8.2 6a1.4 1.4 0 0 0 1.6 0L21 7"/></svg>
-      </a>
+    <div class="nav-actions">
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch appearance">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.4v2.2M12 19.4v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.4 12h2.2M19.4 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20.5 14.3A8.6 8.6 0 1 1 9.7 3.5a6.9 6.9 0 0 0 10.8 10.8Z"/>
+        </svg>
+      </button>
+      <div class="social-row">
+        <a class="social-link is-compact" href="https://github.com/danielwhn25" target="_blank" rel="noopener" aria-label="GitHub" data-bubble="github.com/danielwhn25">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a class="social-link is-compact" href="https://linkedin.com/in/danielngEE" target="_blank" rel="noopener" aria-label="LinkedIn" data-bubble="linkedin.com/in/danielngEE">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg>
+        </a>
+        <a class="social-link is-compact" href="https://www.chess.com/member/daniel_whn" target="_blank" rel="noopener" aria-label="Chess.com" data-bubble="chess.com/member/daniel_whn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0a3.85 3.85 0 0 0-3.875 3.846A3.84 3.84 0 0 0 9.73 6.969l-2.79 1.85c0 .622.144 1.114.434 1.649H9.83c-.014.245-.014.549-.014.925 0 .025.003.048.006.071-.064 1.353-.507 3.472-3.62 5.842-.816.625-1.423 1.495-1.806 2.533a.33.33 0 0 0-.045.084 8.124 8.124 0 0 0-.39 2.516c0 .1.216 1.561 8.038 1.561s8.038-1.46 8.038-1.561c0-2.227-.824-4.048-2.24-5.133-4.034-3.08-3.586-5.74-3.644-6.838h2.458c.29-.535.434-1.027.434-1.649l-2.79-1.836a3.86 3.86 0 0 0 1.604-3.123A3.873 3.873 0 0 0 13.445.275c-.004-.002-.01.004-.015.004A3.76 3.76 0 0 0 12 0Z"/></svg>
+        </a>
+        <a class="social-link is-compact" href="mailto:daniel.whn@outlook.com" aria-label="Email daniel.whn@outlook.com" data-bubble="daniel.whn@outlook.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 8.2 6a1.4 1.4 0 0 0 1.6 0L21 7"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 </nav>
 
 <main id="top">
 
-  <!-- ══ The board: a sticky 3D stage, driven by scroll ══ -->
-  <section class="stack-track" id="projects" data-track aria-label="Project layers">
-    <div class="stage" data-stage>
-
-      <div class="stage-bg" aria-hidden="true">
-        <span class="bg-glow"></span>
-        <span class="bg-grid"></span>
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-avatar" data-reveal>
+        <img src="logos/initials.png" alt="Daniel Ng" width="1050" height="600" fetchpriority="high">
+        <span class="hero-avatar-status" role="img" aria-label="Available for work"></span>
       </div>
 
-      <!-- 3D board stack (decorative; every project is also in the panels below) -->
-      <div class="board-space" aria-hidden="true">
-        <div class="board" data-board>
-          <!-- data-art layers are real Gerber output from the Altium projects,
-               built by tools/build-layers.mjs. The rest are drawn in pcb.js. -->
-          <div class="layer" data-layer="0" data-kind="silk" data-seed="17" data-silk="DANIEL NG" style="--hue:#e6edf3"></div>
-          <div class="layer" data-layer="1" data-art="layers/timing-gates.svg"                    style="--hue:#e3a93f"></div>
-          <div class="layer" data-layer="2" data-art="layers/poe.svg"                             style="--hue:#3fc7a4"></div>
-          <div class="layer" data-layer="3" data-art="layers/ir-remote.svg"                       style="--hue:#7aa2f7"></div>
-          <div class="layer" data-layer="4" data-kind="silk" data-seed="63"                      style="--hue:#c78bf0"></div>
-        </div>
+      <div data-reveal style="--reveal-delay:60ms">
+        <span class="pill pill-live"><span class="dot" aria-hidden="true"></span>Available Summer 2027</span>
+        <span class="pill">Incoming RFIC Design Co-op &middot; Skyworks</span>
       </div>
 
-      <!-- 2D overlay: readable content ------------------------------------ -->
-      <div class="stage-ui">
+      <h1 class="headline-xl" data-reveal style="--reveal-delay:80ms">
+        Hi, I'm Daniel.<br><span class="dim">I design RF and mixed-signal hardware.</span>
+      </h1>
 
-        <div class="hud hud-doc" aria-hidden="true">
-          <span class="hud-dot"></span>PORTFOLIO.PcbDoc
-          <span class="hud-sep">|</span>
-          <span data-hud-layer>5-layer stackup</span>
-        </div>
+      <p class="hero-sub" data-reveal style="--reveal-delay:160ms">
+        Electrical Engineering at UBC. Incoming RFIC design co-op at Skyworks on the
+        WiFi front-end module team, building on RF characterization and mixed-signal PCB work.
+      </p>
 
-        <div class="hud hud-xy" aria-hidden="true">
-          <span data-hud-z>Z 0.000 mm</span>
-          <span class="hud-sep">|</span>
-          <span data-hud-pct>0%</span>
-        </div>
+      <div class="hero-meta" data-reveal style="--reveal-delay:230ms">
+        <span class="pill">
+          <img class="pill-logo" src="logos/ubc.png" alt="" onerror="this.remove()">
+          Electrical Engineering (BASc) &middot; UBC
+        </span>
+        <span class="pill">
+          <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 10.4c0 5.4-8 12.1-8 12.1s-8-6.7-8-12.1a8 8 0 0 1 16 0Z"/>
+            <circle cx="12" cy="10.2" r="2.9"/>
+          </svg>
+          Vancouver, Canada
+        </span>
+      </div>
 
-        <a class="hud hud-credit" href="https://www.altium.com/altium-designer" target="_blank" rel="noopener">
-          <img src="logos/altium.svg" alt="" width="13" height="13">
-          Inspired by Altium Designer
+      <div class="hero-actions" data-reveal style="--reveal-delay:300ms">
+        <a class="btn-primary" href="#projects">View projects</a>
+      </div>
+
+      <div class="social-row" data-reveal style="--reveal-delay:360ms">
+        <a class="social-link" href="https://github.com/danielwhn25" target="_blank" rel="noopener" aria-label="GitHub" data-bubble="github.com/danielwhn25">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
         </a>
+        <a class="social-link" href="https://linkedin.com/in/danielngEE" target="_blank" rel="noopener" aria-label="LinkedIn" data-bubble="linkedin.com/in/danielngEE">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg>
+        </a>
+        <a class="social-link" href="https://www.chess.com/member/daniel_whn" target="_blank" rel="noopener" aria-label="Chess.com" data-bubble="chess.com/member/daniel_whn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0a3.85 3.85 0 0 0-3.875 3.846A3.84 3.84 0 0 0 9.73 6.969l-2.79 1.85c0 .622.144 1.114.434 1.649H9.83c-.014.245-.014.549-.014.925 0 .025.003.048.006.071-.064 1.353-.507 3.472-3.62 5.842-.816.625-1.423 1.495-1.806 2.533a.33.33 0 0 0-.045.084 8.124 8.124 0 0 0-.39 2.516c0 .1.216 1.561 8.038 1.561s8.038-1.46 8.038-1.561c0-2.227-.824-4.048-2.24-5.133-4.034-3.08-3.586-5.74-3.644-6.838h2.458c.29-.535.434-1.027.434-1.649l-2.79-1.836a3.86 3.86 0 0 0 1.604-3.123A3.873 3.873 0 0 0 13.445.275c-.004-.002-.01.004-.015.004A3.76 3.76 0 0 0 12 0Z"/></svg>
+        </a>
+        <a class="social-link" href="mailto:daniel.whn@outlook.com" aria-label="Email daniel.whn@outlook.com" data-bubble="daniel.whn@outlook.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 8.2 6a1.4 1.4 0 0 0 1.6 0L21 7"/></svg>
+        </a>
+      </div>
 
-        <div class="panels">
+      <div class="scroll-cue" data-reveal style="--reveal-delay:440ms" aria-hidden="true">
+        Scroll
+        <span class="chev">⌄</span>
+      </div>
+    </div>
+  </section>
 
-          <!-- L1, identity -->
-          <article class="panel panel-hero is-active" data-layer="0" style="--hue:#e6edf3">
-            <span class="layer-eyebrow"><i></i>L1 &middot; Top Overlay</span>
-            <h1 class="hero-title">Hi, I'm Daniel.<br><span class="dim">I design useful hardware and firmware.</span></h1>
-            <p class="hero-sub">
-              Electrical Engineering at UBC. I lay out mixed-signal boards and write the
-              bare-metal C and FreeRTOS firmware that runs on them.
-            </p>
-            <div class="hero-meta">
-              <div class="hero-meta-row">
-                <span class="pill pill-live"><span class="dot"></span>Available January 2027</span>
-                <span class="pill pill-ciena"><span class="dot"></span>Incoming HW Engineering Intern &middot; Ciena</span>
-              </div>
-              <div class="hero-meta-row">
-                <span class="pill"><img src="logos/ubc.png" alt="" width="18" height="18">Electrical Engineering (BASc) &middot; UBC</span>
-                <span class="pill">
-                  <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M20 10.4c0 5.4-8 12.1-8 12.1s-8-6.7-8-12.1a8 8 0 0 1 16 0Z"/>
-                    <circle cx="12" cy="10.2" r="2.9"/>
-                  </svg>
-                  Vancouver, Canada
-                </span>
-              </div>
-            </div>
-          </article>
+  <!-- ── At a glance ── -->
+  <section id="about">
+    <div class="wrap">
+      <div class="bento" data-reveal-group data-reveal-step="80">
 
-          <!-- L2, Timing Gates -->
-          <article class="panel" data-layer="1" style="--hue:#e3a93f">
-            <span class="layer-eyebrow"><i></i>L2 &middot; Top Copper</span>
-            <h2 class="panel-title">Formula UBC: Laser Timing Gates</h2>
-            <p class="panel-lede">A pair of laser gates for the FSAE test track. They sync their clocks over the air, so a lap time holds up to under a millisecond.</p>
-            <ul class="panel-points">
-              <li>ESP32-C3 gates synchronised over <strong>ESP-NOW</strong>, no access point required.</li>
-              <li>Photodiode transimpedance front end with comparator threshold and ambient rejection.</li>
-              <li>LiPo PowerPath + charge management for all-day paddock use.</li>
-            </ul>
-            <div class="panel-chips"><span>ESP32-C3</span><span>ESP-NOW</span><span>TIA</span><span>LiPo PowerPath</span></div>
-            <a class="panel-link" href="timing-gates/">Open project<span aria-hidden="true">→</span></a>
-          </article>
+        <article class="tile tile-span-2">
+          <span class="tile-label">Currently</span>
+          <span class="tile-value">Hardware Engineer Intern</span>
+          <span class="logo-chip"><img src="logos/norsat.png" alt="Norsat International" width="120" height="120" loading="lazy"></span>
+          <p class="tile-note">RF test automation, PyVISA and LabVIEW instrument control, and circuit-level bias-tee verification.</p>
+        </article>
 
-          <!-- L3, PoE -->
-          <article class="panel" data-layer="2" style="--hue:#3fc7a4">
-            <span class="layer-eyebrow"><i></i>L3 &middot; Signal 1</span>
-            <h2 class="panel-title">PoE Dev Board</h2>
-            <p class="panel-lede">A powered-device board that takes its supply and its 10/100 Ethernet off the same RJ45 cable.</p>
-            <ul class="panel-points">
-              <li>Isolated 802.3af powered-device front end with flyback conversion.</li>
-              <li><strong>W5500</strong> hardwired TCP/IP MAC+PHY driven over SPI from an ESP32.</li>
-              <li>Isolation barrier, magnetics and creepage handled at layout time.</li>
-            </ul>
-            <div class="panel-chips"><span>ESP32</span><span>W5500</span><span>802.3af</span><span>Isolated PD</span></div>
-            <a class="panel-link" href="poe/">Open project<span aria-hidden="true">→</span></a>
-          </article>
+        <article class="tile tile-span-2">
+          <span class="tile-label">Incoming</span>
+          <span class="tile-value">RFIC Design Co-op</span>
+          <p class="tile-note">Skyworks, WiFi front-end module (FEM) team.</p>
+        </article>
 
-          <!-- L4, IR remote -->
-          <article class="panel" data-layer="3" style="--hue:#7aa2f7">
-            <span class="layer-eyebrow"><i></i>L4 &middot; Bottom Copper</span>
-            <h2 class="panel-title">Line Follower Wireless Remote</h2>
-            <p class="panel-lede">A hand-built IR controller for a line-following robot, from carrier generation up to the protocol.</p>
-            <ul class="panel-points">
-              <li>EFM8 8-bit core bit-banging a <strong>38 kHz NEC</strong> carrier out of a timer.</li>
-              <li>Mixed-signal board: keypad matrix, driver stage, regulation on one 2-layer PCB.</li>
-              <li>Full schematic capture and layout in Altium Designer.</li>
-            </ul>
-            <div class="panel-chips"><span>EFM8</span><span>NEC IR</span><span>Altium</span><span>Mixed-signal</span></div>
-            <a class="panel-link" href="ir-remote/">Open project<span aria-hidden="true">→</span></a>
-          </article>
+        <article class="tile tile-span-2">
+          <span class="tile-label">Available</span>
+          <span class="tile-value">Summer 2027</span>
+          <p class="tile-note">4 or 8-month terms in RF and mixed-signal hardware design.</p>
+        </article>
 
-          <!-- L5, DMM -->
-          <article class="panel" data-layer="4" style="--hue:#c78bf0">
-            <span class="layer-eyebrow"><i></i>L5 &middot; Bottom Overlay</span>
-            <h2 class="panel-title">Bare-Metal Digital Multimeter</h2>
-            <p class="panel-lede">A multimeter whose firmware is written straight against the STM32L051 reference manual, without a HAL.</p>
-            <ul class="panel-points">
-              <li><strong>STM32L051</strong> firmware at register level: ADC, timers, clock tree, all by hand.</li>
-              <li>Resistance, capacitance and inductance modes from one analog front end.</li>
-              <li>Written to the <strong>BARR-C:2018</strong> embedded coding standard.</li>
-            </ul>
-            <div class="panel-chips"><span>STM32L051</span><span>Register-level C</span><span>BARR-C</span><span>R/C/L</span></div>
-            <a class="panel-link" href="dmm/">Open project<span aria-hidden="true">→</span></a>
-          </article>
+        <article class="tile tile-span-2">
+          <span class="tile-label">Protocols</span>
+          <span class="tile-value">Wired &amp; wireless comms</span>
+          <div class="chip-row">
+            <span class="chip">UART</span>
+            <span class="chip">SPI</span>
+            <span class="chip">I2C</span>
+            <span class="chip">CAN</span>
+            <span class="chip">Ethernet</span>
+            <span class="chip">RS-232/485</span>
+            <span class="chip">GPIB</span>
+            <span class="chip">ESP-NOW</span>
+          </div>
+        </article>
 
-        </div>
+        <article class="tile tile-span-4">
+          <span class="tile-label">Toolchain</span>
+          <span class="tile-value">Languages, platforms &amp; tools</span>
 
-        <!-- Altium-style layer tab bar -->
-        <div class="layer-rail" role="tablist" aria-label="Board layers"></div>
+          <div class="skill-grid">
+            <span class="skill" title="Embedded C" aria-label="Embedded C" style="--mark:#6A87A6"><svg class="skill-mark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5921 9.1962s-.354-3.298-3.627-3.39c-3.2741-.09-4.9552 2.474-4.9552 6.14 0 3.6651 1.858 6.5972 5.0451 6.5972 3.184 0 3.5381-3.665 3.5381-3.665l6.1041.365s.36 3.31-2.196 5.836c-2.552 2.5241-5.6901 2.9371-7.8762 2.9201-2.19-.017-5.2261.034-8.1602-2.97-2.938-3.0101-3.436-5.9302-3.436-8.8002 0-2.8701.556-6.6702 4.047-9.5502C7.444.72 9.849 0 12.254 0c10.0422 0 10.7172 9.2602 10.7172 9.2602z"/></svg></span>
+            <span class="skill skill--fill" style="--tile:#15204D" title="BARR-C: 2018 Embedded C Coding Standard" aria-label="BARR-C: 2018 Embedded C Coding Standard"><img src="logos/barr.png" alt="" width="56" height="56" loading="lazy"></span>
+            <span class="skill" title="FreeRTOS" aria-label="FreeRTOS"><img src="logos/freertos.png" alt="" width="44" height="44" loading="lazy"></span>
+            <span class="skill" title="Python" aria-label="Python" style="--mark:#3776AB"><svg class="skill-mark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/></svg></span>
+            <span class="skill" title="STM32" aria-label="STM32" style="--mark:#03234B"><svg class="skill-mark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M 23.818 5.61 L 6.402 5.61 C 5.125 5.609 3.968 6.362 3.452 7.529 L 0.014 15.811 C -0.036 15.931 0.052 16.063 0.182 16.061 L 8.046 16.061 C 8.601 16.061 8.848 15.523 8.412 15.093 L 5.524 12.388 C 4.008 10.9 4.658 7.45 7.81 7.45 L 23.206 7.45 C 23.283 7.451 23.352 7.402 23.378 7.329 L 23.987 5.857 C 23.996 5.835 24.001 5.811 24 5.787 C 23.997 5.689 23.917 5.61 23.818 5.61 M 22.082 9.826 L 19.126 9.826 C 18.932 9.825 18.756 9.94 18.681 10.118 L 15.369 18.118 C 15.355 18.144 15.347 18.173 15.347 18.202 C 15.348 18.302 15.429 18.383 15.529 18.381 L 16.632 18.381 C 17.93 18.387 19.105 17.613 19.612 16.418 L 22.244 10.063 C 22.252 10.042 22.257 10.019 22.257 9.996 C 22.253 9.902 22.176 9.828 22.082 9.826 M 16.271 10.005 C 16.271 9.905 16.189 9.825 16.089 9.825 L 7.706 9.825 C 7.251 9.825 6.853 10.38 7.335 10.825 L 10.104 13.404 C 10.104 13.404 11.224 14.437 10.984 15.916 C 10.778 17.219 9.889 18.016 9.241 18.302 C 9.208 18.31 9.196 18.351 9.219 18.376 C 9.23 18.387 9.246 18.392 9.261 18.388 L 12.489 18.388 C 12.683 18.39 12.859 18.275 12.934 18.095 L 16.256 10.068 C 16.266 10.049 16.271 10.027 16.271 10.005"/></svg></span>
+            <span class="skill" title="ESP32" aria-label="ESP32" style="--mark:#E7352C"><svg class="skill-mark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.926 19.324a7.6 7.6 0 00-2.983-6.754 7.44 7.44 0 00-3.828-1.554.697.697 0 01-.606-.731.674.674 0 01.743-.617 8.97 8.97 0 018 9.805 7.828 7.828 0 01-.298 1.542l1.989.56a11.039 11.039 0 001.714-.651 12.159 12.159 0 00.217-2.343A12.57 12.57 0 007.212 6.171a5.53 5.53 0 00-2 0 4.354 4.354 0 00-2.16 1.337 4.274 4.274 0 001.909 6.856 9.896 9.896 0 001.074.195 4.011 4.011 0 013.337 3.954 3.965 3.965 0 01-.64 2.16l1.371.88a10.182 10.182 0 002.057.342 7.52 7.52 0 00.754-2.628m.16 4.73A13.073 13.073 0 01.001 10.983 12.982 12.982 0 013.83 1.737l.743.697a12.067 12.067 0 000 17.141 12.067 12.067 0 0017.141 0l.697.697a12.97 12.97 0 01-9.336 3.726M24 10.993A10.993 10.993 0 0012.949 0c-.389 0-.766 0-1.143.057l-.252.732a18.912 18.912 0 0111.588 11.576l.731-.263c0-.366.069-.732.069-1.143m-1.269 5.165A17.53 17.53 0 007.818 1.27a11.119 11.119 0 00-2.457 1.77v1.635A13.919 13.919 0 0119.268 18.57h1.634a11.713 11.713 0 001.771-2.446M7.92 17.884a1.691 1.691 0 11-1.69-1.691 1.691 1.691 0 011.69 1.691"/></svg></span>
+            <span class="skill" title="Arm Cortex" aria-label="Arm Cortex" style="--mark:#0091BD"><svg class="skill-mark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.419 8.534h1.614v6.911H5.419v-.72c-.71.822-1.573.933-2.07.933C1.218 15.658 0 13.882 0 11.985c0-2.253 1.542-3.633 3.37-3.633.507 0 1.4.132 2.049.984zm-3.765 3.491c0 1.198.751 2.202 1.918 2.202 1.015 0 1.959-.74 1.959-2.181 0-1.512-.934-2.233-1.959-2.233-1.167-.01-1.918.974-1.918 2.212zm7.297-3.49h1.613v.618a3 3 0 0 1 .67-.578c.314-.183.619-.233.984-.233.396 0 .822.06 1.269.324l-.66 1.462a1.432 1.432 0 0 0-.822-.244c-.345 0-.69.05-1.005.376-.446.477-.446 1.136-.446 1.593v3.582H8.94zm5.56 0h1.614v.639c.538-.66 1.177-.822 1.705-.822.72 0 1.4.345 1.786 1.015.579-.822 1.441-1.015 2.05-1.015.842 0 1.573.396 1.969 1.086.132.233.365.74.365 1.745v4.272h-1.614V11.65c0-.771-.08-1.086-.152-1.228-.101-.264-.345-.609-.923-.609-.396 0-.741.213-.954.508-.284.395-.315.984-.315 1.572v3.562H18.43V11.65c0-.771-.081-1.086-.152-1.228-.102-.264-.345-.609-.924-.609-.396 0-.74.213-.954.508-.284.395-.314.984-.314 1.572v3.562h-1.573z"/></svg></span>
+            <span class="skill" title="RISC-V" aria-label="RISC-V" style="--mark:#283272"><svg class="skill-mark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.94945.05132h16.9479v6.2099l-10.42482 14.7424-.52374.73429-5.7888-6.84154c4.10309-.73955 6.2099-3.89648 6.2099-7.37054 0-3.47539-2.10681-7.0534-6.42044-7.4745zM1.47516 13.42121l8.73912 10.52747H0V3.4188h5.47428c2.94506 0 4.42154 1.9989 4.42154 4.10703 0 2.1068-1.47648 4.20967-4.42154 4.20967H1.47516v1.6857zm14.0693 10.52747H24V12.1566l-7.68505 10.73802-.77048 1.05406z"/></svg></span>
+            <span class="skill" title="Altium Designer" aria-label="Altium Designer"><img src="logos/altium.svg" alt="" width="44" height="44" loading="lazy"></span>
+            <span class="skill" title="LTspice" aria-label="LTspice"><img src="logos/ltspice.png" alt="" width="44" height="44" loading="lazy"></span>
+            <span class="skill" title="LabVIEW" aria-label="LabVIEW" style="--mark:#B8930A"><svg class="skill-mark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.176 4.469a.817.817 0 00-.768.816v7.055a.816.816 0 001.182.73l7.058-3.527a.818.818 0 000-1.463L9.59 4.553a.808.808 0 00-.414-.084zm1.918 3.107h.638v.916h.916v.639h-.916v.918h-.638V9.13h-.918v-.639h.918v-.916zm-4.752 7.51v.367h.262c.086 0 .136.05.136.137v3.869h.41v-.273a2.6 2.6 0 00-.011-.256h.011s.281.603 1.028.603c.82 0 1.41-.646 1.41-1.635 0-.97-.522-1.642-1.361-1.642-.802 0-1.065.598-1.065.598H7.15s.012-.113.012-.256v-1.131c0-.267-.112-.381-.379-.381h-.441zm2.855 0v.387h.063c.118 0 .18.018.224.136l1.436 3.85h.467l1.437-3.85c.044-.118.105-.136.223-.136h.834v3.601h-.41v.385h1.25v-.385h-.418v-3.601h.418v-.387h-1.805c-.31 0-.404.056-.516.361l-1.076 2.942c-.08.223-.168.566-.168.566h-.011s-.088-.343-.168-.566L9.9 15.447c-.105-.298-.199-.361-.51-.361h-.193zm5.922 0v.387h.404v3.607c0 .268.112.379.38.379h1.89c.268 0 .379-.111.379-.379v-.435h-.404v.29c0 .094-.05.14-.137.14h-1.535c-.087 0-.137-.046-.137-.14v-1.484h1.64v-.387h-1.64v-1.591h1.492c.087 0 .137.043.137.136v.293h.41v-.435c0-.268-.112-.381-.379-.381h-2.5zM0 15.088v.385h.268c.086 0 .136.043.136.136v3.471c0 .268.112.379.38.379h1.81c.267 0 .379-.111.379-.379v-.435h-.41v.29c0 .094-.05.137-.137.137H.976c-.086 0-.136-.043-.136-.136v-3.47c0-.267-.112-.378-.38-.378H0zm18.334 0v.385h.076c.118 0 .197.018.229.136l1.002 3.85h.515l.897-3.047c.08-.28.156-.64.156-.64h.012s.067.366.142.646l.815 3.041h.515l1.008-3.85c.031-.118.106-.136.23-.136H24v-.385h-.193c-.311 0-.453.055-.528.36l-.76 3.015c-.055.224-.1.467-.1.467h-.01s-.039-.243-.1-.467l-.877-3.358h-.43l-.963 3.358c-.062.224-.12.467-.12.467h-.01s-.039-.243-.095-.467l-.757-3.016c-.075-.304-.219-.36-.53-.36h-.193zM4.637 16.256c-.274 0-1.02.094-1.02.53v.298h.404v-.2c0-.23.454-.273.61-.273.572 0 .808.23.808.883v.037h-.173c-.542 0-1.916.038-1.916 1.076 0 .622.54.926 1.062.926.784 0 1.046-.678 1.04-.678h.01s-.005.094-.005.23c0 .256.106.374.373.374h.43v-.367h-.262c-.087 0-.137-.044-.137-.137v-1.498c0-.672-.236-1.201-1.224-1.201zm3.527.387c.578 0 .988.49.988 1.255 0 .796-.452 1.262-1.006 1.262-.671 0-.996-.628-.996-1.256 0-.889.492-1.261 1.014-1.261zm-2.906 1.224h.181v.143c0 .54-.362 1.162-.959 1.162-.466 0-.695-.298-.695-.59 0-.703.982-.715 1.473-.715Z"/></svg></span>
+          </div>
+        </article>
 
       </div>
     </div>
   </section>
 
-  <!-- ══ Experience ══ -->
-  <section class="flow flow--lead" id="work">
+  <!-- ── Work experience ── -->
+  <section id="work">
     <div class="wrap">
-      <header class="section-head" data-reveal>
-        <span class="section-kicker">02 / Assembly notes</span>
+      <div class="section-head" data-reveal>
         <h2 class="section-title">Experience</h2>
-      </header>
+      </div>
 
-      <div class="role-list" data-reveal-group>
+      <div class="role-list" data-reveal-group data-reveal-step="90">
 
         <article class="role-card">
           <div class="role-head">
-            <span class="logo-chip"><img src="logos/ciena.png" alt="Ciena" width="315" height="120" loading="lazy"></span>
-            <div>
-              <h3>WaveLogic Modem HW Engineering Intern</h3>
-              <span class="role-org">Ciena &middot; Ottawa, ON</span>
+            <div class="role-title">
+              <span class="logo-chip"><img src="logos/ciena.png" alt="Ciena" width="315" height="120" loading="lazy"></span>
+              <h3>Hardware Engineer Co-op</h3>
             </div>
-            <span class="role-date">Sept 2026 – Dec 2026</span>
+            <span class="project-date">Sept 2026 — Dec 2026</span>
           </div>
-          <div class="tag-row"><span>Coherent Optics</span><span>Modem Hardware</span></div>
-          <p class="role-note">Incoming Fall 2026 co-op on the WaveLogic coherent optical modem hardware team.</p>
+          <div class="tech-stack">
+            <span>Signal Integrity</span><span>Power Sequencing</span><span>LTspice</span><span>Cadence</span><span>Agile PLM</span><span>Kanata, ON</span>
+          </div>
+          <ul class="project-bullets">
+            <li><strong>PON level translators:</strong> compared active and passive buffer architectures, then validated signal integrity, rise/fall times and setup/hold margins on SPI, I2C and UART with an R&amp;S RTO6 oscilloscope.</li>
+            <li><strong>Power sequencing:</strong> evaluated discrete comparator and RC-based topologies in LTspice, then validated the final design on hardware to meet strict FPGA power-on compliance, reducing BOM cost and supply chain risk.</li>
+            <li><strong>ECOs and BOMs:</strong> processed ECOs and analyzed BOMs across modem card production variants, updating schematics in Cadence Design Entry HDL and releasing them through Agile PLM.</li>
+          </ul>
         </article>
 
         <article class="role-card">
           <div class="role-head">
-            <span class="logo-chip"><img src="logos/norsat.png" alt="Norsat International" width="120" height="120" loading="lazy"></span>
-            <div>
-              <h3>Electrical Engineering Intern</h3>
-              <span class="role-org">Norsat International</span>
+            <div class="role-title">
+              <span class="logo-chip"><img src="logos/norsat.png" alt="Norsat International" width="120" height="120" loading="lazy"></span>
+              <h3>Hardware Engineer Intern</h3>
             </div>
-            <span class="role-date">May 2026 – July 2026</span>
+            <span class="project-date">May 2026 — Present</span>
           </div>
-          <div class="tag-row"><span>LabVIEW</span><span>Python</span><span>PyVISA</span><span>GPIB</span><span>SCPI</span><span>LTspice</span></div>
-          <ul class="role-points">
+          <div class="tech-stack">
+            <span><svg class="chip-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.176 4.469a.817.817 0 00-.768.816v7.055a.816.816 0 001.182.73l7.058-3.527a.818.818 0 000-1.463L9.59 4.553a.808.808 0 00-.414-.084zm1.918 3.107h.638v.916h.916v.639h-.916v.918h-.638V9.13h-.918v-.639h.918v-.916zm-4.752 7.51v.367h.262c.086 0 .136.05.136.137v3.869h.41v-.273a2.6 2.6 0 00-.011-.256h.011s.281.603 1.028.603c.82 0 1.41-.646 1.41-1.635 0-.97-.522-1.642-1.361-1.642-.802 0-1.065.598-1.065.598H7.15s.012-.113.012-.256v-1.131c0-.267-.112-.381-.379-.381h-.441zm2.855 0v.387h.063c.118 0 .18.018.224.136l1.436 3.85h.467l1.437-3.85c.044-.118.105-.136.223-.136h.834v3.601h-.41v.385h1.25v-.385h-.418v-3.601h.418v-.387h-1.805c-.31 0-.404.056-.516.361l-1.076 2.942c-.08.223-.168.566-.168.566h-.011s-.088-.343-.168-.566L9.9 15.447c-.105-.298-.199-.361-.51-.361h-.193zm5.922 0v.387h.404v3.607c0 .268.112.379.38.379h1.89c.268 0 .379-.111.379-.379v-.435h-.404v.29c0 .094-.05.14-.137.14h-1.535c-.087 0-.137-.046-.137-.14v-1.484h1.64v-.387h-1.64v-1.591h1.492c.087 0 .137.043.137.136v.293h.41v-.435c0-.268-.112-.381-.379-.381h-2.5zM0 15.088v.385h.268c.086 0 .136.043.136.136v3.471c0 .268.112.379.38.379h1.81c.267 0 .379-.111.379-.379v-.435h-.41v.29c0 .094-.05.137-.137.137H.976c-.086 0-.136-.043-.136-.136v-3.47c0-.267-.112-.378-.38-.378H0zm18.334 0v.385h.076c.118 0 .197.018.229.136l1.002 3.85h.515l.897-3.047c.08-.28.156-.64.156-.64h.012s.067.366.142.646l.815 3.041h.515l1.008-3.85c.031-.118.106-.136.23-.136H24v-.385h-.193c-.311 0-.453.055-.528.36l-.76 3.015c-.055.224-.1.467-.1.467h-.01s-.039-.243-.1-.467l-.877-3.358h-.43l-.963 3.358c-.062.224-.12.467-.12.467h-.01s-.039-.243-.095-.467l-.757-3.016c-.075-.304-.219-.36-.53-.36h-.193zM4.637 16.256c-.274 0-1.02.094-1.02.53v.298h.404v-.2c0-.23.454-.273.61-.273.572 0 .808.23.808.883v.037h-.173c-.542 0-1.916.038-1.916 1.076 0 .622.54.926 1.062.926.784 0 1.046-.678 1.04-.678h.01s-.005.094-.005.23c0 .256.106.374.373.374h.43v-.367h-.262c-.087 0-.137-.044-.137-.137v-1.498c0-.672-.236-1.201-1.224-1.201zm3.527.387c.578 0 .988.49.988 1.255 0 .796-.452 1.262-1.006 1.262-.671 0-.996-.628-.996-1.256 0-.889.492-1.261 1.014-1.261zm-2.906 1.224h.181v.143c0 .54-.362 1.162-.959 1.162-.466 0-.695-.298-.695-.59 0-.703.982-.715 1.473-.715Z"/></svg>LabVIEW</span><span><svg class="chip-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/></svg>Python</span><span>PyVISA</span><span>GPIB</span>
+            <span>SCPI</span><span>LTspice</span>
+          </div>
+          <ul class="project-bullets">
             <li><strong>RF debug:</strong> traced unwanted PLL spurs by decoding the SPI register writes against the datasheet bit fields, then checked divider settings, PFD frequency, spur spacing and integer-boundary risk.</li>
             <li><strong>Bias-tee verification:</strong> reviewed 50 Ω and 75 Ω networks at circuit level. Worked out impedance, insertion loss and return loss, then picked the VNA validation points off the SPICE estimates.</li>
             <li><strong>Rework validation:</strong> wrote test recommendations for the bias-tee PCB rework variants. The risks I flagged were shunt-loss paths, impedance matching and GHz parasitics.</li>
@@ -231,15 +248,16 @@
 
         <article class="role-card">
           <div class="role-head">
-            <span class="logo-chip"><img src="logos/norsat.png" alt="Norsat International" width="120" height="120" loading="lazy"></span>
-            <div>
-              <h3>Hardware Test Intern</h3>
-              <span class="role-org">Norsat International</span>
+            <div class="role-title">
+              <span class="logo-chip"><img src="logos/norsat.png" alt="Norsat International" width="120" height="120" loading="lazy"></span>
+              <h3>Hardware Test Engineer Intern</h3>
             </div>
-            <span class="role-date">June 2025 – August 2025</span>
+            <span class="project-date">June 2025 — August 2025</span>
           </div>
-          <div class="tag-row"><span>PNA-X VNA</span><span>Signal Analyzers</span><span>Oscilloscopes</span><span>SMT/THT Rework</span></div>
-          <ul class="role-points">
+          <div class="tech-stack">
+            <span>PNA-X VNA</span><span>Signal Analyzers</span><span>Oscilloscopes</span><span>SMT/THT Rework</span>
+          </div>
+          <ul class="project-bullets">
             <li><strong>RF characterization:</strong> validated block-up converter gain, output power, saturation and spurious parameters against product specs using PNA-X VNAs and signal analyzers.</li>
             <li><strong>Rework &amp; assembly:</strong> microscope-assisted SMT/THT soldering, rework and inspection on BUC/LNB hardware.</li>
           </ul>
@@ -249,65 +267,144 @@
     </div>
   </section>
 
-  <!-- ══ Toolchain ══ -->
-  <section class="flow" id="toolchain">
+  <!-- ── Projects ──
+       No section header: each board announces itself with its own
+       name set at section-title size, one per row. -->
+  <section id="projects">
     <div class="wrap">
-      <header class="section-head" data-reveal>
-        <span class="section-kicker">03 / Bill of materials</span>
-        <h2 class="section-title">Toolchain</h2>
-      </header>
+      <div class="project-stack" data-reveal-group data-reveal-step="90">
 
-      <div class="skill-grid" data-reveal>
-            <span class="skill" data-bubble="Embedded C" aria-label="Embedded C" style="--mark:#6A87A6"><svg class="skill-mark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5921 9.1962s-.354-3.298-3.627-3.39c-3.2741-.09-4.9552 2.474-4.9552 6.14 0 3.6651 1.858 6.5972 5.0451 6.5972 3.184 0 3.5381-3.665 3.5381-3.665l6.1041.365s.36 3.31-2.196 5.836c-2.552 2.5241-5.6901 2.9371-7.8762 2.9201-2.19-.017-5.2261.034-8.1602-2.97-2.938-3.0101-3.436-5.9302-3.436-8.8002 0-2.8701.556-6.6702 4.047-9.5502C7.444.72 9.849 0 12.254 0c10.0422 0 10.7172 9.2602 10.7172 9.2602z"/></svg></span>
-            <span class="skill skill--fill" style="--tile:#15204D" data-bubble="BARR-C:2018" aria-label="BARR-C: 2018 Embedded C Coding Standard"><img src="logos/barr.png" alt="" width="56" height="56" loading="lazy"></span>
-            <span class="skill" data-bubble="FreeRTOS" aria-label="FreeRTOS"><img src="logos/freertos.png" alt="" width="44" height="44" loading="lazy"></span>
-            <span class="skill" data-bubble="Python" aria-label="Python" style="--mark:#3776AB"><svg class="skill-mark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/></svg></span>
-            <span class="skill" data-bubble="STM32" aria-label="STM32" style="--mark:#03234B"><svg class="skill-mark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M 23.818 5.61 L 6.402 5.61 C 5.125 5.609 3.968 6.362 3.452 7.529 L 0.014 15.811 C -0.036 15.931 0.052 16.063 0.182 16.061 L 8.046 16.061 C 8.601 16.061 8.848 15.523 8.412 15.093 L 5.524 12.388 C 4.008 10.9 4.658 7.45 7.81 7.45 L 23.206 7.45 C 23.283 7.451 23.352 7.402 23.378 7.329 L 23.987 5.857 C 23.996 5.835 24.001 5.811 24 5.787 C 23.997 5.689 23.917 5.61 23.818 5.61 M 22.082 9.826 L 19.126 9.826 C 18.932 9.825 18.756 9.94 18.681 10.118 L 15.369 18.118 C 15.355 18.144 15.347 18.173 15.347 18.202 C 15.348 18.302 15.429 18.383 15.529 18.381 L 16.632 18.381 C 17.93 18.387 19.105 17.613 19.612 16.418 L 22.244 10.063 C 22.252 10.042 22.257 10.019 22.257 9.996 C 22.253 9.902 22.176 9.828 22.082 9.826 M 16.271 10.005 C 16.271 9.905 16.189 9.825 16.089 9.825 L 7.706 9.825 C 7.251 9.825 6.853 10.38 7.335 10.825 L 10.104 13.404 C 10.104 13.404 11.224 14.437 10.984 15.916 C 10.778 17.219 9.889 18.016 9.241 18.302 C 9.208 18.31 9.196 18.351 9.219 18.376 C 9.23 18.387 9.246 18.392 9.261 18.388 L 12.489 18.388 C 12.683 18.39 12.859 18.275 12.934 18.095 L 16.256 10.068 C 16.266 10.049 16.271 10.027 16.271 10.005"/></svg></span>
-            <span class="skill" data-bubble="ESP32" aria-label="ESP32" style="--mark:#E7352C"><svg class="skill-mark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.926 19.324a7.6 7.6 0 00-2.983-6.754 7.44 7.44 0 00-3.828-1.554.697.697 0 01-.606-.731.674.674 0 01.743-.617 8.97 8.97 0 018 9.805 7.828 7.828 0 01-.298 1.542l1.989.56a11.039 11.039 0 001.714-.651 12.159 12.159 0 00.217-2.343A12.57 12.57 0 007.212 6.171a5.53 5.53 0 00-2 0 4.354 4.354 0 00-2.16 1.337 4.274 4.274 0 001.909 6.856 9.896 9.896 0 001.074.195 4.011 4.011 0 013.337 3.954 3.965 3.965 0 01-.64 2.16l1.371.88a10.182 10.182 0 002.057.342 7.52 7.52 0 00.754-2.628m.16 4.73A13.073 13.073 0 01.001 10.983 12.982 12.982 0 013.83 1.737l.743.697a12.067 12.067 0 000 17.141 12.067 12.067 0 0017.141 0l.697.697a12.97 12.97 0 01-9.336 3.726M24 10.993A10.993 10.993 0 0012.949 0c-.389 0-.766 0-1.143.057l-.252.732a18.912 18.912 0 0111.588 11.576l.731-.263c0-.366.069-.732.069-1.143m-1.269 5.165A17.53 17.53 0 007.818 1.27a11.119 11.119 0 00-2.457 1.77v1.635A13.919 13.919 0 0119.268 18.57h1.634a11.713 11.713 0 001.771-2.446M7.92 17.884a1.691 1.691 0 11-1.69-1.691 1.691 1.691 0 011.69 1.691"/></svg></span>
-            <span class="skill" data-bubble="Arm Cortex" aria-label="Arm Cortex" style="--mark:#0091BD"><svg class="skill-mark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.419 8.534h1.614v6.911H5.419v-.72c-.71.822-1.573.933-2.07.933C1.218 15.658 0 13.882 0 11.985c0-2.253 1.542-3.633 3.37-3.633.507 0 1.4.132 2.049.984zm-3.765 3.491c0 1.198.751 2.202 1.918 2.202 1.015 0 1.959-.74 1.959-2.181 0-1.512-.934-2.233-1.959-2.233-1.167-.01-1.918.974-1.918 2.212zm7.297-3.49h1.613v.618a3 3 0 0 1 .67-.578c.314-.183.619-.233.984-.233.396 0 .822.06 1.269.324l-.66 1.462a1.432 1.432 0 0 0-.822-.244c-.345 0-.69.05-1.005.376-.446.477-.446 1.136-.446 1.593v3.582H8.94zm5.56 0h1.614v.639c.538-.66 1.177-.822 1.705-.822.72 0 1.4.345 1.786 1.015.579-.822 1.441-1.015 2.05-1.015.842 0 1.573.396 1.969 1.086.132.233.365.74.365 1.745v4.272h-1.614V11.65c0-.771-.08-1.086-.152-1.228-.101-.264-.345-.609-.923-.609-.396 0-.741.213-.954.508-.284.395-.315.984-.315 1.572v3.562H18.43V11.65c0-.771-.081-1.086-.152-1.228-.102-.264-.345-.609-.924-.609-.396 0-.74.213-.954.508-.284.395-.314.984-.314 1.572v3.562h-1.573z"/></svg></span>
-            <span class="skill" data-bubble="RISC-V" aria-label="RISC-V" style="--mark:#283272"><svg class="skill-mark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.94945.05132h16.9479v6.2099l-10.42482 14.7424-.52374.73429-5.7888-6.84154c4.10309-.73955 6.2099-3.89648 6.2099-7.37054 0-3.47539-2.10681-7.0534-6.42044-7.4745zM1.47516 13.42121l8.73912 10.52747H0V3.4188h5.47428c2.94506 0 4.42154 1.9989 4.42154 4.10703 0 2.1068-1.47648 4.20967-4.42154 4.20967H1.47516v1.6857zm14.0693 10.52747H24V12.1566l-7.68505 10.73802-.77048 1.05406z"/></svg></span>
-            <span class="skill" data-bubble="Altium Designer" aria-label="Altium Designer"><img src="logos/altium.svg" alt="" width="44" height="44" loading="lazy"></span>
-            <span class="skill" data-bubble="LTspice" aria-label="LTspice"><img src="logos/ltspice.png" alt="" width="44" height="44" loading="lazy"></span>
-            <span class="skill" data-bubble="LabVIEW" aria-label="LabVIEW" style="--mark:#B8930A"><svg class="skill-mark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.176 4.469a.817.817 0 00-.768.816v7.055a.816.816 0 001.182.73l7.058-3.527a.818.818 0 000-1.463L9.59 4.553a.808.808 0 00-.414-.084zm1.918 3.107h.638v.916h.916v.639h-.916v.918h-.638V9.13h-.918v-.639h.918v-.916zm-4.752 7.51v.367h.262c.086 0 .136.05.136.137v3.869h.41v-.273a2.6 2.6 0 00-.011-.256h.011s.281.603 1.028.603c.82 0 1.41-.646 1.41-1.635 0-.97-.522-1.642-1.361-1.642-.802 0-1.065.598-1.065.598H7.15s.012-.113.012-.256v-1.131c0-.267-.112-.381-.379-.381h-.441zm2.855 0v.387h.063c.118 0 .18.018.224.136l1.436 3.85h.467l1.437-3.85c.044-.118.105-.136.223-.136h.834v3.601h-.41v.385h1.25v-.385h-.418v-3.601h.418v-.387h-1.805c-.31 0-.404.056-.516.361l-1.076 2.942c-.08.223-.168.566-.168.566h-.011s-.088-.343-.168-.566L9.9 15.447c-.105-.298-.199-.361-.51-.361h-.193zm5.922 0v.387h.404v3.607c0 .268.112.379.38.379h1.89c.268 0 .379-.111.379-.379v-.435h-.404v.29c0 .094-.05.14-.137.14h-1.535c-.087 0-.137-.046-.137-.14v-1.484h1.64v-.387h-1.64v-1.591h1.492c.087 0 .137.043.137.136v.293h.41v-.435c0-.268-.112-.381-.379-.381h-2.5zM0 15.088v.385h.268c.086 0 .136.043.136.136v3.471c0 .268.112.379.38.379h1.81c.267 0 .379-.111.379-.379v-.435h-.41v.29c0 .094-.05.137-.137.137H.976c-.086 0-.136-.043-.136-.136v-3.47c0-.267-.112-.378-.38-.378H0zm18.334 0v.385h.076c.118 0 .197.018.229.136l1.002 3.85h.515l.897-3.047c.08-.28.156-.64.156-.64h.012s.067.366.142.646l.815 3.041h.515l1.008-3.85c.031-.118.106-.136.23-.136H24v-.385h-.193c-.311 0-.453.055-.528.36l-.76 3.015c-.055.224-.1.467-.1.467h-.01s-.039-.243-.1-.467l-.877-3.358h-.43l-.963 3.358c-.062.224-.12.467-.12.467h-.01s-.039-.243-.095-.467l-.757-3.016c-.075-.304-.219-.36-.53-.36h-.193zM4.637 16.256c-.274 0-1.02.094-1.02.53v.298h.404v-.2c0-.23.454-.273.61-.273.572 0 .808.23.808.883v.037h-.173c-.542 0-1.916.038-1.916 1.076 0 .622.54.926 1.062.926.784 0 1.046-.678 1.04-.678h.01s-.005.094-.005.23c0 .256.106.374.373.374h.43v-.367h-.262c-.087 0-.137-.044-.137-.137v-1.498c0-.672-.236-1.201-1.224-1.201zm3.527.387c.578 0 .988.49.988 1.255 0 .796-.452 1.262-1.006 1.262-.671 0-.996-.628-.996-1.256 0-.889.492-1.261 1.014-1.261zm-2.906 1.224h.181v.143c0 .54-.362 1.162-.959 1.162-.466 0-.695-.298-.695-.59 0-.703.982-.715 1.473-.715Z"/></svg></span>
+        <!-- Timing Gates -->
+        <article class="project-entry">
+          <h2 class="project-name">Formula UBC: Laser Timing Gates</h2>
+          <div class="project-card">
+            <div class="card-viewer">
+              <model-viewer
+                src="models/timing_gates.glb"
+                alt="3D model of the Formula UBC laser timing gate receiver PCB"
+                loading="lazy"
+                camera-controls
+                auto-rotate
+                auto-rotate-delay="2000"
+                rotation-per-second="28deg"
+                shadow-intensity="1"
+                environment-image="neutral"
+                scale="0.001 0.001 0.001"
+                camera-orbit="45deg 75deg 60%">
+              </model-viewer>
+            </div>
+            <div class="card-footer">
+              <span class="card-sub">ESP32-C3 &middot; ESP-NOW clock sync &middot; photodiode TIA</span>
+              <a href="timing-gates/" class="btn-link">View</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PoE Dev Board -->
+        <article class="project-entry">
+          <h2 class="project-name">PoE Dev Board</h2>
+          <div class="project-card">
+            <div class="card-viewer">
+              <model-viewer
+                src="models/POE_board.glb"
+                alt="3D model of the Power-over-Ethernet development board"
+                loading="lazy"
+                camera-controls
+                auto-rotate
+                auto-rotate-delay="2000"
+                rotation-per-second="28deg"
+                shadow-intensity="1"
+                environment-image="neutral"
+                camera-orbit="45deg 75deg auto">
+              </model-viewer>
+            </div>
+            <div class="card-footer">
+              <span class="card-sub">ESP32 &middot; W5500 &middot; isolated PD front end</span>
+              <a href="poe/" class="btn-link">View</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- IR Remote -->
+        <article class="project-entry">
+          <h2 class="project-name">Line Follower Wireless Remote</h2>
+          <div class="project-card">
+            <div class="card-viewer">
+              <model-viewer
+                src="models/IR_remote.glb"
+                alt="3D model of the line follower robot wireless IR remote"
+                loading="lazy"
+                camera-controls
+                auto-rotate
+                auto-rotate-delay="2000"
+                rotation-per-second="28deg"
+                shadow-intensity="1"
+                environment-image="neutral"
+                scale="0.001 0.001 0.001"
+                camera-orbit="45deg 75deg auto">
+              </model-viewer>
+            </div>
+            <div class="card-footer">
+              <span class="card-sub">EFM8 &middot; 38 kHz NEC IR &middot; mixed-signal PCB</span>
+              <a href="ir-remote/" class="btn-link">View</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- DMM -->
+        <article class="project-entry">
+          <h2 class="project-name">Bare-Metal Digital Multimeter</h2>
+          <div class="project-card">
+            <div class="card-viewer card-image-viewer project-photo-viewer">
+              <img src="models/stm32-dmm-preview.png" alt="STM32 digital multimeter prototype" loading="lazy" decoding="async">
+            </div>
+            <div class="card-footer">
+              <span class="card-sub">STM32L051 &middot; register-level C &middot; R/C/L modes</span>
+              <a href="dmm/" class="btn-link">View</a>
+            </div>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
 
-  <!-- ══ Chess ══ -->
-  <section class="flow" id="chess" aria-labelledby="chess-heading">
+  <!-- ── Chess ── -->
+  <section id="chess" aria-labelledby="chess-heading">
     <div class="wrap">
-      <header class="section-head" data-reveal>
-        <span class="section-kicker">04 / Off the bench</span>
-        <h2 class="section-title" id="chess-heading">Chess</h2>
-      </header>
+      <div class="section-head" data-reveal>
+        <h2 class="section-title" id="chess-heading"><svg class="title-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0a3.85 3.85 0 0 0-3.875 3.846A3.84 3.84 0 0 0 9.73 6.969l-2.79 1.85c0 .622.144 1.114.434 1.649H9.83c-.014.245-.014.549-.014.925 0 .025.003.048.006.071-.064 1.353-.507 3.472-3.62 5.842-.816.625-1.423 1.495-1.806 2.533a.33.33 0 0 0-.045.084 8.124 8.124 0 0 0-.39 2.516c0 .1.216 1.561 8.038 1.561s8.038-1.46 8.038-1.561c0-2.227-.824-4.048-2.24-5.133-4.034-3.08-3.586-5.74-3.644-6.838h2.458c.29-.535.434-1.027.434-1.649l-2.79-1.836a3.86 3.86 0 0 0 1.604-3.123A3.873 3.873 0 0 0 13.445.275c-.004-.002-.01.004-.015.004A3.76 3.76 0 0 0 12 0Z"/></svg>Chess.</h2>
+      </div>
 
-      <div class="chess-status" data-reveal>
+      <div class="chess-status" data-reveal aria-label="Chess.com rating">
         <span data-chess-summary>daniel_whn // Rapid 1112 // Blitz 937 // Bullet 1015 // Puzzles 1732 peak</span>
-        <a href="https://www.chess.com/member/daniel_whn" target="_blank" rel="noopener" aria-label="Chess.com profile">
+        <a href="https://www.chess.com/member/daniel_whn" target="_blank" rel="noopener" class="social-link chess-profile-link" aria-label="Chess.com profile" data-bubble="chess.com/member/daniel_whn">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0a3.85 3.85 0 0 0-3.875 3.846A3.84 3.84 0 0 0 9.73 6.969l-2.79 1.85c0 .622.144 1.114.434 1.649H9.83c-.014.245-.014.549-.014.925 0 .025.003.048.006.071-.064 1.353-.507 3.472-3.62 5.842-.816.625-1.423 1.495-1.806 2.533a.33.33 0 0 0-.045.084 8.124 8.124 0 0 0-.39 2.516c0 .1.216 1.561 8.038 1.561s8.038-1.46 8.038-1.561c0-2.227-.824-4.048-2.24-5.133-4.034-3.08-3.586-5.74-3.644-6.838h2.458c.29-.535.434-1.027.434-1.649l-2.79-1.836a3.86 3.86 0 0 0 1.604-3.123A3.873 3.873 0 0 0 13.445.275c-.004-.002-.01.004-.015.004A3.76 3.76 0 0 0 12 0Z"/></svg>
         </a>
       </div>
 
-      <div class="chess-grid" aria-live="polite" data-reveal-group>
+      <div class="chess-board-grid" aria-live="polite" data-reveal-group data-reveal-step="90">
         <a href="https://www.chess.com/game/live/168905893390" target="_blank" rel="noopener" class="chess-card" data-recent-game-card>
-          <div class="mini-board" data-chess-board data-fen="8/8/8/8/8/6K1/8/1R4k1 b - - 8 62" data-flip="true"></div>
-          <div class="chess-caption">
-            <span data-game-title>daniel_whn vs ruzicarosi</span>
-            <small data-game-meta>Loss // Bullet // May 18</small>
+          <div class="mini-chess-board" data-chess-board data-fen="8/8/8/8/8/6K1/8/1R4k1 b - - 8 62" data-flip="true"></div>
+          <div class="chess-card-caption">
+            <span class="chess-card-title" data-game-title>daniel_whn vs ruzicarosi</span>
+            <small class="chess-card-meta" data-game-meta>Loss // Bullet // May 18</small>
           </div>
         </a>
+
         <a href="https://www.chess.com/game/live/168905785202" target="_blank" rel="noopener" class="chess-card" data-recent-game-card>
-          <div class="mini-board" data-chess-board data-fen="8/8/8/8/8/5k1p/7K/5q2 w - - 0 58"></div>
-          <div class="chess-caption">
-            <span data-game-title>daniel_whn vs kuzeyalkanm</span>
-            <small data-game-meta>Draw // Bullet // May 18</small>
+          <div class="mini-chess-board" data-chess-board data-fen="8/8/8/8/8/5k1p/7K/5q2 w - - 0 58"></div>
+          <div class="chess-card-caption">
+            <span class="chess-card-title" data-game-title>daniel_whn vs kuzeyalkanm</span>
+            <small class="chess-card-meta" data-game-meta>Draw // Bullet // May 18</small>
           </div>
         </a>
+
         <a href="https://www.chess.com/game/live/168905715616" target="_blank" rel="noopener" class="chess-card" data-recent-game-card>
-          <div class="mini-board" data-chess-board data-fen="1r4k1/5pbp/3p2p1/8/PPrp4/3q4/1K6/8 w - - 0 32"></div>
-          <div class="chess-caption">
-            <span data-game-title>daniel_whn vs CORPSEJADED</span>
-            <small data-game-meta>Loss // Bullet // May 18</small>
+          <div class="mini-chess-board" data-chess-board data-fen="1r4k1/5pbp/3p2p1/8/PPrp4/3q4/1K6/8 w - - 0 32"></div>
+          <div class="chess-card-caption">
+            <span class="chess-card-title" data-game-title>daniel_whn vs CORPSEJADED</span>
+            <small class="chess-card-meta" data-game-meta>Loss // Bullet // May 18</small>
           </div>
         </a>
       </div>
@@ -317,25 +414,152 @@
 </main>
 
 <footer class="site-footer">
-  <div class="wrap footer-inner">
-    <div>
-      <p class="footer-lead">Looking for a Co-Op starting January 2027.</p>
-      <p class="footer-sub">Open to 4, 8, 12 or 16-month terms in embedded software or hardware engineering.</p>
+  <div class="footer-inner">
+    <div class="social-row" data-reveal>
+      <a class="social-link" href="https://github.com/danielwhn25" target="_blank" rel="noopener" aria-label="GitHub" data-bubble="github.com/danielwhn25">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      <a class="social-link" href="https://linkedin.com/in/danielngEE" target="_blank" rel="noopener" aria-label="LinkedIn" data-bubble="linkedin.com/in/danielngEE">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg>
+      </a>
+      <a class="social-link" href="https://www.chess.com/member/daniel_whn" target="_blank" rel="noopener" aria-label="Chess.com" data-bubble="chess.com/member/daniel_whn">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0a3.85 3.85 0 0 0-3.875 3.846A3.84 3.84 0 0 0 9.73 6.969l-2.79 1.85c0 .622.144 1.114.434 1.649H9.83c-.014.245-.014.549-.014.925 0 .025.003.048.006.071-.064 1.353-.507 3.472-3.62 5.842-.816.625-1.423 1.495-1.806 2.533a.33.33 0 0 0-.045.084 8.124 8.124 0 0 0-.39 2.516c0 .1.216 1.561 8.038 1.561s8.038-1.46 8.038-1.561c0-2.227-.824-4.048-2.24-5.133-4.034-3.08-3.586-5.74-3.644-6.838h2.458c.29-.535.434-1.027.434-1.649l-2.79-1.836a3.86 3.86 0 0 0 1.604-3.123A3.873 3.873 0 0 0 13.445.275c-.004-.002-.01.004-.015.004A3.76 3.76 0 0 0 12 0Z"/></svg>
+      </a>
+      <a class="social-link" href="mailto:daniel.whn@outlook.com" aria-label="Email daniel.whn@outlook.com" data-bubble="daniel.whn@outlook.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 8.2 6a1.4 1.4 0 0 0 1.6 0L21 7"/></svg>
+      </a>
     </div>
-    <div class="footer-links">
-      <a href="mailto:daniel.whn@outlook.com">daniel.whn@outlook.com</a>
-      <a href="https://github.com/danielwhn25" target="_blank" rel="noopener">github.com/danielwhn25</a>
-      <a href="https://linkedin.com/in/danielngEE" target="_blank" rel="noopener">linkedin.com/in/danielngEE</a>
-    </div>
+    <a class="link-arrow" href="#top" data-reveal style="--reveal-delay:100ms">Back to top</a>
   </div>
-  <div class="footer-fine">
-    <span>© <span data-year>2026</span> Daniel Ng &middot; Electrical Engineering (BASc), University of British Columbia</span>
-    <span class="footer-credit">
-      <img src="logos/altium.svg" alt="" width="15" height="15" loading="lazy">
-      Website design inspired by <a href="https://www.altium.com/altium-designer" target="_blank" rel="noopener">Altium Designer</a>.
-    </span>
-  </div>
+  <div class="footer-fine">© <span data-year>2026</span> Daniel Ng &middot; Electrical Engineering (BASc), University of British Columbia</div>
 </footer>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const yearEl = document.querySelector('[data-year]');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    const CHESS_USERNAME = 'daniel_whn';
+    const CHESS_API_BASE = `https://api.chess.com/pub/player/${CHESS_USERNAME}`;
+    const chessSummary = document.querySelector('[data-chess-summary]');
+    const gameCards = Array.from(document.querySelectorAll('[data-recent-game-card]'));
+    const pieceMap = {
+      p: '♟', r: '♜', n: '♞', b: '♝', q: '♛', k: '♚',
+      P: '♙', R: '♖', N: '♘', B: '♗', Q: '♕', K: '♔'
+    };
+
+    const fetchJson = url => fetch(url).then(response => {
+      if (!response.ok) throw new Error(`Chess.com request failed: ${response.status}`);
+      return response.json();
+    });
+
+    const drawChessBoard = board => {
+      const fen = board.dataset.fen || '';
+      const ranks = fen.split(' ')[0].split('/');
+      const squares = [];
+
+      ranks.forEach(rank => {
+        rank.split('').forEach(token => {
+          const blanks = Number(token);
+          if (blanks) {
+            for (let i = 0; i < blanks; i += 1) squares.push('');
+          } else {
+            squares.push(token);
+          }
+        });
+      });
+
+      if (board.dataset.flip === 'true') squares.reverse();
+
+      const fragment = document.createDocumentFragment();
+      squares.slice(0, 64).forEach((piece, index) => {
+        const square = document.createElement('span');
+        const row = Math.floor(index / 8);
+        const col = index % 8;
+        square.className = `chess-square ${(row + col) % 2 === 0 ? 'light' : 'dark'}`;
+
+        if (piece) {
+          square.textContent = pieceMap[piece] || '';
+          square.classList.add(piece === piece.toUpperCase() ? 'white-piece' : 'black-piece');
+        }
+
+        fragment.appendChild(square);
+      });
+
+      board.replaceChildren(fragment);
+    };
+
+    document.querySelectorAll('[data-chess-board]').forEach(drawChessBoard);
+
+    if (chessSummary) {
+      const statLine = (label, stat) => {
+        const rating = stat && stat.last && stat.last.rating;
+        return rating ? `${label} ${rating}` : '';
+      };
+
+      fetchJson(`${CHESS_API_BASE}/stats`)
+        .then(stats => {
+          const parts = [
+            statLine('Rapid', stats.chess_rapid),
+            statLine('Blitz', stats.chess_blitz),
+            statLine('Bullet', stats.chess_bullet),
+            stats.tactics && stats.tactics.highest && stats.tactics.highest.rating
+              ? `Puzzles ${stats.tactics.highest.rating} peak`
+              : ''
+          ].filter(Boolean);
+
+          if (parts.length) {
+            chessSummary.textContent = `${CHESS_USERNAME} // ${parts.join(' // ')}`;
+          }
+        })
+        .catch(() => {});
+    }
+
+    if (gameCards.length) {
+      const drawResults = new Set(['agreed', 'repetition', 'stalemate', 'insufficient', '50move', 'timevsinsufficient']);
+      const formatLabel = value => value ? value.charAt(0).toUpperCase() + value.slice(1) : 'Chess';
+      const formatDate = timestamp => new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric' }).format(new Date(timestamp * 1000));
+      const playerResult = result => result === 'win' ? 'Win' : drawResults.has(result) ? 'Draw' : 'Loss';
+
+      fetchJson(`${CHESS_API_BASE}/games/archives`)
+        .then(data => {
+          const archives = data.archives || [];
+          const latestArchive = archives[archives.length - 1];
+          return latestArchive ? fetchJson(latestArchive) : { games: [] };
+        })
+        .then(data => {
+          const games = (data.games || [])
+            .filter(game => game.rules === 'chess' && game.fen && game.url)
+            .sort((a, b) => b.end_time - a.end_time)
+            .slice(0, gameCards.length);
+
+          games.forEach((game, index) => {
+            const card = gameCards[index];
+            const board = card.querySelector('[data-chess-board]');
+            const title = card.querySelector('[data-game-title]');
+            const meta = card.querySelector('[data-game-meta]');
+            const isWhite = game.white && game.white.username && game.white.username.toLowerCase() === CHESS_USERNAME;
+            const player = isWhite ? game.white : game.black;
+            const opponent = isWhite ? game.black : game.white;
+            const opponentName = opponent && opponent.username ? opponent.username : 'opponent';
+            const gameLabel = `${CHESS_USERNAME} vs ${opponentName}`;
+            const result = playerResult(player && player.result);
+            const metaText = `${result} // ${formatLabel(game.time_class)} // ${formatDate(game.end_time)}`;
+
+            card.href = game.url;
+            card.setAttribute('aria-label', `${gameLabel}, ${metaText}`);
+            if (title) title.textContent = gameLabel;
+            if (meta) meta.textContent = metaText;
+            if (board) {
+              board.dataset.fen = game.fen;
+              board.dataset.flip = isWhite ? 'false' : 'true';
+              drawChessBoard(board);
+            }
+          });
+        })
+        .catch(() => {});
+    }
+  });
+</script>
 </body>
 </html>
