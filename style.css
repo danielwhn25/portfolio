@@ -373,6 +373,8 @@ body > section { margin-bottom: clamp(3.5rem, 8vw, 6.5rem); }
    In .role-title it must stay centred against the heading, so this
    is scoped rather than set on .logo-chip itself. */
 .tile .logo-chip { align-self: flex-start; margin-top: 0.15rem; }
+.tile-head { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 0.9rem; }
+.tile-head .logo-chip { height: 34px; margin-top: 0; align-self: center; }
 .logo-chip img {
   display: block;
   width: auto;
